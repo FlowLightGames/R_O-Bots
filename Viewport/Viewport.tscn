@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Main_Menu/MAIN_Menu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://SubViewport/Viewport.gdshader" type="Shader" id=2]
+[ext_resource path="res://SubViewport/Viewport.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/scan_line_count = 360.0
+
+[node name="SubViewport" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Filter" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="Filter"]
+visible = false
+material = SubResource( 1 )
+offset_left = 6.10352e-05
+offset_right = 1920.0
+offset_bottom = 1080.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+stretch_shrink = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+size = Vector2( 640, 360 )
+handle_input_locally = false
+usage = 0
+render_target_update_mode = 3
+gui_disable_input = true
+
+[node name="Control" parent="SubViewportContainer/SubViewport" instance=ExtResource( 1 )]

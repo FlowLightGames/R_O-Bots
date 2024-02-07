@@ -1,0 +1,156 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Bombs/Normal/2.png" type="Texture2D" id=1]
+[ext_resource path="res://Bombs/Normal/1.png" type="Texture2D" id=2]
+[ext_resource path="res://Bombs/Normal/0.png" type="Texture2D" id=3]
+[ext_resource path="res://Bombs/Normal/Explosion/Animation/Exp_0.tres" type="Texture2D" id=4]
+[ext_resource path="res://Bombs/Normal/Normal.gd" type="Script" id=5]
+[ext_resource path="res://Character/Pallett.png" type="Texture2D" id=6]
+[ext_resource path="res://Bombs/Normal/Area2D.gd" type="Script" id=7]
+[ext_resource path="res://Character/Char.gdshader" type="Shader" id=8]
+[ext_resource path="res://Character/Char_shader.tres" type="Material" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+size = Vector2( 8, 8 )
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 8 )
+shader_param/Type = 0
+shader_param/palett = ExtResource( 6 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[sub_resource type="TileSet" id=4]
+resource_local_to_scene = true
+0/name = "Exp_0.tres 0"
+0/texture = ExtResource( 4 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 240, 16 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 48, Vector2( 1, 0 ), 144, Vector2( 2, 0 ), 24, Vector2( 3, 0 ), 18, Vector2( 4, 0 ), 146, Vector2( 5, 0 ), 56, Vector2( 6, 0 ), 186, Vector2( 7, 0 ), 26, Vector2( 8, 0 ), 50, Vector2( 9, 0 ), 176, Vector2( 10, 0 ), 152, Vector2( 11, 0 ), 58, Vector2( 12, 0 ), 178, Vector2( 13, 0 ), 184, Vector2( 14, 0 ), 154 ]
+0/autotile/icon_coordinate = Vector2( 5, 0 )
+0/autotile/tile_size = Vector2( 16, 16 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="RectangleShape2D" id=5]
+resource_local_to_scene = true
+size = Vector2( 7, 7 )
+
+[sub_resource type="RectangleShape2D" id=6]
+resource_local_to_scene = true
+size = Vector2( 7, 7 )
+
+[sub_resource type="RectangleShape2D" id=7]
+size = Vector2( 9, 9 )
+
+[node name="Normal" type="RigidBody2D" groups=[
+"Bomb",
+]]
+collision_layer = 16
+collision_mask = 54
+mode = 3
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 8, 8 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource( 2 )
+position = Vector2( 8, 8 )
+frames = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+autostart = true
+
+[node name="hitbox_timer" type="Timer" parent="."]
+wait_time = 0.875
+one_shot = true
+
+[node name="r_Bottom" type="RayCast2D" parent="."]
+position = Vector2( 8, 8 )
+collision_mask = 6
+
+[node name="r_Top" type="RayCast2D" parent="."]
+position = Vector2( 8, 8 )
+rotation = 3.14159
+collision_mask = 6
+
+[node name="r_Right" type="RayCast2D" parent="."]
+position = Vector2( 8, 8 )
+rotation = -1.5708
+collision_mask = 6
+
+[node name="r_Left" type="RayCast2D" parent="."]
+position = Vector2( 8, 8 )
+rotation = 1.5708
+collision_mask = 6
+
+[node name="EXPLOSION" type="TileMap" parent="."]
+material = ExtResource( 9 )
+z_index = -1
+tile_set = SubResource( 4 )
+cell_size = Vector2( 16, 16 )
+format = 1
+__meta__ = {
+"_edit_lock_": true,
+"_editor_description_": ""
+}
+
+[node name="Hurt_Box" type="Area2D" parent="."]
+visible = false
+position = Vector2( 8, 8 )
+collision_layer = 32
+collision_mask = 29
+
+[node name="vert" type="CollisionShape2D" parent="Hurt_Box"]
+shape = SubResource( 5 )
+disabled = true
+
+[node name="hori" type="CollisionShape2D" parent="Hurt_Box"]
+shape = SubResource( 6 )
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 8, 8 )
+shape = SubResource( 7 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="hitbox_timer" to="." method="_on_hitbox_timer_timeout"]
+[connection signal="area_entered" from="Hurt_Box" to="." method="_on_Hurt_Box_area_entered"]
+[connection signal="body_entered" from="Hurt_Box" to="." method="_on_Hurt_Box_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_Area2D_body_exited"]

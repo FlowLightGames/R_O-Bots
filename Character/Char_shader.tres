@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://Character/Pallett.png" type="Texture2D" id=1]
+[ext_resource path="res://Character/Char.gdshader" type="Shader" id=2]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/Type = 0
+shader_param/palett = ExtResource( 1 )

@@ -1,0 +1,4 @@
+res://default_env.tres
+res://Character/Char.gdshader
+res://Viewport/Viewport.gdshader
+res://node_2d.tscn
