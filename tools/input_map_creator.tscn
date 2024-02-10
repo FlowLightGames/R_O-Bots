@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://jkrv7ltlhcmm"]
+
+[ext_resource type="Script" path="res://tools/input_map_creator.gd" id="1_gmpxi"]
+
+[node name="input_map_creator" type="Node"]
+script = ExtResource("1_gmpxi")

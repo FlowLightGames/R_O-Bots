@@ -1,0 +1,109 @@
+[gd_scene load_steps=6 format=3 uid="uid://bplgvqajtlinc"]
+
+[ext_resource type="Script" path="res://maps/UI/draw.gd" id="1_t5dx7"]
+[ext_resource type="Texture2D" uid="uid://e55idbckj8iw" path="res://UI/word_art/DRAW.png" id="2_pdjm0"]
+
+[sub_resource type="Animation" id="Animation_258cu"]
+resource_name = "Default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer/DrawWordArt/ColorRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.225313, 1),
+"update": 0,
+"values": [Vector2(1, 0), Vector2(1, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/DrawWordArt/TextureRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(-768, -48), Vector2(-128, -48)]
+}
+
+[sub_resource type="Animation" id="Animation_yaij7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer/DrawWordArt/ColorRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/DrawWordArt/TextureRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-128, -48)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kthvj"]
+_data = {
+"Default": SubResource("Animation_258cu"),
+"RESET": SubResource("Animation_yaij7")
+}
+
+[node name="Draw" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_t5dx7")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DrawWordArt" type="Control" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/DrawWordArt"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -16.0
+offset_right = 320.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(320, 16)
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/DrawWordArt"]
+layout_mode = 2
+offset_left = -128.0
+offset_top = -48.0
+offset_right = 128.0
+offset_bottom = 48.0
+pivot_offset = Vector2(128, 48)
+texture = ExtResource("2_pdjm0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kthvj")
+}
+autoplay = "Default"

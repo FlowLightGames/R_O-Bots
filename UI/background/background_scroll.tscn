@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1ilbhdx0c8p2"]
+
+[ext_resource type="Shader" path="res://UI/background/BG_scroll.gdshader" id="1_gwj2w"]
+[ext_resource type="Texture2D" uid="uid://bsnudgkxthnpj" path="res://UI/background/BG_scroll_image.png" id="2_n5gus"]
+
+[sub_resource type="Gradient" id="Gradient_mbelt"]
+colors = PackedColorArray(0.129793, 0.118285, 0.161641, 1, 0.292581, 0.298005, 0.361025, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d44vk"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_mbelt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f3e54"]
+shader = ExtResource("1_gwj2w")
+shader_parameter/motion = Vector2(30, -30)
+shader_parameter/scale = 1.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/palette = SubResource("GradientTexture1D_d44vk")
+
+[node name="Background" type="CanvasLayer"]
+layer = -1
+
+[node name="BackgroundScroll" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_f3e54")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_n5gus")
+stretch_mode = 1

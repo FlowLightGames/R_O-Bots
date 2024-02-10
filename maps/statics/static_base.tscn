@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmwiq03g3nyh1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24oxr"]
+size = Vector2(16, 16)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pwevi"]
+blend_mode = 3
+
+[node name="Static_Base" type="Node2D"]
+z_index = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_24oxr")
+
+[node name="VisualSprite" type="Sprite2D" parent="."]
+centered = false
+offset = Vector2(-8, -24)
+
+[node name="Shadow" type="Sprite2D" parent="VisualSprite"]
+z_index = 1
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_pwevi")
+centered = false

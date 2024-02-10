@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuoew4ufo7sve"]
+
+[ext_resource type="PackedScene" uid="uid://dmwiq03g3nyh1" path="res://maps/statics/static_base.tscn" id="1_b4my8"]
+[ext_resource type="Texture2D" uid="uid://bvgct4kvb8vup" path="res://maps/statics/builder.png" id="2_2bnxs"]
+[ext_resource type="Texture2D" uid="uid://7pip7ei386lj" path="res://maps/shadows/default.png" id="3_t7sxq"]
+
+[node name="Static_Base" instance=ExtResource("1_b4my8")]
+
+[node name="VisualSprite" parent="." index="1"]
+texture = ExtResource("2_2bnxs")
+hframes = 2
+frame = 1
+
+[node name="Shadow" parent="VisualSprite" index="0"]
+texture = ExtResource("3_t7sxq")
+centered = true
+offset = Vector2(0, 10)
+vframes = 2

@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0fh1rd681v0r"]
+
+[ext_resource type="Shader" path="res://UI/shader/CRT.gdshader" id="1_2ojd0"]
+[ext_resource type="Texture2D" uid="uid://bj7d41o8lmqdm" path="res://maps/UI/scanlines.png" id="2_4sf58"]
+[ext_resource type="Texture2D" uid="uid://blirwqch763b4" path="res://maps/UI/size_texture.png" id="2_eipt3"]
+[ext_resource type="Texture2D" uid="uid://dybwn6afguk2n" path="res://maps/UI/win_crt.png" id="2_lw6ko"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0egie"]
+resource_local_to_scene = true
+shader = ExtResource("1_2ojd0")
+shader_parameter/vignette_intensity = 0.025
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+shader_parameter/screen_size = Vector2(640, 360)
+shader_parameter/texture_size = Vector2(500, 306)
+shader_parameter/texture_offset = Vector2(29, 27)
+
+[node name="CRT_Screen" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="CanvasLayer"]
+rect = Rect2(29, 27, 500, 306)
+metadata/_edit_lock_ = true
+
+[node name="Shader" type="TextureRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_0egie")
+offset_left = 29.0
+offset_top = 27.0
+offset_right = 529.0
+offset_bottom = 333.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_eipt3")
+metadata/_edit_lock_ = true
+
+[node name="Scanlines" type="TextureRect" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_4sf58")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_lw6ko")
+metadata/_edit_lock_ = true

@@ -1,0 +1,98 @@
+[gd_scene load_steps=8 format=3 uid="uid://dd2jyoj0553sx"]
+
+[ext_resource type="Texture2D" uid="uid://61ebv1kxcr7j" path="res://pickup/shine_sheet.png" id="1_5b7j5"]
+[ext_resource type="Script" path="res://pickup/pickup.gd" id="1_qfjen"]
+[ext_resource type="Texture2D" uid="uid://cq8o4xuce4txf" path="res://pickup/pickup_sheet.png" id="2_k0tix"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvnx0"]
+size = Vector2(12, 12)
+
+[sub_resource type="Animation" id="Animation_1e8uu"]
+resource_name = "Default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shine:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shine:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xsu1f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shine:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shine:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_25jjx"]
+_data = {
+"Default": SubResource("Animation_1e8uu"),
+"RESET": SubResource("Animation_xsu1f")
+}
+
+[node name="Pickup" type="Area2D" node_paths=PackedStringArray("sprite")]
+z_index = 2
+z_as_relative = false
+collision_layer = 64
+script = ExtResource("1_qfjen")
+sprite = NodePath("Shine/Sprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hvnx0")
+
+[node name="Shine" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+texture = ExtResource("1_5b7j5")
+hframes = 3
+
+[node name="Sprite" type="Sprite2D" parent="Shine"]
+show_behind_parent = true
+texture = ExtResource("2_k0tix")
+hframes = 6
+vframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_25jjx")
+}
+autoplay = "Default"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,41 @@
+[gd_resource type="AnimatedTexture" load_steps=11 format=3 uid="uid://bg4ns34j1muwv"]
+
+[ext_resource type="Texture2D" uid="uid://cccju0ptegn0r" path="res://bombs/explosion_sprites/stripe-sheet1.png" id="1_vumn4"]
+[ext_resource type="Texture2D" uid="uid://bttsl76alhd77" path="res://bombs/explosion_sprites/stripe-sheet2.png" id="2_4f2yh"]
+[ext_resource type="Texture2D" uid="uid://cr4lasdidn5r1" path="res://bombs/explosion_sprites/stripe-sheet10.png" id="3_lb5dq"]
+[ext_resource type="Texture2D" uid="uid://y5o4mebk7x0v" path="res://bombs/explosion_sprites/stripe-sheet3.png" id="4_db65p"]
+[ext_resource type="Texture2D" uid="uid://c8jv8e8fikwr7" path="res://bombs/explosion_sprites/stripe-sheet4.png" id="5_fiugt"]
+[ext_resource type="Texture2D" uid="uid://ceokcu7ljv6e1" path="res://bombs/explosion_sprites/stripe-sheet5.png" id="6_8fg0m"]
+[ext_resource type="Texture2D" uid="uid://bdul0muh0jqlk" path="res://bombs/explosion_sprites/stripe-sheet6.png" id="7_5gti6"]
+[ext_resource type="Texture2D" uid="uid://dtd6shn4uepqq" path="res://bombs/explosion_sprites/stripe-sheet8.png" id="8_e35ov"]
+[ext_resource type="Texture2D" uid="uid://dt1bljel36r1f" path="res://bombs/explosion_sprites/stripe-sheet7.png" id="9_fqd51"]
+[ext_resource type="Texture2D" uid="uid://d355a4h161nvn" path="res://bombs/explosion_sprites/stripe-sheet9.png" id="10_wtrxn"]
+
+[resource]
+frames = 13
+frame_0/texture = ExtResource("1_vumn4")
+frame_0/duration = 0.05
+frame_1/texture = ExtResource("2_4f2yh")
+frame_1/duration = 0.05
+frame_2/texture = ExtResource("1_vumn4")
+frame_2/duration = 0.05
+frame_3/texture = ExtResource("4_db65p")
+frame_3/duration = 0.05
+frame_4/texture = ExtResource("5_fiugt")
+frame_4/duration = 0.05
+frame_5/texture = ExtResource("6_8fg0m")
+frame_5/duration = 0.05
+frame_6/texture = ExtResource("7_5gti6")
+frame_6/duration = 0.1
+frame_7/texture = ExtResource("8_e35ov")
+frame_7/duration = 0.05
+frame_8/texture = ExtResource("7_5gti6")
+frame_8/duration = 0.1
+frame_9/texture = ExtResource("8_e35ov")
+frame_9/duration = 0.05
+frame_10/texture = ExtResource("9_fqd51")
+frame_10/duration = 0.1
+frame_11/texture = ExtResource("10_wtrxn")
+frame_11/duration = 0.1
+frame_12/texture = ExtResource("3_lb5dq")
+frame_12/duration = 0.1

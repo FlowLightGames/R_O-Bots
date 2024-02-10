@@ -1,0 +1,149 @@
+[gd_scene load_steps=12 format=3 uid="uid://b4coeyley8e8w"]
+
+[ext_resource type="PackedScene" uid="uid://bdyc7owplefe3" path="res://bombs/explosion_base.tscn" id="1_orkj0"]
+[ext_resource type="Script" path="res://bombs/explosion_instances/default_explosion.gd" id="2_aj625"]
+[ext_resource type="Texture2D" uid="uid://bg4ns34j1muwv" path="res://bombs/explosion_sprites/explosion_animated_texture.tres" id="3_26efn"]
+[ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="4_crjyh"]
+[ext_resource type="Texture2D" uid="uid://dc165nqytilb2" path="res://bombs/explosion_sprites/explosion_palette.png" id="5_k82pl"]
+[ext_resource type="PackedScene" uid="uid://c12dccm4tygku" path="res://bombs/solid_explosion_raycasts.tscn" id="6_iw84k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jifqv"]
+resource_local_to_scene = true
+shader = ExtResource("4_crjyh")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 8
+shader_parameter/palett = ExtResource("5_k82pl")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_50ew3"]
+texture = ExtResource("3_26efn")
+use_texture_padding = false
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/right_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/bottom_side = 0
+3:0/0 = 0
+3:0/0/terrain_set = 0
+3:0/0/terrain = 0
+3:0/0/terrains_peering_bit/left_side = 0
+4:0/0 = 0
+4:0/0/terrain_set = 0
+4:0/0/terrain = 0
+4:0/0/terrains_peering_bit/top_side = 0
+5:0/0 = 0
+5:0/0/terrain_set = 0
+5:0/0/terrain = 0
+5:0/0/terrains_peering_bit/bottom_side = 0
+5:0/0/terrains_peering_bit/top_side = 0
+6:0/0 = 0
+6:0/0/terrain_set = 0
+6:0/0/terrain = 0
+6:0/0/terrains_peering_bit/right_side = 0
+6:0/0/terrains_peering_bit/left_side = 0
+7:0/0 = 0
+7:0/0/terrain_set = 0
+7:0/0/terrain = 0
+7:0/0/terrains_peering_bit/right_side = 0
+7:0/0/terrains_peering_bit/bottom_side = 0
+7:0/0/terrains_peering_bit/left_side = 0
+7:0/0/terrains_peering_bit/top_side = 0
+8:0/0 = 0
+8:0/0/terrain_set = 0
+8:0/0/terrain = 0
+8:0/0/terrains_peering_bit/left_side = 0
+8:0/0/terrains_peering_bit/top_side = 0
+9:0/0 = 0
+9:0/0/terrain_set = 0
+9:0/0/terrain = 0
+9:0/0/terrains_peering_bit/right_side = 0
+9:0/0/terrains_peering_bit/top_side = 0
+10:0/0 = 0
+10:0/0/terrain_set = 0
+10:0/0/terrain = 0
+10:0/0/terrains_peering_bit/right_side = 0
+10:0/0/terrains_peering_bit/bottom_side = 0
+11:0/0 = 0
+11:0/0/terrain_set = 0
+11:0/0/terrain = 0
+11:0/0/terrains_peering_bit/bottom_side = 0
+11:0/0/terrains_peering_bit/left_side = 0
+12:0/0 = 0
+12:0/0/terrain_set = 0
+12:0/0/terrain = 0
+12:0/0/terrains_peering_bit/right_side = 0
+12:0/0/terrains_peering_bit/left_side = 0
+12:0/0/terrains_peering_bit/top_side = 0
+13:0/0 = 0
+13:0/0/terrain_set = 0
+13:0/0/terrain = 0
+13:0/0/terrains_peering_bit/right_side = 0
+13:0/0/terrains_peering_bit/bottom_side = 0
+13:0/0/terrains_peering_bit/top_side = 0
+14:0/0 = 0
+14:0/0/terrain_set = 0
+14:0/0/terrain = 0
+14:0/0/terrains_peering_bit/right_side = 0
+14:0/0/terrains_peering_bit/bottom_side = 0
+14:0/0/terrains_peering_bit/left_side = 0
+15:0/0 = 0
+15:0/0/terrain_set = 0
+15:0/0/terrain = 0
+15:0/0/terrains_peering_bit/bottom_side = 0
+15:0/0/terrains_peering_bit/left_side = 0
+15:0/0/terrains_peering_bit/top_side = 0
+
+[sub_resource type="TileSet" id="TileSet_sp3ou"]
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Autotile"
+terrain_set_0/terrain_0/color = Color(0.545098, 0.345098, 0.25098, 1)
+sources/0 = SubResource("TileSetAtlasSource_50ew3")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01ggx"]
+resource_local_to_scene = true
+size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ypb20"]
+resource_local_to_scene = true
+size = Vector2(14, 14)
+
+[node name="ExplosionBase" node_paths=PackedStringArray("tilemap", "collision_shape_h", "collision_shape_v") instance=ExtResource("1_orkj0")]
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("2_aj625")
+animated_texture = ExtResource("3_26efn")
+tilemap = NodePath("TileMap")
+collision_shape_h = NodePath("Hurtbox/CollisionShapeH")
+collision_shape_v = NodePath("Hurtbox/CollisionShapeV")
+time_to_life = 0.0
+
+[node name="TileMap" type="TileMap" parent="." index="1"]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_jifqv")
+position = Vector2(-8, -8)
+tile_set = SubResource("TileSet_sp3ou")
+format = 2
+layer_0/y_sort_enabled = true
+
+[node name="Hurtbox" parent="." index="2"]
+collision_layer = 128
+collision_mask = 79
+
+[node name="CollisionShapeH" type="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("RectangleShape2D_01ggx")
+disabled = true
+debug_color = Color(1, 0.0117647, 0.0156863, 0.419608)
+
+[node name="CollisionShapeV" type="CollisionShape2D" parent="Hurtbox" index="1"]
+shape = SubResource("RectangleShape2D_ypb20")
+disabled = true
+debug_color = Color(0.6, 0.458824, 0.0745098, 0.419608)
+
+[node name="SolidExplosionRaycasts" parent="." index="3" instance=ExtResource("6_iw84k")]

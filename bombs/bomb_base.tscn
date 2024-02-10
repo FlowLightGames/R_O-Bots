@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bi24h0fnhi5yq"]
+
+[ext_resource type="Script" path="res://bombs/bomb_base.gd" id="1_4tgyd"]
+[ext_resource type="PackedScene" uid="uid://cu33g4fjkulvt" path="res://bombs/one_way_bomb_collision.tscn" id="1_c5i8r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vhb3r"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uk6sx"]
+size = Vector2(14, 14)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" node_paths=PackedStringArray("bomb_sprite")]
+collision_layer = 4
+collision_mask = 31
+sync_to_physics = false
+script = ExtResource("1_4tgyd")
+bomb_sprite = NodePath("BombSprite")
+
+[node name="OccupancyArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OccupancyArea"]
+shape = SubResource("RectangleShape2D_vhb3r")
+
+[node name="OneWayBombCollision" parent="." instance=ExtResource("1_c5i8r")]
+
+[node name="BombSprite" type="Sprite2D" parent="."]
+
+[node name="ExplosionTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_uk6sx")
+
+[connection signal="timeout" from="ExplosionTimer" to="." method="_on_explosion_timer_timeout"]

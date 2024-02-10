@@ -1,0 +1,393 @@
+[gd_scene load_steps=17 format=3 uid="uid://ca0ofo74p5we4"]
+
+[ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="1_a8h24"]
+[ext_resource type="PackedScene" uid="uid://cd27yl8tl5qd6" path="res://player_character/character.tscn" id="2_6d3b8"]
+[ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="2_lank3"]
+[ext_resource type="Texture2D" uid="uid://dc165nqytilb2" path="res://bombs/explosion_sprites/explosion_palette.png" id="2_um6le"]
+[ext_resource type="Texture2D" uid="uid://h1grom73hp0x" path="res://UI/word_art/LEFT.png" id="3_cl2g1"]
+[ext_resource type="Texture2D" uid="uid://y3yu130wj8tc" path="res://UI/word_art/RIGHT.png" id="4_365ie"]
+[ext_resource type="Script" path="res://menus/lobby_character_customizer.gd" id="5_h4pye"]
+[ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="6_rcmc8"]
+[ext_resource type="Texture2D" uid="uid://00et7mgdndui" path="res://player_character/base_color_palette.png" id="7_646sm"]
+[ext_resource type="Shader" path="res://player_character/character_face.gdshader" id="8_hvyq6"]
+[ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="9_ewlph"]
+[ext_resource type="Texture2D" uid="uid://bw335sbq0nqxa" path="res://player_character/face_base_color_palette.png" id="10_0fgjq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m4yiq"]
+resource_local_to_scene = true
+shader = ExtResource("6_rcmc8")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("2_um6le")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_03se3"]
+texture = ExtResource("2_lank3")
+texture_margin_left = 2.0
+texture_margin_top = 3.0
+texture_margin_right = 2.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hfxrk"]
+resource_local_to_scene = true
+shader = ExtResource("6_rcmc8")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 7
+shader_parameter/palett = ExtResource("7_646sm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_owlxl"]
+resource_local_to_scene = true
+shader = ExtResource("8_hvyq6")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/displacement_strength = 0.0
+shader_parameter/displacement_map_size = Vector2i(12, 9)
+shader_parameter/palett = ExtResource("10_0fgjq")
+shader_parameter/displacement_map = ExtResource("9_ewlph")
+
+[node name="LobbyCharacterCustomizer" type="PanelContainer" node_paths=PackedStringArray("example_character_0", "example_character_1", "body_color_txt", "body_color_txt_shdw", "body_txt", "body_txt_shdw", "face_color_txt", "face_color_txt_shdw", "face_custom_txt", "face_custom_txt_shdw", "face_number_txt", "face_number_txt_shdw")]
+material = SubResource("ShaderMaterial_m4yiq")
+custom_minimum_size = Vector2(156, 116)
+offset_right = 6.0
+offset_bottom = 11.0
+theme = ExtResource("1_a8h24")
+theme_override_styles/panel = SubResource("StyleBoxTexture_03se3")
+script = ExtResource("5_h4pye")
+example_character_0 = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character")
+example_character_1 = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character2")
+body_color_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer/Label")
+body_color_txt_shdw = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer/Label/Shadow")
+body_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Label")
+body_txt_shdw = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Label/Shadow")
+face_color_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer/Label")
+face_color_txt_shdw = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer/Label/Shadow")
+face_custom_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer/Label")
+face_custom_txt_shdw = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer/Label/Shadow")
+face_number_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer/Label")
+face_number_txt_shdw = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer/Label/Shadow")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Spacer" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Body" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="BodyBase" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Body"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Body_Base"
+
+[node name="Shadwon" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/Label"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+layout_mode = 2
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 2.0
+offset_bottom = 7.0
+text = "Body_Base"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase"]
+layout_mode = 2
+alignment = 1
+
+[node name="Dec" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_cl2g1")
+texture_pressed = ExtResource("3_cl2g1")
+texture_hover = ExtResource("3_cl2g1")
+texture_disabled = ExtResource("3_cl2g1")
+texture_focused = ExtResource("3_cl2g1")
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Shadow" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Label"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+layout_mode = 2
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 8.0
+offset_bottom = 9.0
+text = "0"
+
+[node name="Inc" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_365ie")
+texture_pressed = ExtResource("4_365ie")
+texture_hover = ExtResource("4_365ie")
+texture_disabled = ExtResource("4_365ie")
+texture_focused = ExtResource("4_365ie")
+
+[node name="BodyColor" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Body"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Body_Color"
+
+[node name="Shadwon" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/Label"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+layout_mode = 2
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 2.0
+offset_bottom = 7.0
+text = "Body_Color"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor"]
+layout_mode = 2
+alignment = 1
+
+[node name="Dec" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_cl2g1")
+texture_pressed = ExtResource("3_cl2g1")
+texture_hover = ExtResource("3_cl2g1")
+texture_disabled = ExtResource("3_cl2g1")
+texture_focused = ExtResource("3_cl2g1")
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Shadow" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer/Label"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+layout_mode = 2
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 8.0
+offset_bottom = 9.0
+text = "0"
+
+[node name="Inc" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_365ie")
+texture_pressed = ExtResource("4_365ie")
+texture_hover = ExtResource("4_365ie")
+texture_disabled = ExtResource("4_365ie")
+texture_focused = ExtResource("4_365ie")
+
+[node name="Control" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer/Body"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Character" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control" instance=ExtResource("2_6d3b8")]
+position = Vector2(-16, 28)
+disabled = true
+
+[node name="Body" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character/Visuals" index="0"]
+material = SubResource("ShaderMaterial_hfxrk")
+
+[node name="Face" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character/Visuals" index="1"]
+material = SubResource("ShaderMaterial_owlxl")
+
+[node name="Character2" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control" instance=ExtResource("2_6d3b8")]
+position = Vector2(16, 28)
+disabled = true
+
+[node name="Face" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(84, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="FacePreset" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Face_Type"
+
+[node name="Shadwon" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/Label"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+layout_mode = 2
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 2.0
+offset_bottom = 7.0
+text = "Face_Type"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset"]
+layout_mode = 2
+alignment = 1
+
+[node name="Dec" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_cl2g1")
+texture_pressed = ExtResource("3_cl2g1")
+texture_hover = ExtResource("3_cl2g1")
+texture_disabled = ExtResource("3_cl2g1")
+texture_focused = ExtResource("3_cl2g1")
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer"]
+layout_mode = 2
+text = "Preset"
+
+[node name="Shadow" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer/Label"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+layout_mode = 2
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 8.0
+offset_bottom = 9.0
+text = "Preset"
+
+[node name="Inc" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_365ie")
+texture_pressed = ExtResource("4_365ie")
+texture_hover = ExtResource("4_365ie")
+texture_disabled = ExtResource("4_365ie")
+texture_focused = ExtResource("4_365ie")
+
+[node name="FaceType" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Face_Number"
+
+[node name="Shadwon" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/Label"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+layout_mode = 2
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 2.0
+offset_bottom = 7.0
+text = "Face_Number"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType"]
+layout_mode = 2
+alignment = 1
+
+[node name="Dec" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_cl2g1")
+texture_pressed = ExtResource("3_cl2g1")
+texture_hover = ExtResource("3_cl2g1")
+texture_disabled = ExtResource("3_cl2g1")
+texture_focused = ExtResource("3_cl2g1")
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Shadow" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer/Label"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+layout_mode = 2
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 8.0
+offset_bottom = 9.0
+text = "0"
+
+[node name="Inc" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_365ie")
+texture_pressed = ExtResource("4_365ie")
+texture_hover = ExtResource("4_365ie")
+texture_disabled = ExtResource("4_365ie")
+texture_focused = ExtResource("4_365ie")
+
+[node name="FaceColor" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Face_Color"
+
+[node name="Shadwon" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/Label"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+layout_mode = 2
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 2.0
+offset_bottom = 7.0
+text = "Face_Color"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor"]
+layout_mode = 2
+alignment = 1
+
+[node name="Dec" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_cl2g1")
+texture_pressed = ExtResource("3_cl2g1")
+texture_hover = ExtResource("3_cl2g1")
+texture_disabled = ExtResource("3_cl2g1")
+texture_focused = ExtResource("3_cl2g1")
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Shadow" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer/Label"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+layout_mode = 2
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 8.0
+offset_bottom = 9.0
+text = "0"
+
+[node name="Inc" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_365ie")
+texture_pressed = ExtResource("4_365ie")
+texture_hover = ExtResource("4_365ie")
+texture_disabled = ExtResource("4_365ie")
+texture_focused = ExtResource("4_365ie")
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Dec" to="." method="_on_bodytype_dec_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Inc" to="." method="_on_bodytype_inc_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer/Dec" to="." method="_on_bodycolor_dec_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer/Inc" to="." method="_on_bodycolor_inc_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer/Dec" to="." method="_on_facepreset_dec_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer/Inc" to="." method="_on_facepreset_inc_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer/Dec" to="." method="_on_facetype_dec_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer/Inc" to="." method="_on_facetype_inc_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer/Dec" to="." method="_on_facecolor_dec_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer/Inc" to="." method="_on_facecolor_inc_pressed"]
+
+[editable path="CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character"]

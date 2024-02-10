@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://67tlg7mgp1os"]
+
+[ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="1_7sreb"]
+[ext_resource type="Texture2D" uid="uid://bbfkldtav8bib" path="res://player_character/gun_shot_texture.png" id="1_77mss"]
+[ext_resource type="Script" path="res://player_character/gun_shot.gd" id="1_elke4"]
+[ext_resource type="Texture2D" uid="uid://l1xel3yu8tvh" path="res://player_character/gun_shot.png" id="1_kn55u"]
+[ext_resource type="Texture2D" uid="uid://00et7mgdndui" path="res://player_character/base_color_palette.png" id="2_vtox8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wgnj8"]
+resource_local_to_scene = true
+shader = ExtResource("1_7sreb")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("2_vtox8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_byii6"]
+resource_local_to_scene = true
+shader = ExtResource("1_7sreb")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("2_vtox8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l7w8p"]
+resource_local_to_scene = true
+shader = ExtResource("1_7sreb")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("2_vtox8")
+
+[node name="GunShot" type="Line2D" node_paths=PackedStringArray("end_sprite", "start_sprite")]
+z_index = 3
+texture_filter = 1
+material = SubResource("ShaderMaterial_wgnj8")
+points = PackedVector2Array(0, 0, 120, 0)
+width = 4.0
+texture = ExtResource("1_77mss")
+texture_mode = 2
+script = ExtResource("1_elke4")
+end_sprite = NodePath("End")
+start_sprite = NodePath("Start")
+
+[node name="Start" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_byii6")
+position = Vector2(7, 0)
+texture = ExtResource("1_kn55u")
+flip_h = true
+hframes = 2
+frame = 1
+
+[node name="End" type="Sprite2D" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_l7w8p")
+position = Vector2(118, 0)
+rotation = -1.5708
+texture = ExtResource("1_kn55u")
+hframes = 2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

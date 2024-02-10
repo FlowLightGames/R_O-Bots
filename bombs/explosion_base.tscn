@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdyc7owplefe3"]
+
+[ext_resource type="Script" path="res://bombs/explosion_base.gd" id="1_w40cx"]
+
+[node name="ExplosionBase" type="Node2D" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_w40cx")
+time_to_life = 1.0
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

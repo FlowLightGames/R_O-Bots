@@ -1,0 +1,243 @@
+[gd_scene load_steps=14 format=3 uid="uid://ba2chyw1gv6ew"]
+
+[ext_resource type="Texture2D" uid="uid://g3tlmg8rcqwx" path="res://UI/theme/exit.png" id="1_klo7g"]
+[ext_resource type="Script" path="res://maps/map_base.gd" id="1_uvgx8"]
+[ext_resource type="Script" path="res://maps/DestroyablesRandom.gd" id="2_lcam7"]
+[ext_resource type="Texture2D" uid="uid://1q0tcn6c3i04" path="res://UI/theme/down.png" id="3_fj8dp"]
+[ext_resource type="Script" path="res://maps/RoundTime.gd" id="6_0ehqq"]
+[ext_resource type="Texture2D" uid="uid://cowlymgw8e7wd" path="res://maps/UI/time_icon.png" id="6_mtn5u"]
+[ext_resource type="Texture2D" uid="uid://dvffq8wbdsdr" path="res://maps/UI/box_inner.png" id="7_bqdqg"]
+[ext_resource type="Texture2D" uid="uid://bkhu2sb735emw" path="res://maps/UI/digits.png" id="8_cblbo"]
+[ext_resource type="Texture2D" uid="uid://x1r8i80v7e6s" path="res://maps/UI/point_colon.png" id="9_oeixh"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p7g3d"]
+texture = ExtResource("1_klo7g")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_uh6c7"]
+sources/0 = SubResource("TileSetAtlasSource_p7g3d")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6r470"]
+texture = ExtResource("3_fj8dp")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_levuw"]
+sources/0 = SubResource("TileSetAtlasSource_6r470")
+
+[node name="MapBase" type="Node2D" node_paths=PackedStringArray("spawnpoint_tilemap", "base_ground_tilemap", "camera", "time_ui", "player_nodes", "bomb_nodes", "enemy_nodes", "round_timer")]
+y_sort_enabled = true
+script = ExtResource("1_uvgx8")
+spawnpoint_tilemap = NodePath("SpawnPoints")
+base_ground_tilemap = NodePath("BaseGround")
+camera = NodePath("Camera2D")
+time_ui = NodePath("Camera2D/UI/CenterContainer/RoundTime")
+player_nodes = NodePath("Players")
+bomb_nodes = NodePath("Bombs")
+enemy_nodes = NodePath("Enemys")
+round_timer = NodePath("RoundTimer")
+
+[node name="BaseGround" type="TileMap" parent="."]
+format = 2
+metadata/_edit_lock_ = true
+
+[node name="DestroyablesConsistent" type="TileMap" parent="."]
+y_sort_enabled = true
+format = 2
+layer_0/y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="DestroyablesRandom" type="TileMap" parent="." node_paths=PackedStringArray("map")]
+y_sort_enabled = true
+tile_set = SubResource("TileSet_uh6c7")
+format = 2
+layer_0/y_sort_enabled = true
+script = ExtResource("2_lcam7")
+map = NodePath("..")
+metadata/_edit_lock_ = true
+
+[node name="Indestructable" type="TileMap" parent="."]
+y_sort_enabled = true
+format = 2
+layer_0/y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="SpawnPoints" type="TileMap" parent="."]
+self_modulate = Color(0.501961, 1, 0, 1)
+tile_set = SubResource("TileSet_levuw")
+format = 2
+metadata/_edit_lock_ = true
+
+[node name="Interactables" type="TileMap" parent="."]
+y_sort_enabled = true
+format = 2
+layer_0/y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Players" type="Node2D" parent="."]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Enemys" type="Node2D" parent="."]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Bombs" type="Node2D" parent="."]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="UI" type="Control" parent="Camera2D"]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Camera2D/UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -97.0
+offset_right = 97.0
+offset_bottom = 42.0
+grow_horizontal = 2
+metadata/_edit_group_ = true
+
+[node name="RoundTime" type="NinePatchRect" parent="Camera2D/UI/CenterContainer" node_paths=PackedStringArray("timer", "minutes_0", "minutes_1", "seconds_0", "seconds_1", "centiseconds_0", "centiseconds_1")]
+custom_minimum_size = Vector2(114, 25)
+layout_mode = 2
+texture = ExtResource("7_bqdqg")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+script = ExtResource("6_0ehqq")
+timer = NodePath("../../../../RoundTimer")
+minutes_0 = NodePath("HBoxContainer/HBoxContainer/Minutes_0/Sprite2D")
+minutes_1 = NodePath("HBoxContainer/HBoxContainer/Minutes_1/Sprite2D")
+seconds_0 = NodePath("HBoxContainer/HBoxContainer/Seconds_0/Sprite2D")
+seconds_1 = NodePath("HBoxContainer/HBoxContainer/Seconds_1/Sprite2D")
+centiseconds_0 = NodePath("HBoxContainer/HBoxContainer/CentiSeconds_0/Sprite2D")
+centiseconds_1 = NodePath("HBoxContainer/HBoxContainer/CentiSeconds_1/Sprite2D")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/UI/CenterContainer/RoundTime"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -8.5
+offset_right = 52.0
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer"]
+layout_mode = 2
+
+[node name="Clock" type="TextureRect" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("6_mtn5u")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Minutes_0" type="Control" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(8, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer/Minutes_0"]
+texture = ExtResource("8_cblbo")
+centered = false
+hframes = 10
+
+[node name="Minutes_1" type="Control" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(8, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer/Minutes_1"]
+texture = ExtResource("8_cblbo")
+centered = false
+hframes = 10
+
+[node name="Colon" type="Control" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(4, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer/Colon"]
+texture = ExtResource("9_oeixh")
+centered = false
+hframes = 2
+
+[node name="Seconds_0" type="Control" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(8, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer/Seconds_0"]
+texture = ExtResource("8_cblbo")
+centered = false
+hframes = 10
+
+[node name="Seconds_1" type="Control" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(8, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer/Seconds_1"]
+texture = ExtResource("8_cblbo")
+centered = false
+hframes = 10
+
+[node name="Point" type="Control" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(4, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer/Point"]
+texture = ExtResource("9_oeixh")
+centered = false
+hframes = 2
+frame = 1
+
+[node name="CentiSeconds_0" type="Control" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(8, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer/CentiSeconds_0"]
+texture = ExtResource("8_cblbo")
+centered = false
+hframes = 10
+
+[node name="CentiSeconds_1" type="Control" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(8, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/UI/CenterContainer/RoundTime/HBoxContainer/HBoxContainer/CentiSeconds_1"]
+texture = ExtResource("8_cblbo")
+centered = false
+hframes = 10
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D"]
+z_index = -1
+custom_minimum_size = Vector2(640, 360)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RoundTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]

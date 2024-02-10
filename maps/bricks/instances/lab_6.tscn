@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfv21x3j3xm7a"]
+
+[ext_resource type="PackedScene" uid="uid://w6opehj3w17t" path="res://maps/bricks/brick_base.tscn" id="1_d5b0f"]
+[ext_resource type="Texture2D" uid="uid://c0p370nlbfqbi" path="res://maps/bricks/sprites/lab.png" id="2_k0o3u"]
+[ext_resource type="Texture2D" uid="uid://dgs65342jw1kd" path="res://maps/shadows/lab.png" id="3_128ph"]
+
+[node name="Brick_Base" instance=ExtResource("1_d5b0f")]
+
+[node name="VisualSprite" parent="." index="1"]
+texture = ExtResource("2_k0o3u")
+hframes = 4
+vframes = 2
+frame = 6
+
+[node name="Shadow" parent="VisualSprite" index="0"]
+texture = ExtResource("3_128ph")
+offset = Vector2(0, 12)
+vframes = 2
+frame = 1
