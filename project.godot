@@ -24,6 +24,8 @@ InputMapCreator="*res://tools/input_map_creator.tscn"
 FacesAutoload="*res://globals/faces_autoload.gd"
 BombList="*res://globals/bomb_list.gd"
 PlayerConfigs="*res://globals/player_configs.gd"
+PackageDeconstructor="*res://globals/package_deconstructor.gd"
+PackageConstructor="*res://globals/package_constructor.gd"
 
 [debug]
 

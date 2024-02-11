@@ -1,14 +1,8 @@
-res://maps/map_base.tscn
+res://menus/character_creator/custom_face.tscn
 res://UI/shader/palette_swap.gdshader
 res://player_character/character_face.gdshader
 res://UI/theme/new_theme.tres
 res://UI/background/BG_scroll.gdshader
 res://maps/effects/disco.gdshader
 res://maps/effects/cloud_scroll_add.gdshader
-res://maps/instances/forest_M.tscn
-res://player_character/character.tscn
-res://menus/lobby.tscn
-res://menus/character_creator/custom_face.tscn
-res://maps/UI/CRT_Win_Screen.tscn
-res://maps/instances/sky_M.tscn
-res://UI/shader/Blur.gdshader
+res://globals/package_deconstructor.gd

@@ -17,8 +17,7 @@ extends Node
 func initial_data_transfer()->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(2)
-	var max_number_of_faces:int=24
-	for n:int in range(0,min(max_number_of_faces,FacesAutoload.custom_faces.size())):
+	for n:int in range(0,min(FacesAutoload.max_number_of_faces,FacesAutoload.custom_faces.size())):
 		output.append_array(FacesAutoload.face_to_bytes(FacesAutoload.custom_faces[n]))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output

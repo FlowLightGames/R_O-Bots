@@ -1,6 +1,9 @@
 extends Node
 
 const max_custom_faces:int=24
+const bytes_per_face:int=216
+const tex_width:int=12
+const tex_height:int=18
 
 var preset_faces:Array[CompressedTexture2D]=[
 	preload("res://player_character/face_presets/face_preset_sprite1.png"),
@@ -50,7 +53,7 @@ func face_to_bytes(input:Texture2D)->PackedByteArray:
 			output.append(0)
 	return output
 
-func bytes_to_face(input:PackedByteArray,width:int,height:int)->Texture2D:
+func bytes_to_face(input:PackedByteArray,width:int=tex_width,height:int=tex_height)->Texture2D:
 	var tmp_data:PackedByteArray=PackedByteArray()
 	for n:int in input:
 		match n:

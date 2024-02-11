@@ -71,6 +71,7 @@ func read_p2p_packet()->void:
 		var packet_code: PackedByteArray = this_packet["data"]
 		var readable_data: PackedByteArray = packet_code.decompress_dynamic(-1, FileAccess.COMPRESSION_GZIP)
 		# Append logic here to deal with packet data
+		PackageDeconstructor.handle_data(readable_data)
 
 func send_p2p_packet(this_target: int,send_type:int, packet_data:PackedByteArray) -> void:
 	var channel: int = 0
