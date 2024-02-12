@@ -14,17 +14,20 @@ extends Node
 #9: assign playernumber
 
 
-func initial_data_transfer()->PackedByteArray:
+func initial_data_transfer(self_player_number:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(2)
+	output.append(self_player_number)
 	for n:int in range(0,min(FacesAutoload.max_number_of_faces,FacesAutoload.custom_faces.size())):
 		output.append_array(FacesAutoload.face_to_bytes(FacesAutoload.custom_faces[n]))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func character_data_update(body_base:int,body_color:int,face_base:int,face_color:int,face_custom:bool)->PackedByteArray:
+func character_data_update(body_base:int,body_color:int,face_base:int,face_color:int,face_custom:bool,self_player_number:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(4)
+	output.append(self_player_number)
+	
 	output.append(body_base)
 	output.append(body_color)
 	output.append(face_base)
@@ -34,10 +37,11 @@ func character_data_update(body_base:int,body_color:int,face_base:int,face_color
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func character_ready(body_base:int,body_color:int,face_base:int,face_color:int,face_custom:bool,ready:bool)->PackedByteArray:
+func character_ready(body_base:int,body_color:int,face_base:int,face_color:int,face_custom:bool,ready:bool,self_player_number:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(5)
 	output.append(ready)
+	output.append(self_player_number)
 	if ready:
 		output.append(body_base)
 		output.append(body_color)

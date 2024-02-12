@@ -53,7 +53,7 @@ func set_new_body_color(to:int)->void:
 	(Body.material as ShaderMaterial).set_shader_parameter("Type",to)
 	Body_Color=to
 
-func config_init(config:PlayerConfig)->void:
+func config_init(config:PlayerConfigMetaData)->void:
 	set_new_body(config.Body_Base)
 	set_new_body_color(config.Body_Color)
 	set_new_face(config.Face_Texture)

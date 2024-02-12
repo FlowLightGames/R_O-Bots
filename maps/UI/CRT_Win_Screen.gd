@@ -7,7 +7,7 @@ var player_scene:PackedScene=preload("res://player_character/character.tscn")
 @export var old_cam:Camera2D
 @export var new_cam:Camera2D
 
-func set_winner(player_config:PlayerConfig)->void:
+func set_winner(player_config:PlayerConfigMetaData)->void:
 	var tmp_char:PlayerCharacter=player_scene.instantiate() as PlayerCharacter
 	tmp_char.config_init(player_config)
 	player_node.add_child(tmp_char)

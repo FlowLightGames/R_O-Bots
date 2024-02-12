@@ -106,11 +106,19 @@ scenes/3/scene = ExtResource("5_b0ewj")
 [sub_resource type="TileSet" id="TileSet_nfjjk"]
 sources/0 = SubResource("TileSetScenesCollectionSource_jggus")
 
-[node name="MapBase" instance=ExtResource("1_4wjk5")]
+[node name="MapBase" node_paths=PackedStringArray("spawnpoint_tilemap", "base_ground_tilemap", "camera", "time_ui", "player_nodes", "bomb_nodes", "enemy_nodes", "round_timer") instance=ExtResource("1_4wjk5")]
 players_spawned = 8
+spawnpoint_tilemap = NodePath("")
+base_ground_tilemap = NodePath("")
+camera = NodePath("")
+time_ui = NodePath("")
+player_nodes = NodePath("")
+bomb_nodes = NodePath("")
+enemy_nodes = NodePath("")
 pickup_chance = 0.505
 possible_pickups = Array[int]([0, 22, 23, 5, 7, 13, 8])
 round_time = 110.0
+round_timer = NodePath("")
 metadata/_edit_lock_ = true
 
 [node name="BaseGround" parent="." index="0"]
