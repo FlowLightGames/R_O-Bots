@@ -1,5 +1,7 @@
 extends Node
 
+signal player_config_changed
+
 var Player_Configs:Array[PlayerConfigMetaData]=[
 	PlayerConfigMetaData.new(0,0,0,FacesAutoload.preset_faces[0],PickUpStats.new()),
 	PlayerConfigMetaData.new(0,1,1,FacesAutoload.preset_faces[1],PickUpStats.new()),
@@ -23,7 +25,38 @@ func reset_full()->void:
 	PlayerConfigMetaData.new(0,5,5,FacesAutoload.preset_faces[5],PickUpStats.new()),
 	PlayerConfigMetaData.new(0,6,6,FacesAutoload.preset_faces[6],PickUpStats.new()),
 	PlayerConfigMetaData.new(0,7,7,FacesAutoload.preset_faces[7],PickUpStats.new()),
-]
+	]
+
+func set_player_custom_faces(player_number:int,data:Array[Texture2D])->void:
+	if player_number >=0 && player_number<=7:
+		Player_Configs[player_number].custom_faces=data
+		
+		player_config_changed.emit()
+
+func update_player_confi(player_number:int,data:Array[int])->void:
+	if player_number >=0 && player_number<=7:
+		if data.size()==5:
+			#0 (body_base)
+			#1 (body_color)
+			#2 (face_base)
+			#3 (face_color)
+			#4 (face_custom)
+			Player_Configs[player_number].Body_Base=data[0]
+			Player_Configs[player_number].Body_Base=data[1]
+			Player_Configs[player_number].Body_Base=data[2]
+			Player_Configs[player_number].Body_Base=data[3]
+			Player_Configs[player_number].Body_Base=data[4]
+			
+			player_config_changed.emit()
+
+func set_steamID(player_number:int,steamID:int)->void:
+	if player_number >=0 && player_number<=7:
+		Player_Configs[player_number].steam_id=steamID
+
+func set_player_initial_data_akk(player_number:int)->void:
+	if player_number >=0 && player_number<=7:
+		Player_Configs[player_number].initial_data_received=true
+
 func reset_player_start_stats()->void:
 	for n:PlayerConfigMetaData in Player_Configs:
 		n.Starting_Stats=PickUpStats.new()

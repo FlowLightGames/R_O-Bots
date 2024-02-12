@@ -75,17 +75,23 @@ func read_p2p_packet()->void:
 
 func send_p2p_packet(this_target: int,send_type:int, packet_data:PackedByteArray) -> void:
 	var channel: int = 0
-	# If sending a packet to everyone
-	if this_target == 0:
-		# If there is more than one user, send packets
-		if lobby_members.size() > 1:
-			# Loop through all members that aren't you
-			for this_member:Dictionary in lobby_members:
-				if this_member['steam_id'] != steam_id:
-					Steam.sendP2PPacket(this_member['steam_id'], packet_data, send_type, channel)
+	
+	match this_target:
+		# If sending a packet to lobby owner
+		-1:
+			var target_steamID:int=Steam.getLobbyOwner(lobby_id)
+			Steam.sendP2PPacket(target_steamID, packet_data, send_type, channel)
+		# If sending a packet to everyone
+		0:
+			# If there is more than one user, send packets
+			if lobby_members.size() > 1:
+				# Loop through all members that aren't you
+				for this_member:Dictionary in lobby_members:
+					if this_member['steam_id'] != steam_id:
+						Steam.sendP2PPacket(this_member['steam_id'], packet_data, send_type, channel)
 	 # Else send it to someone specific
-	else:
-		Steam.sendP2PPacket(this_target, packet_data, send_type, channel)
+		_:
+			Steam.sendP2PPacket(this_target, packet_data, send_type, channel)
 
 func get_lobby_members()->void:
 	lobby_members.clear()
@@ -168,6 +174,11 @@ func _on_persona_change(this_steam_id: int, _flag: int) -> void:
 		get_lobby_members()
 
 func _on_lobby_chat_update(this_lobby_id: int, change_id: int, making_change_id: int, chat_state: int) -> void:
+		#TODO HANDLE CASE WHEN HOST LEFT
+			#TODO HANDLE CASE WHEN HOST LEFT
+				#TODO HANDLE CASE WHEN HOST LEFT
+					#TODO HANDLE CASE WHEN HOST LEFT
+						#TODO HANDLE CASE WHEN HOST LEFT
 	var changer_name: String = Steam.getFriendPersonaName(change_id)
 	match chat_state:
 		Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:

@@ -1,9 +1,11 @@
 extends Node
 
+
 #first byte =type
 #0: different checks
 #1: Acknoledgement
-	#0 initial data transfer
+	#0 initial player number assignment
+	#1 initial data transfer
 #2: initial data transfer for a lobby (custom faces,etc)
 #3: UNSUSED
 #4: Character data update
@@ -12,7 +14,16 @@ extends Node
 #7: game state update
 #8: finished game
 #9: assign playernumber
+#10: clock sync (estimate tcp,udp delay)
 
+func player_akk(self_player_number:int,akk_type:int,data:PackedByteArray=[])->PackedByteArray:
+	var output:PackedByteArray=PackedByteArray()
+	output.append(1)
+	output.append(akk_type)
+	output.append(self_player_number)
+	output.append_array(data)
+	output=output.compress(FileAccess.COMPRESSION_GZIP)
+	return output
 
 func initial_data_transfer(self_player_number:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
@@ -59,6 +70,7 @@ func player_number_assignment(number:int)->PackedByteArray:
 	output.append(number)
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
+
 
 
 

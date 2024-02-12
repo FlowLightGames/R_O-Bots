@@ -7,6 +7,9 @@ class_name PlayerConfigMetaData
 @export var Face_Texture:Texture2D=null
 @export var Starting_Stats:PickUpStats=PickUpStats.new()
 
+var initial_data_received:bool=false
+var steam_id:int=-1
+
 var custom_faces:Array[Texture2D]=[]
 var message_delay_udp:float=0.0
 var message_delay_tcp:float=0.0
