@@ -53,7 +53,7 @@ func set_steamID(player_number:int,steamID:int)->void:
 	if player_number >=0 && player_number<=7:
 		Player_Configs[player_number].steam_id=steamID
 
-func set_player_initial_data_akk(player_number:int)->void:
+func set_player_initial_data_ack(player_number:int)->void:
 	if player_number >=0 && player_number<=7:
 		Player_Configs[player_number].initial_data_received=true
 

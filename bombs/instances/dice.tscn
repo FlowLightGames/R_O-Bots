@@ -55,6 +55,7 @@ _data = {
 z_index = 2
 script = ExtResource("2_sqc5i")
 solid_explosion_raycast = NodePath("SolidExplosionRaycasts")
+bomb_type = 5
 
 [node name="BombSprite" parent="." index="2"]
 material = SubResource("ShaderMaterial_2appy")

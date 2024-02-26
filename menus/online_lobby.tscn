@@ -1,0 +1,129 @@
+[gd_scene load_steps=14 format=3 uid="uid://bqyx8ovdlweo6"]
+
+[ext_resource type="Script" path="res://menus/online_lobby.gd" id="1_5s41p"]
+[ext_resource type="PackedScene" uid="uid://ca0ofo74p5we4" path="res://menus/lobby_character_customizer.tscn" id="2_xj8qo"]
+[ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="3_jcfst"]
+[ext_resource type="Texture2D" uid="uid://dc165nqytilb2" path="res://bombs/explosion_sprites/explosion_palette.png" id="4_kmnox"]
+[ext_resource type="PackedScene" uid="uid://b1ilbhdx0c8p2" path="res://UI/background/background_scroll.tscn" id="5_04yeh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ibh7r"]
+resource_local_to_scene = true
+shader = ExtResource("3_jcfst")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_kmnox")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fl6tg"]
+resource_local_to_scene = true
+shader = ExtResource("3_jcfst")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_kmnox")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1htby"]
+resource_local_to_scene = true
+shader = ExtResource("3_jcfst")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_kmnox")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b8dbx"]
+resource_local_to_scene = true
+shader = ExtResource("3_jcfst")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_kmnox")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fynae"]
+resource_local_to_scene = true
+shader = ExtResource("3_jcfst")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_kmnox")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wslxt"]
+resource_local_to_scene = true
+shader = ExtResource("3_jcfst")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_kmnox")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ogc6s"]
+resource_local_to_scene = true
+shader = ExtResource("3_jcfst")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_kmnox")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_seul6"]
+resource_local_to_scene = true
+shader = ExtResource("3_jcfst")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_kmnox")
+
+[node name="OnlineLobby" type="Node2D" node_paths=PackedStringArray("player_boxes")]
+script = ExtResource("1_5s41p")
+player_boxes = [NodePath("Control/CenterContainer/GridContainer/LobbyCharacterCustomizer"), NodePath("Control/CenterContainer/GridContainer/LobbyCharacterCustomizer2"), NodePath("Control/CenterContainer/GridContainer/LobbyCharacterCustomizer3"), NodePath("Control/CenterContainer/GridContainer/LobbyCharacterCustomizer4"), NodePath("Control/CenterContainer/GridContainer/LobbyCharacterCustomizer5"), NodePath("Control/CenterContainer/GridContainer/LobbyCharacterCustomizer6"), NodePath("Control/CenterContainer/GridContainer/LobbyCharacterCustomizer7"), NodePath("Control/CenterContainer/GridContainer/LobbyCharacterCustomizer8")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 600.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Control/CenterContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="LobbyCharacterCustomizer" parent="Control/CenterContainer/GridContainer" instance=ExtResource("2_xj8qo")]
+material = SubResource("ShaderMaterial_ibh7r")
+layout_mode = 2
+
+[node name="LobbyCharacterCustomizer2" parent="Control/CenterContainer/GridContainer" instance=ExtResource("2_xj8qo")]
+material = SubResource("ShaderMaterial_fl6tg")
+layout_mode = 2
+type = 1
+
+[node name="LobbyCharacterCustomizer3" parent="Control/CenterContainer/GridContainer" instance=ExtResource("2_xj8qo")]
+material = SubResource("ShaderMaterial_1htby")
+layout_mode = 2
+type = 2
+
+[node name="LobbyCharacterCustomizer4" parent="Control/CenterContainer/GridContainer" instance=ExtResource("2_xj8qo")]
+material = SubResource("ShaderMaterial_b8dbx")
+layout_mode = 2
+type = 3
+
+[node name="LobbyCharacterCustomizer5" parent="Control/CenterContainer/GridContainer" instance=ExtResource("2_xj8qo")]
+material = SubResource("ShaderMaterial_fynae")
+layout_mode = 2
+type = 4
+
+[node name="LobbyCharacterCustomizer6" parent="Control/CenterContainer/GridContainer" instance=ExtResource("2_xj8qo")]
+material = SubResource("ShaderMaterial_wslxt")
+layout_mode = 2
+type = 5
+
+[node name="LobbyCharacterCustomizer7" parent="Control/CenterContainer/GridContainer" instance=ExtResource("2_xj8qo")]
+material = SubResource("ShaderMaterial_ogc6s")
+layout_mode = 2
+type = 6
+
+[node name="LobbyCharacterCustomizer8" parent="Control/CenterContainer/GridContainer" instance=ExtResource("2_xj8qo")]
+material = SubResource("ShaderMaterial_seul6")
+layout_mode = 2
+type = 7
+
+[node name="Background" parent="." instance=ExtResource("5_04yeh")]

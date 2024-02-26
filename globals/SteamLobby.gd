@@ -9,8 +9,8 @@ var lobby_id: int = 0
 var lobby_members: Array[Dictionary] = []
 var lobby_members_max: int = 8
 var lobby_vote_kick: bool = false
-var steam_id: int = 0
-var steam_username: String = ""
+
+var player_assignment_dict:Dictionary={}
 
 func _ready()->void:
 	Steam.join_requested.connect(_on_lobby_join_requested)
@@ -33,6 +33,15 @@ func _physics_process(_delta:float)->void:
 	if lobby_id > 0:
 		read_p2p_packet()
 
+### returns successful assignment -1 if error
+func add_player_assignment(player_id:int)->int:
+	if player_assignment_dict.size()>8:
+		return -1
+	else:
+		var idx:int=player_assignment_dict.size()
+		player_assignment_dict[idx]=player_id
+		return idx
+
 func join_lobby(this_lobby_id:int)->void:
 	lobby_members.clear()
 	Steam.joinLobby(this_lobby_id)
@@ -41,10 +50,12 @@ func leave_lobby()->void:
 	if lobby_id!=0:
 		Steam.leaveLobby(lobby_id)
 		
+		is_host=false
+		player_assignment_dict.clear()
 		lobby_id=0
 		
 		for member:Dictionary in lobby_members:
-			if member["steam_id"]!=steam_id:
+			if member["steam_id"]!=GlobalSteam.steam_id:
 				Steam.closeP2PSessionWithUser(member["steam_id"])
 		
 		lobby_members.clear()
@@ -87,7 +98,7 @@ func send_p2p_packet(this_target: int,send_type:int, packet_data:PackedByteArray
 			if lobby_members.size() > 1:
 				# Loop through all members that aren't you
 				for this_member:Dictionary in lobby_members:
-					if this_member['steam_id'] != steam_id:
+					if this_member['steam_id'] != GlobalSteam.steam_id:
 						Steam.sendP2PPacket(this_member['steam_id'], packet_data, send_type, channel)
 	 # Else send it to someone specific
 		_:
@@ -102,7 +113,7 @@ func get_lobby_members()->void:
 		lobby_members.append({"steam_id":member_steam_id, "steam_name":member_steam_name})
 
 func make_p2p_handshake()->void:
-	send_p2p_packet(0,Steam.P2P_SEND_RELIABLE,var_to_bytes({"message":"handshake","from":steam_id}).compress(FileAccess.COMPRESSION_GZIP))
+	send_p2p_packet(0,Steam.P2P_SEND_RELIABLE,var_to_bytes({"message":"handshake","from":GlobalSteam.steam_id}).compress(FileAccess.COMPRESSION_GZIP))
 
 func check_command_line()->void:
 	var these_arguments:PackedStringArray=OS.get_cmdline_args()
@@ -141,6 +152,8 @@ func _on_lobby_created(connect: int, this_lobby_id: int) -> void:
 	Steam.setLobbyData(lobby_id, "key", "value")
 	is_host=true
 	var set_relay: bool = Steam.allowP2PPacketRelay(true)
+	#custom
+	player_assignment_dict[0]=GlobalSteam.steam_id
 
 func _on_lobby_joined(this_lobby_id:int,_permissions:int,_locked:bool,response: int) -> void:
 	if response==Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
@@ -148,6 +161,9 @@ func _on_lobby_joined(this_lobby_id:int,_permissions:int,_locked:bool,response: 
 		get_lobby_members()
 		make_p2p_handshake()
 		is_host=false
+		#custom send player number ass request
+		var msg:PackedByteArray=PackageConstructor.player_number_request(GlobalSteam.steam_id)
+		send_p2p_packet(-1,2,msg)
 	else:
 		var fail_reason:String
 		match response:

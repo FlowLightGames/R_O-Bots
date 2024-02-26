@@ -1,7 +1,9 @@
 extends Node
 
+
 #first byte =type
-#0: different checks
+#0: Rquests
+	#0 player number assignment
 #1: Acknoledgement
 	#0 initial player number assignment
 	#1 initial data transfer
@@ -15,32 +17,39 @@ extends Node
 #9: assign playernumber
 #10: clock sync (estimate tcp,udp delay)
 
-signal player_initial_data_transfer_akk(player_number:int)
-signal player_number_assignment_akk(player_number:int)
-signal player_number_assignment(number:int)
+signal player_initial_data_transfer_ack(player_number:int)
+signal player_number_assignment_ack(player_number:int)
 signal character_custom_data_update(player_number:int,data:Array[int])
 signal character_custom_ready_update(player_number:int,ready:bool,data:Array[int])
-
 
 func handle_data(input:PackedByteArray)->void:
 	var type:int=input.decode_u8(0)
 	input.remove_at(0)
 	match type:
 		0:
-			pass
+			var req_type:int=input.decode_u8(0)
+			input.remove_at(0)
+			match req_type:
+				0:
+					var req_steam_id:int=bytes_to_var(input)
+					var test:int=SteamLobby.add_player_assignment(req_steam_id)
+					if test>=0:
+						var msg:PackedByteArray=PackageConstructor.player_number_assignment(test)
+						SteamLobby.send_p2p_packet(req_steam_id,2, msg)
 		1:
-			var akk_type:int=input.decode_u8(0)
+			var ack_type:int=input.decode_u8(0)
 			input.remove_at(0)
 			var player_number:int=input.decode_u8(0)
 			input.remove_at(0)
 			var data:PackedByteArray=input
-			match akk_type:
+			match ack_type:
 				0:
 					var steamID:int=bytes_to_var(data)
 					PlayerConfigs.set_steamID(player_number,steamID)
-					player_number_assignment_akk.emit(player_number)
+					player_number_assignment_ack.emit(player_number)
 				1:
-					PlayerConfigs.set_player_initial_data_akk(player_number)
+					PlayerConfigs.set_player_initial_data_ack(player_number)
+					player_initial_data_transfer_ack.emit(player_number)
 				_:
 					pass
 		2:
@@ -51,8 +60,8 @@ func handle_data(input:PackedByteArray)->void:
 				custom_faces.append(FacesAutoload.bytes_to_face(input.slice(n*FacesAutoload.bytes_per_face,(n+1)*FacesAutoload.bytes_per_face)))
 			PlayerConfigs.set_player_custom_faces(player_number,custom_faces)
 			
-			var akk_msg:PackedByteArray=PackageConstructor.player_akk(player_number,1)
-			SteamLobby.send_p2p_packet(-1,2, akk_msg)
+			var ack_msg:PackedByteArray=PackageConstructor.player_ack(player_number,1)
+			SteamLobby.send_p2p_packet(-1,2, ack_msg)
 		3:
 			pass
 		4:
@@ -97,8 +106,8 @@ func handle_data(input:PackedByteArray)->void:
 			SteamLobby.player_number=player
 			
 			var self_steamID:int=Steam.getSteamID()
-			var akk_msg:PackedByteArray=PackageConstructor.player_akk(player,0,var_to_bytes(self_steamID))
-			SteamLobby.send_p2p_packet(-1,2, akk_msg)
+			var ack_msg:PackedByteArray=PackageConstructor.player_ack(player,0,var_to_bytes(self_steamID))
+			SteamLobby.send_p2p_packet(-1,2, ack_msg)
 		10:
 			pass
 		_:

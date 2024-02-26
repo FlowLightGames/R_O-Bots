@@ -29,6 +29,7 @@ var preset_faces:Array[CompressedTexture2D]=[
 	preload("res://player_character/face_presets/face_preset_sprite21.png"),
 	preload("res://player_character/face_presets/face_preset_sprite22.png"),
 	preload("res://player_character/face_presets/face_preset_sprite23.png"),
+	preload("res://player_character/face_presets/face_preset_sprite24.png"),
 ]
 
 var custom_faces:Array[ImageTexture]=[

@@ -101,3 +101,7 @@ func _ready()->void:
 
 func _on_round_timer_timeout()->void:
 	time_out()
+
+func get_gamestate()->GameState:
+	var output:GameState=GameState.new()
+	return output

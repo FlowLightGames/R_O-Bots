@@ -7,6 +7,7 @@ class_name BombBase
 @export var affiliated_player:PlayerCharacter
 @export var placed_with_color:int=0
 @export var placed_with_power:int=1
+@export var bomb_type:BombList.BOMBTYPE=BombList.BOMBTYPE.DEFAULT
 
 var is_moving:bool=false
 var motion_vec:Vector2i=Vector2i.ZERO

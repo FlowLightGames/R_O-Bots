@@ -56,6 +56,7 @@ _data = {
 z_index = 2
 script = ExtResource("2_0curu")
 piercing_explosion_raycast = NodePath("PiercingExplosionRaycasts")
+bomb_type = 6
 
 [node name="BombSprite" parent="." index="2"]
 material = SubResource("ShaderMaterial_0gmhg")

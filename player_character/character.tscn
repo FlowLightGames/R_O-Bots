@@ -1199,6 +1199,7 @@ KnifeHurtBox = NodePath("KifeDmgArea/CollisionShape2D")
 GunRayCast = NodePath("GunCast2D")
 KickerRayCast = NodePath("KickerCast2D")
 death_timer = NodePath("DeathTimer")
+disabled = null
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 

@@ -1,9 +1,16 @@
 extends Control
+class_name LobbyCharacterCustom
 
 @export var type:int
 @export var disabled:bool=false
 @export var example_character_0:PlayerCharacter
 @export var example_character_1:PlayerCharacter
+@export var example_character_2:PlayerCharacter
+@export var example_character_3:PlayerCharacter
+
+@export var panel_content:Control
+@export var ready_overlay:Control
+@export var lobby_ref:MultiplayerCustomLobby
 
 @export var body_color_txt:Label
 @export var body_color_txt_shdw:Label
@@ -33,13 +40,21 @@ func _ready()->void:
 	
 	example_character_0.BodyAnimation.play("idle_front_left")
 	example_character_1.BodyAnimation.play("idle_front_right")
+	example_character_2.BodyAnimation.play("run_front_left")
+	example_character_3.BodyAnimation.play("run_front_right")
 	
 	example_character_0.set_new_body_color(type)
 	example_character_1.set_new_body_color(type)
+	example_character_2.set_new_body_color(type)
+	example_character_3.set_new_body_color(type)
 	example_character_0.set_new_face(FacesAutoload.preset_faces[0])
 	example_character_1.set_new_face(FacesAutoload.preset_faces[0])
+	example_character_2.set_new_face(FacesAutoload.preset_faces[0])
+	example_character_3.set_new_face(FacesAutoload.preset_faces[0])
 	example_character_0.set_new_face_color(type)
 	example_character_1.set_new_face_color(type)
+	example_character_2.set_new_face_color(type)
+	example_character_3.set_new_face_color(type)
 	
 	current_body_color=type
 	current_face_color=type
@@ -51,6 +66,11 @@ func _ready()->void:
 	
 	max_number_face_base=FacesAutoload.preset_faces.size()
 
+func enable()->void:
+	_ready()
+	panel_content.visible=true
+func disable()->void:
+	panel_content.visible=false
 
 func _on_bodycolor_dec_pressed()->void:
 	if(!disabled):
@@ -158,3 +178,24 @@ func _on_facepreset_inc_pressed()->void:
 		face_number_txt.text=str(current_face_base)
 		face_number_txt_shdw.text=str(current_face_base)
 
+
+
+
+func _on_ready_pressed()->void:
+	if (!disabled):
+		example_character_2.set_new_body(current_body_base)
+		example_character_3.set_new_body(current_body_base)
+		example_character_2.set_new_body_color(current_body_color)
+		example_character_3.set_new_body_color(current_body_color)
+		example_character_2.set_new_face_color(current_face_color)
+		example_character_3.set_new_face_color(current_face_color)
+		
+		if current_face_custom:
+			example_character_2.set_new_face(FacesAutoload.custom_faces[current_face_base])
+			example_character_3.set_new_face(FacesAutoload.custom_faces[current_face_base])
+		else:
+			example_character_2.set_new_face(FacesAutoload.preset_faces[current_face_base])
+			example_character_3.set_new_face(FacesAutoload.preset_faces[current_face_base])
+		
+		disable()
+		ready_overlay.visible=true

@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://ca0ofo74p5we4"]
+[gd_scene load_steps=15 format=3 uid="uid://ca0ofo74p5we4"]
 
 [ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="1_a8h24"]
 [ext_resource type="PackedScene" uid="uid://cd27yl8tl5qd6" path="res://player_character/character.tscn" id="2_6d3b8"]
-[ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="2_lank3"]
 [ext_resource type="Texture2D" uid="uid://dc165nqytilb2" path="res://bombs/explosion_sprites/explosion_palette.png" id="2_um6le"]
 [ext_resource type="Texture2D" uid="uid://h1grom73hp0x" path="res://UI/word_art/LEFT.png" id="3_cl2g1"]
 [ext_resource type="Texture2D" uid="uid://y3yu130wj8tc" path="res://UI/word_art/RIGHT.png" id="4_365ie"]
@@ -19,13 +18,6 @@ shader = ExtResource("6_rcmc8")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("2_um6le")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_03se3"]
-texture = ExtResource("2_lank3")
-texture_margin_left = 2.0
-texture_margin_top = 3.0
-texture_margin_right = 2.0
-texture_margin_bottom = 4.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hfxrk"]
 resource_local_to_scene = true
@@ -44,16 +36,20 @@ shader_parameter/displacement_map_size = Vector2i(12, 9)
 shader_parameter/palett = ExtResource("10_0fgjq")
 shader_parameter/displacement_map = ExtResource("9_ewlph")
 
-[node name="LobbyCharacterCustomizer" type="PanelContainer" node_paths=PackedStringArray("example_character_0", "example_character_1", "body_color_txt", "body_color_txt_shdw", "body_txt", "body_txt_shdw", "face_color_txt", "face_color_txt_shdw", "face_custom_txt", "face_custom_txt_shdw", "face_number_txt", "face_number_txt_shdw")]
+[node name="LobbyCharacterCustomizer" type="PanelContainer" node_paths=PackedStringArray("example_character_0", "example_character_1", "example_character_2", "example_character_3", "panel_content", "ready_overlay", "body_color_txt", "body_color_txt_shdw", "body_txt", "body_txt_shdw", "face_color_txt", "face_color_txt_shdw", "face_custom_txt", "face_custom_txt_shdw", "face_number_txt", "face_number_txt_shdw")]
+process_mode = 1
 material = SubResource("ShaderMaterial_m4yiq")
-custom_minimum_size = Vector2(156, 116)
+custom_minimum_size = Vector2(150, 128)
 offset_right = 6.0
 offset_bottom = 11.0
 theme = ExtResource("1_a8h24")
-theme_override_styles/panel = SubResource("StyleBoxTexture_03se3")
 script = ExtResource("5_h4pye")
 example_character_0 = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character")
 example_character_1 = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character2")
+example_character_2 = NodePath("CenterContainer/NinePatchRect/Control/Character")
+example_character_3 = NodePath("CenterContainer/NinePatchRect/Control/Character2")
+panel_content = NodePath("CenterContainer/VBoxContainer")
+ready_overlay = NodePath("CenterContainer/NinePatchRect")
 body_color_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer/Label")
 body_color_txt_shdw = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer/Label/Shadow")
 body_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Label")
@@ -64,12 +60,18 @@ face_custom_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Face/Fac
 face_custom_txt_shdw = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer/Label/Shadow")
 face_number_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer/Label")
 face_number_txt_shdw = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer/Label/Shadow")
+metadata/_edit_lock_ = true
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 2
+metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(134, 0)
 layout_mode = 2
+theme_override_constants/separation = 9
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -79,7 +81,6 @@ theme_override_constants/separation = 2
 layout_mode = 2
 
 [node name="Body" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -93,7 +94,7 @@ alignment = 1
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Body_Base"
+text = "BodyBase"
 
 [node name="Shadwon" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/Label"]
 self_modulate = Color(0, 0, 0, 1)
@@ -103,7 +104,7 @@ offset_left = 1.0
 offset_top = -1.0
 offset_right = 2.0
 offset_bottom = 7.0
-text = "Body_Base"
+text = "BodyBase"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase"]
 layout_mode = 2
@@ -146,7 +147,7 @@ alignment = 1
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Body_Color"
+text = "BodyClr"
 
 [node name="Shadwon" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/Label"]
 self_modulate = Color(0, 0, 0, 1)
@@ -156,7 +157,7 @@ offset_left = 1.0
 offset_top = -1.0
 offset_right = 2.0
 offset_bottom = 7.0
-text = "Body_Color"
+text = "BodyClr"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor"]
 layout_mode = 2
@@ -213,7 +214,7 @@ position = Vector2(16, 28)
 disabled = true
 
 [node name="Face" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(84, 0)
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -227,7 +228,7 @@ alignment = 1
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Face_Type"
+text = "FaceCstm"
 
 [node name="Shadwon" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/Label"]
 self_modulate = Color(0, 0, 0, 1)
@@ -237,7 +238,7 @@ offset_left = 1.0
 offset_top = -1.0
 offset_right = 2.0
 offset_bottom = 7.0
-text = "Face_Type"
+text = "FaceCstm"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset"]
 layout_mode = 2
@@ -280,7 +281,7 @@ alignment = 1
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Face_Number"
+text = "FaceNum"
 
 [node name="Shadwon" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/Label"]
 self_modulate = Color(0, 0, 0, 1)
@@ -290,7 +291,7 @@ offset_left = 1.0
 offset_top = -1.0
 offset_right = 2.0
 offset_bottom = 7.0
-text = "Face_Number"
+text = "FaceNum"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType"]
 layout_mode = 2
@@ -333,7 +334,7 @@ alignment = 1
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Face_Color"
+text = "FaceClr"
 
 [node name="Shadwon" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/Label"]
 self_modulate = Color(0, 0, 0, 1)
@@ -343,7 +344,7 @@ offset_left = 1.0
 offset_top = -1.0
 offset_right = 2.0
 offset_bottom = 7.0
-text = "Face_Color"
+text = "FaceClr"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor"]
 layout_mode = 2
@@ -379,6 +380,51 @@ texture_hover = ExtResource("4_365ie")
 texture_disabled = ExtResource("4_365ie")
 texture_focused = ExtResource("4_365ie")
 
+[node name="Ready" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "READY "
+
+[node name="NinePatchRect" type="Panel" parent="CenterContainer"]
+visible = false
+custom_minimum_size = Vector2(134, 40)
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/NinePatchRect"]
+custom_minimum_size = Vector2(133, 33)
+layout_mode = 2
+offset_top = 7.0
+offset_right = 133.0
+offset_bottom = 40.0
+bbcode_enabled = true
+text = "[center]
+[wave amp=25
+.0 freq=5.0 connected=1][rainbow freq=1.0 sat=0.8 val=0.8]READY[/rainbow][/wave][/center]"
+metadata/_edit_lock_ = true
+
+[node name="Control" type="Control" parent="CenterContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -20.0
+offset_right = -76.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Character" parent="CenterContainer/NinePatchRect/Control" instance=ExtResource("2_6d3b8")]
+position = Vector2(44, 27)
+disabled = true
+
+[node name="Character2" parent="CenterContainer/NinePatchRect/Control" instance=ExtResource("2_6d3b8")]
+position = Vector2(106, 27)
+disabled = true
+
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Dec" to="." method="_on_bodytype_dec_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Inc" to="." method="_on_bodytype_inc_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer/Dec" to="." method="_on_bodycolor_dec_pressed"]
@@ -389,5 +435,6 @@ texture_focused = ExtResource("4_365ie")
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer/Inc" to="." method="_on_facetype_inc_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer/Dec" to="." method="_on_facecolor_dec_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer/Inc" to="." method="_on_facecolor_inc_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Ready" to="." method="_on_ready_pressed"]
 
 [editable path="CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character"]

@@ -2,7 +2,8 @@ extends Node
 
 
 #first byte =type
-#0: different checks
+#0: Rquests
+	#0 player number assignment
 #1: Acknoledgement
 	#0 initial player number assignment
 	#1 initial data transfer
@@ -16,10 +17,10 @@ extends Node
 #9: assign playernumber
 #10: clock sync (estimate tcp,udp delay)
 
-func player_akk(self_player_number:int,akk_type:int,data:PackedByteArray=[])->PackedByteArray:
+func player_ack(self_player_number:int,ack_type:int,data:PackedByteArray=[])->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(1)
-	output.append(akk_type)
+	output.append(ack_type)
 	output.append(self_player_number)
 	output.append_array(data)
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
@@ -64,10 +65,19 @@ func character_ready(body_base:int,body_color:int,face_base:int,face_color:int,f
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func player_number_assignment(number:int)->PackedByteArray:
+func player_number_request(number:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(9)
 	output.append(number)
+	output=output.compress(FileAccess.COMPRESSION_GZIP)
+	return output
+
+
+func player_number_assignment(who_steam_id:int)->PackedByteArray:
+	var output:PackedByteArray=PackedByteArray()
+	output.append(0)
+	output.append(0)
+	output.append_array(var_to_bytes(who_steam_id))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 

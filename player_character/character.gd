@@ -58,21 +58,22 @@ func config_init(config:PlayerConfigMetaData)->void:
 	set_new_body_color(config.Body_Color)
 	set_new_face(config.Face_Texture)
 	set_new_face_color(config.Face_color)
+
 func picked_up(what:PickUp.PICKUP)->void:
 	match what:
 		#BOMBTYPE
 		PickUp.PICKUP.BANANA:
-			Pickup_Stats.BOMB_TYPE=Pickup_Stats.BOMBTYPE.BANANA
+			Pickup_Stats.BOMB_TYPE=BombList.BOMBTYPE.BANANA
 		PickUp.PICKUP.E:
-			Pickup_Stats.BOMB_TYPE=Pickup_Stats.BOMBTYPE.E
+			Pickup_Stats.BOMB_TYPE=BombList.BOMBTYPE.E
 		PickUp.PICKUP.REMOTE:
-			Pickup_Stats.BOMB_TYPE=Pickup_Stats.BOMBTYPE.REMOTE
+			Pickup_Stats.BOMB_TYPE=BombList.BOMBTYPE.REMOTE
 		PickUp.PICKUP.MINE:
-			Pickup_Stats.BOMB_TYPE=Pickup_Stats.BOMBTYPE.MINE
+			Pickup_Stats.BOMB_TYPE=BombList.BOMBTYPE.MINE
 		PickUp.PICKUP.DICE:
-			Pickup_Stats.BOMB_TYPE=Pickup_Stats.BOMBTYPE.DICE
+			Pickup_Stats.BOMB_TYPE=BombList.BOMBTYPE.DICE
 		PickUp.PICKUP.PLASMA:
-			Pickup_Stats.BOMB_TYPE=Pickup_Stats.BOMBTYPE.PLASMA
+			Pickup_Stats.BOMB_TYPE=BombList.BOMBTYPE.PLASMA
 		#STAT_UP
 		PickUp.PICKUP.LIFE_UP:
 			Pickup_Stats.LIFE_UP+=1
@@ -119,6 +120,7 @@ func picked_up(what:PickUp.PICKUP)->void:
 			pass
 	Pickup_Stats.clamp_stats()
 	update_state()
+
 func update_state()->void:
 	if Pickup_Stats.LIFE_UP>=0:
 		match Pickup_Stats.SPECIAL_STATE:
@@ -141,6 +143,7 @@ func update_state()->void:
 			KickerRayCast.enabled=false
 	else:
 		die()
+
 func damage()->void:
 	if !disabled:
 		if !i_frames:
@@ -150,11 +153,13 @@ func damage()->void:
 				die()
 			else:
 				IFramesAnimation.play("i_frames")
+
 func die()->void:
 	KnifeHurtBox.set_deferred("disabled",true)
 	disabled=true
 	BodyAnimation.play("death")
 	death_timer.start(0.6)
+
 func place_bomb()->void:
 	if Bomb_Ref_List.size()<(1+Pickup_Stats.BOMB_UP):
 		bomb_place_check.enabled=true
@@ -162,16 +167,16 @@ func place_bomb()->void:
 		if !(bomb_place_check.is_colliding()):
 			var tmp_bomb:BombBase
 			match Pickup_Stats.BOMB_TYPE:
-				Pickup_Stats.BOMBTYPE.DEFAULT:
+				BombList.BOMBTYPE.DEFAULT:
 					tmp_bomb=BombList.Default.instantiate() as DefaultBomb
 					tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
-				Pickup_Stats.BOMBTYPE.DICE:
+				BombList.BOMBTYPE.DICE:
 					tmp_bomb=BombList.Dice.instantiate() as DiceBomb
 					tmp_bomb.placed_with_power=1+randi_range(0,5)
-				Pickup_Stats.BOMBTYPE.BANANA:
+				BombList.BOMBTYPE.BANANA:
 					tmp_bomb=BombList.Banana.instantiate() as BananaBomb
 					(tmp_bomb as BananaBomb).placed_with_direction=get_priority_4_way_direction(current_view_direction)
-				Pickup_Stats.BOMBTYPE.PLASMA:
+				BombList.BOMBTYPE.PLASMA:
 					tmp_bomb=BombList.Plasma.instantiate() as PlasmaBomb
 					tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
 				_:
@@ -185,6 +190,7 @@ func place_bomb()->void:
 			map.bomb_nodes.add_child(tmp_bomb)
 			tmp_bomb.position=(map.base_ground_tilemap.local_to_map(self.position)*16)+Vector2i(8,8)
 		bomb_place_check.enabled=false
+
 func fire_gun()->void:
 	var view_direction_4_way:Vector2i=get_priority_4_way_direction(current_view_direction)
 	Pickup_Stats.SPECIAL_STATE=PickUpStats.SPECIALSTATE.NONE
@@ -212,6 +218,7 @@ func fire_gun()->void:
 		elif hit_target is PlayerCharacter:
 			(hit_target as PlayerCharacter).damage()
 	update_state()
+
 func get_priority_4_way_direction(input:Vector2i)->Vector2i:
 	var output:Vector2i=Vector2i.ZERO
 	if input.y==0:
@@ -221,6 +228,16 @@ func get_priority_4_way_direction(input:Vector2i)->Vector2i:
 			output=input
 		else:
 			output.x=input.x
+	return output
+
+func get_player_state()->PlayerState:
+	#TODO PLAYER ACTIONS
+	var output:PlayerState = PlayerState.new()
+	output.player_number=Player_Number
+	output.position=global_position
+	output.velocity=velocity
+	output.pickup_stats=Pickup_Stats
+	output.taken_aktions=[]
 	return output
 
 func _physics_process(_delta:float)->void:

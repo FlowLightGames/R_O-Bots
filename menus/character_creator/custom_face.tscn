@@ -236,7 +236,7 @@ alignment = 1
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Body_Base"
+text = "BodyBase"
 
 [node name="Shadwon" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase/Label"]
 self_modulate = Color(0, 0, 0, 1)
@@ -246,7 +246,7 @@ offset_left = 1.0
 offset_top = -1.0
 offset_right = 2.0
 offset_bottom = 7.0
-text = "Body_Base"
+text = "BodyBase"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase"]
 layout_mode = 2
@@ -289,7 +289,7 @@ alignment = 1
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Body_Color"
+text = "BodyClr"
 
 [node name="Shadwon" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor/Label"]
 self_modulate = Color(0, 0, 0, 1)
@@ -299,7 +299,7 @@ offset_left = 1.0
 offset_top = -1.0
 offset_right = 2.0
 offset_bottom = 7.0
-text = "Body_Color"
+text = "BodyClr"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor"]
 layout_mode = 2
@@ -342,7 +342,7 @@ alignment = 1
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Face_Color"
+text = "FaceClr"
 
 [node name="Shadwon" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor/Label"]
 self_modulate = Color(0, 0, 0, 1)
@@ -352,7 +352,7 @@ offset_left = 1.0
 offset_top = -1.0
 offset_right = 2.0
 offset_bottom = 7.0
-text = "Face_Color"
+text = "FaceClr"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor"]
 layout_mode = 2

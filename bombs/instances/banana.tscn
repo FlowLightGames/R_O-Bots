@@ -45,6 +45,7 @@ _data = {
 [node name="BombBase" instance=ExtResource("1_yp4c1")]
 z_index = 2
 script = ExtResource("2_43vg4")
+bomb_type = 1
 
 [node name="BombSprite" parent="." index="2"]
 texture = ExtResource("2_uy3db")

@@ -61,10 +61,15 @@ folder_colors={
 "res://globals/": "gray",
 "res://maps/": "green",
 "res://menus/character_creator/": "pink",
+"res://multiplayer/": "orange",
 "res://pickup/": "blue",
 "res://player_character/": "red",
 "res://tools/": "gray"
 }
+
+[gui]
+
+fonts/dynamic_fonts/use_oversampling=false
 
 [input]
 
