@@ -1,6 +1,6 @@
 extends Node
 class_name WinOverlay
-var player_scene:PackedScene=preload("res://player_character/character.tscn")
+var player_scene:PackedScene=load("res://player_character/character.tscn")
 
 @export var player_node:Node2D
 @export var animation_player:AnimationPlayer
