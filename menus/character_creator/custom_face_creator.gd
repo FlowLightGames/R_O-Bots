@@ -91,3 +91,4 @@ func _on_inc_face_color_pressed()->void:
 	example_character_1.set_new_face_color(current_face_color)
 	face_color_txt.text=str(current_face_color)
 	face_color_txt_shdw.text=str(current_face_color)
+

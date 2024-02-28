@@ -66,6 +66,10 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 1
 
+[node name="Seperator3" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
@@ -196,7 +200,7 @@ color = Color(0.501961, 0.501961, 0.501961, 1)
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="ExampleCaracter" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="ExampleCaracter" type="PanelContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(42, 23)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -204,20 +208,15 @@ size_flags_vertical = 4
 metadata/_edit_lock_ = true
 
 [node name="Visuals" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ExampleCaracter"]
-custom_minimum_size = Vector2(42, 23)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+custom_minimum_size = Vector2(42, 27)
+layout_mode = 2
 metadata/_edit_group_ = true
 
 [node name="Character" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ExampleCaracter/Visuals" instance=ExtResource("6_pmmbq")]
-position = Vector2(9, 21)
+position = Vector2(9, 24)
 
 [node name="Character2" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ExampleCaracter/Visuals" instance=ExtResource("6_pmmbq")]
-position = Vector2(33, 21)
+position = Vector2(33, 24)
 
 [node name="seperator3" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(16, 0)
@@ -392,25 +391,9 @@ texture_focused = ExtResource("10_2crly")
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
-[node name="Seperator2" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 8)
-layout_mode = 2
-
 [node name="Cancel and save" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-
-[node name="Cancel" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/Cancel and save"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -9.5
-offset_right = 41.0
-offset_bottom = 9.5
-grow_vertical = 2
-pivot_offset = Vector2(0, -14)
-text = "Cancel"
 
 [node name="Save" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/Cancel and save"]
 layout_mode = 1
@@ -419,15 +402,33 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -31.0
-offset_top = -9.5
-offset_bottom = 9.5
+offset_left = -28.0
+offset_top = -4.0
+offset_bottom = 10.0
 grow_horizontal = 0
 grow_vertical = 2
 pivot_offset = Vector2(0, -14)
 text = "Save"
 
-[node name="Seperator3" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/Cancel and save"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -15.0
+offset_right = 86.0
+grow_vertical = 0
+
+[node name="Cancel" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/Cancel and save/HBoxContainer"]
+layout_mode = 2
+text = "Cancel
+"
+
+[node name="Clear" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/Cancel and save/HBoxContainer"]
+layout_mode = 2
+text = "Clear"
+
+[node name="Seperator2" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 

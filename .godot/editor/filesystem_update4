@@ -1,11 +1,11 @@
-res://menus/online_lobby.tscn
+res://player_character/character.tscn
 res://UI/shader/palette_swap.gdshader
 res://player_character/character_face.gdshader
 res://UI/theme/new_theme.tres
 res://UI/background/BG_scroll.gdshader
 res://maps/effects/cloud_scroll_add.gdshader
 res://maps/effects/disco.gdshader
-res://player_character/character.tscn
 res://maps/instances/builder_M.tscn
 res://menus/lobby_character_customizer.tscn
+res://menus/online_lobby.tscn
 res://menus/character_creator/custom_face.tscn

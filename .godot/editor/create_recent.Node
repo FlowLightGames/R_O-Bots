@@ -1,14 +1,14 @@
+HBoxContainer
+Button
+PanelContainer
 Panel
 Control
 NinePatchRect
 RichTextLabel
 CenterContainer
-Button
 GridContainer
-PanelContainer
 VBoxContainer
 ItemList
-HBoxContainer
 Node2D
 TextureRect
 Sprite2D
