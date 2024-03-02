@@ -109,6 +109,8 @@ func update_character_custom(player_number:int)->void:
 		example_character_1.set_new_face(FacesAutoload.preset_faces[current_face_base])
 	face_number_txt.text=str(current_face_base)
 	face_number_txt_shdw.text=str(current_face_base)
+	
+	player_tag.text=Steam.getFriendPersonaName(config.steam_id)
 
 func _on_bodycolor_dec_pressed()->void:
 	if(!disabled):
