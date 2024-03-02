@@ -1,8 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://ca0ofo74p5we4"]
+[gd_scene load_steps=16 format=3 uid="uid://ca0ofo74p5we4"]
 
 [ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="1_a8h24"]
+[ext_resource type="Texture2D" uid="uid://c1c0hbjgbbtnl" path="res://menus/character_creator/menu_palette.png" id="2_0fqbj"]
 [ext_resource type="PackedScene" uid="uid://cd27yl8tl5qd6" path="res://player_character/character.tscn" id="2_6d3b8"]
-[ext_resource type="Texture2D" uid="uid://dc165nqytilb2" path="res://bombs/explosion_sprites/explosion_palette.png" id="2_um6le"]
 [ext_resource type="Texture2D" uid="uid://h1grom73hp0x" path="res://UI/word_art/LEFT.png" id="3_cl2g1"]
 [ext_resource type="Texture2D" uid="uid://y3yu130wj8tc" path="res://UI/word_art/RIGHT.png" id="4_365ie"]
 [ext_resource type="Script" path="res://menus/lobby_character_customizer.gd" id="5_h4pye"]
@@ -11,13 +11,14 @@
 [ext_resource type="Shader" path="res://player_character/character_face.gdshader" id="8_hvyq6"]
 [ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="9_ewlph"]
 [ext_resource type="Texture2D" uid="uid://bw335sbq0nqxa" path="res://player_character/face_base_color_palette.png" id="10_0fgjq"]
+[ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="12_1tuyl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m4yiq"]
 resource_local_to_scene = true
 shader = ExtResource("6_rcmc8")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
-shader_parameter/palett = ExtResource("2_um6le")
+shader_parameter/palett = ExtResource("2_0fqbj")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hfxrk"]
 resource_local_to_scene = true
@@ -36,7 +37,7 @@ shader_parameter/displacement_map_size = Vector2i(12, 9)
 shader_parameter/palett = ExtResource("10_0fgjq")
 shader_parameter/displacement_map = ExtResource("9_ewlph")
 
-[node name="LobbyCharacterCustomizer" type="PanelContainer" node_paths=PackedStringArray("example_character_0", "example_character_1", "example_character_2", "example_character_3", "panel_content", "ready_overlay", "body_color_txt", "body_color_txt_shdw", "body_txt", "body_txt_shdw", "face_color_txt", "face_color_txt_shdw", "face_custom_txt", "face_custom_txt_shdw", "face_number_txt", "face_number_txt_shdw")]
+[node name="LobbyCharacterCustomizer" type="PanelContainer" node_paths=PackedStringArray("player_tag", "example_character_0", "example_character_1", "example_character_2", "example_character_3", "panel_content", "ready_overlay", "player_name", "body_color_txt", "body_color_txt_shdw", "body_txt", "body_txt_shdw", "face_color_txt", "face_color_txt_shdw", "face_custom_txt", "face_custom_txt_shdw", "face_number_txt", "face_number_txt_shdw")]
 process_mode = 1
 material = SubResource("ShaderMaterial_m4yiq")
 custom_minimum_size = Vector2(150, 128)
@@ -44,12 +45,14 @@ offset_right = 6.0
 offset_bottom = 11.0
 theme = ExtResource("1_a8h24")
 script = ExtResource("5_h4pye")
+player_tag = NodePath("Control/Panel/Label")
 example_character_0 = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character")
 example_character_1 = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character2")
 example_character_2 = NodePath("CenterContainer/NinePatchRect/Control/Character")
 example_character_3 = NodePath("CenterContainer/NinePatchRect/Control/Character2")
 panel_content = NodePath("CenterContainer/VBoxContainer")
 ready_overlay = NodePath("CenterContainer/NinePatchRect")
+player_name = NodePath("Control")
 body_color_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer/Label")
 body_color_txt_shdw = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer/Label/Shadow")
 body_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Label")
@@ -424,6 +427,33 @@ disabled = true
 [node name="Character2" parent="CenterContainer/NinePatchRect/Control" instance=ExtResource("2_6d3b8")]
 position = Vector2(106, 27)
 disabled = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Panel" type="NinePatchRect" parent="Control"]
+custom_minimum_size = Vector2(94, 24)
+layout_mode = 0
+offset_left = 17.0
+offset_top = -20.0
+offset_right = 34.0
+offset_bottom = 4.0
+texture = ExtResource("12_1tuyl")
+patch_margin_left = 8
+patch_margin_top = 10
+patch_margin_right = 7
+patch_margin_bottom = 3
+
+[node name="Label" type="Label" parent="Control/Panel"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 86.0
+offset_bottom = 22.0
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Dec" to="." method="_on_bodytype_dec_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Inc" to="." method="_on_bodytype_inc_pressed"]

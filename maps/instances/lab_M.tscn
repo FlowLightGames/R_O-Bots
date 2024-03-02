@@ -169,7 +169,7 @@ sources/0 = SubResource("TileSetScenesCollectionSource_bpa2w")
 [node name="MapBase" instance=ExtResource("1_gvyec")]
 players_spawned = 8
 pickup_chance = 0.505
-possible_pickups = Array[int]([8, 7, 17, 4, 5, 6, 18, 21, 22, 16, 14, 19, 9])
+possible_pickups = Array[Resource("res://maps/pickup_option_struct.gd")]([])
 metadata/_edit_lock_ = true
 
 [node name="BaseGround" parent="." index="0"]

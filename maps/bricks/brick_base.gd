@@ -21,8 +21,10 @@ func _on_animation_player_animation_finished(_anim_name:String)->void:
 	else:
 		spawn=(random_f<=map.pickup_chance)
 	if(spawn):
-		var tmp_pickup:PickUp=map.pickup_scene.instantiate() as PickUp
-		tmp_pickup.type=map.possible_pickups.pick_random()
-		get_parent().add_child(tmp_pickup)
-		tmp_pickup.position=position
+		var picked_struct:PickUpOptionStruct=map.pick_up_with_weights()
+		if picked_struct:
+			var tmp_pickup:PickUp=map.pickup_scene.instantiate() as PickUp
+			tmp_pickup.type=picked_struct.what
+			get_parent().add_child(tmp_pickup)
+			tmp_pickup.position=position
 	queue_free()

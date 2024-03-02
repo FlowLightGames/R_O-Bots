@@ -170,7 +170,6 @@ shader_parameter/offset = Vector2(0, 0)
 [node name="MapBase" instance=ExtResource("1_4rd1t")]
 players_spawned = 8
 pickup_chance = 1.0
-possible_pickups = Array[int]([7, 9, 5])
 round_time = 60.0
 metadata/_edit_lock_ = true
 

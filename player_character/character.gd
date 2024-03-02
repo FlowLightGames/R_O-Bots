@@ -57,7 +57,7 @@ func config_init(config:PlayerConfigMetaData)->void:
 	set_new_body(config.Body_Base)
 	set_new_body_color(config.Body_Color)
 	set_new_face(config.Face_Texture)
-	set_new_face_color(config.Face_color)
+	set_new_face_color(config.Face_Color)
 
 func picked_up(what:PickUp.PICKUP)->void:
 	match what:

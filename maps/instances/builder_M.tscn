@@ -133,7 +133,7 @@ blend_mode = 3
 [node name="MapBase" instance=ExtResource("1_hjnxq")]
 players_spawned = 8
 pickup_chance = 0.505
-possible_pickups = Array[int]([0, 22, 23, 5, 7, 13, 8])
+possible_pickups = Array[Resource("res://maps/pickup_option_struct.gd")]([])
 round_time = 110.0
 metadata/_edit_lock_ = true
 

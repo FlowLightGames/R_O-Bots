@@ -3,6 +3,7 @@ class_name LobbyCharacterCustom
 
 @export var type:int
 @export var disabled:bool=false
+@export var player_tag:Label
 @export var example_character_0:PlayerCharacter
 @export var example_character_1:PlayerCharacter
 @export var example_character_2:PlayerCharacter
@@ -10,6 +11,7 @@ class_name LobbyCharacterCustom
 
 @export var panel_content:Control
 @export var ready_overlay:Control
+@export var player_name:Control
 @export var lobby_ref:MultiplayerCustomLobby
 
 @export var body_color_txt:Label
@@ -64,13 +66,49 @@ func _ready()->void:
 	face_color_txt.text=str(current_face_color)
 	face_color_txt_shdw.text=str(current_face_color)
 	
+	player_tag.text=GlobalSteam.steam_username
+	
 	max_number_face_base=FacesAutoload.preset_faces.size()
 
 func enable()->void:
 	_ready()
 	panel_content.visible=true
+	player_name.visible=true
 func disable()->void:
 	panel_content.visible=false
+	player_name.visible=false
+
+func update_character_custom(player_number:int)->void:
+	var config:PlayerConfigMetaData=PlayerConfigs.Player_Configs[player_number]
+	
+	current_body_color=config.Body_Color
+	example_character_0.set_new_body_color(current_body_color)
+	example_character_1.set_new_body_color(current_body_color)
+	body_color_txt.text=str(current_body_color)
+	body_color_txt_shdw.text=str(current_body_color)
+	
+	current_body_base=config.Body_Base
+	example_character_0.set_new_body(current_body_base)
+	example_character_1.set_new_body(current_body_base)
+	body_txt.text=str(current_body_base)
+	body_txt_shdw.text=str(current_body_base)
+	
+	current_face_color=config.Face_color
+	example_character_0.set_new_face_color(current_face_color)
+	example_character_1.set_new_face_color(current_face_color)
+	face_color_txt.text=str(current_face_color)
+	face_color_txt_shdw.text=str(current_face_color)
+	
+	current_face_base=config.Face_Base
+	current_face_custom=config.Custom_Face
+	if current_face_custom:
+		example_character_0.set_new_face(config.custom_faces[current_face_base])
+		example_character_1.set_new_face(config.custom_faces[current_face_base])
+	else:
+		example_character_0.set_new_face(FacesAutoload.preset_faces[current_face_base])
+		example_character_1.set_new_face(FacesAutoload.preset_faces[current_face_base])
+	face_number_txt.text=str(current_face_base)
+	face_number_txt_shdw.text=str(current_face_base)
 
 func _on_bodycolor_dec_pressed()->void:
 	if(!disabled):
@@ -177,8 +215,6 @@ func _on_facepreset_inc_pressed()->void:
 			face_custom_txt_shdw.text="Preset"
 		face_number_txt.text=str(current_face_base)
 		face_number_txt_shdw.text=str(current_face_base)
-
-
 
 
 func _on_ready_pressed()->void:

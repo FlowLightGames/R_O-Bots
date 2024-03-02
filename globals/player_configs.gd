@@ -1,6 +1,6 @@
 extends Node
 
-signal player_config_changed
+signal player_config_changed(player_number:int)
 
 var Player_Configs:Array[PlayerConfigMetaData]=[
 	PlayerConfigMetaData.new(0,0,0,FacesAutoload.preset_faces[0],PickUpStats.new()),
@@ -33,7 +33,7 @@ func set_player_custom_faces(player_number:int,data:Array[Texture2D])->void:
 		
 		player_config_changed.emit()
 
-func update_player_confi(player_number:int,data:Array[int])->void:
+func update_player_config(player_number:int,data:Array[int])->void:
 	if player_number >=0 && player_number<=7:
 		if data.size()==5:
 			#0 (body_base)
@@ -42,12 +42,16 @@ func update_player_confi(player_number:int,data:Array[int])->void:
 			#3 (face_color)
 			#4 (face_custom)
 			Player_Configs[player_number].Body_Base=data[0]
-			Player_Configs[player_number].Body_Base=data[1]
-			Player_Configs[player_number].Body_Base=data[2]
-			Player_Configs[player_number].Body_Base=data[3]
-			Player_Configs[player_number].Body_Base=data[4]
+			Player_Configs[player_number].Body_Color=data[1]
+			Player_Configs[player_number].Face_Base=data[2]
+			Player_Configs[player_number].Face_Color=data[3]
+			Player_Configs[player_number].Custom_Face=bool(data[4])
+			if bool(data[4]):
+				Player_Configs[player_number].Face_Texture=Player_Configs[player_number].custom_faces[data[2]]
+			else:
+				Player_Configs[player_number].Face_Texture=FacesAutoload.preset_faces[data[2]]
 			
-			player_config_changed.emit()
+			player_config_changed.emit(player_number)
 
 func set_steamID(player_number:int,steamID:int)->void:
 	if player_number >=0 && player_number<=7:

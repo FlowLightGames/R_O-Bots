@@ -77,7 +77,8 @@ func handle_data(input:PackedByteArray)->void:
 			character_data.append(input.decode_u8(3))
 			character_data.append(input.decode_u8(4))
 			character_data.append(input.decode_u8(5))
-			PlayerConfigs.update_player_confi(player_number,character_data)
+			PlayerConfigs.update_player_config(player_number,character_data)
+			
 		5:
 			#0_ ready bool
 			#1 (body_base)
