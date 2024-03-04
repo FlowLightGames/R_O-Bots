@@ -44,6 +44,7 @@ func add_player_assignment(player_id:int)->int:
 
 func join_lobby(this_lobby_id:int)->void:
 	lobby_members.clear()
+	is_host=false
 	Steam.joinLobby(this_lobby_id)
 
 func leave_lobby()->void:
@@ -82,7 +83,7 @@ func read_p2p_packet()->void:
 		var packet_code: PackedByteArray = this_packet["data"]
 		var readable_data: PackedByteArray = packet_code.decompress_dynamic(-1, FileAccess.COMPRESSION_GZIP)
 		# Append logic here to deal with packet data
-		PackageDeconstructor.handle_data(readable_data)
+		PackageDeconstructor.handle_data(readable_data,packet_sender)
 
 func send_p2p_packet(this_target: int,send_type:int, packet_data:PackedByteArray) -> void:
 	var channel: int = 0
@@ -211,7 +212,7 @@ func _on_lobby_chat_update(this_lobby_id: int, change_id: int, making_change_id:
 	get_lobby_members()
 
 #TODO
-func _on_lobby_data_update()->void:
+func _on_lobby_data_update(success :int, lobby_id :int, member_id :int)->void:
 	pass
 
 func _on_lobby_invite()->void:

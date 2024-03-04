@@ -1,13 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://b33a2c617wpeh"]
+[gd_scene load_steps=9 format=3 uid="uid://b33a2c617wpeh"]
 
 [ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="1_wtp2m"]
+[ext_resource type="Script" path="res://menus/main_menu.gd" id="1_wv75o"]
 [ext_resource type="Texture2D" uid="uid://du2ycui0mnds2" path="res://UI/word_art/GAME_START.png" id="2_iwafk"]
 [ext_resource type="Texture2D" uid="uid://5nejtyp6mix8" path="res://UI/word_art/BATTLE_START.png" id="3_cx1dl"]
 [ext_resource type="Texture2D" uid="uid://dometteuw755t" path="res://UI/word_art/LOBBY_HOST.png" id="4_r5ws6"]
 [ext_resource type="Texture2D" uid="uid://brpi2odksav2s" path="res://UI/word_art/LOBBY_JOIN.png" id="5_gfm5d"]
 [ext_resource type="Texture2D" uid="uid://bslelq1ccsd7c" path="res://UI/word_art/OPTIONS.png" id="6_w0ceh"]
+[ext_resource type="Texture2D" uid="uid://b2ycmw237cqq7" path="res://menus/main_menu/crt.png" id="8_2uxn3"]
 
 [node name="MainMenu" type="Node2D"]
+script = ExtResource("1_wv75o")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 8
@@ -68,3 +71,19 @@ texture_normal = ExtResource("6_w0ceh")
 texture_pressed = ExtResource("6_w0ceh")
 texture_hover = ExtResource("6_w0ceh")
 texture_disabled = ExtResource("6_w0ceh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(318, 179)
+texture = ExtResource("8_2uxn3")
+
+[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
+show_behind_parent = true
+offset_left = -131.0
+offset_top = -82.0
+offset_right = 130.0
+offset_bottom = 82.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HostLobby" to="." method="_on_host_lobby_pressed"]

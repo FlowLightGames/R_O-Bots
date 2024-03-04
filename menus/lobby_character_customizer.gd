@@ -15,15 +15,10 @@ class_name LobbyCharacterCustom
 @export var lobby_ref:MultiplayerCustomLobby
 
 @export var body_color_txt:Label
-@export var body_color_txt_shdw:Label
 @export var body_txt:Label
-@export var body_txt_shdw:Label
 @export var face_color_txt:Label
-@export var face_color_txt_shdw:Label
 @export var face_custom_txt:Label
-@export var face_custom_txt_shdw:Label
 @export var face_number_txt:Label
-@export var face_number_txt_shdw:Label
 
 var max_number_body_color:int=8
 var max_number_body_base:int=5
@@ -62,9 +57,7 @@ func _ready()->void:
 	current_face_color=type
 	
 	body_color_txt.text=str(current_body_color)
-	body_color_txt_shdw.text=str(current_body_color)
 	face_color_txt.text=str(current_face_color)
-	face_color_txt_shdw.text=str(current_face_color)
 	
 	player_tag.text=GlobalSteam.steam_username
 	
@@ -85,19 +78,16 @@ func update_character_custom(player_number:int)->void:
 	example_character_0.set_new_body_color(current_body_color)
 	example_character_1.set_new_body_color(current_body_color)
 	body_color_txt.text=str(current_body_color)
-	body_color_txt_shdw.text=str(current_body_color)
 	
 	current_body_base=config.Body_Base
 	example_character_0.set_new_body(current_body_base)
 	example_character_1.set_new_body(current_body_base)
 	body_txt.text=str(current_body_base)
-	body_txt_shdw.text=str(current_body_base)
 	
 	current_face_color=config.Face_color
 	example_character_0.set_new_face_color(current_face_color)
 	example_character_1.set_new_face_color(current_face_color)
 	face_color_txt.text=str(current_face_color)
-	face_color_txt_shdw.text=str(current_face_color)
 	
 	current_face_base=config.Face_Base
 	current_face_custom=config.Custom_Face
@@ -108,7 +98,6 @@ func update_character_custom(player_number:int)->void:
 		example_character_0.set_new_face(FacesAutoload.preset_faces[current_face_base])
 		example_character_1.set_new_face(FacesAutoload.preset_faces[current_face_base])
 	face_number_txt.text=str(current_face_base)
-	face_number_txt_shdw.text=str(current_face_base)
 	
 	player_tag.text=Steam.getFriendPersonaName(config.steam_id)
 
@@ -118,7 +107,6 @@ func _on_bodycolor_dec_pressed()->void:
 		example_character_0.set_new_body_color(current_body_color)
 		example_character_1.set_new_body_color(current_body_color)
 		body_color_txt.text=str(current_body_color)
-		body_color_txt_shdw.text=str(current_body_color)
 
 
 func _on_bodycolor_inc_pressed()->void:
@@ -127,7 +115,6 @@ func _on_bodycolor_inc_pressed()->void:
 		example_character_0.set_new_body_color(current_body_color)
 		example_character_1.set_new_body_color(current_body_color)
 		body_color_txt.text=str(current_body_color)
-		body_color_txt_shdw.text=str(current_body_color)
 
 func _on_bodytype_dec_pressed()->void:
 	if(!disabled):
@@ -135,7 +122,6 @@ func _on_bodytype_dec_pressed()->void:
 		example_character_0.set_new_body(current_body_base)
 		example_character_1.set_new_body(current_body_base)
 		body_txt.text=str(current_body_base)
-		body_txt_shdw.text=str(current_body_base)
 
 func _on_bodytype_inc_pressed()->void:
 	if(!disabled):
@@ -143,7 +129,6 @@ func _on_bodytype_inc_pressed()->void:
 		example_character_0.set_new_body(current_body_base)
 		example_character_1.set_new_body(current_body_base)
 		body_txt.text=str(current_body_base)
-		body_txt_shdw.text=str(current_body_base)
 
 
 func _on_facecolor_dec_pressed()->void:
@@ -152,7 +137,6 @@ func _on_facecolor_dec_pressed()->void:
 		example_character_0.set_new_face_color(current_face_color)
 		example_character_1.set_new_face_color(current_face_color)
 		face_color_txt.text=str(current_face_color)
-		face_color_txt_shdw.text=str(current_face_color)
 
 
 func _on_facecolor_inc_pressed()->void:
@@ -161,7 +145,6 @@ func _on_facecolor_inc_pressed()->void:
 		example_character_0.set_new_face_color(current_face_color)
 		example_character_1.set_new_face_color(current_face_color)
 		face_color_txt.text=str(current_face_color)
-		face_color_txt_shdw.text=str(current_face_color)
 
 func _on_facetype_dec_pressed()->void:
 	if(!disabled):
@@ -173,8 +156,6 @@ func _on_facetype_dec_pressed()->void:
 			example_character_0.set_new_face(FacesAutoload.preset_faces[current_face_base])
 			example_character_1.set_new_face(FacesAutoload.preset_faces[current_face_base])
 		face_number_txt.text=str(current_face_base)
-		face_number_txt_shdw.text=str(current_face_base)
-	
 
 func _on_facetype_inc_pressed()->void:
 	if(!disabled):
@@ -186,7 +167,6 @@ func _on_facetype_inc_pressed()->void:
 			example_character_0.set_new_face(FacesAutoload.preset_faces[current_face_base])
 			example_character_1.set_new_face(FacesAutoload.preset_faces[current_face_base])
 		face_number_txt.text=str(current_face_base)
-		face_number_txt_shdw.text=str(current_face_base)
 
 func _on_facepreset_dec_pressed()->void:
 	if(!disabled):
@@ -195,13 +175,10 @@ func _on_facepreset_dec_pressed()->void:
 		if current_face_custom:
 			max_number_face_base=FacesAutoload.custom_faces.size()
 			face_custom_txt.text="Custom"
-			face_custom_txt_shdw.text="Custom"
 		else:
 			max_number_face_base=FacesAutoload.preset_faces.size()
 			face_custom_txt.text="Preset"
-			face_custom_txt_shdw.text="Preset"
 		face_number_txt.text=str(current_face_base)
-		face_number_txt_shdw.text=str(current_face_base)
 
 func _on_facepreset_inc_pressed()->void:
 	if(!disabled):
@@ -210,13 +187,10 @@ func _on_facepreset_inc_pressed()->void:
 		if current_face_custom:
 			max_number_face_base=FacesAutoload.custom_faces.size()
 			face_custom_txt.text="Custom"
-			face_custom_txt_shdw.text="Custom"
 		else:
 			max_number_face_base=FacesAutoload.preset_faces.size()
 			face_custom_txt.text="Preset"
-			face_custom_txt_shdw.text="Preset"
 		face_number_txt.text=str(current_face_base)
-		face_number_txt_shdw.text=str(current_face_base)
 
 
 func _on_ready_pressed()->void:

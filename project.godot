@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Robots"
 config/version="0.9"
-run/main_scene="res://menus/character_creator/custom_face.tscn"
+run/main_scene="res://menus/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.png"
 
@@ -26,6 +26,7 @@ BombList="*res://globals/bomb_list.gd"
 PlayerConfigs="*res://globals/player_configs.gd"
 PackageDeconstructor="*res://globals/package_deconstructor.gd"
 PackageConstructor="*res://globals/package_constructor.gd"
+SceneCollection="*res://globals/scene_collection.gd"
 
 [debug]
 
@@ -60,7 +61,6 @@ folder_colors={
 "res://enemy_character/": "orange",
 "res://globals/": "gray",
 "res://maps/": "green",
-"res://menus/character_creator/": "pink",
 "res://multiplayer/": "orange",
 "res://pickup/": "blue",
 "res://player_character/": "red",
