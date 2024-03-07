@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=37 format=3 uid="uid://dy5u7q4gd4umg"]
+[gd_resource type="Theme" load_steps=41 format=3 uid="uid://dy5u7q4gd4umg"]
 
 [ext_resource type="Texture2D" uid="uid://c7g3ei7p02dqg" path="res://UI/theme/button_dark.png" id="1_v6qkr"]
 [ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="2_g1xli"]
@@ -13,7 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://dx0npj6q3ijml" path="res://UI/theme/increment.png" id="11_gt1tf"]
 [ext_resource type="Texture2D" uid="uid://cg48sfx7clhxv" path="res://UI/theme/menu_mark_dark.png" id="12_up4ll"]
 [ext_resource type="Texture2D" uid="uid://byxrmt7lxhegj" path="res://UI/theme/menu_mark.png" id="13_0dh5k"]
+[ext_resource type="Texture2D" uid="uid://e0xlf2dan7vs" path="res://UI/theme/scroll_bar_v.png" id="15_ek4jb"]
 [ext_resource type="Texture2D" uid="uid://dcaj6ckqayaoe" path="res://UI/theme/tab_disabled.png" id="15_ixifg"]
+[ext_resource type="Texture2D" uid="uid://blub8i4tcbxly" path="res://UI/theme/scroll_bar_h_empty.png" id="15_qimot"]
 [ext_resource type="Texture2D" uid="uid://ba05rrq2glmg2" path="res://UI/theme/tab.png" id="16_0d5j3"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hq7it"]
@@ -118,6 +120,20 @@ texture_margin_top = 16.0
 texture_margin_right = 8.0
 texture_margin_bottom = 1.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xycot"]
+texture = ExtResource("15_ek4jb")
+texture_margin_left = 6.0
+texture_margin_top = 2.0
+texture_margin_right = 5.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rlc5v"]
+texture = ExtResource("4_37ch7")
+texture_margin_left = 2.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 4.0
+
 [sub_resource type="FontVariation" id="FontVariation_j7etc"]
 base_font = ExtResource("4_1wshd")
 spacing_space = 2
@@ -130,9 +146,9 @@ default_font_size = 8
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_focus_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(1, 1, 1, 1)
-Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(0.494118, 0.494118, 0.494118, 1)
 Button/colors/font_outline_color = Color(1, 1, 1, 1)
-Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(0.494118, 0.494118, 0.494118, 1)
 Button/colors/icon_focus_color = Color(1, 1, 1, 1)
 Button/colors/icon_hover_color = Color(1, 1, 1, 1)
 Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
@@ -187,3 +203,14 @@ TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_g0fms")
 TabContainer/styles/tab_hovered = SubResource("StyleBoxTexture_7tf7s")
 TabContainer/styles/tab_selected = SubResource("StyleBoxTexture_je48i")
 TabContainer/styles/tab_unselected = SubResource("StyleBoxTexture_de4ks")
+VScrollBar/icons/decrement = ExtResource("15_qimot")
+VScrollBar/icons/decrement_highlight = ExtResource("15_qimot")
+VScrollBar/icons/decrement_pressed = ExtResource("15_qimot")
+VScrollBar/icons/increment = ExtResource("15_qimot")
+VScrollBar/icons/increment_highlight = ExtResource("15_qimot")
+VScrollBar/icons/increment_pressed = ExtResource("15_qimot")
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_xycot")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_xycot")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_xycot")
+VScrollBar/styles/scroll = SubResource("StyleBoxTexture_rlc5v")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxTexture_rlc5v")

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c1c0hbjgbbtnl" path="res://menus/character_creator/menu_palette.png" id="3_ydp07"]
 [ext_resource type="PackedScene" uid="uid://b1ilbhdx0c8p2" path="res://UI/background/background_scroll.tscn" id="5_04yeh"]
 
-[sub_resource type="Shader" id="Shader_etvi6"]
+[sub_resource type="Shader" id="Shader_65veb"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -23,12 +23,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h62vj"]
 resource_local_to_scene = true
-shader = SubResource("Shader_etvi6")
+shader = SubResource("Shader_65veb")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[sub_resource type="Shader" id="Shader_lqk31"]
+[sub_resource type="Shader" id="Shader_v0crr"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -45,12 +45,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b7e2k"]
 resource_local_to_scene = true
-shader = SubResource("Shader_lqk31")
+shader = SubResource("Shader_v0crr")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[sub_resource type="Shader" id="Shader_tlr43"]
+[sub_resource type="Shader" id="Shader_d2ek7"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -67,12 +67,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88fua"]
 resource_local_to_scene = true
-shader = SubResource("Shader_tlr43")
+shader = SubResource("Shader_d2ek7")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[sub_resource type="Shader" id="Shader_f56i4"]
+[sub_resource type="Shader" id="Shader_apcyh"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -89,12 +89,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8dsxe"]
 resource_local_to_scene = true
-shader = SubResource("Shader_f56i4")
+shader = SubResource("Shader_apcyh")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[sub_resource type="Shader" id="Shader_var3u"]
+[sub_resource type="Shader" id="Shader_pjicq"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -111,12 +111,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h3kn5"]
 resource_local_to_scene = true
-shader = SubResource("Shader_var3u")
+shader = SubResource("Shader_pjicq")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[sub_resource type="Shader" id="Shader_tr5tr"]
+[sub_resource type="Shader" id="Shader_wa34g"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -133,12 +133,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1mq1e"]
 resource_local_to_scene = true
-shader = SubResource("Shader_tr5tr")
+shader = SubResource("Shader_wa34g")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[sub_resource type="Shader" id="Shader_oq44c"]
+[sub_resource type="Shader" id="Shader_64d4i"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -155,12 +155,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8b51h"]
 resource_local_to_scene = true
-shader = SubResource("Shader_oq44c")
+shader = SubResource("Shader_64d4i")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[sub_resource type="Shader" id="Shader_3esda"]
+[sub_resource type="Shader" id="Shader_0s7me"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -177,14 +177,15 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyk73"]
 resource_local_to_scene = true
-shader = SubResource("Shader_3esda")
+shader = SubResource("Shader_0s7me")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[node name="OnlineLobby" type="Node2D" node_paths=PackedStringArray("player_boxes")]
+[node name="OnlineLobby" type="Node2D" node_paths=PackedStringArray("player_boxes", "lobby_id_label")]
 script = ExtResource("1_5s41p")
 player_boxes = [NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer2"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer3"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer4"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer5"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer6"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer7"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer8")]
+lobby_id_label = NodePath("Control/CenterContainer/VBoxContainer/Label")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -282,6 +283,9 @@ text = "INVITE"
 [node name="Start" type="Button" parent="Control/CenterContainer/VBoxContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "STAGE SELECT"
+
+[node name="Label" type="Label" parent="Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="Background" parent="." instance=ExtResource("5_04yeh")]
 

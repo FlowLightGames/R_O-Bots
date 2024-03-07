@@ -2,6 +2,7 @@ extends Node2D
 class_name MultiplayerCustomLobby
 
 @export var player_boxes:Array[LobbyCharacterCustom]
+@export var lobby_id_label:Label
 
 func _ready()->void:
 	for n:LobbyCharacterCustom in player_boxes:
@@ -10,6 +11,7 @@ func _ready()->void:
 	##MultiplayerSpecific:
 	PackageDeconstructor.player_initial_data_transfer_ack.connect(init_player)
 	PlayerConfigs.player_config_changed.connect(on_character_custom_data_update)
+	lobby_id_label.text=str(SteamLobby.lobby_id)
 
 func init_player(player:int)->void:
 	if player>=0&&player<player_boxes.size():
