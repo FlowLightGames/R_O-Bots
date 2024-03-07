@@ -150,7 +150,7 @@ func _on_lobby_match_list(these_lobbies:Array[int])->void:
 func _on_lobby_created(connect: int, this_lobby_id: int) -> void:
 	lobby_id=this_lobby_id
 	Steam.setLobbyJoinable(lobby_id, true)
-	Steam.setLobbyData(lobby_id, "key", "value")
+	Steam.setLobbyData(lobby_id, "name", GlobalSteam.steam_username)
 	is_host=true
 	var set_relay: bool = Steam.allowP2PPacketRelay(true)
 	#custom

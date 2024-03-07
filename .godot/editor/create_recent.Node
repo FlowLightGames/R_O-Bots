@@ -1,12 +1,12 @@
+VBoxContainer
+Button
+HBoxContainer
 PanelContainer
 ScrollContainer
 VScrollBar
 Label
 MenuBar
-Button
-VBoxContainer
 Control
-HBoxContainer
 CenterContainer
 ItemList
 ColorRect

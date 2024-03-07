@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwrl3y4hbd2k7"]
+[gd_scene load_steps=6 format=3 uid="uid://bwrl3y4hbd2k7"]
 
 [ext_resource type="Script" path="res://menus/online_lobby_list.gd" id="1_wrpf2"]
 [ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="2_rwhwq"]
-[ext_resource type="PackedScene" uid="uid://bamwchhcoupu3" path="res://menus/lobby_query_element.tscn" id="3_637pr"]
 [ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="3_hpj01"]
 [ext_resource type="PackedScene" uid="uid://b1ilbhdx0c8p2" path="res://UI/background/background_scroll.tscn" id="5_7cy3n"]
 
@@ -13,8 +12,9 @@ texture_margin_top = 12.0
 texture_margin_right = 7.0
 texture_margin_bottom = 4.0
 
-[node name="OnlineLobby" type="Node2D"]
+[node name="OnlineLobby" type="Node2D" node_paths=PackedStringArray("lobby_list_node")]
 script = ExtResource("1_wrpf2")
+lobby_list_node = NodePath("Control/CenterContainer/HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -36,77 +36,33 @@ offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/CenterContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/CenterContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_f235l")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control/CenterContainer/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/CenterContainer/HBoxContainer/PanelContainer"]
 custom_minimum_size = Vector2(258, 250)
 layout_mode = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/PanelContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/HBoxContainer/PanelContainer/ScrollContainer"]
 layout_mode = 2
 
-[node name="LobbyQueryElement" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/HBoxContainer"]
 layout_mode = 2
-menu_ref = NodePath("../../../../../..")
+alignment = 2
 
-[node name="LobbyQueryElement2" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
+[node name="Button" type="Button" parent="Control/CenterContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-menu_ref = NodePath("../../../../../..")
-
-[node name="LobbyQueryElement3" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
-layout_mode = 2
-menu_ref = NodePath("../../../../../..")
-
-[node name="LobbyQueryElement4" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
-layout_mode = 2
-menu_ref = NodePath("../../../../../..")
-
-[node name="LobbyQueryElement5" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
-layout_mode = 2
-menu_ref = NodePath("../../../../../..")
-
-[node name="LobbyQueryElement6" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
-layout_mode = 2
-menu_ref = NodePath("../../../../../..")
-
-[node name="LobbyQueryElement7" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
-layout_mode = 2
-menu_ref = NodePath("../../../../../..")
-
-[node name="LobbyQueryElement8" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
-layout_mode = 2
-menu_ref = NodePath("../../../../../..")
-
-[node name="LobbyQueryElement9" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
-layout_mode = 2
-menu_ref = NodePath("../../../../../..")
-
-[node name="LobbyQueryElement10" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
-layout_mode = 2
-menu_ref = NodePath("../../../../../..")
-
-[node name="LobbyQueryElement11" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
-layout_mode = 2
-menu_ref = NodePath("../../../../../..")
-
-[node name="LobbyQueryElement12" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
-layout_mode = 2
-menu_ref = NodePath("../../../../../..")
-
-[node name="LobbyQueryElement13" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
-layout_mode = 2
-menu_ref = NodePath("../../../../../..")
-
-[node name="LobbyQueryElement14" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
-layout_mode = 2
-menu_ref = NodePath("../../../../../..")
-
-[node name="LobbyQueryElement15" parent="Control/CenterContainer/PanelContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("menu_ref") instance=ExtResource("3_637pr")]
-layout_mode = 2
-menu_ref = NodePath("../../../../../..")
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "SEARCH FRIEND
+LOBBY"
 
 [node name="Background" parent="." instance=ExtResource("5_7cy3n")]
+
+[connection signal="pressed" from="Control/CenterContainer/HBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
