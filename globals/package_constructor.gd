@@ -20,11 +20,11 @@ extends Node
 #9: assign playernumber
 #10: clock sync (estimate tcp,udp delay)
 
-func handshake_req(self_steam_id:int)->PackedByteArray:
+func handshake_req(reqester_steam_id:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(0)
 	output.append(2)
-	output.append_array(var_to_bytes(self_steam_id))
+	output.append_array(var_to_bytes(reqester_steam_id))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
@@ -32,23 +32,23 @@ func handshake_ack()->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(1)
 	output.append(2)
+	output.append_array(var_to_bytes(GlobalSteam.steam_id))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func player_ack(self_player_number:int,ack_type:int,data:PackedByteArray=[])->PackedByteArray:
-	var output:PackedByteArray=PackedByteArray()
-	output.append(1)
-	output.append(ack_type)
-	output.append(self_player_number)
-	output.append_array(data)
-	output=output.compress(FileAccess.COMPRESSION_GZIP)
-	return output
-
-func initial_data_request(self_requester_number:int)->PackedByteArray:
+func initial_data_req(self_requester_number:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(0)
 	output.append(1)
 	output.append_array(var_to_bytes(self_requester_number))
+	output=output.compress(FileAccess.COMPRESSION_GZIP)
+	return output
+
+func initial_data_ack()->PackedByteArray:
+	var output:PackedByteArray=PackedByteArray()
+	output.append(1)
+	output.append(1)
+	output.append(SteamLobby.player_number)
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
@@ -91,11 +91,20 @@ func character_ready(body_base:int,body_color:int,face_base:int,face_color:int,f
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func player_number_request(who_steam_id:int)->PackedByteArray:
+func player_number_req(who_steam_id:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(0)
 	output.append(0)
 	output.append_array(var_to_bytes(who_steam_id))
+	output=output.compress(FileAccess.COMPRESSION_GZIP)
+	return output
+
+func player_number_ack()->PackedByteArray:
+	var output:PackedByteArray=PackedByteArray()
+	output.append(1)
+	output.append(0)
+	output.append(SteamLobby.player_number)
+	output.append_array(var_to_bytes(GlobalSteam.steam_id))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 

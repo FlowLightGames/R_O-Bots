@@ -53,17 +53,19 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 		1:
 			var ack_type:int=input.decode_u8(0)
 			input.remove_at(0)
-			var player_number:int=input.decode_u8(0)
-			input.remove_at(0)
 			var data:PackedByteArray=input
 			match ack_type:
 				0:
 					print("got number assignment ack")
+					var player_number:int=data.decode_u8(0)
+					data.remove_at(0)
 					var steamID:int=bytes_to_var(data)
 					PlayerConfigs.set_steamID(player_number,steamID)
 					player_number_assignment_ack.emit(player_number)
 				1:
 					print("got initial data ack")
+					var player_number:int=data.decode_u8(0)
+					data.remove_at(0)
 					player_initial_data_transfer_ack.emit(player_number)
 				2:
 					print("got handshake ack")
@@ -78,7 +80,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 				custom_faces.append(FacesAutoload.bytes_to_face(input.slice(n*FacesAutoload.bytes_per_face,(n+1)*FacesAutoload.bytes_per_face)))
 			PlayerConfigs.set_player_custom_faces(player_number,custom_faces)
 			PlayerConfigs.set_player_initial_data_ack(player_number)
-			var ack_msg:PackedByteArray=PackageConstructor.player_ack(player_number,1)
+			var ack_msg:PackedByteArray=PackageConstructor.initial_data_ack()
 			SteamLobby.send_p2p_packet(-1,Steam.P2P_SEND_RELIABLE, ack_msg)
 		3:
 			pass
@@ -129,7 +131,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			var self_steamID:int=GlobalSteam.steam_id
 			#works as well: but to keep it consistent top
 			#var self_steamID:int=Steam.getSteamID()
-			var ack_msg:PackedByteArray=PackageConstructor.player_ack(player,0,var_to_bytes(self_steamID))
+			var ack_msg:PackedByteArray=PackageConstructor.player_number_ack()
 			SteamLobby.send_p2p_packet(-1,Steam.P2P_SEND_RELIABLE, ack_msg)
 		10:
 			pass

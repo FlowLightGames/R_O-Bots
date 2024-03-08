@@ -165,7 +165,7 @@ func _on_lobby_joined(this_lobby_id:int,_permissions:int,_locked:bool,response: 
 		is_host=false
 		#custom send player number ass request
 		print("sending player number request")
-		var msg:PackedByteArray=PackageConstructor.player_number_request(GlobalSteam.steam_id)
+		var msg:PackedByteArray=PackageConstructor.player_number_req(GlobalSteam.steam_id)
 		send_p2p_packet(-1,Steam.P2P_SEND_RELIABLE,msg)
 	else:
 		var fail_reason:String
