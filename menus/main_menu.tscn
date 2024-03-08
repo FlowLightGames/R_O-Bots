@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b33a2c617wpeh"]
+[gd_scene load_steps=17 format=3 uid="uid://b33a2c617wpeh"]
 
 [ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="1_wtp2m"]
 [ext_resource type="Script" path="res://menus/main_menu.gd" id="1_wv75o"]
@@ -8,6 +8,110 @@
 [ext_resource type="Texture2D" uid="uid://brpi2odksav2s" path="res://UI/word_art/LOBBY_JOIN.png" id="5_gfm5d"]
 [ext_resource type="Texture2D" uid="uid://bslelq1ccsd7c" path="res://UI/word_art/OPTIONS.png" id="6_w0ceh"]
 [ext_resource type="Texture2D" uid="uid://b2ycmw237cqq7" path="res://menus/main_menu/crt.png" id="8_2uxn3"]
+[ext_resource type="Shader" path="res://UI/shader/posterize.gdshader" id="9_w8xsl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_he035"]
+shader = ExtResource("9_w8xsl")
+shader_parameter/Steps = 5
+
+[sub_resource type="Gradient" id="Gradient_3ap82"]
+offsets = PackedFloat32Array(0.111111, 0.840404)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5p7o8"]
+frequency = 0.009
+fractal_lacunarity = 3.14
+fractal_gain = 2.5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q8gae"]
+generate_mipmaps = false
+seamless = true
+color_ramp = SubResource("Gradient_3ap82")
+noise = SubResource("FastNoiseLite_5p7o8")
+
+[sub_resource type="Animation" id="Animation_bnb4d"]
+resource_name = "DEFAULT"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:noise:seed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.5, 0.1), Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_urqgt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:noise:seed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jgn4v"]
+_data = {
+"DEFAULT": SubResource("Animation_bnb4d"),
+"RESET": SubResource("Animation_urqgt")
+}
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_wv75o")
@@ -85,5 +189,23 @@ offset_right = 113.0
 offset_bottom = 82.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Sprite2D/ColorRect"]
+material = SubResource("ShaderMaterial_he035")
+layout_mode = 0
+offset_left = -1.0
+offset_right = 225.0
+offset_bottom = 164.0
+pivot_offset = Vector2(113, 82)
+texture = SubResource("NoiseTexture2D_q8gae")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D/ColorRect/TextureRect")
+libraries = {
+"": SubResource("AnimationLibrary_jgn4v")
+}
+autoplay = "DEFAULT"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HostLobby" to="." method="_on_host_lobby_pressed"]
