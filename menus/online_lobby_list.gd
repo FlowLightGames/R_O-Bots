@@ -56,8 +56,9 @@ func _on_friend_search_pressed()->void:
 		tmp_element.current_player_num=current_members
 		tmp_element.lobby_id=key
 		tmp_element.font_color=Color.from_hsv(randf(),1.0,1.0,1.0)
+		
+		lobby_list_node.add_child(tmp_element)
 
-	pass # Replace with function body.
 
 
 func _on_cancel_pressed()->void:
