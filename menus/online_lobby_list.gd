@@ -34,6 +34,7 @@ func get_lobbies_with_friends() -> Dictionary:
 			results["friend"]=steam_id
 			results["name"] = lobby_name
 			output[game_info['lobby']]=results
+	print("found friend lobbys: "+str(output))
 	return output
 
 func _on_friend_search_pressed()->void:
