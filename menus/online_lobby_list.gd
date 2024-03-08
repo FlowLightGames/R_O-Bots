@@ -10,6 +10,9 @@ func clear_list()->void:
 	for i:Node in lobby_list_node.get_children():
 		i.queue_free()
 
+func join_selected_lobby(lobby_id:int)->void:
+	SteamLobby.join_lobby(lobby_id)
+
 func get_lobbies_with_friends() -> Dictionary:
 	var output: Dictionary = {}
 	
