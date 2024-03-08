@@ -25,6 +25,7 @@ signal character_custom_ready_update(player_number:int,ready:bool,data:Array[int
 
 func handle_data(input:PackedByteArray,packet_sender:int)->void:
 	var type:int=input.decode_u8(0)
+	print("got message with code: "+str(type))
 	input.remove_at(0)
 	match type:
 		0:
