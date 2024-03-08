@@ -27,11 +27,11 @@ func get_lobbies_with_friends() -> Dictionary:
 				# Either not in this game, or not in a lobby
 				continue
 			if not results.has(game_info['lobby']):
-				results["friends"] = []
+				results["friend"] = 0
 				
 			var lobby_name: String = Steam.getLobbyData(game_info['lobby'], "name")
 			
-			results["friends"].append(steam_id)
+			results["friend"]=steam_id
 			results["name"] = lobby_name
 			output[game_info['lobby']]=results
 	return output
@@ -42,7 +42,7 @@ func _on_friend_search_pressed()->void:
 	for key:int in friend_lobbys.keys():
 		var lobby_info:Dictionary=friend_lobbys[key]
 		var lobby_name:String=lobby_info["name"]
-		var friend_ids:Array[int]=lobby_info["friends"]
+		var friend_ids:Array[int]=lobby_info["friend"]
 		var max_members:int= Steam.getLobbyMemberLimit(key)
 		var current_members:int=Steam.getNumLobbyMembers(key)
 		var host_id:int=Steam.getLobbyOwner(key)

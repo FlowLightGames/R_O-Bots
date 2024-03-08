@@ -11,6 +11,4 @@ res://maps/map_base.tscn
 res://maps/instances/lab_M.tscn
 res://menus/main_menu.tscn
 res://menus/lobby_query_element.tscn
-res://menus/main_menu.gd
-res://globals/scene_collection.gd
 res://menus/online_lobby_list.gd
