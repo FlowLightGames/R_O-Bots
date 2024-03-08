@@ -17,7 +17,6 @@ func _on_host_lobby_pressed()->void:
 		disabled=true
 		SteamLobby.create_lobby()
 		await Steam.lobby_created
-		
 		get_tree().change_scene_to_packed(SceneCollection.online_lobby)
 
 

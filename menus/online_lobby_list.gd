@@ -28,7 +28,8 @@ func get_lobbies_with_friends() -> Dictionary:
 				continue
 			if not results.has(game_info['lobby']):
 				results["friend"] = 0
-				
+			var requested_lobby_data:bool=Steam.requestLobbyData(game_info['lobby'])
+			print("lobby data request: "+str(requested_lobby_data))
 			var lobby_name: String = Steam.getLobbyData(game_info['lobby'], "name")
 			
 			results["friend"]=steam_id

@@ -150,7 +150,8 @@ func _on_lobby_match_list(these_lobbies:Array[int])->void:
 func _on_lobby_created(connect: int, this_lobby_id: int) -> void:
 	lobby_id=this_lobby_id
 	Steam.setLobbyJoinable(lobby_id, true)
-	Steam.setLobbyData(lobby_id, "name", GlobalSteam.steam_username)
+	var set_name_on_lobby:bool=Steam.setLobbyData(lobby_id, "name", GlobalSteam.steam_username)
+	print("set name on lobby: "+str(set_name_on_lobby))
 	is_host=true
 	var set_relay: bool = Steam.allowP2PPacketRelay(true)
 	#custom
@@ -213,7 +214,7 @@ func _on_lobby_chat_update(this_lobby_id: int, change_id: int, making_change_id:
 
 #TODO
 func _on_lobby_data_update(success :int, lobby_id :int, member_id :int)->void:
-	pass
+	print("LOBBY DATA CHANGED")
 
 func _on_lobby_invite()->void:
 	pass
