@@ -32,6 +32,7 @@ func get_lobbies_with_friends() -> Dictionary:
 			if not results.has(game_info['lobby']):
 				results["friend"] = 0
 			var requested_lobby_data:bool=Steam.requestLobbyData(game_info['lobby'])
+			await Steam.lobby_data_update
 			print("lobby data request: "+str(requested_lobby_data))
 			var lobby_name: String = Steam.getLobbyData(game_info['lobby'], "name")
 			
@@ -43,7 +44,7 @@ func get_lobbies_with_friends() -> Dictionary:
 
 func _on_friend_search_pressed()->void:
 	clear_list()
-	var friend_lobbys:Dictionary=get_lobbies_with_friends()
+	var friend_lobbys:Dictionary=await get_lobbies_with_friends()
 	for key:int in friend_lobbys.keys():
 		var lobby_info:Dictionary=friend_lobbys[key]
 		var lobby_name:String=lobby_info["name"]
