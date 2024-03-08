@@ -39,6 +39,17 @@ grow_vertical = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/CenterContainer"]
 layout_mode = 2
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/CenterContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Cancel" type="Button" parent="Control/CenterContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "CANCEL
+"
+
 [node name="PanelContainer" type="PanelContainer" parent="Control/CenterContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_f235l")
@@ -56,7 +67,7 @@ layout_mode = 2
 layout_mode = 2
 alignment = 2
 
-[node name="Button" type="Button" parent="Control/CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="FriendSearch" type="Button" parent="Control/CenterContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -65,4 +76,5 @@ LOBBY"
 
 [node name="Background" parent="." instance=ExtResource("5_7cy3n")]
 
-[connection signal="pressed" from="Control/CenterContainer/HBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/HBoxContainer/VBoxContainer2/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/HBoxContainer/VBoxContainer/FriendSearch" to="." method="_on_friend_search_pressed"]

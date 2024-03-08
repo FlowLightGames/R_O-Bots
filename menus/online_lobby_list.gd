@@ -36,7 +36,7 @@ func get_lobbies_with_friends() -> Dictionary:
 			output[game_info['lobby']]=results
 	return output
 
-func _on_button_pressed()->void:
+func _on_friend_search_pressed()->void:
 	clear_list()
 	var friend_lobbys:Dictionary=get_lobbies_with_friends()
 	for key:int in friend_lobbys.keys():
@@ -56,3 +56,9 @@ func _on_button_pressed()->void:
 		tmp_element.current_player_num=current_members
 		tmp_element.lobby_id=key
 		tmp_element.font_color=Color.from_hsv(randf(),1.0,1.0,1.0)
+
+	pass # Replace with function body.
+
+
+func _on_cancel_pressed()->void:
+	get_tree().change_scene_to_packed(SceneCollection.main_menu)

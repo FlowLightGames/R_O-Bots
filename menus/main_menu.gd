@@ -19,3 +19,9 @@ func _on_host_lobby_pressed()->void:
 		await Steam.lobby_created
 		
 		get_tree().change_scene_to_packed(SceneCollection.online_lobby)
+
+
+func _on_join_lobby_pressed()->void:
+	if !disabled:
+		disabled=true
+		get_tree().change_scene_to_packed(SceneCollection.lobby_search)
