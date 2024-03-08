@@ -114,7 +114,7 @@ func get_lobby_members()->void:
 		lobby_members.append({"steam_id":member_steam_id, "steam_name":member_steam_name})
 
 func make_p2p_handshake()->void:
-	send_p2p_packet(0,Steam.P2P_SEND_RELIABLE,var_to_bytes({"message":"handshake","from":GlobalSteam.steam_id}).compress(FileAccess.COMPRESSION_GZIP))
+	send_p2p_packet(0,Steam.P2P_SEND_RELIABLE,PackageConstructor.handshake_req(GlobalSteam.steam_id))
 
 func check_command_line()->void:
 	var these_arguments:PackedStringArray=OS.get_cmdline_args()
@@ -166,7 +166,7 @@ func _on_lobby_joined(this_lobby_id:int,_permissions:int,_locked:bool,response: 
 		#custom send player number ass request
 		print("sending player number request")
 		var msg:PackedByteArray=PackageConstructor.player_number_request(GlobalSteam.steam_id)
-		send_p2p_packet(-1,2,msg)
+		send_p2p_packet(-1,Steam.P2P_SEND_RELIABLE,msg)
 	else:
 		var fail_reason:String
 		match response:

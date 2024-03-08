@@ -5,9 +5,11 @@ extends Node
 #0: Rquests
 	#0 player number assignment
 	#1 send me yourinitial data
+	#2 handshake
 #1: Acknoledgement
 	#0 initial player number assignment
 	#1 initial data transfer
+	#2 handshake
 #2: initial data transfer for a lobby (custom faces,etc)
 #3: UNSUSED
 #4: Character data update
@@ -17,6 +19,21 @@ extends Node
 #8: finished game
 #9: assign playernumber
 #10: clock sync (estimate tcp,udp delay)
+
+func handshake_req(self_steam_id:int)->PackedByteArray:
+	var output:PackedByteArray=PackedByteArray()
+	output.append(0)
+	output.append(2)
+	output.append_array(var_to_bytes(self_steam_id))
+	output=output.compress(FileAccess.COMPRESSION_GZIP)
+	return output
+
+func handshake_ack()->PackedByteArray:
+	var output:PackedByteArray=PackedByteArray()
+	output.append(1)
+	output.append(2)
+	output=output.compress(FileAccess.COMPRESSION_GZIP)
+	return output
 
 func player_ack(self_player_number:int,ack_type:int,data:PackedByteArray=[])->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
@@ -81,7 +98,6 @@ func player_number_request(who_steam_id:int)->PackedByteArray:
 	output.append_array(var_to_bytes(who_steam_id))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
-
 
 func player_number_assignment(who_steam_id:int,number:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()

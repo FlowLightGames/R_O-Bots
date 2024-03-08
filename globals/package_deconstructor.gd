@@ -5,9 +5,11 @@ extends Node
 #0: Rquests
 	#0 player number assignment
 	#1 send me yourinitial data
+	#2 handshake
 #1: Acknoledgement
 	#0 initial player number assignment
 	#1 initial data transfer
+	#2 handshake
 #2: initial data transfer for a lobby (custom faces,etc)
 #3: UNSUSED
 #4: Character data update
@@ -25,7 +27,6 @@ signal character_custom_ready_update(player_number:int,ready:bool,data:Array[int
 
 func handle_data(input:PackedByteArray,packet_sender:int)->void:
 	var type:int=input.decode_u8(0)
-	print("got message with code: "+str(type))
 	input.remove_at(0)
 	match type:
 		0:
@@ -33,15 +34,22 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			input.remove_at(0)
 			match req_type:
 				0:
+					print("got player number assignment request")
 					var req_steam_id:int=bytes_to_var(input)
 					var test:int=SteamLobby.add_player_assignment(req_steam_id)
 					if test>=0:
 						var msg:PackedByteArray=PackageConstructor.player_number_assignment(req_steam_id,test)
-						SteamLobby.send_p2p_packet(req_steam_id,2, msg)
+						SteamLobby.send_p2p_packet(req_steam_id,Steam.P2P_SEND_RELIABLE, msg)
 				1:
+					print("got initial data request")
 					var req_steam_id:int=bytes_to_var(input)
 					var msg:PackedByteArray=PackageConstructor.initial_data_transfer(SteamLobby.player_number)
-					SteamLobby.send_p2p_packet(req_steam_id,2, msg)
+					SteamLobby.send_p2p_packet(req_steam_id,Steam.P2P_SEND_RELIABLE, msg)
+				2:
+					print("got handshake request")
+					var req_steam_id:int=bytes_to_var(input)
+					var msg:PackedByteArray=PackageConstructor.handshake_ack()
+					SteamLobby.send_p2p_packet(req_steam_id,Steam.P2P_SEND_RELIABLE, msg)
 		1:
 			var ack_type:int=input.decode_u8(0)
 			input.remove_at(0)
@@ -50,14 +58,19 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			var data:PackedByteArray=input
 			match ack_type:
 				0:
+					print("got number assignment ack")
 					var steamID:int=bytes_to_var(data)
 					PlayerConfigs.set_steamID(player_number,steamID)
 					player_number_assignment_ack.emit(player_number)
 				1:
+					print("got initial data ack")
 					player_initial_data_transfer_ack.emit(player_number)
+				2:
+					print("got handshake ack")
 				_:
 					pass
 		2:
+			print("got initial data transfer")
 			var player_number:int=input.decode_u8(0)
 			input.remove_at(0)
 			var custom_faces:Array[Texture2D]=[]
@@ -66,7 +79,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			PlayerConfigs.set_player_custom_faces(player_number,custom_faces)
 			PlayerConfigs.set_player_initial_data_ack(player_number)
 			var ack_msg:PackedByteArray=PackageConstructor.player_ack(player_number,1)
-			SteamLobby.send_p2p_packet(-1,2, ack_msg)
+			SteamLobby.send_p2p_packet(-1,Steam.P2P_SEND_RELIABLE, ack_msg)
 		3:
 			pass
 		4:
@@ -85,6 +98,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			PlayerConfigs.update_player_config(player_number,character_data)
 			
 		5:
+			print("got player is ready data")
 			#0_ ready bool
 			#1 (body_base)
 			#2 (body_color)
@@ -108,6 +122,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 		8:
 			pass
 		9:
+			print("got player number assignment")
 			var player:int=input.decode_u8(0)
 			SteamLobby.player_number=player
 			
@@ -115,7 +130,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			#works as well: but to keep it consistent top
 			#var self_steamID:int=Steam.getSteamID()
 			var ack_msg:PackedByteArray=PackageConstructor.player_ack(player,0,var_to_bytes(self_steamID))
-			SteamLobby.send_p2p_packet(-1,2, ack_msg)
+			SteamLobby.send_p2p_packet(-1,Steam.P2P_SEND_RELIABLE, ack_msg)
 		10:
 			pass
 		_:
