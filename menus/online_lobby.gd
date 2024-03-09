@@ -20,7 +20,6 @@ func init_player(player:int)->void:
 func on_character_custom_data_update(player_number:int)->void:
 	player_boxes[player_number].update_character_custom(player_number)
 
-
 func _on_cancel_pressed()->void:
 	SteamLobby.leave_lobby()
 	get_tree().change_scene_to_packed(SceneCollection.main_menu)
