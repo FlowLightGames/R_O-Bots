@@ -84,7 +84,7 @@ func update_character_custom(player_number:int)->void:
 	example_character_1.set_new_body(current_body_base)
 	body_txt.text=str(current_body_base)
 	
-	current_face_color=config.Face_color
+	current_face_color=config.Face_Color
 	example_character_0.set_new_face_color(current_face_color)
 	example_character_1.set_new_face_color(current_face_color)
 	face_color_txt.text=str(current_face_color)
