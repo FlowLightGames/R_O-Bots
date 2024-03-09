@@ -36,11 +36,11 @@ func handshake_ack()->PackedByteArray:
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func initial_data_req(self_requester_number:int)->PackedByteArray:
+func initial_data_req(self_requester_id:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(0)
 	output.append(1)
-	output.append_array(var_to_bytes(self_requester_number))
+	output.append_array(var_to_bytes(self_requester_id))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 

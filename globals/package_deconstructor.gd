@@ -61,7 +61,10 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 					data.remove_at(0)
 					var steamID:int=bytes_to_var(data)
 					PlayerConfigs.set_steamID(player_number,steamID)
+					
 					player_number_assignment_ack.emit(player_number)
+					var msg:PackedByteArray=PackageConstructor.initial_data_req(GlobalSteam.steam_id)
+					SteamLobby.send_p2p_packet(steamID,Steam.P2P_SEND_RELIABLE,  msg)
 				1:
 					print("got initial data ack")
 					var player_number:int=data.decode_u8(0)
