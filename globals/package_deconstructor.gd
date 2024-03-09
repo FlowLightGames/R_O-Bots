@@ -37,7 +37,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 					print("got player number assignment request")
 					var req_steam_id:int=bytes_to_var(input)
 					var test:int=SteamLobby.add_player_assignment(req_steam_id)
-					if test>=0:
+					if test>0:
 						var msg:PackedByteArray=PackageConstructor.player_number_assignment(req_steam_id,test)
 						SteamLobby.send_p2p_packet(req_steam_id,Steam.P2P_SEND_RELIABLE, msg)
 				1:
@@ -63,8 +63,9 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 					PlayerConfigs.set_steamID(player_number,steamID)
 					
 					player_number_assignment_ack.emit(player_number)
-					var msg:PackedByteArray=PackageConstructor.initial_data_req(GlobalSteam.steam_id)
-					SteamLobby.send_p2p_packet(steamID,Steam.P2P_SEND_RELIABLE,  msg)
+					if player_number!=0:
+						var msg:PackedByteArray=PackageConstructor.initial_data_req(GlobalSteam.steam_id)
+						SteamLobby.send_p2p_packet(steamID,Steam.P2P_SEND_RELIABLE,  msg)
 				1:
 					print("got initial data ack")
 					var player_number:int=data.decode_u8(0)
@@ -79,7 +80,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			var player_number:int=input.decode_u8(0)
 			input.remove_at(0)
 			var custom_faces:Array[Texture2D]=[]
-			for n:int in range(0,mini(input.size()/FacesAutoload.bytes_per_face,FacesAutoload.max_number_of_faces)):
+			for n:int in range(0,mini(input.size()/FacesAutoload.bytes_per_face,FacesAutoload.max_custom_faces)):
 				custom_faces.append(FacesAutoload.bytes_to_face(input.slice(n*FacesAutoload.bytes_per_face,(n+1)*FacesAutoload.bytes_per_face)))
 			PlayerConfigs.set_player_custom_faces(player_number,custom_faces)
 			PlayerConfigs.set_player_initial_data_ack(player_number)

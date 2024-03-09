@@ -31,7 +31,7 @@ func set_player_custom_faces(player_number:int,data:Array[Texture2D])->void:
 	if player_number >=0 && player_number<=7:
 		Player_Configs[player_number].custom_faces=data
 		
-		player_config_changed.emit()
+		player_config_changed.emit(player_number)
 
 func update_player_config(player_number:int,data:Array[int])->void:
 	if player_number >=0 && player_number<=7:
