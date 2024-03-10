@@ -11,7 +11,7 @@ extends Node
 	#1 initial data transfer
 	#2 handshake
 #2: initial data transfer for a lobby (custom faces,etc)
-#3: UNSUSED
+#3: Player Config Master List Update
 #4: Character data update
 #5: Character ready tru/false (if true send also character config)
 #6: lobby start game data (spawnpoints block placements)
@@ -90,10 +90,19 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 				custom_faces.append(FacesAutoload.bytes_to_face(input.slice(n*FacesAutoload.bytes_per_face,(n+1)*FacesAutoload.bytes_per_face)))
 			PlayerConfigs.set_player_custom_faces(player_number,custom_faces)
 			PlayerConfigs.set_player_initial_data_ack(player_number)
+			
+			var master_player_list:PackedByteArray=PackageConstructor.player_config_master_list(PlayerConfigs.Player_Configs)
+			for member:Dictionary in SteamLobby.lobby_members:
+				if member.has("steam_id"):
+					if member["steam_id"]!=GlobalSteam.steam_id:
+						SteamLobby.send_p2p_packet(member["steam_id"],Steam.P2P_SEND_RELIABLE, master_player_list)
+			
 			var ack_msg:PackedByteArray=PackageConstructor.initial_data_ack(player_number)
 			SteamLobby.send_p2p_packet(-1,Steam.P2P_SEND_RELIABLE, ack_msg)
 		3:
-			pass
+			var player_configs:Array[PlayerConfigMetaData]=bytes_to_var(input)
+			print("got player config master list")
+			PlayerConfigs.Player_Configs=player_configs
 		4:
 			#0 (body_base)
 			#1 (body_color)

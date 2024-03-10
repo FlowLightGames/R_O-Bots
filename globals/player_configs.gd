@@ -27,6 +27,22 @@ func reset_full()->void:
 	PlayerConfigMetaData.new(0,7,7,FacesAutoload.preset_faces[7],PickUpStats.new()),
 	]
 
+func player_left(leaver_id:int)->void:
+	for n:int in Player_Configs.size():
+		if Player_Configs[n].steam_id==leaver_id:
+			Player_Configs[n]=PlayerConfigMetaData.new(0,n,n,FacesAutoload.preset_faces[n],PickUpStats.new())
+			for i:int in range(n,Player_Configs.size()):
+				if Player_Configs[i].steam_id!=-1:
+					Player_Configs[i-1]=Player_Configs[i]
+				else:
+					Player_Configs[i]=PlayerConfigMetaData.new(0,i,i,FacesAutoload.preset_faces[i],PickUpStats.new())
+	
+	var msg:PackedByteArray=PackageConstructor.player_config_master_list(Player_Configs)
+	for member:Dictionary in SteamLobby.lobby_members:
+		if member.has("steam_id"):
+			if member["steam_id"]!=GlobalSteam.steam_id:
+				SteamLobby.send_p2p_packet(member["steam_id"],Steam.P2P_SEND_RELIABLE, msg)
+
 func set_player_custom_faces(player_number:int,data:Array[Texture2D])->void:
 	if player_number >=0 && player_number<=7:
 		Player_Configs[player_number].custom_faces=data

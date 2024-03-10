@@ -11,7 +11,7 @@ extends Node
 	#1 initial data transfer
 	#2 handshake
 #2: initial data transfer for a lobby (custom faces,etc)
-#3: UNSUSED
+#3: Player Config Master List Update
 #4: Character data update
 #5: Character ready tru/false (if true send also character config)
 #6: lobby start game data (spawnpoints block placements)
@@ -115,6 +115,11 @@ func player_number_assignment(who_steam_id:int,number:int)->PackedByteArray:
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-
+func player_config_master_list(player_configs:Array[PlayerConfigMetaData])->PackedByteArray:
+	var output:PackedByteArray=PackedByteArray()
+	output.append(3)
+	output.append_array(var_to_bytes(player_configs))
+	output=output.compress(FileAccess.COMPRESSION_GZIP)
+	return output
 
 

@@ -204,6 +204,8 @@ func _on_lobby_chat_update(this_lobby_id: int, change_id: int, making_change_id:
 			print("%s has joined the lobby." % changer_name)
 		Steam.CHAT_MEMBER_STATE_CHANGE_LEFT:
 			print("%s has left the lobby." % changer_name)
+			if is_host:
+				PlayerConfigs.player_left(change_id)
 		Steam.CHAT_MEMBER_STATE_CHANGE_KICKED:
 			print("%s has been kicked from the lobby." % changer_name)
 		Steam.CHAT_MEMBER_STATE_CHANGE_BANNED:
