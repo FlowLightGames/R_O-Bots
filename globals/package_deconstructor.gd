@@ -90,7 +90,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 				custom_faces.append(FacesAutoload.bytes_to_face(input.slice(n*FacesAutoload.bytes_per_face,(n+1)*FacesAutoload.bytes_per_face)))
 			PlayerConfigs.set_player_custom_faces(player_number,custom_faces)
 			PlayerConfigs.set_player_initial_data_ack(player_number)
-			var ack_msg:PackedByteArray=PackageConstructor.initial_data_ack()
+			var ack_msg:PackedByteArray=PackageConstructor.initial_data_ack(player_number)
 			SteamLobby.send_p2p_packet(-1,Steam.P2P_SEND_RELIABLE, ack_msg)
 		3:
 			pass

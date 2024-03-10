@@ -44,11 +44,11 @@ func initial_data_req(self_requester_id:int)->PackedByteArray:
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func initial_data_ack()->PackedByteArray:
+func initial_data_ack(player_number:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(1)
 	output.append(1)
-	output.append(SteamLobby.player_number)
+	output.append(player_number)
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
