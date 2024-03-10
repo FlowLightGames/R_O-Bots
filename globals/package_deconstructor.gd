@@ -44,6 +44,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 				1:
 					print("got initial data request")
 					var req_steam_id:int=bytes_to_var(input)
+					print("sending initial data request from: "+str(SteamLobby.player_number))
 					var msg:PackedByteArray=PackageConstructor.initial_data_transfer(SteamLobby.player_number)
 					SteamLobby.send_p2p_packet(req_steam_id,Steam.P2P_SEND_RELIABLE, msg)
 				2:
@@ -80,9 +81,10 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 				_:
 					pass
 		2:
-			print("got initial data transfer")
+			
 			var player_number:int=input.decode_u8(0)
 			input.remove_at(0)
+			print("got initial data transfer from: "+str(player_number))
 			var custom_faces:Array[Texture2D]=[]
 			for n:int in range(0,mini(input.size()/FacesAutoload.bytes_per_face,FacesAutoload.max_custom_faces)):
 				custom_faces.append(FacesAutoload.bytes_to_face(input.slice(n*FacesAutoload.bytes_per_face,(n+1)*FacesAutoload.bytes_per_face)))
