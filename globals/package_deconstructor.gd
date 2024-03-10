@@ -37,6 +37,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 					print("got player number assignment request")
 					var req_steam_id:int=bytes_to_var(input)
 					var test:int=SteamLobby.add_player_assignment(req_steam_id)
+					print("sending assignment !=0: "+str(test))
 					if test>0:
 						var msg:PackedByteArray=PackageConstructor.player_number_assignment(req_steam_id,test)
 						SteamLobby.send_p2p_packet(req_steam_id,Steam.P2P_SEND_RELIABLE, msg)
@@ -56,11 +57,13 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			var data:PackedByteArray=input
 			match ack_type:
 				0:
-					print("got number assignment ack")
+					
 					var player_number:int=data.decode_u8(0)
 					data.remove_at(0)
 					var steamID:int=bytes_to_var(data)
 					PlayerConfigs.set_steamID(player_number,steamID)
+					
+					print("got number assignment ack: "+str(player_number))
 					
 					player_number_assignment_ack.emit(player_number)
 					if player_number!=0:
@@ -131,6 +134,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 		9:
 			print("got player number assignment")
 			var player:int=input.decode_u8(0)
+			print("got player number assignment to: "+str(player))
 			SteamLobby.player_number=player
 			
 			var self_steamID:int=GlobalSteam.steam_id
