@@ -1,7 +1,7 @@
 // NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's CanvasItemMaterial.
 
 shader_type canvas_item;
-render_mode blend_add,unshaded;
+render_mode blend_mix,unshaded;
 uniform int Steps=5;
 
 void fragment(){
