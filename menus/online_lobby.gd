@@ -16,6 +16,7 @@ func apply_player_configs()->void:
 		var metadata:PlayerConfigMetaData=PlayerConfigs.Player_Configs[i]
 		if metadata.steam_id != -1:
 			player_boxes[i].enable()
+			player_boxes[i].player_tag.text=Steam.getFriendPersonaName(metadata.steam_id)
 		else:
 			player_boxes[i].disable()
 
