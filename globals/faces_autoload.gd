@@ -32,7 +32,7 @@ var preset_faces:Array[CompressedTexture2D]=[
 	load("res://player_character/face_presets/face_preset_sprite24.png"),
 ]
 
-var custom_faces:Array[ImageTexture]=[
+var custom_faces:Array[Texture2D]=[
 	
 ]
 

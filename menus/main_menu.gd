@@ -17,6 +17,12 @@ func _on_host_lobby_pressed()->void:
 		disabled=true
 		SteamLobby.create_lobby()
 		await Steam.lobby_created
+		
+		PlayerConfigs.reset_full()
+		PlayerConfigs.set_player_custom_faces(0,FacesAutoload.custom_faces)
+		PlayerConfigs.set_steamID(0,GlobalSteam.steam_id)
+		PlayerConfigs.set_player_initial_data_ack(0)
+		
 		get_tree().change_scene_to_packed(SceneCollection.online_lobby)
 
 
