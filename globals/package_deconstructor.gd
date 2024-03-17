@@ -22,6 +22,7 @@ extends Node
 
 signal player_initial_data_transfer_ack(player_number:int)
 signal player_number_assignment_ack(player_number:int)
+signal player_master_list
 signal character_custom_data_update(player_number:int,data:Array[int])
 signal character_custom_ready_update(player_number:int,ready:bool,data:Array[int])
 
@@ -103,6 +104,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			var player_configs:Array[PlayerConfigMetaData]=bytes_to_var(input)
 			print("got player config master list")
 			PlayerConfigs.Player_Configs=player_configs
+			player_master_list.emit()
 		4:
 			#0 (body_base)
 			#1 (body_color)

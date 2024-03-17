@@ -12,6 +12,8 @@ func clear_list()->void:
 
 func join_selected_lobby(lobby_id:int)->void:
 	SteamLobby.join_lobby(lobby_id)
+	await PackageDeconstructor.player_master_list
+	get_tree().change_scene_to_packed(SceneCollection.online_lobby)
 
 func get_lobbies_with_friends() -> Dictionary:
 	var output: Dictionary = {}

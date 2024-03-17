@@ -5,13 +5,20 @@ class_name MultiplayerCustomLobby
 @export var lobby_name_label:Label
 
 func _ready()->void:
-	for n:LobbyCharacterCustom in player_boxes:
-		n.disable()
-	player_boxes[0].enable()
+	apply_player_configs()
 	##MultiplayerSpecific:
 	PackageDeconstructor.player_initial_data_transfer_ack.connect(init_player)
 	PlayerConfigs.player_config_changed.connect(on_character_custom_data_update)
 	lobby_name_label.text=str(SteamLobby.lobby_id)
+
+func apply_player_configs()->void:
+	for i:int in PlayerConfigs.Player_Configs.size():
+		var metadata:PlayerConfigMetaData=PlayerConfigs.Player_Configs[i]
+		if metadata.steam_id != -1:
+			player_boxes[i].enable()
+		else:
+			player_boxes[i].disable()
+
 
 func init_player(player:int)->void:
 	if player>=0&&player<player_boxes.size():
