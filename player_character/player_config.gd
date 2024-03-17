@@ -33,7 +33,7 @@ func serialize()->Dictionary:
 	output["BB"]=Body_Base
 	output["BC"]=Body_Color
 	output["FB"]=Face_Base
-	output["FB"]=Face_Color
+	output["FC"]=Face_Color
 	output["CF"]=serialized_faces
 	output["SI"]=steam_id
 	

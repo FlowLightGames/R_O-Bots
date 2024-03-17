@@ -101,9 +101,9 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			var ack_msg:PackedByteArray=PackageConstructor.initial_data_ack(player_number)
 			SteamLobby.send_p2p_packet(-1,Steam.P2P_SEND_RELIABLE, ack_msg)
 		3:
-			var ser_player_configs:Array[Dictionary]=bytes_to_var(input)
+			var ser_player_configs:Array=bytes_to_var(input)
 			for n:int in ser_player_configs.size():
-				PlayerConfigs.Player_Configs[n].deserialize(ser_player_configs[n])
+				PlayerConfigs.Player_Configs[n].deserialize(ser_player_configs[n] as Dictionary)
 				PlayerConfigs.Player_Configs[n].initial_data_received=true
 			print("got player config master list")
 			player_master_list.emit()
