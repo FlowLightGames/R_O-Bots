@@ -23,3 +23,31 @@ func _init(bodybase:int=0,bodycolor:int=0,facecolor:int=3,facetexture:Texture2D=
 	Face_Color=facecolor
 	Face_Texture=facetexture
 	Starting_Stats=startingtats
+
+func serialize()->Dictionary:
+	var serialized_faces:Array[PackedByteArray]=[]
+	for n:Texture2D in custom_faces:
+		serialized_faces.append(FacesAutoload.face_to_bytes(n))
+	
+	var output:Dictionary={}
+	output["BB"]=Body_Base
+	output["BC"]=Body_Color
+	output["FB"]=Face_Base
+	output["FB"]=Face_Color
+	output["CF"]=serialized_faces
+	output["SI"]=steam_id
+	
+	return output
+
+func deserialize(input:Dictionary)->void:
+	var deserialized_faces:Array[Texture2D]=[]
+	for n:PackedByteArray in input["CF"]:
+		deserialized_faces.append(FacesAutoload.bytes_to_face(n))
+	
+	Body_Base=input["BB"]
+	Body_Color=input["BC"]
+	Face_Base=input["FB"]
+	Face_Color=input["FC"]
+	Body_Base=input["BB"]
+	steam_id=input["SI"]
+	custom_faces=deserialized_faces

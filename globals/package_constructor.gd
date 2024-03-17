@@ -118,7 +118,11 @@ func player_number_assignment(who_steam_id:int,number:int)->PackedByteArray:
 func player_config_master_list(player_configs:Array[PlayerConfigMetaData])->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(3)
-	output.append_array(var_to_bytes(player_configs))
+	
+	var ser_player_configs:Array[Dictionary]=[]
+	for n:PlayerConfigMetaData in PlayerConfigs.Player_Configs:
+		ser_player_configs.append(n.serialize())
+	output.append_array(var_to_bytes(ser_player_configs))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
