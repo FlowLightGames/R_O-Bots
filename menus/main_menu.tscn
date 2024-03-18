@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b33a2c617wpeh"]
+[gd_scene load_steps=32 format=3 uid="uid://b33a2c617wpeh"]
 
 [ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="1_wtp2m"]
 [ext_resource type="Script" path="res://menus/main_menu.gd" id="1_wv75o"]
@@ -19,6 +19,23 @@
 [ext_resource type="Texture2D" uid="uid://lrhtkfhpmx4y" path="res://UI/word_art/OPTIONS_DOWN.png" id="12_xswww"]
 [ext_resource type="Texture2D" uid="uid://bhn8slgs0a5xj" path="res://UI/word_art/LOBBY_JOIN_FOCUS.png" id="14_xv6vb"]
 [ext_resource type="Texture2D" uid="uid://dir5phbrcx5k4" path="res://UI/word_art/OPTIONS_FOCUS.png" id="17_1xcsj"]
+[ext_resource type="Shader" path="res://UI/background/BG_scroll.gdshader" id="19_5rq4l"]
+[ext_resource type="Texture2D" uid="uid://fyjqyxmg724a" path="res://menus/main_menu/moving_tex.png" id="20_bnm3p"]
+
+[sub_resource type="Gradient" id="Gradient_v7xrr"]
+offsets = PackedFloat32Array(0.455847, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.122252, 0.122252, 0.122252, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3bhqh"]
+gradient = SubResource("Gradient_v7xrr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r4y6m"]
+resource_local_to_scene = true
+shader = ExtResource("19_5rq4l")
+shader_parameter/motion = Vector2(0, 16)
+shader_parameter/scale = 1.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/palette = SubResource("GradientTexture1D_3bhqh")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_he035"]
 shader = ExtResource("9_w8xsl")
@@ -224,6 +241,19 @@ offset_right = 113.0
 offset_bottom = 82.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="TextureRect" parent="Sprite2D/ColorRect"]
+material = SubResource("ShaderMaterial_r4y6m")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("20_bnm3p")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="StaticBlack" type="ColorRect" parent="Sprite2D"]
 show_behind_parent = true

@@ -92,8 +92,9 @@ func update_character_custom(player_number:int)->void:
 	current_face_base=config.Face_Base
 	current_face_custom=config.Custom_Face
 	if current_face_custom:
-		example_character_0.set_new_face(config.custom_faces[current_face_base])
-		example_character_1.set_new_face(config.custom_faces[current_face_base])
+		if current_face_base>=0&&current_face_base<config.custom_faces.size():
+			example_character_0.set_new_face(config.custom_faces[current_face_base])
+			example_character_1.set_new_face(config.custom_faces[current_face_base])
 	else:
 		example_character_0.set_new_face(FacesAutoload.preset_faces[current_face_base])
 		example_character_1.set_new_face(FacesAutoload.preset_faces[current_face_base])
@@ -150,8 +151,13 @@ func _on_facetype_dec_pressed()->void:
 	if(!disabled):
 		current_face_base=posmod(current_face_base-1,max_number_face_base)
 		if current_face_custom:
-			example_character_0.set_new_face(FacesAutoload.custom_faces[current_face_base])
-			example_character_1.set_new_face(FacesAutoload.custom_faces[current_face_base])
+			if current_face_base>=0&&current_face_base<FacesAutoload.custom_faces.size():
+				example_character_0.set_new_face(FacesAutoload.custom_faces[current_face_base])
+				example_character_1.set_new_face(FacesAutoload.custom_faces[current_face_base])
+			else:
+				current_face_base=0
+				example_character_0.set_new_face(null)
+				example_character_1.set_new_face(null)
 		else:
 			example_character_0.set_new_face(FacesAutoload.preset_faces[current_face_base])
 			example_character_1.set_new_face(FacesAutoload.preset_faces[current_face_base])
@@ -161,8 +167,13 @@ func _on_facetype_inc_pressed()->void:
 	if(!disabled):
 		current_face_base=posmod(current_face_base+1,max_number_face_base)
 		if current_face_custom:
-			example_character_0.set_new_face(FacesAutoload.custom_faces[current_face_base])
-			example_character_1.set_new_face(FacesAutoload.custom_faces[current_face_base])
+			if current_face_base>=0&&current_face_base<FacesAutoload.custom_faces.size():
+				example_character_0.set_new_face(FacesAutoload.custom_faces[current_face_base])
+				example_character_1.set_new_face(FacesAutoload.custom_faces[current_face_base])
+			else:
+				current_face_base=0
+				example_character_0.set_new_face(null)
+				example_character_1.set_new_face(null)
 		else:
 			example_character_0.set_new_face(FacesAutoload.preset_faces[current_face_base])
 			example_character_1.set_new_face(FacesAutoload.preset_faces[current_face_base])
@@ -173,11 +184,15 @@ func _on_facepreset_dec_pressed()->void:
 		current_face_base=0
 		current_face_custom=!current_face_custom
 		if current_face_custom:
-			max_number_face_base=FacesAutoload.custom_faces.size()
+			max_number_face_base=maxi(FacesAutoload.custom_faces.size(),1)
 			face_custom_txt.text="Custom"
+			example_character_0.set_new_face(null)
+			example_character_1.set_new_face(null)
 		else:
 			max_number_face_base=FacesAutoload.preset_faces.size()
 			face_custom_txt.text="Preset"
+			example_character_0.set_new_face(FacesAutoload.preset_faces[0])
+			example_character_1.set_new_face(FacesAutoload.preset_faces[0])
 		face_number_txt.text=str(current_face_base)
 
 func _on_facepreset_inc_pressed()->void:
@@ -185,11 +200,15 @@ func _on_facepreset_inc_pressed()->void:
 		current_face_base=0
 		current_face_custom=!current_face_custom
 		if current_face_custom:
-			max_number_face_base=FacesAutoload.custom_faces.size()
+			max_number_face_base=maxi(FacesAutoload.custom_faces.size(),1)
 			face_custom_txt.text="Custom"
+			example_character_0.set_new_face(null)
+			example_character_1.set_new_face(null)
 		else:
 			max_number_face_base=FacesAutoload.preset_faces.size()
 			face_custom_txt.text="Preset"
+			example_character_0.set_new_face(FacesAutoload.preset_faces[0])
+			example_character_1.set_new_face(FacesAutoload.preset_faces[0])
 		face_number_txt.text=str(current_face_base)
 
 
