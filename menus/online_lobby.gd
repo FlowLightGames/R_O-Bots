@@ -3,6 +3,7 @@ class_name MultiplayerCustomLobby
 
 @export var player_boxes:Array[LobbyCharacterCustom]
 @export var lobby_name_label:Label
+@export var stage_select_button:Button
 
 func _ready()->void:
 	apply_player_configs()
@@ -20,6 +21,19 @@ func apply_player_configs()->void:
 		else:
 			player_boxes[i].disable()
 
+func check_all_ready()->bool:
+	for n:LobbyCharacterCustom in player_boxes:
+		if !n.disabled:
+			if !n.player_ready:
+				return false
+	return true
+
+func player_is_ready(player:int)->void:
+	#check if all players are ready
+	if check_all_ready():
+		stage_select_button.disabled=false
+	else:
+		stage_select_button.disabled=true
 
 func init_player(player:int)->void:
 	if player>=0&&player<player_boxes.size():

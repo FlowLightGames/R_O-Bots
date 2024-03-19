@@ -19,10 +19,12 @@ extends Node
 #8: finished game
 #9: assign playernumber
 #10: clock sync (estimate tcp,udp delay)
+#11: Character Custom Finished Master
 
 signal player_initial_data_transfer_ack(player_number:int)
 signal player_number_assignment_ack(player_number:int)
 signal player_master_list
+signal character_custom_finished
 signal character_custom_data_update(player_number:int,data:Array[int])
 signal character_custom_ready_update(player_number:int,ready:bool,data:Array[int])
 
@@ -159,5 +161,13 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			SteamLobby.send_p2p_packet(-1,Steam.P2P_SEND_RELIABLE, ack_msg)
 		10:
 			pass
+		11:
+			var ser_player_configs:Array=bytes_to_var(input)
+			for n:int in ser_player_configs.size():
+				PlayerConfigs.Player_Configs[n].deserialize(ser_player_configs[n] as Dictionary)
+				PlayerConfigs.Player_Configs[n].initial_data_received=true
+			print("got player ready config master list")
+			character_custom_finished.emit()
+			#TODO switch scene logic
 		_:
 			pass

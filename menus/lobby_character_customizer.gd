@@ -20,6 +20,8 @@ class_name LobbyCharacterCustom
 @export var face_custom_txt:Label
 @export var face_number_txt:Label
 
+var player_ready:bool=false
+
 var max_number_body_color:int=8
 var max_number_body_base:int=5
 var max_number_face_color:int=8
@@ -229,4 +231,6 @@ func _on_ready_pressed()->void:
 			example_character_3.set_new_face(FacesAutoload.preset_faces[current_face_base])
 		
 		disable()
+		player_ready=true
 		ready_overlay.visible=true
+		

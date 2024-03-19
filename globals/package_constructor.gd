@@ -19,6 +19,7 @@ extends Node
 #8: finished game
 #9: assign playernumber
 #10: clock sync (estimate tcp,udp delay)
+#11: Character Custom Finished Master
 
 func handshake_req(reqester_steam_id:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
@@ -126,4 +127,14 @@ func player_config_master_list(player_configs:Array[PlayerConfigMetaData])->Pack
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
+func character_custom_finished_master(player_configs:Array[PlayerConfigMetaData])->PackedByteArray:
+	var output:PackedByteArray=PackedByteArray()
+	output.append(11)
+	
+	var ser_player_configs:Array[Dictionary]=[]
+	for n:PlayerConfigMetaData in PlayerConfigs.Player_Configs:
+		ser_player_configs.append(n.serialize())
+	output.append_array(var_to_bytes(ser_player_configs))
+	output=output.compress(FileAccess.COMPRESSION_GZIP)
+	return output
 
