@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5g77somkggcq"]
+
+[ext_resource type="Texture2D" uid="uid://h1grom73hp0x" path="res://UI/word_art/LEFT.png" id="1_rvcb5"]
+[ext_resource type="Texture2D" uid="uid://b4psduoceaha6" path="res://UI/word_art/LEFT_DOWN.png" id="2_tlei5"]
+
+[node name="Dec" type="TextureButton"]
+texture_normal = ExtResource("1_rvcb5")
+texture_pressed = ExtResource("2_tlei5")
+texture_hover = ExtResource("1_rvcb5")
+texture_disabled = ExtResource("2_tlei5")

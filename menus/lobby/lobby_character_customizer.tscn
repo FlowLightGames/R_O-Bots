@@ -3,12 +3,12 @@
 [ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="1_a8h24"]
 [ext_resource type="Texture2D" uid="uid://c1c0hbjgbbtnl" path="res://menus/character_creator/menu_palette.png" id="2_0fqbj"]
 [ext_resource type="PackedScene" uid="uid://cd27yl8tl5qd6" path="res://player_character/character.tscn" id="2_6d3b8"]
-[ext_resource type="Texture2D" uid="uid://h1grom73hp0x" path="res://UI/word_art/LEFT.png" id="3_cl2g1"]
-[ext_resource type="Texture2D" uid="uid://y3yu130wj8tc" path="res://UI/word_art/RIGHT.png" id="4_365ie"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="5_4ciyq"]
-[ext_resource type="Script" path="res://menus/lobby_character_customizer.gd" id="5_h4pye"]
+[ext_resource type="Script" path="res://menus/lobby/lobby_character_customizer.gd" id="5_h4pye"]
+[ext_resource type="PackedScene" uid="uid://c5g77somkggcq" path="res://UI/buttons/dec.tscn" id="6_f72pg"]
 [ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="6_rcmc8"]
 [ext_resource type="Texture2D" uid="uid://00et7mgdndui" path="res://player_character/base_color_palette.png" id="7_646sm"]
+[ext_resource type="PackedScene" uid="uid://cbjorljnfyjlt" path="res://UI/buttons/inc.tscn" id="7_yercm"]
 [ext_resource type="Shader" path="res://player_character/character_face.gdshader" id="8_hvyq6"]
 [ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="9_ewlph"]
 [ext_resource type="Texture2D" uid="uid://bw335sbq0nqxa" path="res://player_character/face_base_color_palette.png" id="10_0fgjq"]
@@ -100,25 +100,17 @@ text = "BodyBase"
 layout_mode = 2
 alignment = 1
 
-[node name="Dec" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer"]
+[node name="Dec" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer" instance=ExtResource("6_f72pg")]
 layout_mode = 2
-texture_normal = ExtResource("3_cl2g1")
-texture_pressed = ExtResource("3_cl2g1")
-texture_hover = ExtResource("3_cl2g1")
-texture_disabled = ExtResource("3_cl2g1")
-texture_focused = ExtResource("3_cl2g1")
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer"]
 layout_mode = 2
 text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Inc" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer"]
+[node name="Inc" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer" instance=ExtResource("7_yercm")]
 layout_mode = 2
-texture_normal = ExtResource("4_365ie")
-texture_pressed = ExtResource("4_365ie")
-texture_hover = ExtResource("4_365ie")
-texture_disabled = ExtResource("4_365ie")
-texture_focused = ExtResource("4_365ie")
 
 [node name="BodyColor" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Body"]
 layout_mode = 2
@@ -133,25 +125,17 @@ text = "BodyClr"
 layout_mode = 2
 alignment = 1
 
-[node name="Dec" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer"]
+[node name="Dec" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer" instance=ExtResource("6_f72pg")]
 layout_mode = 2
-texture_normal = ExtResource("3_cl2g1")
-texture_pressed = ExtResource("3_cl2g1")
-texture_hover = ExtResource("3_cl2g1")
-texture_disabled = ExtResource("3_cl2g1")
-texture_focused = ExtResource("3_cl2g1")
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer"]
 layout_mode = 2
 text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Inc" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer"]
+[node name="Inc" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer" instance=ExtResource("7_yercm")]
 layout_mode = 2
-texture_normal = ExtResource("4_365ie")
-texture_pressed = ExtResource("4_365ie")
-texture_hover = ExtResource("4_365ie")
-texture_disabled = ExtResource("4_365ie")
-texture_focused = ExtResource("4_365ie")
 
 [node name="Control" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer/Body"]
 custom_minimum_size = Vector2(0, 24)
@@ -174,7 +158,6 @@ position = Vector2(16, 28)
 disabled = true
 
 [node name="Face" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -194,25 +177,18 @@ text = "FaceCstm"
 layout_mode = 2
 alignment = 1
 
-[node name="Dec" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer"]
+[node name="Dec" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer" instance=ExtResource("6_f72pg")]
 layout_mode = 2
-texture_normal = ExtResource("3_cl2g1")
-texture_pressed = ExtResource("3_cl2g1")
-texture_hover = ExtResource("3_cl2g1")
-texture_disabled = ExtResource("3_cl2g1")
-texture_focused = ExtResource("3_cl2g1")
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer"]
+custom_minimum_size = Vector2(38, 0)
 layout_mode = 2
 text = "Preset"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Inc" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer"]
+[node name="Inc" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer" instance=ExtResource("7_yercm")]
 layout_mode = 2
-texture_normal = ExtResource("4_365ie")
-texture_pressed = ExtResource("4_365ie")
-texture_hover = ExtResource("4_365ie")
-texture_disabled = ExtResource("4_365ie")
-texture_focused = ExtResource("4_365ie")
 
 [node name="FaceType" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face"]
 layout_mode = 2
@@ -227,25 +203,18 @@ text = "FaceNum"
 layout_mode = 2
 alignment = 1
 
-[node name="Dec" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer"]
+[node name="Dec" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer" instance=ExtResource("6_f72pg")]
 layout_mode = 2
-texture_normal = ExtResource("3_cl2g1")
-texture_pressed = ExtResource("3_cl2g1")
-texture_hover = ExtResource("3_cl2g1")
-texture_disabled = ExtResource("3_cl2g1")
-texture_focused = ExtResource("3_cl2g1")
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer"]
+custom_minimum_size = Vector2(14, 0)
 layout_mode = 2
 text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Inc" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer"]
+[node name="Inc" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer" instance=ExtResource("7_yercm")]
 layout_mode = 2
-texture_normal = ExtResource("4_365ie")
-texture_pressed = ExtResource("4_365ie")
-texture_hover = ExtResource("4_365ie")
-texture_disabled = ExtResource("4_365ie")
-texture_focused = ExtResource("4_365ie")
 
 [node name="FaceColor" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face"]
 layout_mode = 2
@@ -260,25 +229,17 @@ text = "FaceClr"
 layout_mode = 2
 alignment = 1
 
-[node name="Dec" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer"]
+[node name="Dec" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer" instance=ExtResource("6_f72pg")]
 layout_mode = 2
-texture_normal = ExtResource("3_cl2g1")
-texture_pressed = ExtResource("3_cl2g1")
-texture_hover = ExtResource("3_cl2g1")
-texture_disabled = ExtResource("3_cl2g1")
-texture_focused = ExtResource("3_cl2g1")
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer"]
 layout_mode = 2
 text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Inc" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer"]
+[node name="Inc" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer" instance=ExtResource("7_yercm")]
 layout_mode = 2
-texture_normal = ExtResource("4_365ie")
-texture_pressed = ExtResource("4_365ie")
-texture_hover = ExtResource("4_365ie")
-texture_disabled = ExtResource("4_365ie")
-texture_focused = ExtResource("4_365ie")
 
 [node name="Ready" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2

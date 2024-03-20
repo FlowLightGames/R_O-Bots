@@ -6,9 +6,13 @@ class_name MultiplayerCustomLobby
 @export var stage_select_button:Button
 
 func _ready()->void:
+	if !SteamLobby.is_host:
+		stage_select_button.free()
 	apply_player_configs()
 	##MultiplayerSpecific:
 	PackageDeconstructor.player_initial_data_transfer_ack.connect(init_player)
+	PackageDeconstructor.character_custom_finished.connect(finished_character_custom)
+	
 	PlayerConfigs.player_config_changed.connect(on_character_custom_data_update)
 	lobby_name_label.text=str(SteamLobby.lobby_id)
 
@@ -45,3 +49,11 @@ func on_character_custom_data_update(player_number:int)->void:
 func _on_cancel_pressed()->void:
 	SteamLobby.leave_lobby()
 	get_tree().change_scene_to_packed(SceneCollection.main_menu)
+
+func finished_character_custom()->void:
+	pass
+
+func _on_start_pressed()->void:
+	var msg:PackedByteArray=PackageConstructor.character_custom_finished_master(PlayerConfigs.Player_Configs)
+	SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_RELIABLE, msg)
+	finished_character_custom()

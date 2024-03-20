@@ -1,7 +1,7 @@
 [gd_scene load_steps=32 format=3 uid="uid://b33a2c617wpeh"]
 
 [ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="1_wtp2m"]
-[ext_resource type="Script" path="res://menus/main_menu.gd" id="1_wv75o"]
+[ext_resource type="Script" path="res://menus/main_menu/main_menu.gd" id="1_wv75o"]
 [ext_resource type="Texture2D" uid="uid://du2ycui0mnds2" path="res://UI/word_art/GAME_START.png" id="2_iwafk"]
 [ext_resource type="Texture2D" uid="uid://5nejtyp6mix8" path="res://UI/word_art/BATTLE_START.png" id="3_cx1dl"]
 [ext_resource type="Texture2D" uid="uid://dtapi8ffvg1ej" path="res://UI/word_art/GAME_START_DOWN.png" id="4_bdn5e"]
