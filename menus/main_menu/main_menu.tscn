@@ -38,8 +38,8 @@ shader_parameter/offset = Vector2(0, 0)
 shader_parameter/palette = SubResource("GradientTexture1D_3bhqh")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_he035"]
+render_priority = 0
 shader = ExtResource("9_w8xsl")
-shader_parameter/Steps = 5
 
 [sub_resource type="Gradient" id="Gradient_3ap82"]
 offsets = PackedFloat32Array(0.111111, 0.840404)
