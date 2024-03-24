@@ -14,7 +14,7 @@ extends Node
 #3: Player Config Master List Update
 #4: Character data update
 #5: Character ready tru/false (if true send also character config)
-#6: lobby start game data (spawnpoints block placements)
+#6: lobby start game data (Random Seed)
 #7: game state update
 #8: finished game
 #9: assign playernumber
@@ -138,3 +138,10 @@ func character_custom_finished_master(player_configs:Array[PlayerConfigMetaData]
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
+func stage_start_up_master(random_seed:int,package_delay:float)->PackedByteArray:
+	var output:PackedByteArray=PackedByteArray()
+	output.append(6)
+	var dict:Dictionary={"RS":random_seed,"PD":package_delay}
+	output.append_array(var_to_bytes(dict))
+	output=output.compress(FileAccess.COMPRESSION_GZIP)
+	return output

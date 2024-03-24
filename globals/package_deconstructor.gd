@@ -14,7 +14,7 @@ extends Node
 #3: Player Config Master List Update
 #4: Character data update
 #5: Character ready tru/false (if true send also character config)
-#6: lobby start game data (spawnpoints block placements)
+#6: lobby start game data (Random Seed)
 #7: game state update
 #8: finished game
 #9: assign playernumber
@@ -143,7 +143,10 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			PlayerConfigs.update_player_confi(player_number,character_data)
 			#TODO set rady var in relevant script
 		6:
-			pass
+			var data_dict:Dictionary=bytes_to_var(input)
+			var package_delay:float=data_dict["PD"]
+			var random_seed:int=data_dict["RS"]
+			#TODO set variables and emit signal to change scene
 		7:
 			pass
 		8:

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://w6opehj3w17t" path="res://maps/bricks/brick_base.tscn" id="1_e6ysd"]
 [ext_resource type="Texture2D" uid="uid://dao01dlohpsmt" path="res://maps/bricks/sprites/default.png" id="2_ouiqc"]
-[ext_resource type="Texture2D" uid="uid://dtclvavboo0eb" path="res://maps/shadows/sky.png" id="3_ip6ow"]
+[ext_resource type="Texture2D" uid="uid://7pip7ei386lj" path="res://maps/shadows/default.png" id="3_k2mfv"]
 
 [node name="Brick_Base" instance=ExtResource("1_e6ysd")]
 
@@ -10,6 +10,9 @@
 texture = ExtResource("2_ouiqc")
 
 [node name="Shadow" parent="VisualSprite" index="0"]
-position = Vector2(0, 4)
-texture = ExtResource("3_ip6ow")
+position = Vector2(0, 9)
+texture = ExtResource("3_k2mfv")
 vframes = 2
+
+[node name="CollisionShape2D" parent="." index="2"]
+visible = false

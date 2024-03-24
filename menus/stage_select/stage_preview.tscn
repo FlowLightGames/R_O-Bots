@@ -1,0 +1,186 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8d0vrsqampkv"]
+
+[ext_resource type="Script" path="res://menus/stage_select/stage_preview.gd" id="1_7ws3r"]
+[ext_resource type="Texture2D" uid="uid://cq8o4xuce4txf" path="res://pickup/pickup_sheet.png" id="1_25we1"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="1_c45yj"]
+[ext_resource type="PackedScene" uid="uid://cgfbed6xit0gq" path="res://menus/stage_select/pickup_ui_element.tscn" id="3_ctndy"]
+[ext_resource type="PackedScene" uid="uid://dagq47uucuhii" path="res://menus/stage_select/stage_previews/builder.tscn" id="4_xc2xs"]
+[ext_resource type="PackedScene" uid="uid://ccsyywjyxa2h" path="res://menus/stage_select/stage_previews/default.tscn" id="5_65ym8"]
+[ext_resource type="PackedScene" uid="uid://bjad4h8fhuuwt" path="res://menus/stage_select/stage_previews/lab.tscn" id="5_lgn6h"]
+
+[node name="StageInfo" type="Panel" node_paths=PackedStringArray("tileset_preview", "possible_spaws_grid", "spawn_percent_label")]
+offset_left = 106.0
+offset_top = -46.0
+offset_right = 318.0
+offset_bottom = 130.0
+theme = ExtResource("1_c45yj")
+script = ExtResource("1_7ws3r")
+tileset_preview = NodePath("HBoxContainer/PanelContainer/VBoxContainer/Tilemap")
+possible_spaws_grid = NodePath("HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer")
+spawn_percent_label = NodePath("HBoxContainer/PickUp/PickUpPercent/Label")
+stage_previews = Array[PackedScene]([ExtResource("5_65ym8"), ExtResource("4_xc2xs"), ExtResource("5_lgn6h")])
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 14.0
+offset_top = 17.0
+offset_right = 271.0
+offset_bottom = 151.0
+
+[node name="PickUp" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="PickUpPercent" type="PanelContainer" parent="HBoxContainer/PickUp"]
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="HBoxContainer/PickUp/PickUpPercent"]
+custom_minimum_size = Vector2(109, 0)
+layout_mode = 2
+text = "PickUpChance: 100%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PowerUps" type="PanelContainer" parent="HBoxContainer/PickUp"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PickUp/PowerUps"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+
+[node name="PowerUps" type="Label" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer"]
+layout_mode = 2
+text = "PowerUps:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 5
+
+[node name="UIPowerUpSprite" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer" instance=ExtResource("3_ctndy")]
+layout_mode = 2
+
+[node name="UIPowerUpSprite6" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite6"]
+texture = ExtResource("1_25we1")
+centered = false
+hframes = 8
+vframes = 7
+
+[node name="UIPowerUpSprite7" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite7"]
+texture = ExtResource("1_25we1")
+centered = false
+hframes = 8
+vframes = 7
+
+[node name="UIPowerUpSprite8" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite8"]
+texture = ExtResource("1_25we1")
+centered = false
+hframes = 8
+vframes = 7
+
+[node name="UIPowerUpSprite9" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite9"]
+texture = ExtResource("1_25we1")
+centered = false
+hframes = 8
+vframes = 7
+
+[node name="UIPowerUpSprite10" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite10"]
+texture = ExtResource("1_25we1")
+centered = false
+hframes = 8
+vframes = 7
+
+[node name="UIPowerUpSprite2" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite2"]
+texture = ExtResource("1_25we1")
+centered = false
+hframes = 8
+vframes = 7
+
+[node name="UIPowerUpSprite3" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite3"]
+texture = ExtResource("1_25we1")
+centered = false
+hframes = 8
+vframes = 7
+
+[node name="UIPowerUpSprite4" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite4"]
+texture = ExtResource("1_25we1")
+centered = false
+hframes = 8
+vframes = 7
+
+[node name="UIPowerUpSprite5" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite5"]
+texture = ExtResource("1_25we1")
+centered = false
+hframes = 8
+vframes = 7
+
+[node name="Spacer" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Tilemap" type="Control" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+
+[node name="TileMap" parent="HBoxContainer/PanelContainer/VBoxContainer/Tilemap" instance=ExtResource("5_65ym8")]
+
+[node name="Spacer2" type="Control" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgfbed6xit0gq"]
+
+[ext_resource type="Script" path="res://menus/stage_select/pickup_ui_element.gd" id="1_7unph"]
+[ext_resource type="Texture2D" uid="uid://cq8o4xuce4txf" path="res://pickup/pickup_sheet.png" id="1_rovqa"]
+
+[node name="UIPowerUpSprite" type="Control" node_paths=PackedStringArray("sprite")]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_7unph")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rovqa")
+centered = false
+hframes = 8
+vframes = 7

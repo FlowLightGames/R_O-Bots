@@ -2,6 +2,7 @@ extends Node
 
 signal player_config_changed(player_number:int)
 
+
 var Player_Configs:Array[PlayerConfigMetaData]=[
 	PlayerConfigMetaData.new(0,0,0,FacesAutoload.preset_faces[0],PickUpStats.new()),
 	PlayerConfigMetaData.new(0,1,1,FacesAutoload.preset_faces[1],PickUpStats.new()),
@@ -26,6 +27,7 @@ func reset_full()->void:
 	PlayerConfigMetaData.new(0,6,6,FacesAutoload.preset_faces[6],PickUpStats.new()),
 	PlayerConfigMetaData.new(0,7,7,FacesAutoload.preset_faces[7],PickUpStats.new()),
 	]
+
 
 func player_left(leaver_id:int)->void:
 	for n:int in Player_Configs.size():
@@ -80,3 +82,32 @@ func set_player_initial_data_ack(player_number:int)->void:
 func reset_player_start_stats()->void:
 	for n:PlayerConfigMetaData in Player_Configs:
 		n.Starting_Stats=PickUpStats.new()
+
+func get_package_delay(player_number:int)->void:
+	pass
+
+class DelayCounter extends RefCounted:
+	signal player_delay_timeout(player_steam_id:int)
+	
+	var timeout:float
+	var timeout_timer:Timer
+	var associated_player_id:int
+	
+	func _init(timeout_sec:float,player_id:int)->void:
+		timeout=timeout_sec
+		timeout_timer=Timer.new()
+		associated_player_id=player_id
+		timeout_timer.start(timeout_sec)
+		timeout_timer.timeout.connect(_on_timeout)
+	
+	func _on_timeout()->void:
+		player_delay_timeout.emit(associated_player_id)
+	
+	func _on_ack()->float:
+		timeout_timer.stop()
+		var delay_time:float=(timeout-timeout_timer.time_left)/2.0
+		return delay_time
+
+func _on_delay_timeout(player_Steam_id:int)->void:
+	#TODO check if player still in lobby, redo request or whatever try3 times then kick player
+	#do stuff

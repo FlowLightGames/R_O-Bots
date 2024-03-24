@@ -12,7 +12,11 @@ var lobby_vote_kick: bool = false
 
 var player_assignment_dict:Dictionary={}
 
+var random_seed:int=0
+
 func _ready()->void:
+	random_seed=randi()
+	
 	Steam.join_requested.connect(_on_lobby_join_requested)
 	Steam.lobby_chat_update.connect(_on_lobby_chat_update)
 	Steam.lobby_created.connect(_on_lobby_created)
