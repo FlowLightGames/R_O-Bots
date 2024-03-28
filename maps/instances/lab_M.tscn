@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://ulhsquwm0qtk"]
+[gd_scene load_steps=18 format=3 uid="uid://ulhsquwm0qtk"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_gvyec"]
+[ext_resource type="Resource" uid="uid://bj1ciahxq4uu3" path="res://maps/pickup_maps/instances/lab.tres" id="2_fjkc1"]
 [ext_resource type="Texture2D" uid="uid://dv51jsjvx0fls" path="res://maps/tilesets/lab.png" id="2_txvb4"]
 [ext_resource type="PackedScene" uid="uid://cbslnt63d3m5i" path="res://maps/bricks/instances/lab_0.tscn" id="3_dnlft"]
 [ext_resource type="PackedScene" uid="uid://dq6jf25k6053i" path="res://maps/bricks/instances/lab_1.tscn" id="4_m41kq"]
@@ -168,8 +169,7 @@ sources/0 = SubResource("TileSetScenesCollectionSource_bpa2w")
 
 [node name="MapBase" instance=ExtResource("1_gvyec")]
 players_spawned = 8
-pickup_chance = 0.505
-possible_pickups = Array[Resource("res://maps/pickup_option_struct.gd")]([])
+possible_pickups = ExtResource("2_fjkc1")
 metadata/_edit_lock_ = true
 
 [node name="BaseGround" parent="." index="0"]

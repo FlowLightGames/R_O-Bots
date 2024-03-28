@@ -1,0 +1,167 @@
+[gd_scene load_steps=14 format=3 uid="uid://c2e7mkr0ya81o"]
+
+[ext_resource type="PackedScene" uid="uid://bi24h0fnhi5yq" path="res://bombs/bomb_base.tscn" id="1_hxlkl"]
+[ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="2_3wed1"]
+[ext_resource type="Script" path="res://bombs/instances/hydrogen.gd" id="2_bppb8"]
+[ext_resource type="Texture2D" uid="uid://00et7mgdndui" path="res://player_character/base_color_palette.png" id="3_vnnya"]
+[ext_resource type="Texture2D" uid="uid://ne8qb1bvh2n0" path="res://bombs/bomb_sprites/hydrogen_bomb_target.png" id="4_ij461"]
+[ext_resource type="Texture2D" uid="uid://tboo64jilw2h" path="res://bombs/bomb_sprites/hydrogen_bomb.png" id="6_wucuu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0gmhg"]
+resource_local_to_scene = true
+shader = ExtResource("2_3wed1")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("3_vnnya")
+
+[sub_resource type="Animation" id="Animation_fic7i"]
+resource_name = "Default"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_cisb4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_768rw"]
+_data = {
+"Default": SubResource("Animation_fic7i"),
+"RESET": SubResource("Animation_cisb4")
+}
+
+[sub_resource type="Animation" id="Animation_4jlmw"]
+resource_name = "Default"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bomb:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(0.0794392, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bomb:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(0.249923, 1),
+"update": 0,
+"values": [Vector2(0, -160), Vector2(0, -12)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"detonate"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_mue5m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bomb:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bomb:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -160)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3ukct"]
+_data = {
+"Default": SubResource("Animation_4jlmw"),
+"RESET": SubResource("Animation_mue5m")
+}
+
+[node name="AnimatableBody2D" node_paths=PackedStringArray("bomb_body", "visual_animator") instance=ExtResource("1_hxlkl")]
+z_index = 2
+script = ExtResource("2_bppb8")
+bomb_body = NodePath("bomb")
+visual_animator = NodePath("AnimationPlayer")
+kickable = false
+throwable = false
+bomb_type = 7
+
+[node name="OneWayBombCollision" parent="." index="1"]
+collision_layer = 0
+
+[node name="BombSprite" parent="." index="2"]
+material = SubResource("ShaderMaterial_0gmhg")
+texture = ExtResource("4_ij461")
+
+[node name="ExplosionTimer" parent="." index="3"]
+wait_time = 2.0
+
+[node name="bomb" type="Sprite2D" parent="." index="5"]
+self_modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_0gmhg")
+position = Vector2(0, -160)
+texture = ExtResource("6_wucuu")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="bomb" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_768rw")
+}
+autoplay = "Default"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+libraries = {
+"": SubResource("AnimationLibrary_3ukct")
+}
+
+[connection signal="timeout" from="ExplosionTimer" to="." method="launch"]

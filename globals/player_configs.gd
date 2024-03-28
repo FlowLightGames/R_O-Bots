@@ -109,5 +109,6 @@ class DelayCounter extends RefCounted:
 		return delay_time
 
 func _on_delay_timeout(player_Steam_id:int)->void:
+	pass
 	#TODO check if player still in lobby, redo request or whatever try3 times then kick player
 	#do stuff

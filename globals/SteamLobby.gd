@@ -2,7 +2,7 @@ extends Node
 
 const PACKET_READ_LIMIT: int = 32
 
-var is_host:bool=false
+var is_host:bool=true
 var player_number:int=0
 
 var lobby_id: int = 0

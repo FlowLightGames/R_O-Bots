@@ -15,6 +15,8 @@ func _ready()->void:
 	
 	PlayerConfigs.player_config_changed.connect(on_character_custom_data_update)
 	lobby_name_label.text=str(SteamLobby.lobby_id)
+	
+	stage_select_button.disabled=false
 
 func apply_player_configs()->void:
 	for i:int in PlayerConfigs.Player_Configs.size():
@@ -51,7 +53,7 @@ func _on_cancel_pressed()->void:
 	get_tree().change_scene_to_packed(SceneCollection.main_menu)
 
 func finished_character_custom()->void:
-	pass
+	get_tree().change_scene_to_packed(SceneCollection.stage_select)
 
 func _on_start_pressed()->void:
 	var msg:PackedByteArray=PackageConstructor.character_custom_finished_master(PlayerConfigs.Player_Configs)

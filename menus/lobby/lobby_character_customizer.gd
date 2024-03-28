@@ -233,4 +233,3 @@ func _on_ready_pressed()->void:
 		disable()
 		player_ready=true
 		ready_overlay.visible=true
-		

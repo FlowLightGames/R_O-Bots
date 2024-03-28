@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjad4h8fhuuwt"]
+[gd_scene load_steps=8 format=3 uid="uid://c281nabrokjkv"]
 
-[ext_resource type="Texture2D" uid="uid://dv51jsjvx0fls" path="res://maps/tilesets/lab.png" id="1_vgu4e"]
-[ext_resource type="PackedScene" uid="uid://bta55ts2p8tmh" path="res://maps/statics/instances/lab_1.tscn" id="2_bnhsf"]
-[ext_resource type="PackedScene" uid="uid://b33jvo8fousjx" path="res://maps/bricks/instances/lab_2.tscn" id="3_h3qr7"]
-[ext_resource type="PackedScene" uid="uid://b8n55htbp42rh" path="res://maps/bricks/instances/lab_3.tscn" id="4_7uptt"]
+[ext_resource type="Texture2D" uid="uid://dv51jsjvx0fls" path="res://maps/tilesets/lab.png" id="1_hriqv"]
+[ext_resource type="PackedScene" uid="uid://bta55ts2p8tmh" path="res://maps/statics/instances/lab_1.tscn" id="2_6cvgy"]
+[ext_resource type="PackedScene" uid="uid://b33jvo8fousjx" path="res://maps/bricks/instances/lab_2.tscn" id="3_uelfh"]
+[ext_resource type="PackedScene" uid="uid://b8n55htbp42rh" path="res://maps/bricks/instances/lab_3.tscn" id="4_ifdlx"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tah2a"]
-texture = ExtResource("1_vgu4e")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6xaue"]
+texture = ExtResource("1_hriqv")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -46,23 +46,23 @@ texture = ExtResource("1_vgu4e")
 3:8/0 = 0
 4:8/0 = 0
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_tg77m"]
-scenes/6/scene = ExtResource("2_bnhsf")
-scenes/8/scene = ExtResource("3_h3qr7")
-scenes/9/scene = ExtResource("4_7uptt")
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_m77wl"]
+scenes/1/scene = ExtResource("2_6cvgy")
+scenes/2/scene = ExtResource("3_uelfh")
+scenes/3/scene = ExtResource("4_ifdlx")
 
-[sub_resource type="TileSet" id="TileSet_hkce1"]
-sources/0 = SubResource("TileSetAtlasSource_tah2a")
-sources/2 = SubResource("TileSetScenesCollectionSource_tg77m")
+[sub_resource type="TileSet" id="TileSet_mb3ov"]
+sources/0 = SubResource("TileSetAtlasSource_6xaue")
+sources/1 = SubResource("TileSetScenesCollectionSource_m77wl")
 
 [node name="TileMap" type="TileMap"]
 y_sort_enabled = true
-tile_set = SubResource("TileSet_hkce1")
+tile_set = SubResource("TileSet_mb3ov")
 format = 2
 layer_0/y_sort_enabled = true
-layer_0/tile_data = PackedInt32Array(65539, 131072, 1, 65538, 131072, 1, 65540, 131072, 1, 65541, 196608, 1, 65537, 65536, 1, 1, 65536, 0, 2, 131072, 0, 3, 131072, 0, 4, 131072, 0, 5, 196608, 0, 0, 0, 0, 65536, 0, 1, 131072, 0, 1, 196608, 0, 1, 262144, 0, 1, 262150, 262144, 1, 196614, 262144, 1, 131078, 262144, 1, 65542, 262144, 1, 6, 262144, 0, 262145, 65536, 2, 196609, 65536, 2, 131073, 65536, 2, 262149, 196608, 2, 196613, 196608, 2, 131077, 196608, 2, 327682, 131072, 3, 327683, 131072, 3, 327684, 131072, 3, 327685, 196608, 3, 327681, 65536, 3, 327680, 0, 3, 327686, 262144, 3, 393216, 0, 4, 393222, 262144, 4, 393217, 131072, 4, 393218, 131072, 4, 393219, 131072, 4, 393220, 131072, 4, 393221, 131072, 4, 131074, 65536, 7, 196610, 65536, 7, 262146, 65536, 7, 262147, 65536, 7, 262148, 65536, 7, 196612, 65536, 7, 131076, 65536, 7, 131075, 65536, 7, 196611, 65536, 7)
+layer_0/tile_data = PackedInt32Array(131074, 65536, 7, 196610, 65536, 7, 262146, 65536, 7, 262147, 65536, 7, 262148, 65536, 7, 196612, 65536, 7, 131076, 65536, 7, 131075, 65536, 7, 196611, 65536, 7, 327683, 131072, 3, 327682, 131072, 3, 327684, 131072, 3, 327685, 196608, 3, 327681, 65536, 3, 262145, 65536, 2, 196609, 65536, 2, 131073, 65536, 2, 262149, 196608, 2, 196613, 196608, 2, 131077, 196608, 2, 65538, 131072, 1, 65539, 131072, 1, 65540, 131072, 1, 65537, 65536, 1, 65541, 196608, 1, 2, 131072, 0, 3, 131072, 0, 4, 131072, 0, 5, 196608, 0, 1, 65536, 0, 0, 0, 0, 6, 262144, 0, 65542, 262144, 1, 131078, 262144, 1, 196614, 262144, 1, 262150, 262144, 2, 65536, 0, 1, 131072, 0, 1, 196608, 0, 1, 262144, 0, 2, 327686, 262144, 3, 327680, 0, 3, 393216, 0, 4, 393222, 262144, 4, 393217, 131072, 4, 393218, 131072, 4, 393219, 131072, 4, 393220, 131072, 4, 393221, 131072, 4)
 layer_1/y_sort_enabled = true
-layer_1/tile_data = PackedInt32Array(131075, 2, 589824, 196612, 2, 524288, 196610, 2, 524288, 262147, 2, 589824, 196611, 2, 393216)
+layer_1/tile_data = PackedInt32Array(196611, 1, 65536, 131075, 1, 131072, 262147, 1, 131072, 196612, 1, 196608, 196610, 1, 196608)
 layer_2/y_sort_enabled = true
 layer_2/z_index = 1
-layer_2/tile_data = PackedInt32Array(327683, 131072, 3, 327684, 131072, 3, 327682, 131072, 3)
+layer_2/tile_data = PackedInt32Array(327682, 131072, 3, 327683, 131072, 3, 327684, 131072, 3)

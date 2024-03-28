@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b33a2c617wpeh"]
+[gd_scene load_steps=30 format=3 uid="uid://b33a2c617wpeh"]
 
 [ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="1_wtp2m"]
 [ext_resource type="Script" path="res://menus/main_menu/main_menu.gd" id="1_wv75o"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://b2ycmw237cqq7" path="res://menus/main_menu/crt.png" id="8_2uxn3"]
 [ext_resource type="Texture2D" uid="uid://cykvamvn63kuq" path="res://UI/word_art/LOBBY_HOST_DOWN.png" id="8_pmc18"]
 [ext_resource type="Texture2D" uid="uid://cqm0xmtv620gb" path="res://UI/word_art/BATTLE_START_FOCUS.png" id="8_wx4ng"]
-[ext_resource type="Shader" path="res://UI/shader/posterize.gdshader" id="9_w8xsl"]
 [ext_resource type="Texture2D" uid="uid://d0wuv8gul7rtp" path="res://UI/word_art/LOBBY_JOIN_DOWN.png" id="10_xgjyn"]
 [ext_resource type="Texture2D" uid="uid://c5uoa2jkn2ola" path="res://UI/word_art/LOBBY_HOST_FOCUS.png" id="11_d5m5p"]
 [ext_resource type="Texture2D" uid="uid://lrhtkfhpmx4y" path="res://UI/word_art/OPTIONS_DOWN.png" id="12_xswww"]
@@ -36,10 +35,6 @@ shader_parameter/motion = Vector2(0, 16)
 shader_parameter/scale = 1.0
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/palette = SubResource("GradientTexture1D_3bhqh")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_he035"]
-render_priority = 0
-shader = ExtResource("9_w8xsl")
 
 [sub_resource type="Gradient" id="Gradient_3ap82"]
 offsets = PackedFloat32Array(0.111111, 0.840404)
@@ -266,7 +261,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="Static" type="TextureRect" parent="Sprite2D"]
 show_behind_parent = true
-material = SubResource("ShaderMaterial_he035")
 offset_left = -113.0
 offset_top = -82.0
 offset_right = 113.0

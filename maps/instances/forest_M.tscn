@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://d2bnlyda5ph3q"]
+[gd_scene load_steps=11 format=3 uid="uid://d2bnlyda5ph3q"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_4wjk5"]
+[ext_resource type="Resource" uid="uid://bb2nqesc37rsm" path="res://maps/pickup_maps/instances/forest.tres" id="2_7181u"]
 [ext_resource type="Texture2D" uid="uid://bxnde0n60g2mm" path="res://maps/tilesets/forest.png" id="2_st7xo"]
 [ext_resource type="PackedScene" uid="uid://dpeavjtxk7y34" path="res://maps/bricks/instances/forest_0.tscn" id="3_p0aw5"]
 [ext_resource type="PackedScene" uid="uid://0lg5ehhj3vnb" path="res://maps/bricks/instances/forest_1.tscn" id="4_u6r7s"]
@@ -108,7 +109,7 @@ sources/0 = SubResource("TileSetScenesCollectionSource_jggus")
 
 [node name="MapBase" instance=ExtResource("1_4wjk5")]
 players_spawned = 8
-pickup_chance = 0.505
+possible_pickups = ExtResource("2_7181u")
 round_time = 110.0
 metadata/_edit_lock_ = true
 

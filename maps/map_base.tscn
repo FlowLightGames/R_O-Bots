@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://ba2chyw1gv6ew"]
+[gd_scene load_steps=14 format=3 uid="uid://ba2chyw1gv6ew"]
 
 [ext_resource type="Texture2D" uid="uid://g3tlmg8rcqwx" path="res://UI/theme/exit.png" id="1_klo7g"]
 [ext_resource type="Script" path="res://maps/map_base.gd" id="1_uvgx8"]
-[ext_resource type="Script" path="res://maps/pickup_option_struct.gd" id="2_fbipq"]
 [ext_resource type="Script" path="res://maps/DestroyablesRandom.gd" id="2_lcam7"]
 [ext_resource type="Texture2D" uid="uid://1q0tcn6c3i04" path="res://UI/theme/down.png" id="3_fj8dp"]
 [ext_resource type="Texture2D" uid="uid://cowlymgw8e7wd" path="res://maps/UI/time_icon.png" id="6_mtn5u"]
@@ -10,11 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://dvffq8wbdsdr" path="res://maps/UI/box_inner.png" id="7_bqdqg"]
 [ext_resource type="Texture2D" uid="uid://bkhu2sb735emw" path="res://maps/UI/digits.png" id="8_cblbo"]
 [ext_resource type="Texture2D" uid="uid://x1r8i80v7e6s" path="res://maps/UI/point_colon.png" id="9_oeixh"]
-
-[sub_resource type="Resource" id="Resource_pelg5"]
-script = ExtResource("2_fbipq")
-what = 1
-weight = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p7g3d"]
 texture = ExtResource("1_klo7g")
@@ -40,7 +34,6 @@ time_ui = NodePath("Camera2D/UI/CenterContainer/RoundTime")
 player_nodes = NodePath("Players")
 bomb_nodes = NodePath("Bombs")
 enemy_nodes = NodePath("Enemys")
-possible_pickups = Array[ExtResource("2_fbipq")]([SubResource("Resource_pelg5")])
 round_timer = NodePath("RoundTimer")
 
 [node name="BaseGround" type="TileMap" parent="."]

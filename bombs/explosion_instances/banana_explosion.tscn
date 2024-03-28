@@ -75,7 +75,6 @@ _data = {
 
 [node name="ExplosionBase" node_paths=PackedStringArray("collision_shape_h", "collision_shape_v", "animation_player") instance=ExtResource("1_j2hft")]
 script = ExtResource("2_3p31e")
-time_to_live = 1.0
 collision_shape_h = NodePath("Hurtbox/CollisionShape2D")
 collision_shape_v = NodePath("Hurtbox/CollisionShape2D2")
 animation_player = NodePath("AnimationPlayer")

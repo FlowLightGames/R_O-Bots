@@ -2,7 +2,7 @@ extends Node2D
 
 class_name OnlineLobbyList
 
-var lobby_query_element:PackedScene=load("res://menus/lobby_query_element.tscn") as PackedScene
+var lobby_query_element:PackedScene=load("res://menus/lobby/lobby_query_element.tscn") as PackedScene
 
 @export var lobby_list_node:VBoxContainer
 
@@ -66,7 +66,6 @@ func _on_friend_search_pressed()->void:
 		tmp_element.font_color=Color.from_hsv(randf(),1.0,1.0,1.0)
 		
 		lobby_list_node.add_child(tmp_element)
-
 
 
 func _on_cancel_pressed()->void:

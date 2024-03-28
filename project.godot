@@ -65,6 +65,7 @@ folder_colors={
 "res://enemy_character/": "orange",
 "res://globals/": "gray",
 "res://maps/": "green",
+"res://menus/": "pink",
 "res://multiplayer/": "orange",
 "res://pickup/": "blue",
 "res://player_character/": "red",

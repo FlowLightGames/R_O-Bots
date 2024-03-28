@@ -9,12 +9,15 @@ var pickup_ui_element:PackedScene=load("res://menus/stage_select/pickup_ui_eleme
 @export var spawn_percent_label:Label
 
 @export var stage_previews:Array[PackedScene]
+@export var stage_pickup_maps:Array[PickUpMap]
 
 func _ready()->void:
-	pass # Replace with function body.
+	for n:PickUpMap in stage_pickup_maps:
+		print(n.map)
+		n.sort_map()
 
 func set_spawn_percent(input:float)->void:
-	spawn_percent_label.text="PickUpChance: "+str(input*100.0)+"%"
+	spawn_percent_label.text="PickUpChance: "+str(int(input*100.0))+"%"
 
 func set_possible_spawn_grid(input: Array[PickUpOptionStruct])->void:
 	var children:Array[Node]=possible_spaws_grid.get_children()
@@ -32,3 +35,6 @@ func set_tileset_preview(stage_num:int)->void:
 			child.queue_free()
 		var tmp:TileMap=stage_previews[stage_num].instantiate() as TileMap
 		tileset_preview.add_child(tmp)
+		#TODO might need to change selection based on different sizes 
+		set_possible_spawn_grid(stage_pickup_maps[stage_num].map)
+		set_spawn_percent(stage_pickup_maps[stage_num].pickup_chance)

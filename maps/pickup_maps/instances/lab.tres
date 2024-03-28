@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PickUpMap" load_steps=2 format=3 uid="uid://bj1ciahxq4uu3"]
+
+[ext_resource type="Script" path="res://maps/pickup_maps/pickup_map_base.gd" id="1_8jyaj"]
+
+[resource]
+script = ExtResource("1_8jyaj")
+map = Array[Resource("res://maps/pickup_option_struct.gd")]([])

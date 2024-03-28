@@ -74,6 +74,8 @@ func picked_up(what:PickUp.PICKUP)->void:
 			Pickup_Stats.BOMB_TYPE=BombList.BOMBTYPE.DICE
 		PickUp.PICKUP.PLASMA:
 			Pickup_Stats.BOMB_TYPE=BombList.BOMBTYPE.PLASMA
+		PickUp.PICKUP.HYDROGEN:
+			Pickup_Stats.BOMB_TYPE=BombList.BOMBTYPE.HYDROGEN
 		#STAT_UP
 		PickUp.PICKUP.LIFE_UP:
 			Pickup_Stats.LIFE_UP+=1
@@ -179,6 +181,8 @@ func place_bomb()->void:
 				BombList.BOMBTYPE.PLASMA:
 					tmp_bomb=BombList.Plasma.instantiate() as PlasmaBomb
 					tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
+				BombList.BOMBTYPE.HYDROGEN:
+					tmp_bomb=BombList.Hydrogen.instantiate() as HydrogenBomb
 				_:
 					tmp_bomb=BombList.Default.instantiate()
 			

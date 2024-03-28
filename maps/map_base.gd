@@ -15,8 +15,7 @@ var countdown_overlay:PackedScene=load("res://maps/UI/countdown.tscn")
 @export var bomb_nodes:Node2D
 @export var enemy_nodes:Node2D
 
-@export_range(0.0,1.0) var pickup_chance:float
-@export var possible_pickups:Array[PickUpOptionStruct]
+@export var possible_pickups:PickUpMap
 
 @export var round_time:float=180.0
 @export var round_timer:Timer
@@ -25,14 +24,14 @@ var disabled:bool=false
 var player_ref_list:Array[PlayerCharacter]=[]
 
 func pick_up_with_weights()->PickUpOptionStruct:
-	if !possible_pickups.is_empty():
+	if !possible_pickups.map.is_empty():
 		var total_weight:int=0
-		for i:PickUpOptionStruct in possible_pickups:
+		for i:PickUpOptionStruct in possible_pickups.map:
 			total_weight+=i.weight
 		var random_num:int=randi()%total_weight
 		
 		var cumulative_weight:int=0
-		for p:PickUpOptionStruct in possible_pickups:
+		for p:PickUpOptionStruct in possible_pickups.map:
 			cumulative_weight+= p.weight
 			if random_num<cumulative_weight:
 				return p

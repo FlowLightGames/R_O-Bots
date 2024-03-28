@@ -16,10 +16,10 @@ func spawn_pickup_and_free()->void:
 func _on_animation_player_animation_finished(_anim_name:String)->void:
 	var spawn:bool=false
 	var random_f:float=randf()
-	if map.pickup_chance==0.0:
+	if map.possible_pickups.pickup_chance==0.0:
 		pass
 	else:
-		spawn=(random_f<=map.pickup_chance)
+		spawn=(random_f<=map.possible_pickups.pickup_chance)
 	if(spawn):
 		var picked_struct:PickUpOptionStruct=map.pick_up_with_weights()
 		if picked_struct:

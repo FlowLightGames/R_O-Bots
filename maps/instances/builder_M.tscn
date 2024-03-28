@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://j7ybgu386yt6"]
+[gd_scene load_steps=16 format=3 uid="uid://j7ybgu386yt6"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_hjnxq"]
+[ext_resource type="Resource" uid="uid://bau8cj2gm4rd8" path="res://maps/pickup_maps/instances/builder.tres" id="2_5t4fk"]
 [ext_resource type="Texture2D" uid="uid://cvp6agl5khasp" path="res://maps/tilesets/builder.png" id="2_m61gk"]
 [ext_resource type="PackedScene" uid="uid://c4nab4mvuc8gq" path="res://maps/bricks/instances/builder_0.tscn" id="3_k4wts"]
 [ext_resource type="PackedScene" uid="uid://b110p8bbrj57f" path="res://maps/bricks/instances/builder_1.tscn" id="4_4xxw3"]
@@ -132,8 +133,7 @@ blend_mode = 3
 
 [node name="MapBase" instance=ExtResource("1_hjnxq")]
 players_spawned = 8
-pickup_chance = 0.505
-possible_pickups = Array[Resource("res://maps/pickup_option_struct.gd")]([])
+possible_pickups = ExtResource("2_5t4fk")
 round_time = 110.0
 metadata/_edit_lock_ = true
 
