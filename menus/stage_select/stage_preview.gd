@@ -1,4 +1,4 @@
-extends Panel
+extends Control
 
 class_name StagePreview
 
@@ -13,7 +13,6 @@ var pickup_ui_element:PackedScene=load("res://menus/stage_select/pickup_ui_eleme
 
 func _ready()->void:
 	for n:PickUpMap in stage_pickup_maps:
-		print(n.map)
 		n.sort_map()
 
 func set_spawn_percent(input:float)->void:

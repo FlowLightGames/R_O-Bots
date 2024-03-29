@@ -128,7 +128,7 @@ _data = {
 }
 
 [node name="AnimatableBody2D" node_paths=PackedStringArray("bomb_body", "visual_animator") instance=ExtResource("1_hxlkl")]
-z_index = 2
+z_index = 1
 script = ExtResource("2_bppb8")
 bomb_body = NodePath("bomb")
 visual_animator = NodePath("AnimationPlayer")
@@ -148,6 +148,8 @@ wait_time = 2.0
 
 [node name="bomb" type="Sprite2D" parent="." index="5"]
 self_modulate = Color(1, 1, 1, 0)
+z_index = 2
+z_as_relative = false
 material = SubResource("ShaderMaterial_0gmhg")
 position = Vector2(0, -160)
 texture = ExtResource("6_wucuu")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cj7kdptcelfix"]
+[gd_scene load_steps=15 format=3 uid="uid://cj7kdptcelfix"]
 
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="1_65nkd"]
 [ext_resource type="Script" path="res://menus/stage_select/stage_select.gd" id="1_p8ugr"]
@@ -6,7 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://cbjorljnfyjlt" path="res://UI/buttons/inc.tscn" id="3_yb0gp"]
 [ext_resource type="PackedScene" uid="uid://b8d0vrsqampkv" path="res://menus/stage_select/stage_preview.tscn" id="5_mr6la"]
 [ext_resource type="PackedScene" uid="uid://b1ilbhdx0c8p2" path="res://UI/background/background_scroll.tscn" id="6_0mgp2"]
+[ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="7_08v1q"]
 [ext_resource type="Texture2D" uid="uid://cll1ybp4cx55r" path="res://UI/background/BG_w_xp_75.png" id="7_rvws7"]
+[ext_resource type="Texture2D" uid="uid://bnc1l1woe8fmb" path="res://UI/theme/button_light.png" id="8_iu25y"]
+[ext_resource type="Texture2D" uid="uid://b86ni80kqlbbs" path="res://UI/background/recycle_icon.png" id="8_j6nji"]
+[ext_resource type="Texture2D" uid="uid://hx13ej7r828i" path="res://UI/background/desktop_icon.png" id="9_l66p5"]
+[ext_resource type="Texture2D" uid="uid://c2kl7qva5cxnr" path="res://UI/theme/button_medium.png" id="9_liw6v"]
+[ext_resource type="Texture2D" uid="uid://dj8y6cfla1n2m" path="res://UI/background/directory_icon.png" id="10_vlqag"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e2amk"]
+font_size = 8
+font_color = Color(0, 0, 0, 1)
 
 [node name="StageSelect" type="Node2D" node_paths=PackedStringArray("stage_label", "size_label", "stage_preview")]
 script = ExtResource("1_p8ugr")
@@ -26,15 +36,15 @@ grow_vertical = 2
 theme = ExtResource("1_65nkd")
 metadata/_edit_lock_ = true
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="Panel" type="Control" parent="Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -180.0
-offset_top = -67.0
+offset_left = -165.0
+offset_top = -93.0
 offset_right = 4.0
 offset_bottom = 114.0
 grow_horizontal = 2
@@ -138,7 +148,19 @@ text = "LETS GOOOO"
 
 [node name="Background" parent="." instance=ExtResource("6_0mgp2")]
 
-[node name="TextureRect" type="TextureRect" parent="Background"]
+[node name="PanelContainer" type="NinePatchRect" parent="Background"]
+offset_left = 55.0
+offset_top = 22.0
+offset_right = 585.0
+offset_bottom = 331.0
+texture = ExtResource("7_08v1q")
+patch_margin_left = 8
+patch_margin_top = 10
+patch_margin_right = 7
+patch_margin_bottom = 4
+metadata/_edit_lock_ = true
+
+[node name="Window" type="TextureRect" parent="Background"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -152,7 +174,134 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("1_65nkd")
 texture = ExtResource("7_rvws7")
+metadata/_edit_lock_ = true
+
+[node name="Taskbar" type="NinePatchRect" parent="Background/Window"]
+layout_mode = 0
+offset_top = 276.0
+offset_right = 526.0
+offset_bottom = 296.0
+texture = ExtResource("8_iu25y")
+patch_margin_left = 3
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/Window/Taskbar"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 18.0
+metadata/_edit_group_ = true
+
+[node name="Button" type="NinePatchRect" parent="Background/Window/Taskbar/HBoxContainer"]
+custom_minimum_size = Vector2(46, 16)
+layout_mode = 2
+texture = ExtResource("8_iu25y")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+metadata/_edit_group_ = true
+
+[node name="Start" type="Label" parent="Background/Window/Taskbar/HBoxContainer/Button"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 1.0
+offset_right = 44.0
+offset_bottom = 13.0
+text = "# Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="NinePatchRect" parent="Background/Window/Taskbar/HBoxContainer"]
+custom_minimum_size = Vector2(58.645, 14)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("9_liw6v")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+metadata/_edit_group_ = true
+
+[node name="Start" type="Label" parent="Background/Window/Taskbar/HBoxContainer/Button2"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 1.0
+offset_right = 44.0
+offset_bottom = 11.0
+text = "R_O-Bots"
+label_settings = SubResource("LabelSettings_e2amk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icons" type="VBoxContainer" parent="Background/Window"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 66.0
+offset_bottom = 126.0
+theme_override_constants/separation = 0
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="Recycle" type="TextureRect" parent="Background/Window/Icons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_j6nji")
+stretch_mode = 2
+
+[node name="Bin" type="Label" parent="Background/Window/Icons"]
+layout_mode = 2
+text = "Recycle Bin"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="Background/Window/Icons"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="Desktop" type="TextureRect" parent="Background/Window/Icons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("9_l66p5")
+stretch_mode = 2
+
+[node name="Computer" type="Label" parent="Background/Window/Icons"]
+layout_mode = 2
+text = "Computer
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer3" type="Control" parent="Background/Window/Icons"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="Directory" type="TextureRect" parent="Background/Window/Icons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("10_vlqag")
+stretch_mode = 2
+
+[node name="Document" type="Label" parent="Background/Window/Icons"]
+layout_mode = 2
+text = "Docouments
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer2" type="Control" parent="Background/Window/Icons"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
 
 [connection signal="pressed" from="Control/Panel/Selector/VBoxContainer/StageSelect/StageDec" to="." method="_on_stage_dec_pressed"]
 [connection signal="pressed" from="Control/Panel/Selector/VBoxContainer/StageSelect/StageInc" to="." method="_on_stage_inc_pressed"]

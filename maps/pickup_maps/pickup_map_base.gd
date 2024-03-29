@@ -13,9 +13,10 @@ func compare_function(a:PickUpOptionStruct,b:PickUpOptionStruct)->int:
 	#-1 if a before b
 	#1 if a  after b
 	#0 if equal
-	if int(a.what)>int(b.what):
-		return 1
-	elif int(a.what)<int(b.what):
-		return -1
-	else:
-		return 0
+	#if int(a.what)>int(b.what):
+		#return 1
+	#elif int(a.what)<int(b.what):
+		#return -1
+	#else:
+		#return 0
+	return int(a.what)<int(b.what)

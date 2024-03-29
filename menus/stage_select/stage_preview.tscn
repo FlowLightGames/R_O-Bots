@@ -15,11 +15,13 @@
 [ext_resource type="Resource" uid="uid://bj1ciahxq4uu3" path="res://maps/pickup_maps/instances/lab.tres" id="11_wyii6"]
 [ext_resource type="Resource" uid="uid://vifr20kyl8bm" path="res://maps/pickup_maps/instances/sky.tres" id="12_5nedb"]
 
-[node name="StageInfo" type="Panel" node_paths=PackedStringArray("tileset_preview", "possible_spaws_grid", "spawn_percent_label")]
-offset_left = 106.0
-offset_top = -46.0
-offset_right = 318.0
-offset_bottom = 130.0
+[node name="StageInfo" type="Control" node_paths=PackedStringArray("tileset_preview", "possible_spaws_grid", "spawn_percent_label")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 22.0
+offset_top = 12.0
+offset_right = 234.0
+offset_bottom = 188.0
 theme = ExtResource("1_c45yj")
 script = ExtResource("1_7ws3r")
 tileset_preview = NodePath("HBoxContainer/PanelContainer/VBoxContainer/Tilemap")
