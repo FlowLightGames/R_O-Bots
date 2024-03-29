@@ -67,6 +67,5 @@ func _on_friend_search_pressed()->void:
 		
 		lobby_list_node.add_child(tmp_element)
 
-
 func _on_cancel_pressed()->void:
 	get_tree().change_scene_to_packed(SceneCollection.main_menu)

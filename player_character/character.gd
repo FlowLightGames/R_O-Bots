@@ -178,11 +178,15 @@ func place_bomb()->void:
 				BombList.BOMBTYPE.BANANA:
 					tmp_bomb=BombList.Banana.instantiate() as BananaBomb
 					(tmp_bomb as BananaBomb).placed_with_direction=get_priority_4_way_direction(current_view_direction)
+				BombList.BOMBTYPE.E:
+					tmp_bomb=BombList.E.instantiate() as EBomb
+					(tmp_bomb as EBomb).placed_with_direction=get_priority_4_way_direction(current_view_direction)
 				BombList.BOMBTYPE.PLASMA:
 					tmp_bomb=BombList.Plasma.instantiate() as PlasmaBomb
 					tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
 				BombList.BOMBTYPE.HYDROGEN:
 					tmp_bomb=BombList.Hydrogen.instantiate() as HydrogenBomb
+
 				_:
 					tmp_bomb=BombList.Default.instantiate()
 			

@@ -1,11 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://cj7kdptcelfix"]
+[gd_scene load_steps=20 format=3 uid="uid://cj7kdptcelfix"]
 
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="1_65nkd"]
 [ext_resource type="Script" path="res://menus/stage_select/stage_select.gd" id="1_p8ugr"]
 [ext_resource type="PackedScene" uid="uid://c5g77somkggcq" path="res://UI/buttons/dec.tscn" id="2_bfhf8"]
+[ext_resource type="Resource" uid="uid://1fmhmk2wgv0l" path="res://menus/stage_select/stage_select_meta_datas/default.tres" id="2_ogmd1"]
+[ext_resource type="Resource" uid="uid://b3axbay36hl74" path="res://menus/stage_select/stage_select_meta_datas/builder.tres" id="3_13x4f"]
 [ext_resource type="PackedScene" uid="uid://cbjorljnfyjlt" path="res://UI/buttons/inc.tscn" id="3_yb0gp"]
+[ext_resource type="Resource" uid="uid://dxgqhi8f283ad" path="res://menus/stage_select/stage_select_meta_datas/forest.tres" id="4_byyl7"]
+[ext_resource type="Resource" uid="uid://d2s8me31yw22c" path="res://menus/stage_select/stage_select_meta_datas/lab.tres" id="5_cgtbc"]
 [ext_resource type="PackedScene" uid="uid://b8d0vrsqampkv" path="res://menus/stage_select/stage_preview.tscn" id="5_mr6la"]
 [ext_resource type="PackedScene" uid="uid://b1ilbhdx0c8p2" path="res://UI/background/background_scroll.tscn" id="6_0mgp2"]
+[ext_resource type="Resource" uid="uid://cjo1qr6v85uvh" path="res://menus/stage_select/stage_select_meta_datas/sky.tres" id="6_br88h"]
 [ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="7_08v1q"]
 [ext_resource type="Texture2D" uid="uid://cll1ybp4cx55r" path="res://UI/background/BG_w_xp_75.png" id="7_rvws7"]
 [ext_resource type="Texture2D" uid="uid://bnc1l1woe8fmb" path="res://UI/theme/button_light.png" id="8_iu25y"]
@@ -23,6 +28,7 @@ script = ExtResource("1_p8ugr")
 stage_label = NodePath("Control/Panel/Selector/VBoxContainer/StageSelect/Label")
 size_label = NodePath("Control/Panel/Selector/VBoxContainer/SizeSelect/Label")
 stage_preview = NodePath("Control/Panel/StageInfo")
+stage_select_meta_datas = Array[Resource("res://menus/stage_select/stage_select_meta_data.gd")]([ExtResource("2_ogmd1"), ExtResource("3_13x4f"), ExtResource("4_byyl7"), ExtResource("5_cgtbc"), ExtResource("6_br88h")])
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

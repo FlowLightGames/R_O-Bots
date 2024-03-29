@@ -1,6 +1,6 @@
 extends Node
 
-var path:String="C:/Users/r059055/Desktop/ROBOTS"
+var path:String=r"C:\Users\Flo\Desktop\Robots_Source"
 @export var size:int=6
 func _ready()->void:
 	var img:Image=Image.create(1,size,false,Image.Format.FORMAT_RGBA8)

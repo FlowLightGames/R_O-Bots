@@ -278,5 +278,6 @@ libraries = {
 }
 autoplay = "DEFAULT"
 
+[connection signal="pressed" from="CenterContainer/VBoxContainer/BattleStart" to="." method="_on_battle_start_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HostLobby" to="." method="_on_host_lobby_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/JoinLobby" to="." method="_on_join_lobby_pressed"]
