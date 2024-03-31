@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8d0vrsqampkv"]
+[gd_scene load_steps=3 format=3 uid="uid://b8d0vrsqampkv"]
 
 [ext_resource type="Script" path="res://menus/stage_select/stage_preview.gd" id="1_7ws3r"]
-[ext_resource type="Texture2D" uid="uid://cq8o4xuce4txf" path="res://pickup/pickup_sheet.png" id="1_25we1"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="1_c45yj"]
-[ext_resource type="PackedScene" uid="uid://cgfbed6xit0gq" path="res://menus/stage_select/pickup_ui_element.tscn" id="3_ctndy"]
 
 [node name="StageInfo" type="Control" node_paths=PackedStringArray("tileset_preview", "possible_spaws_grid", "spawn_percent_label")]
 layout_mode = 3
@@ -62,99 +60,6 @@ size_flags_vertical = 4
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 5
-
-[node name="UIPowerUpSprite" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer" instance=ExtResource("3_ctndy")]
-layout_mode = 2
-
-[node name="UIPowerUpSprite6" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite6"]
-texture = ExtResource("1_25we1")
-centered = false
-hframes = 8
-vframes = 7
-
-[node name="UIPowerUpSprite7" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite7"]
-texture = ExtResource("1_25we1")
-centered = false
-hframes = 8
-vframes = 7
-
-[node name="UIPowerUpSprite8" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite8"]
-texture = ExtResource("1_25we1")
-centered = false
-hframes = 8
-vframes = 7
-
-[node name="UIPowerUpSprite9" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite9"]
-texture = ExtResource("1_25we1")
-centered = false
-hframes = 8
-vframes = 7
-
-[node name="UIPowerUpSprite10" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite10"]
-texture = ExtResource("1_25we1")
-centered = false
-hframes = 8
-vframes = 7
-
-[node name="UIPowerUpSprite2" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite2"]
-texture = ExtResource("1_25we1")
-centered = false
-hframes = 8
-vframes = 7
-
-[node name="UIPowerUpSprite3" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite3"]
-texture = ExtResource("1_25we1")
-centered = false
-hframes = 8
-vframes = 7
-
-[node name="UIPowerUpSprite4" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite4"]
-texture = ExtResource("1_25we1")
-centered = false
-hframes = 8
-vframes = 7
-
-[node name="UIPowerUpSprite5" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer"]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer/GridContainer/UIPowerUpSprite5"]
-texture = ExtResource("1_25we1")
-centered = false
-hframes = 8
-vframes = 7
 
 [node name="Spacer" type="Control" parent="HBoxContainer/PickUp/PowerUps/VBoxContainer"]
 layout_mode = 2

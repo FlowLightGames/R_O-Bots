@@ -186,6 +186,9 @@ func place_bomb()->void:
 					tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
 				BombList.BOMBTYPE.HYDROGEN:
 					tmp_bomb=BombList.Hydrogen.instantiate() as HydrogenBomb
+				BombList.BOMBTYPE.MINE:
+					tmp_bomb=BombList.Mine.instantiate() as MineBomb
+					tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
 
 				_:
 					tmp_bomb=BombList.Default.instantiate()

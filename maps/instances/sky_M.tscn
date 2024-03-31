@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://p8sealut80t1"]
+[gd_scene load_steps=16 format=3 uid="uid://p8sealut80t1"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_4rd1t"]
 [ext_resource type="Texture2D" uid="uid://sg68vkk5s2nx" path="res://maps/tilesets/sky.png" id="2_3wj7d"]
+[ext_resource type="Resource" uid="uid://vifr20kyl8bm" path="res://maps/pickup_maps/instances/sky.tres" id="2_xcj5q"]
 [ext_resource type="PackedScene" uid="uid://cpvrlrs4jc7fd" path="res://maps/bricks/instances/sky_0.tscn" id="3_vohpf"]
 [ext_resource type="PackedScene" uid="uid://ctoeqriircelu" path="res://maps/statics/instances/sky_0.tscn" id="4_xa4cd"]
 [ext_resource type="Shader" path="res://maps/effects/cloud_scroll.gdshader" id="5_k3di6"]
@@ -169,7 +170,7 @@ shader_parameter/offset = Vector2(0, 0)
 
 [node name="MapBase" instance=ExtResource("1_4rd1t")]
 players_spawned = 8
-pickup_chance = 1.0
+possible_pickups = ExtResource("2_xcj5q")
 round_time = 60.0
 metadata/_edit_lock_ = true
 

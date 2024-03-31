@@ -50,7 +50,7 @@ weight = 50
 
 [sub_resource type="Resource" id="Resource_y5xbb"]
 script = ExtResource("1_2h0t4")
-what = 6
+what = 3
 weight = 50
 
 [resource]

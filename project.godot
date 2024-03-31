@@ -14,6 +14,7 @@ config/name="Robots"
 config/version="0.9"
 run/main_scene="res://menus/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=60
 config/icon="res://icon.png"
 
 [autoload]
@@ -48,8 +49,8 @@ window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/resizable=false
 window/size/borderless=true
-window/size/window_width_override=1920
-window/size/window_height_override=1080
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 

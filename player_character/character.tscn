@@ -17,7 +17,7 @@ radius = 6.0
 resource_local_to_scene = true
 shader = ExtResource("3_ykf1j")
 shader_parameter/Max_types = 8
-shader_parameter/Type = 7
+shader_parameter/Type = 6
 shader_parameter/palett = ExtResource("2_hxxlk")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hbvyt"]

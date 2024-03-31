@@ -36,22 +36,25 @@ shader_parameter/scale = 1.0
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/palette = SubResource("GradientTexture1D_3bhqh")
 
-[sub_resource type="Gradient" id="Gradient_3ap82"]
-offsets = PackedFloat32Array(0.111111, 0.840404)
+[sub_resource type="Gradient" id="Gradient_k5mav"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.127036, 0.449511, 0.661238, 0.775244)
+colors = PackedColorArray(0, 0, 0, 1, 0.340339, 0.340339, 0.340339, 1, 0.687215, 0.687215, 0.687215, 1, 1, 1, 1, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_5p7o8"]
-frequency = 0.009
+frequency = 0.0027
+fractal_type = 3
 fractal_lacunarity = 3.14
 fractal_gain = 2.5
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q8gae"]
 generate_mipmaps = false
 seamless = true
-color_ramp = SubResource("Gradient_3ap82")
+color_ramp = SubResource("Gradient_k5mav")
 noise = SubResource("FastNoiseLite_5p7o8")
 
 [sub_resource type="Animation" id="Animation_bnb4d"]
-resource_name = "DEFAULT"
+resource_name = "Default"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -154,12 +157,18 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jgn4v"]
 _data = {
-"DEFAULT": SubResource("Animation_bnb4d"),
+"Default": SubResource("Animation_bnb4d"),
 "RESET": SubResource("Animation_urqgt")
 }
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Node2D" node_paths=PackedStringArray("animation_player", "game_start", "battle_start", "host_lobby", "join_lobby", "options")]
 script = ExtResource("1_wv75o")
+animation_player = NodePath("AnimationPlayer")
+game_start = NodePath("CenterContainer/VBoxContainer/GameStart")
+battle_start = NodePath("CenterContainer/VBoxContainer/BattleStart")
+host_lobby = NodePath("CenterContainer/VBoxContainer/HostLobby")
+join_lobby = NodePath("CenterContainer/VBoxContainer/JoinLobby")
+options = NodePath("CenterContainer/VBoxContainer/Options")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 8
@@ -276,7 +285,6 @@ root_node = NodePath("../Sprite2D/Static")
 libraries = {
 "": SubResource("AnimationLibrary_jgn4v")
 }
-autoplay = "DEFAULT"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/BattleStart" to="." method="_on_battle_start_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HostLobby" to="." method="_on_host_lobby_pressed"]

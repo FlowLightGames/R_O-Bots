@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b22lw6j64bdgr"]
+[gd_scene load_steps=27 format=3 uid="uid://b22lw6j64bdgr"]
 
 [ext_resource type="Texture2D" uid="uid://cif2kt1cimkyq" path="res://maps/UI/win_bg.png" id="1_oixa2"]
 [ext_resource type="Script" path="res://maps/UI/CRT_Win_Screen.gd" id="1_yor1v"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bj7d41o8lmqdm" path="res://maps/UI/scanlines.png" id="11_3sgp5"]
 [ext_resource type="Texture2D" uid="uid://dybwn6afguk2n" path="res://maps/UI/win_crt.png" id="12_m88r4"]
 [ext_resource type="PackedScene" uid="uid://5w2ex05brd33" path="res://UI/transition.tscn" id="13_ey60s"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="14_ubxp5"]
 
 [sub_resource type="Gradient" id="Gradient_fe8j2"]
 colors = PackedColorArray(0, 0, 0, 1, 0.207843, 0.203922, 0.247059, 1)
@@ -113,10 +114,10 @@ tracks/0/path = NodePath("CRT_Frame/TextureRect:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(0.138696, 1),
+"times": PackedFloat32Array(0, 0.6, 0.8),
+"transitions": PackedFloat32Array(0.287174, 0.15932, 1),
 "update": 0,
-"values": [Vector2(2, 2), Vector2(1, 1)]
+"values": [Vector2(2, 2), Vector2(0.9, 0.9), Vector2(1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -368,30 +369,6 @@ offset_right = 52.0
 offset_bottom = -28.0
 color = Color(0, 0, 0, 1)
 
-[node name="NinePatchRect" type="Panel" parent="Scene/CRT_WinScreen/Control"]
-show_behind_parent = true
-layout_mode = 0
-offset_left = -66.0
-offset_top = -8.0
-offset_right = -20.0
-offset_bottom = 27.0
-
-[node name="NinePatchRect2" type="Panel" parent="Scene/CRT_WinScreen/Control"]
-show_behind_parent = true
-layout_mode = 0
-offset_left = -79.0
-offset_top = -34.0
-offset_right = -39.0
-offset_bottom = -3.0
-
-[node name="NinePatchRect3" type="Panel" parent="Scene/CRT_WinScreen/Control"]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 29.0
-offset_top = -33.0
-offset_right = 73.0
-offset_bottom = 3.0
-
 [node name="Winner" type="RichTextLabel" parent="Scene/CRT_WinScreen/Control"]
 layout_mode = 0
 offset_left = -45.0
@@ -401,35 +378,6 @@ offset_bottom = -27.0
 bbcode_enabled = true
 text = "[wave amp=16
  freq=2][rainbow freq=1 sat=1 val=1]WINNNNNNNNNNER[/rainbow][/wave]
-"
-scroll_active = false
-
-[node name="Insane" type="RichTextLabel" parent="Scene/CRT_WinScreen/Control"]
-layout_mode = 0
-offset_left = -88.0
-offset_top = -32.0
-offset_right = -8.0
-offset_bottom = 24.0
-bbcode_enabled = true
-text = "[tornado radius=4
-.0 freq=2.0 connected=0]
-      Best
-
-[/tornado][shake rate=20.0 level=8]
-         Insane
-[/shake]
-"
-scroll_active = false
-
-[node name="GOAT" type="RichTextLabel" parent="Scene/CRT_WinScreen/Control"]
-layout_mode = 0
-offset_left = 33.0
-offset_top = -23.0
-offset_right = 72.0
-offset_bottom = 13.0
-bbcode_enabled = true
-text = "[pulse freq=1.0 color=#ffffff00 ease=-2.0]THE 
-[/pulse]G.O.A.T
 "
 scroll_active = false
 
@@ -483,6 +431,7 @@ metadata/_edit_lock_ = true
 
 [node name="Scanlines" type="TextureRect" parent="CRT_Frame"]
 visible = false
+self_modulate = Color(1, 1, 1, 0.290196)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("11_3sgp5")
@@ -495,6 +444,15 @@ offset_bottom = 40.0
 pivot_offset = Vector2(279, 180)
 texture = ExtResource("12_m88r4")
 metadata/_edit_lock_ = true
+
+[node name="Button" type="Button" parent="CRT_Frame/TextureRect"]
+layout_mode = 0
+offset_left = 565.0
+offset_top = 293.0
+offset_right = 627.0
+offset_bottom = 314.0
+theme = ExtResource("14_ubxp5")
+text = "OK."
 
 [node name="Transition" parent="." instance=ExtResource("13_ey60s")]
 

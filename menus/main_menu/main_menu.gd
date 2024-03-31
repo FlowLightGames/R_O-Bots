@@ -1,11 +1,23 @@
 extends Node
 
 var disabled:bool=false
+@export var animation_player:AnimationPlayer
+
+#buttons
+@export var game_start:TextureButton
+@export var battle_start:TextureButton
+@export var host_lobby:TextureButton
+@export var join_lobby:TextureButton
+@export var options:TextureButton
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready()->void:
+	if !GlobalSteam.steam_init:
+		host_lobby.disabled=true
+		join_lobby.disabled=true
 	disabled=false
-
+	animation_player.play("Default")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta:float)->void:

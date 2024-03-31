@@ -224,8 +224,12 @@ func _on_ready_pressed()->void:
 		example_character_3.set_new_face_color(current_face_color)
 		
 		if current_face_custom:
-			example_character_2.set_new_face(FacesAutoload.custom_faces[current_face_base])
-			example_character_3.set_new_face(FacesAutoload.custom_faces[current_face_base])
+			if !FacesAutoload.custom_faces.is_empty():
+				example_character_2.set_new_face(FacesAutoload.custom_faces[current_face_base])
+				example_character_3.set_new_face(FacesAutoload.custom_faces[current_face_base])
+			else:
+				example_character_2.set_new_face(null)
+				example_character_3.set_new_face(null)
 		else:
 			example_character_2.set_new_face(FacesAutoload.preset_faces[current_face_base])
 			example_character_3.set_new_face(FacesAutoload.preset_faces[current_face_base])
