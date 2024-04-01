@@ -7,3 +7,5 @@
 
 layer -1: BG
 layer 2: countdown,windraw
+
+layer 10: Mouse Cursor

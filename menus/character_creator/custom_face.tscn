@@ -1,9 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://ckvahyw454yty"]
+[gd_scene load_steps=19 format=3 uid="uid://ckvahyw454yty"]
 
-[ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="1_2sclc"]
 [ext_resource type="Texture2D" uid="uid://cku07yuqo02it" path="res://menus/character_creator/focus_UI.png" id="1_83p8w"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="1_mn51c"]
 [ext_resource type="Script" path="res://menus/character_creator/FocusUI.gd" id="2_3otq7"]
-[ext_resource type="PackedScene" uid="uid://b1ilbhdx0c8p2" path="res://UI/background/background_scroll.tscn" id="2_bm1hc"]
 [ext_resource type="Script" path="res://menus/character_creator/custom_face_creator.gd" id="2_co753"]
 [ext_resource type="Texture2D" uid="uid://csq85bq71qs26" path="res://menus/character_creator/face_bg.png" id="2_uyadp"]
 [ext_resource type="Texture2D" uid="uid://cogay0i3t7w5s" path="res://menus/character_creator/color_button_normal.png" id="4_rx3cs"]
@@ -28,33 +27,29 @@ tile_size = Vector2i(5, 5)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g648x"]
 
-[node name="Control" type="Control" node_paths=PackedStringArray("example_character_0", "example_character_1", "body_color_txt", "body_color_txt_shdw", "body_txt", "body_txt_shdw", "face_color_txt", "face_color_txt_shdw")]
+[node name="FaceCustom" type="Control" node_paths=PackedStringArray("example_character_0", "example_character_1", "body_color_txt", "body_txt", "face_color_txt")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -381.0
+offset_bottom = -221.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource("1_2sclc")
+theme = ExtResource("1_mn51c")
 script = ExtResource("2_co753")
 example_character_0 = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ExampleCaracter/Visuals/Character")
 example_character_1 = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ExampleCaracter/Visuals/Character2")
 body_color_txt = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer/Label")
-body_color_txt_shdw = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer/Label/Shadow")
 body_txt = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer/Label")
-body_txt_shdw = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer/Label/Shadow")
 face_color_txt = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer/Label")
-face_color_txt_shdw = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer/Label/Shadow")
-
-[node name="Background" parent="." instance=ExtResource("2_bm1hc")]
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 2
-offset_left = 200.0
-offset_top = 118.0
-offset_right = 440.0
-offset_bottom = 242.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -142,17 +137,6 @@ layout_mode = 2
 text = "Mirrored
 "
 
-[node name="Shadow" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Label"]
-self_modulate = Color(0, 0, 0, 1)
-show_behind_parent = true
-layout_mode = 2
-offset_left = 1.0
-offset_top = -1.0
-offset_right = 48.0
-offset_bottom = 9.0
-text = "Mirrored
-"
-
 [node name="seperator" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
@@ -237,16 +221,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "BodyBase"
 
-[node name="Shadwon" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase/Label"]
-self_modulate = Color(0, 0, 0, 1)
-show_behind_parent = true
-layout_mode = 2
-offset_left = 1.0
-offset_top = -1.0
-offset_right = 2.0
-offset_bottom = 7.0
-text = "BodyBase"
-
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase"]
 layout_mode = 2
 alignment = 1
@@ -261,16 +235,6 @@ texture_focused = ExtResource("9_2e0cx")
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer"]
 layout_mode = 2
-text = "0"
-
-[node name="Shadow" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer/Label"]
-self_modulate = Color(0, 0, 0, 1)
-show_behind_parent = true
-layout_mode = 2
-offset_left = 1.0
-offset_top = -1.0
-offset_right = 8.0
-offset_bottom = 9.0
 text = "0"
 
 [node name="Inc" type="TextureButton" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer"]
@@ -290,16 +254,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "BodyClr"
 
-[node name="Shadwon" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor/Label"]
-self_modulate = Color(0, 0, 0, 1)
-show_behind_parent = true
-layout_mode = 2
-offset_left = 1.0
-offset_top = -1.0
-offset_right = 2.0
-offset_bottom = 7.0
-text = "BodyClr"
-
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor"]
 layout_mode = 2
 alignment = 1
@@ -314,16 +268,6 @@ texture_focused = ExtResource("9_2e0cx")
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer"]
 layout_mode = 2
-text = "0"
-
-[node name="Shadow" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer/Label"]
-self_modulate = Color(0, 0, 0, 1)
-show_behind_parent = true
-layout_mode = 2
-offset_left = 1.0
-offset_top = -1.0
-offset_right = 8.0
-offset_bottom = 9.0
 text = "0"
 
 [node name="Inc" type="TextureButton" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer"]
@@ -343,16 +287,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "FaceClr"
 
-[node name="Shadwon" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor/Label"]
-self_modulate = Color(0, 0, 0, 1)
-show_behind_parent = true
-layout_mode = 2
-offset_left = 1.0
-offset_top = -1.0
-offset_right = 2.0
-offset_bottom = 7.0
-text = "FaceClr"
-
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor"]
 layout_mode = 2
 alignment = 1
@@ -367,16 +301,6 @@ texture_focused = ExtResource("9_2e0cx")
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer"]
 layout_mode = 2
-text = "0"
-
-[node name="Shadow" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer/Label"]
-self_modulate = Color(0, 0, 0, 1)
-show_behind_parent = true
-layout_mode = 2
-offset_left = 1.0
-offset_top = -1.0
-offset_right = 8.0
-offset_bottom = 9.0
 text = "0"
 
 [node name="Inc" type="TextureButton" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer"]

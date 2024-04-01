@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://y72hxwg6wfjo"]
+
+[ext_resource type="Texture2D" uid="uid://d3advdi2ichhb" path="res://UI/cursor/cursor.png" id="1_fg8ki"]
+[ext_resource type="Script" path="res://UI/cursor/cursor.gd" id="2_i3lis"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fg8ki")
+centered = false
+script = ExtResource("2_i3lis")

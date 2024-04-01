@@ -1,0 +1,290 @@
+[gd_scene load_steps=8 format=3 uid="uid://c73jgxta38rfp"]
+
+[ext_resource type="Script" path="res://menus/options/options.gd" id="1_kfknl"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="2_jh0ha"]
+[ext_resource type="PackedScene" uid="uid://c5g77somkggcq" path="res://UI/buttons/dec.tscn" id="3_aymlg"]
+[ext_resource type="PackedScene" uid="uid://ckvahyw454yty" path="res://menus/character_creator/custom_face.tscn" id="3_gloqi"]
+[ext_resource type="PackedScene" uid="uid://b1ilbhdx0c8p2" path="res://UI/background/background_scroll.tscn" id="3_rdeqp"]
+[ext_resource type="PackedScene" uid="uid://qt42tjjxi7ge" path="res://UI/background/window_bg.tscn" id="4_b2kv2"]
+[ext_resource type="PackedScene" uid="uid://cbjorljnfyjlt" path="res://UI/buttons/inc.tscn" id="4_mhakd"]
+
+[node name="Options" type="Node2D"]
+script = ExtResource("1_kfknl")
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_jh0ha")
+
+[node name="Main" type="PanelContainer" parent="Control"]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 64.0
+offset_right = 246.0
+offset_bottom = 144.0
+metadata/_edit_group_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/Main"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Main/CenterContainer"]
+layout_mode = 2
+
+[node name="Audio" type="Button" parent="Control/Main/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+text = "Sound"
+
+[node name="Video" type="Button" parent="Control/Main/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+text = "Video"
+
+[node name="Customize" type="Button" parent="Control/Main/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+text = "Custom"
+
+[node name="Sound" type="PanelContainer" parent="Control"]
+layout_mode = 0
+offset_left = 278.0
+offset_top = 54.0
+offset_right = 394.0
+offset_bottom = 172.0
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Sound"]
+layout_mode = 2
+
+[node name="Master" type="Control" parent="Control/Sound/VBoxContainer"]
+custom_minimum_size = Vector2(100, 12)
+layout_mode = 2
+
+[node name="Master" type="Label" parent="Control/Sound/VBoxContainer/Master"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -5.0
+offset_right = 37.0
+offset_bottom = 5.0
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Master
+"
+
+[node name="Val" type="Label" parent="Control/Sound/VBoxContainer/Master"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -5.0
+offset_bottom = 5.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "50
+"
+
+[node name="MasterSlider" type="HSlider" parent="Control/Sound/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+value = 50.0
+
+[node name="Music" type="Control" parent="Control/Sound/VBoxContainer"]
+custom_minimum_size = Vector2(100, 12)
+layout_mode = 2
+
+[node name="Music" type="Label" parent="Control/Sound/VBoxContainer/Music"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -5.0
+offset_right = 100.0
+offset_bottom = 5.0
+grow_vertical = 2
+text = "Music"
+
+[node name="Val" type="Label" parent="Control/Sound/VBoxContainer/Music"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -5.0
+offset_bottom = 5.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "50
+"
+
+[node name="MusicSlider" type="HSlider" parent="Control/Sound/VBoxContainer"]
+layout_mode = 2
+value = 50.0
+
+[node name="SFX" type="Control" parent="Control/Sound/VBoxContainer"]
+custom_minimum_size = Vector2(100, 12)
+layout_mode = 2
+
+[node name="SFX" type="Label" parent="Control/Sound/VBoxContainer/SFX"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -5.0
+offset_right = 100.0
+offset_bottom = 5.0
+grow_vertical = 2
+text = "SFX
+"
+
+[node name="Val" type="Label" parent="Control/Sound/VBoxContainer/SFX"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -5.0
+offset_bottom = 5.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "50
+"
+
+[node name="SFXSLider" type="HSlider" parent="Control/Sound/VBoxContainer"]
+layout_mode = 2
+value = 50.0
+rounded = true
+
+[node name="Result" type="Control" parent="Control/Sound/VBoxContainer"]
+custom_minimum_size = Vector2(100, 18)
+layout_mode = 2
+
+[node name="Cancel" type="Button" parent="Control/Sound/VBoxContainer/Result"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -7.0
+offset_right = 41.0
+offset_bottom = 7.0
+grow_vertical = 2
+text = "Cancel"
+
+[node name="Save" type="Button" parent="Control/Sound/VBoxContainer/Result"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -7.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Save"
+
+[node name="Video" type="PanelContainer" parent="Control"]
+layout_mode = 0
+offset_left = 276.0
+offset_top = 54.0
+offset_right = 396.0
+offset_bottom = 155.0
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Video"]
+layout_mode = 2
+
+[node name="Resolution" type="Label" parent="Control/Video/VBoxContainer"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Video/VBoxContainer"]
+layout_mode = 2
+
+[node name="Dec" parent="Control/Video/VBoxContainer/HBoxContainer" instance=ExtResource("3_aymlg")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Video/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(62, 10)
+layout_mode = 2
+text = "640x360"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Inc" parent="Control/Video/VBoxContainer/HBoxContainer" instance=ExtResource("4_mhakd")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Video/VBoxContainer"]
+layout_mode = 2
+text = "CRT-filter"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Video/VBoxContainer"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="Control/Video/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Enabled"
+flat = true
+
+[node name="Result" type="Control" parent="Control/Video/VBoxContainer"]
+custom_minimum_size = Vector2(100, 18)
+layout_mode = 2
+
+[node name="Cancel" type="Button" parent="Control/Video/VBoxContainer/Result"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -7.0
+offset_right = 41.0
+offset_bottom = 7.0
+grow_vertical = 2
+text = "Cancel"
+
+[node name="Save" type="Button" parent="Control/Video/VBoxContainer/Result"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -7.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Save"
+
+[node name="FaceCustom" parent="Control" instance=ExtResource("3_gloqi")]
+layout_mode = 1
+offset_left = 162.0
+offset_top = 150.0
+offset_right = -219.0
+offset_bottom = -71.0
+
+[node name="Background" parent="." instance=ExtResource("3_rdeqp")]
+
+[node name="CanvasLayer" parent="." instance=ExtResource("4_b2kv2")]
+
+[connection signal="pressed" from="Control/Main/CenterContainer/VBoxContainer/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="Control/Main/CenterContainer/VBoxContainer/Video" to="." method="_on_video_pressed"]
+[connection signal="pressed" from="Control/Main/CenterContainer/VBoxContainer/Customize" to="." method="_on_customize_pressed"]

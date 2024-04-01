@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://qt42tjjxi7ge"]
+[gd_scene load_steps=12 format=3 uid="uid://qt42tjjxi7ge"]
 
 [ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="1_2hf1u"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="2_p1lxx"]
@@ -11,6 +11,15 @@
 [sub_resource type="LabelSettings" id="LabelSettings_e2amk"]
 font_size = 8
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_huu74"]
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_y34mi"]
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_xl4xi"]
+font_size = 8
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = -1
@@ -42,7 +51,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_p1lxx")
-color = Color(0.278431, 0.368627, 0.627451, 1)
+color = Color(0.192157, 0.282353, 0.54902, 1)
 metadata/_edit_lock_ = true
 
 [node name="Taskbar" type="NinePatchRect" parent="Window"]
@@ -127,6 +136,7 @@ stretch_mode = 2
 [node name="Bin" type="Label" parent="Window/Icons"]
 layout_mode = 2
 text = "Recycle Bin"
+label_settings = SubResource("LabelSettings_huu74")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -145,6 +155,7 @@ stretch_mode = 2
 layout_mode = 2
 text = "Computer
 "
+label_settings = SubResource("LabelSettings_y34mi")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -163,6 +174,7 @@ stretch_mode = 2
 layout_mode = 2
 text = "Docouments
 "
+label_settings = SubResource("LabelSettings_xl4xi")
 horizontal_alignment = 1
 vertical_alignment = 1
 

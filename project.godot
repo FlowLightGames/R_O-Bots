@@ -28,6 +28,7 @@ PlayerConfigs="*res://globals/player_configs.gd"
 PackageDeconstructor="*res://globals/package_deconstructor.gd"
 PackageConstructor="*res://globals/package_constructor.gd"
 SceneCollection="*res://globals/scene_collection.gd"
+Cursor="*res://UI/cursor/cursor.tscn"
 
 [debug]
 

@@ -1,10 +1,12 @@
-[gd_resource type="Theme" load_steps=37 format=3 uid="uid://bv4urn83158ba"]
+[gd_resource type="Theme" load_steps=45 format=3 uid="uid://bv4urn83158ba"]
 
 [ext_resource type="Texture2D" uid="uid://c7g3ei7p02dqg" path="res://UI/theme/button_dark.png" id="1_txp8d"]
 [ext_resource type="Texture2D" uid="uid://ddhumxm8mptyr" path="res://UI/theme/button_def.png" id="2_gbiao"]
 [ext_resource type="Texture2D" uid="uid://bug6ykgcbhj2n" path="res://UI/theme/check.png" id="3_j6vka"]
 [ext_resource type="Texture2D" uid="uid://c7eh3adanxevv" path="res://UI/theme/check_empty.png" id="4_4613t"]
 [ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="5_h5gyn"]
+[ext_resource type="Texture2D" uid="uid://rx2qci4j1emb" path="res://UI/theme/h_pin_default.png" id="5_tldm5"]
+[ext_resource type="Texture2D" uid="uid://dvwkx5bv70hh0" path="res://UI/theme/h_pin_dark.png" id="6_1y1a1"]
 [ext_resource type="Texture2D" uid="uid://dsm1qjs1370c0" path="res://UI/theme/decrement_dark.png" id="6_kdaj8"]
 [ext_resource type="Texture2D" uid="uid://duhixhegdm74q" path="res://UI/theme/decrement.png" id="7_wdh75"]
 [ext_resource type="Texture2D" uid="uid://bofykwqmygwwy" path="res://UI/theme/drop_mark.png" id="8_gd2re"]
@@ -15,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://dcaj6ckqayaoe" path="res://UI/theme/tab_disabled.png" id="13_q2bvr"]
 [ext_resource type="Texture2D" uid="uid://ba05rrq2glmg2" path="res://UI/theme/tab.png" id="14_f31kc"]
 [ext_resource type="FontFile" uid="uid://5uxlm7vh7fql" path="res://UI/font/GLORIOUS.ttf" id="15_gq4s1"]
+[ext_resource type="Texture2D" uid="uid://blub8i4tcbxly" path="res://UI/theme/scroll_bar_h_empty.png" id="17_vgnld"]
+[ext_resource type="Texture2D" uid="uid://e0xlf2dan7vs" path="res://UI/theme/scroll_bar_v.png" id="18_r7nvf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hq7it"]
 texture = ExtResource("1_txp8d")
@@ -49,6 +53,15 @@ texture_margin_top = 1.0
 texture_margin_right = 2.0
 texture_margin_bottom = 3.0
 region_rect = Rect2(0, 0, 16, 16)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ii3uy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bu7eu"]
+bg_color = Color(0.176471, 0.176471, 0.176471, 1)
+border_width_top = 1
+border_color = Color(0, 0, 0, 1)
+expand_margin_bottom = 2.0
+anti_aliasing = false
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dk1ev"]
 
@@ -118,6 +131,20 @@ texture_margin_top = 16.0
 texture_margin_right = 8.0
 texture_margin_bottom = 1.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xycot"]
+texture = ExtResource("18_r7nvf")
+texture_margin_left = 6.0
+texture_margin_top = 2.0
+texture_margin_right = 5.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rlc5v"]
+texture = ExtResource("4_4613t")
+texture_margin_left = 2.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 4.0
+
 [sub_resource type="FontVariation" id="FontVariation_a08gu"]
 base_font = ExtResource("15_gq4s1")
 spacing_space = 2
@@ -155,6 +182,14 @@ CheckBox/icons/radio_unchecked = ExtResource("4_4613t")
 CheckBox/icons/radio_unchecked_disabled = ExtResource("4_4613t")
 CheckBox/icons/unchecked = ExtResource("4_4613t")
 CheckBox/icons/unchecked_disabled = ExtResource("4_4613t")
+HSlider/constants/center_grabber = 1
+HSlider/constants/grabber_offset = 0
+HSlider/icons/grabber = ExtResource("5_tldm5")
+HSlider/icons/grabber_disabled = ExtResource("6_1y1a1")
+HSlider/icons/grabber_highlight = ExtResource("5_tldm5")
+HSlider/styles/grabber_area = SubResource("StyleBoxEmpty_ii3uy")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_bu7eu")
+HSlider/styles/slider = SubResource("StyleBoxFlat_bu7eu")
 ItemList/colors/font_color = Color(1, 1, 1, 1)
 ItemList/colors/font_outline_color = Color(0, 0, 0, 1)
 ItemList/colors/font_selected_color = Color(1, 1, 1, 1)
@@ -177,10 +212,11 @@ Label/styles/normal = SubResource("StyleBoxEmpty_kxm05")
 Panel/styles/panel = SubResource("StyleBoxTexture_3dra4")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_cj4kg")
 TabContainer/colors/drop_mark_color = Color(1, 1, 1, 1)
-TabContainer/colors/font_outline_color = Color(0, 0, 0, 1)
+TabContainer/colors/font_outline_color = Color(1, 1, 1, 0)
 TabContainer/colors/font_selected_color = Color(1, 1, 1, 1)
 TabContainer/colors/font_unselected_color = Color(1, 1, 1, 1)
 TabContainer/constants/outline_size = 4
+TabContainer/font_sizes/font_size = 8
 TabContainer/icons/decrement = ExtResource("6_kdaj8")
 TabContainer/icons/decrement_highlight = ExtResource("7_wdh75")
 TabContainer/icons/drop_mark = ExtResource("8_gd2re")
@@ -194,3 +230,14 @@ TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_g0fms")
 TabContainer/styles/tab_hovered = SubResource("StyleBoxTexture_7tf7s")
 TabContainer/styles/tab_selected = SubResource("StyleBoxTexture_je48i")
 TabContainer/styles/tab_unselected = SubResource("StyleBoxTexture_de4ks")
+VScrollBar/icons/decrement = ExtResource("17_vgnld")
+VScrollBar/icons/decrement_highlight = ExtResource("17_vgnld")
+VScrollBar/icons/decrement_pressed = ExtResource("17_vgnld")
+VScrollBar/icons/increment = ExtResource("17_vgnld")
+VScrollBar/icons/increment_highlight = ExtResource("17_vgnld")
+VScrollBar/icons/increment_pressed = ExtResource("17_vgnld")
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_xycot")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_xycot")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_xycot")
+VScrollBar/styles/scroll = SubResource("StyleBoxTexture_rlc5v")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxTexture_rlc5v")
