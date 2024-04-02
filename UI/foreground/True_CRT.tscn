@@ -27,6 +27,7 @@ shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
 [node name="TrueCRT" type="CanvasLayer"]
+layer = 11
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 scale = Vector2(3.135, 1)
@@ -39,3 +40,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(320, 180)
+mouse_filter = 2

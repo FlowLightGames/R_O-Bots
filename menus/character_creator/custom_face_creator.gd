@@ -1,5 +1,7 @@
 extends Control
 
+signal cancel
+
 @export
 var example_character_0:PlayerCharacter
 @export
@@ -80,3 +82,6 @@ func _on_inc_face_color_pressed()->void:
 	example_character_1.set_new_face_color(current_face_color)
 	face_color_txt.text=str(current_face_color)
 
+
+func _on_cancel_pressed()->void:
+	cancel.emit()

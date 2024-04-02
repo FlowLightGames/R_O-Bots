@@ -50,3 +50,10 @@ func _on_battle_start_pressed()->void:
 		disabled=true
 		SteamLobby.is_host=true
 		get_tree().change_scene_to_packed(SceneCollection.stage_select)
+
+
+func _on_options_pressed()->void:
+	if !disabled:
+		disabled=true
+		SteamLobby.is_host=true
+		get_tree().change_scene_to_packed(SceneCollection.options)

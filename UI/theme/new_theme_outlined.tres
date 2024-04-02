@@ -182,7 +182,6 @@ CheckBox/icons/radio_unchecked = ExtResource("4_4613t")
 CheckBox/icons/radio_unchecked_disabled = ExtResource("4_4613t")
 CheckBox/icons/unchecked = ExtResource("4_4613t")
 CheckBox/icons/unchecked_disabled = ExtResource("4_4613t")
-HSlider/constants/center_grabber = 1
 HSlider/constants/grabber_offset = 0
 HSlider/icons/grabber = ExtResource("5_tldm5")
 HSlider/icons/grabber_disabled = ExtResource("6_1y1a1")

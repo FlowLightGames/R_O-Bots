@@ -81,11 +81,15 @@ func _on_texture_button_white_pressed()->void:
 	button_gray.button_pressed=false
 	current_color=(button_white.get_node("ColorRect") as ColorRect).color
 
-
 func _on_texture_button_gray_pressed()->void:
 	button_white.button_pressed=false
 	current_color=(button_gray.get_node("ColorRect") as ColorRect).color
 
-
 func _on_check_box_pressed()->void:
+	set_example_face(build_texture(image))
+
+
+func _on_clear_pressed()->void:
+	image.fill(Color(0, 0, 0, 0))
+	canvas.texture=ImageTexture.create_from_image(image)
 	set_example_face(build_texture(image))
