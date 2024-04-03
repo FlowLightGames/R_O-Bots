@@ -13,6 +13,8 @@ config_version=5
 config/name="Robots"
 config/version="0.9"
 run/main_scene="res://menus/main_menu/main_menu.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Robots"
 config/features=PackedStringArray("4.2", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.png"
@@ -112,6 +114,7 @@ ui_right_mouse={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.145098, 0.137255, 0.223529, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
