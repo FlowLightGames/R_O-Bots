@@ -1,5 +1,5 @@
 extends Control
-class_name TimeUI
+class_name StageUI
 
 @export var timer:Timer
 

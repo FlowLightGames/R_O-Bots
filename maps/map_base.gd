@@ -10,7 +10,7 @@ var countdown_overlay:PackedScene=load("res://maps/UI/countdown.tscn")
 @export var spawnpoint_tilemap:TileMap
 @export var base_ground_tilemap:TileMap
 @export var camera:Camera2D
-@export var time_ui:TimeUI
+@export var time_ui:StageUI
 @export var player_nodes:Node2D
 @export var bomb_nodes:Node2D
 @export var enemy_nodes:Node2D

@@ -1,6 +1,5 @@
-[gd_scene load_steps=17 format=3 uid="uid://ca0ofo74p5we4"]
+[gd_scene load_steps=16 format=3 uid="uid://ca0ofo74p5we4"]
 
-[ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="1_a8h24"]
 [ext_resource type="Texture2D" uid="uid://c1c0hbjgbbtnl" path="res://menus/character_creator/menu_palette.png" id="2_0fqbj"]
 [ext_resource type="PackedScene" uid="uid://cd27yl8tl5qd6" path="res://player_character/character.tscn" id="2_6d3b8"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="5_4ciyq"]
@@ -44,7 +43,7 @@ material = SubResource("ShaderMaterial_m4yiq")
 custom_minimum_size = Vector2(150, 128)
 offset_right = 6.0
 offset_bottom = 11.0
-theme = ExtResource("1_a8h24")
+theme = ExtResource("5_4ciyq")
 script = ExtResource("5_h4pye")
 player_tag = NodePath("Control/Panel/Label")
 example_character_0 = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character")
@@ -74,7 +73,6 @@ metadata/_edit_lock_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_4ciyq")
 theme_override_constants/separation = 2
 
 [node name="Spacer" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer"]

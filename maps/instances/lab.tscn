@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bp787gu0pobre"]
+[gd_scene load_steps=17 format=3 uid="uid://co7hjdghmwk16"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_wk1v3"]
 [ext_resource type="Texture2D" uid="uid://dv51jsjvx0fls" path="res://maps/tilesets/lab.png" id="2_li7t2"]

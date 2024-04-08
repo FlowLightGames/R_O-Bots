@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3cxuurwvsfsc"]
+
+[ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="1_i4lv1"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="1_j2kjv"]
+[ext_resource type="Texture2D" uid="uid://00et7mgdndui" path="res://player_character/base_color_palette.png" id="2_bw5vr"]
+[ext_resource type="Texture2D" uid="uid://bmhd1trpiwd6q" path="res://maps/UI/player_icon.png" id="3_x1w6i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lna21"]
+resource_local_to_scene = true
+shader = ExtResource("1_i4lv1")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 7
+shader_parameter/palett = ExtResource("2_bw5vr")
+
+[node name="Control" type="Control"]
+custom_minimum_size = Vector2(37, 17)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 37.0
+offset_bottom = 17.0
+theme = ExtResource("1_j2kjv")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -10.0
+offset_right = 40.0
+offset_bottom = 20.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_lna21")
+position = Vector2(19, 9)
+texture = ExtResource("3_x1w6i")
+vframes = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = -1.0
+offset_right = 36.0
+offset_bottom = 9.0
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 30.0
+text = "Player1"
+text_overrun_behavior = 1

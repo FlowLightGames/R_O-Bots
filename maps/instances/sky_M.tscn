@@ -196,7 +196,6 @@ position = Vector2(184, 136)
 
 [node name="ColorRect" parent="Camera2D" index="1"]
 visible = false
-color = Color(0.352941, 0.803922, 0.945098, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="11"]
 

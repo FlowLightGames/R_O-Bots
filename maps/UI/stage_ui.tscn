@@ -1,0 +1,194 @@
+[gd_scene load_steps=8 format=3 uid="uid://bm6gdxca7km6t"]
+
+[ext_resource type="Script" path="res://maps/stage_ui.gd" id="1_yu4c8"]
+[ext_resource type="Texture2D" uid="uid://dgwo110vph8ds" path="res://UI/theme/status_frame.png" id="2_hhiil"]
+[ext_resource type="PackedScene" uid="uid://d3cxuurwvsfsc" path="res://maps/UI/player_icon.tscn" id="3_20ejk"]
+[ext_resource type="Texture2D" uid="uid://c7g3ei7p02dqg" path="res://UI/theme/button_dark.png" id="4_1qywn"]
+[ext_resource type="Texture2D" uid="uid://cowlymgw8e7wd" path="res://maps/UI/time_icon.png" id="4_xt57g"]
+[ext_resource type="Texture2D" uid="uid://bkhu2sb735emw" path="res://maps/UI/digits.png" id="5_5m3vk"]
+[ext_resource type="Texture2D" uid="uid://x1r8i80v7e6s" path="res://maps/UI/point_colon.png" id="6_juims"]
+
+[node name="UI" type="Control"]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yu4c8")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(640, 45)
+layout_mode = 2
+offset_right = 640.0
+offset_bottom = 53.0
+texture = ExtResource("2_hhiil")
+region_rect = Rect2(1, 0, 14, 16)
+patch_margin_left = 11
+patch_margin_top = 4
+patch_margin_right = 11
+patch_margin_bottom = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 16.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 192
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="GridContainer" type="HBoxContainer" parent="NinePatchRect/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="Control" parent="NinePatchRect/HBoxContainer/GridContainer" instance=ExtResource("3_20ejk")]
+layout_mode = 2
+
+[node name="Control2" parent="NinePatchRect/HBoxContainer/GridContainer" instance=ExtResource("3_20ejk")]
+layout_mode = 2
+
+[node name="Control3" parent="NinePatchRect/HBoxContainer/GridContainer" instance=ExtResource("3_20ejk")]
+layout_mode = 2
+
+[node name="Control4" parent="NinePatchRect/HBoxContainer/GridContainer" instance=ExtResource("3_20ejk")]
+layout_mode = 2
+
+[node name="GridContainer2" type="HBoxContainer" parent="NinePatchRect/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="Control" parent="NinePatchRect/HBoxContainer/GridContainer2" instance=ExtResource("3_20ejk")]
+layout_mode = 2
+
+[node name="Control2" parent="NinePatchRect/HBoxContainer/GridContainer2" instance=ExtResource("3_20ejk")]
+layout_mode = 2
+
+[node name="Control3" parent="NinePatchRect/HBoxContainer/GridContainer2" instance=ExtResource("3_20ejk")]
+layout_mode = 2
+
+[node name="Control4" parent="NinePatchRect/HBoxContainer/GridContainer2" instance=ExtResource("3_20ejk")]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="NinePatchRect"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 53.0
+
+[node name="RoundTime" type="NinePatchRect" parent="NinePatchRect/CenterContainer"]
+custom_minimum_size = Vector2(114, 25)
+layout_mode = 2
+texture = ExtResource("4_1qywn")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/CenterContainer/RoundTime"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -8.5
+offset_right = 52.0
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer"]
+layout_mode = 2
+
+[node name="Clock" type="TextureRect" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("4_xt57g")
+
+[node name="Digits" type="HBoxContainer" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Minutes_0" type="Control" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits"]
+custom_minimum_size = Vector2(8, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits/Minutes_0"]
+texture = ExtResource("5_5m3vk")
+centered = false
+hframes = 10
+
+[node name="Minutes_1" type="Control" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits"]
+custom_minimum_size = Vector2(8, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits/Minutes_1"]
+texture = ExtResource("5_5m3vk")
+centered = false
+hframes = 10
+
+[node name="Colon" type="Control" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits"]
+custom_minimum_size = Vector2(4, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits/Colon"]
+texture = ExtResource("6_juims")
+centered = false
+hframes = 2
+
+[node name="Seconds_0" type="Control" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits"]
+custom_minimum_size = Vector2(8, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits/Seconds_0"]
+texture = ExtResource("5_5m3vk")
+centered = false
+hframes = 10
+
+[node name="Seconds_1" type="Control" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits"]
+custom_minimum_size = Vector2(8, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits/Seconds_1"]
+texture = ExtResource("5_5m3vk")
+centered = false
+hframes = 10
+
+[node name="Point" type="Control" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits"]
+custom_minimum_size = Vector2(4, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits/Point"]
+texture = ExtResource("6_juims")
+centered = false
+hframes = 2
+frame = 1
+
+[node name="CentiSeconds_0" type="Control" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits"]
+custom_minimum_size = Vector2(8, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits/CentiSeconds_0"]
+texture = ExtResource("5_5m3vk")
+centered = false
+hframes = 10
+
+[node name="CentiSeconds_1" type="Control" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits"]
+custom_minimum_size = Vector2(8, 12)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits/CentiSeconds_1"]
+texture = ExtResource("5_5m3vk")
+centered = false
+hframes = 10

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2bnlyda5ph3q"]
+[gd_scene load_steps=24 format=3 uid="uid://d2bnlyda5ph3q"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_4wjk5"]
 [ext_resource type="Resource" uid="uid://bb2nqesc37rsm" path="res://maps/pickup_maps/instances/forest.tres" id="2_7181u"]
@@ -126,6 +126,85 @@ texture = ExtResource("7_hn70u")
 [sub_resource type="TileSet" id="TileSet_mqd02"]
 sources/0 = SubResource("TileSetAtlasSource_v47ui")
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_icr3q"]
+blend_mode = 3
+
+[sub_resource type="Gradient" id="Gradient_scoli"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.369439, 0.533849)
+colors = PackedColorArray(1, 1, 1, 1, 0.509804, 0.635294, 0.576471, 1, 0.333333, 0.4, 0.384314, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lj6cd"]
+noise_type = 4
+frequency = 0.0405
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rrqto"]
+generate_mipmaps = false
+seamless = true
+color_ramp = SubResource("Gradient_scoli")
+noise = SubResource("FastNoiseLite_lj6cd")
+
+[sub_resource type="Animation" id="Animation_24odf"]
+resource_name = "Default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -32), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture:noise:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(32, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ieuqu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture:noise:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vu0lv"]
+_data = {
+"Default": SubResource("Animation_24odf"),
+"RESET": SubResource("Animation_ieuqu")
+}
+
 [node name="MapBase" instance=ExtResource("1_4wjk5")]
 players_spawned = 8
 possible_pickups = ExtResource("2_7181u")
@@ -171,3 +250,19 @@ position = Vector2(0, -8)
 tile_set = SubResource("TileSet_mqd02")
 format = 2
 layer_0/tile_data = PackedInt32Array(1114133, 0, 0, 1114132, 0, 0, 1114131, 0, 0, 1114130, 0, 0, 1114129, 0, 0, 1114128, 0, 0, 1114127, 0, 0, 1114126, 0, 0, 1114125, 0, 0, 1114124, 0, 0, 1114123, 0, 0, 1114122, 0, 0, 1114121, 0, 0, 1114120, 0, 0, 1114119, 0, 0, 1114118, 0, 0, 1114117, 0, 0, 1114116, 0, 0, 1114115, 0, 0, 1114114, 0, 0, 1114113, 0, 0, 131092, 0, 0, 131091, 0, 0, 131090, 0, 0, 131089, 0, 0, 131088, 0, 0, 131087, 0, 0, 131086, 0, 0, 131085, 0, 0, 131084, 0, 0, 131083, 0, 0, 131082, 0, 0, 131081, 0, 0, 131080, 0, 0, 131079, 0, 0, 131078, 0, 0, 131077, 0, 0, 131076, 0, 0, 131075, 0, 0, 131074, 0, 0, 131093, 0, 0, 131073, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="12"]
+
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer" index="0"]
+material = SubResource("CanvasItemMaterial_icr3q")
+custom_minimum_size = Vector2(640, 640)
+offset_right = 640.0
+offset_bottom = 640.0
+texture = SubResource("NoiseTexture2D_rrqto")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ColorRect" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_vu0lv")
+}
+autoplay = "Default"
+speed_scale = 0.024
