@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bkhu2sb735emw" path="res://maps/UI/digits.png" id="5_5m3vk"]
 [ext_resource type="Texture2D" uid="uid://x1r8i80v7e6s" path="res://maps/UI/point_colon.png" id="6_juims"]
 
-[node name="UI" type="Control"]
+[node name="UI" type="Control" node_paths=PackedStringArray("minutes_0", "minutes_1", "seconds_0", "seconds_1", "centiseconds_0", "centiseconds_1", "player_icons")]
 custom_minimum_size = Vector2(640, 360)
 layout_mode = 3
 anchors_preset = 15
@@ -17,6 +17,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yu4c8")
+minutes_0 = NodePath("NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits/Minutes_0/Sprite2D")
+minutes_1 = NodePath("NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits/Minutes_1/Sprite2D")
+seconds_0 = NodePath("NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits/Seconds_0/Sprite2D")
+seconds_1 = NodePath("NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits/Seconds_1/Sprite2D")
+centiseconds_0 = NodePath("NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits/CentiSeconds_0/Sprite2D")
+centiseconds_1 = NodePath("NinePatchRect/CenterContainer/RoundTime/HBoxContainer/Digits/CentiSeconds_1/Sprite2D")
+player_icons = [NodePath("NinePatchRect/HBoxContainer/GridContainer/Control"), NodePath("NinePatchRect/HBoxContainer/GridContainer/Control2"), NodePath("NinePatchRect/HBoxContainer/GridContainer/Control3"), NodePath("NinePatchRect/HBoxContainer/GridContainer/Control4"), NodePath("NinePatchRect/HBoxContainer/GridContainer2/Control"), NodePath("NinePatchRect/HBoxContainer/GridContainer2/Control2"), NodePath("NinePatchRect/HBoxContainer/GridContainer2/Control3"), NodePath("NinePatchRect/HBoxContainer/GridContainer2/Control4")]
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(640, 45)

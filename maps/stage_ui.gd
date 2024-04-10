@@ -12,6 +12,8 @@ class_name StageUI
 @export var centiseconds_0:Sprite2D
 @export var centiseconds_1:Sprite2D
 
+@export var player_icons:Array[PlayerIcon]
+
 func initial_time(round_time:float)->void:
 	var minutes_left:int=int(round_time/60.0)
 	var seconds_left:int=int(round_time-float(minutes_left*60))

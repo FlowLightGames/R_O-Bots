@@ -20,17 +20,16 @@ texture = ExtResource("3_fj8dp")
 [sub_resource type="TileSet" id="TileSet_levuw"]
 sources/0 = SubResource("TileSetAtlasSource_6r470")
 
-[node name="MapBase" type="Node2D" node_paths=PackedStringArray("spawnpoint_tilemap", "base_ground_tilemap", "camera", "player_nodes", "bomb_nodes", "enemy_nodes", "round_timer")]
+[node name="MapBase" type="Node2D" node_paths=PackedStringArray("spawnpoint_tilemap", "base_ground_tilemap", "camera", "stage_ui", "player_nodes", "bomb_nodes", "enemy_nodes", "round_timer")]
 y_sort_enabled = true
 script = ExtResource("1_uvgx8")
-players_spawned = null
 spawnpoint_tilemap = NodePath("SpawnPoints")
 base_ground_tilemap = NodePath("BaseGround")
 camera = NodePath("Camera2D")
+stage_ui = NodePath("Camera2D/UI")
 player_nodes = NodePath("Players")
 bomb_nodes = NodePath("Bombs")
 enemy_nodes = NodePath("Enemys")
-round_time = null
 round_timer = NodePath("RoundTimer")
 
 [node name="BaseGround" type="TileMap" parent="."]
@@ -84,7 +83,8 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="UI" parent="Camera2D" instance=ExtResource("5_s8khv")]
+[node name="UI" parent="Camera2D" node_paths=PackedStringArray("timer") instance=ExtResource("5_s8khv")]
+timer = NodePath("../../RoundTimer")
 
 [node name="ColorRect" type="ColorRect" parent="Camera2D"]
 z_index = -1

@@ -336,10 +336,11 @@ material = SubResource("CanvasItemMaterial_ge5ff")
 texture = ExtResource("4_y1lb0")
 
 [node name="Pedastool" type="Sprite2D" parent="Scene/CRT_WinScreen"]
+visible = false
 texture = ExtResource("5_txo7g")
 
 [node name="Player" type="Node2D" parent="Scene/CRT_WinScreen"]
-position = Vector2(4, 0)
+position = Vector2(4, 14)
 
 [node name="shadow" type="Sprite2D" parent="Scene/CRT_WinScreen/Player"]
 show_behind_parent = true
