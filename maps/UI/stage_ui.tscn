@@ -61,12 +61,15 @@ layout_mode = 2
 
 [node name="Control2" parent="NinePatchRect/HBoxContainer/GridContainer" instance=ExtResource("3_20ejk")]
 layout_mode = 2
+number = 1
 
 [node name="Control3" parent="NinePatchRect/HBoxContainer/GridContainer" instance=ExtResource("3_20ejk")]
 layout_mode = 2
+number = 2
 
 [node name="Control4" parent="NinePatchRect/HBoxContainer/GridContainer" instance=ExtResource("3_20ejk")]
 layout_mode = 2
+number = 3
 
 [node name="GridContainer2" type="HBoxContainer" parent="NinePatchRect/HBoxContainer"]
 layout_mode = 2
@@ -76,15 +79,19 @@ metadata/_edit_group_ = true
 
 [node name="Control" parent="NinePatchRect/HBoxContainer/GridContainer2" instance=ExtResource("3_20ejk")]
 layout_mode = 2
+number = 4
 
 [node name="Control2" parent="NinePatchRect/HBoxContainer/GridContainer2" instance=ExtResource("3_20ejk")]
 layout_mode = 2
+number = 5
 
 [node name="Control3" parent="NinePatchRect/HBoxContainer/GridContainer2" instance=ExtResource("3_20ejk")]
 layout_mode = 2
+number = 6
 
 [node name="Control4" parent="NinePatchRect/HBoxContainer/GridContainer2" instance=ExtResource("3_20ejk")]
 layout_mode = 2
+number = 7
 
 [node name="CenterContainer" type="CenterContainer" parent="NinePatchRect"]
 layout_mode = 0

@@ -1,5 +1,9 @@
 extends Node
 
+#session settings
+#wont be saved
+var Online_Session:bool=false
+
 #Audio Settings
 var Master:int=100
 var Music:int=50
@@ -10,7 +14,7 @@ var Resolution:Vector2i=Vector2i(1920,1080)
 var CRT_Filer:bool=false
 
 #SAVE/LOAD
-var save_path:String="user://R_O-Bot_Config.save"
+var save_path:String="user://R_O-Bots_Config.save"
 
 func save_data()->void:
 	var save_dict:Dictionary={}

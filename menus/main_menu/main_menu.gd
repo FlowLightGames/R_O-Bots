@@ -26,6 +26,7 @@ func _process(delta:float)->void:
 
 func _on_host_lobby_pressed()->void:
 	if !disabled:
+		GameConfig.Online_Session=true
 		disabled=true
 		SteamLobby.create_lobby()
 		await Steam.lobby_created
@@ -40,6 +41,7 @@ func _on_host_lobby_pressed()->void:
 
 func _on_join_lobby_pressed()->void:
 	if !disabled:
+		GameConfig.Online_Session=true
 		disabled=true
 		SteamLobby.is_host=false
 		get_tree().change_scene_to_packed(SceneCollection.lobby_search)
@@ -47,6 +49,7 @@ func _on_join_lobby_pressed()->void:
 
 func _on_battle_start_pressed()->void:
 	if !disabled:
+		GameConfig.Online_Session=false
 		disabled=true
 		SteamLobby.is_host=true
 		get_tree().change_scene_to_packed(SceneCollection.stage_select)
@@ -54,6 +57,7 @@ func _on_battle_start_pressed()->void:
 
 func _on_options_pressed()->void:
 	if !disabled:
+		GameConfig.Online_Session=false
 		disabled=true
 		SteamLobby.is_host=true
 		get_tree().change_scene_to_packed(SceneCollection.options)

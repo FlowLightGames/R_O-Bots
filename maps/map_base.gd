@@ -90,12 +90,17 @@ func spawn_players(how_many:int)->void:
 			var character:PlayerCharacter=player_scene.instantiate() as PlayerCharacter
 			player_nodes.add_child(character)
 			character.Player_Number=n
+			if GameConfig.Online_Session:
+				character.Player_Name=Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n].steam_id)
+			else:
+				character.Player_Name="Player"+str(n)
 			character.config_init(PlayerConfigs.Player_Configs[n])
 			character.position=spawn*16+Vector2i(8,8)
 			character.map=self
 			character.disabled=true
 			player_ref_list.append(character)
 			possible_spawns.erase(spawn)
+		stage_ui.update_icons(player_ref_list)
 	spawnpoint_tilemap.visible=false
 
 func unlock_players()->void:

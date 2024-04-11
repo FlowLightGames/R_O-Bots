@@ -27,6 +27,7 @@ var Action_0:String ="0_Action_0"
 var Action_1:String ="0_Action_1"
 
 var Player_Number:int=0
+var Player_Name:String
 
 const BASE_MOVEMENT_SPEED:int=60
 

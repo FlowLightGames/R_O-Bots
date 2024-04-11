@@ -83,8 +83,9 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="UI" parent="Camera2D" node_paths=PackedStringArray("timer") instance=ExtResource("5_s8khv")]
+[node name="UI" parent="Camera2D" node_paths=PackedStringArray("timer", "map") instance=ExtResource("5_s8khv")]
 timer = NodePath("../../RoundTimer")
+map = NodePath("../..")
 
 [node name="ColorRect" type="ColorRect" parent="Camera2D"]
 z_index = -1
