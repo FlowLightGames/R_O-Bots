@@ -64,7 +64,7 @@ _data = {
 }
 
 [node name="Draw" type="CanvasLayer"]
-layer = 2
+layer = 4
 script = ExtResource("1_t5dx7")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]

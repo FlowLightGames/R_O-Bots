@@ -26,7 +26,7 @@ script = ExtResource("1_uvgx8")
 spawnpoint_tilemap = NodePath("SpawnPoints")
 base_ground_tilemap = NodePath("BaseGround")
 camera = NodePath("Camera2D")
-stage_ui = NodePath("Camera2D/UI")
+stage_ui = NodePath("Camera2D/CanvasLayer/UI")
 player_nodes = NodePath("Players")
 bomb_nodes = NodePath("Bombs")
 enemy_nodes = NodePath("Enemys")
@@ -83,23 +83,12 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="UI" parent="Camera2D" node_paths=PackedStringArray("timer", "map") instance=ExtResource("5_s8khv")]
-timer = NodePath("../../RoundTimer")
-map = NodePath("../..")
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+layer = 3
 
-[node name="ColorRect" type="ColorRect" parent="Camera2D"]
-z_index = -1
-custom_minimum_size = Vector2(640, 360)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -320.0
-offset_top = -180.0
-offset_right = 320.0
-offset_bottom = 180.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
+[node name="UI" parent="Camera2D/CanvasLayer" node_paths=PackedStringArray("timer", "map") instance=ExtResource("5_s8khv")]
+timer = NodePath("../../../RoundTimer")
+map = NodePath("../../..")
 
 [node name="RoundTimer" type="Timer" parent="."]
 one_shot = true

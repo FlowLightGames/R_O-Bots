@@ -306,7 +306,7 @@ animation_player = NodePath("AnimationPlayer")
 new_cam = NodePath("Scene/CRT_WinScreen/Camera2D")
 
 [node name="Scene" type="CanvasLayer" parent="."]
-layer = 3
+layer = 5
 visible = false
 follow_viewport_enabled = true
 
@@ -405,7 +405,7 @@ libraries = {
 autoplay = "Default"
 
 [node name="CRT_Frame" type="CanvasLayer" parent="."]
-layer = 3
+layer = 5
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="CRT_Frame"]
 rect = Rect2(29, 27, 500, 306)

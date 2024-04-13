@@ -190,4 +190,7 @@ layer_0/tile_data = PackedInt32Array(458755, 0, 131072, 327683, 0, 131072, 19661
 layer_0/tile_data = PackedInt32Array(131074, 0, 0, 917506, 0, 0, 917524, 0, 0, 131092, 0, 0, 393222, 0, 0, 655366, 0, 0, 655376, 0, 0, 393232, 0, 0)
 
 [node name="Camera2D" parent="." index="9"]
-position = Vector2(184, 136)
+position = Vector2(184, 120)
+
+[node name="ColorRect" parent="Camera2D" index="0"]
+visible = false

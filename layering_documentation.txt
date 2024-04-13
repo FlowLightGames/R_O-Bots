@@ -6,6 +6,10 @@
 5:other overlays
 
 layer -1: BG
-layer 2: countdown,windraw
+layer 1: Stage fx
+layer 2:
+layer 3: stageUI
+layer 4: countdown,match-draw,transition
+layer 5: win-crt
 
 layer 10: Mouse Cursor
