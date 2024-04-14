@@ -2,11 +2,10 @@ extends BombBase
 class_name BananaBomb
 
 var explosion:PackedScene=load("res://bombs/explosion_instances/banana_explosion.tscn")
-var placed_with_direction:Vector2i
 
 func explode()->void:
 	if !disabled:
-		position=Vector2((roundi(position.x)/16)*16+8,(roundi(position.y)/16)*16+8)
+		position=Vector2((roundi(position.x)/16)*16+(signi(position.x)*8),(roundi(position.y)/16)*16+(signi(position.y)*8))
 		var explosion_spawn:BananaExplosion=explosion.instantiate() as BananaExplosion
 		get_parent().call_deferred("add_child", explosion_spawn)
 		explosion_spawn.set_deferred("position",self.position)

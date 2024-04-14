@@ -20,11 +20,12 @@ texture = ExtResource("3_fj8dp")
 [sub_resource type="TileSet" id="TileSet_levuw"]
 sources/0 = SubResource("TileSetAtlasSource_6r470")
 
-[node name="MapBase" type="Node2D" node_paths=PackedStringArray("spawnpoint_tilemap", "base_ground_tilemap", "camera", "stage_ui", "player_nodes", "bomb_nodes", "enemy_nodes", "round_timer")]
+[node name="MapBase" type="Node2D" node_paths=PackedStringArray("spawnpoint_tilemap", "base_ground_tilemap", "statics_tilemap", "camera", "stage_ui", "player_nodes", "bomb_nodes", "enemy_nodes", "round_timer")]
 y_sort_enabled = true
 script = ExtResource("1_uvgx8")
 spawnpoint_tilemap = NodePath("SpawnPoints")
 base_ground_tilemap = NodePath("BaseGround")
+statics_tilemap = NodePath("Indestructable")
 camera = NodePath("Camera2D")
 stage_ui = NodePath("Camera2D/CanvasLayer/UI")
 player_nodes = NodePath("Players")

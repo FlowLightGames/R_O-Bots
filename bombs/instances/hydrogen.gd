@@ -48,7 +48,7 @@ func explode()->void:
 #explode blocked so other bombs cant trigger it
 #hence alternate function to destroy stuff after set animation
 func launch()->void:
-	position=Vector2((roundi(position.x)/16)*16+8,(roundi(position.y)/16)*16+8)
+	position=Vector2((roundi(position.x)/16)*16+(signi(position.x)*8),(roundi(position.y)/16)*16+(signi(position.y)*8))
 	visual_animator.play("Default")
 	
 

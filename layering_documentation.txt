@@ -1,7 +1,7 @@
 0:base tilemap(ground)
 1:shadows
 2:interactables
-3:explosion
+3:explosion,flying bomb
 4:tilemap over layer
 5:other overlays
 

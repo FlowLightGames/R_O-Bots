@@ -3,7 +3,7 @@ extends Resource
 class_name PickUpStats
 
 enum SPECIALSTATE{
-	NONE,GUN,KNIFE
+	NONE,GUN,KNIFE,ZEUS
 }
 
 

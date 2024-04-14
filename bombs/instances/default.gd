@@ -10,7 +10,7 @@ func _ready()->void:
 
 func explode()->void:
 	if !disabled:
-		position=Vector2((roundi(position.x)/16)*16+8,(roundi(position.y)/16)*16+8)
+		position=Vector2((roundi(position.x)/16)*16+(signi(position.x)*8),(roundi(position.y)/16)*16+(signi(position.y)*8))
 		solid_explosion_raycast.enable(true)
 		solid_explosion_raycast.resize_raycasts(placed_with_power)
 		var result:Dictionary=solid_explosion_raycast.get_raycast_targets_and_extents()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bi24h0fnhi5yq"]
+[gd_scene load_steps=5 format=3 uid="uid://bi24h0fnhi5yq"]
 
 [ext_resource type="Script" path="res://bombs/bomb_base.gd" id="1_4tgyd"]
 [ext_resource type="PackedScene" uid="uid://cu33g4fjkulvt" path="res://bombs/one_way_bomb_collision.tscn" id="1_c5i8r"]
@@ -9,24 +9,16 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uk6sx"]
 size = Vector2(14, 14)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ixu3p"]
-radius = 1.0
-
-[node name="AnimatableBody2D" type="AnimatableBody2D" node_paths=PackedStringArray("bomb_sprite", "occupancy_area", "explosion_timer", "one_way_bomb_collision", "bounce_check")]
+[node name="AnimatableBody2D" type="AnimatableBody2D" node_paths=PackedStringArray("bomb_sprite")]
 collision_layer = 4
 collision_mask = 31
 sync_to_physics = false
 script = ExtResource("1_4tgyd")
 bomb_sprite = NodePath("BombSprite")
-occupancy_area = NodePath("OccupancyArea")
-explosion_timer = NodePath("ExplosionTimer")
-one_way_bomb_collision = NodePath("OneWayBombCollision")
-bounce_check = NodePath("BounceCheck")
 
 [node name="OccupancyArea" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 0
-input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OccupancyArea"]
 shape = SubResource("RectangleShape2D_vhb3r")
@@ -41,13 +33,5 @@ autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_uk6sx")
-
-[node name="BounceCheck" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 31
-input_pickable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceCheck"]
-shape = SubResource("CircleShape2D_ixu3p")
 
 [connection signal="timeout" from="ExplosionTimer" to="." method="_on_explosion_timer_timeout"]

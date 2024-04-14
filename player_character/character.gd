@@ -109,16 +109,24 @@ func picked_up(what:PickUp.PICKUP)->void:
 			Pickup_Stats.KICKER=true
 		PickUp.PICKUP.DUNKER:
 			Pickup_Stats.DUNKER=true
-		#UNDECIDED YET
 		PickUp.PICKUP.BRICK_WALKER:
 			Pickup_Stats.BRICK_WALKER=true
-		PickUp.PICKUP.UNDECIDED_1:
+		#SPECIAL YET
+		PickUp.PICKUP.PILL:
+			pass
+		PickUp.PICKUP.POOP:
+			pass
+		PickUp.PICKUP.FIRE:
+			pass
+		PickUp.PICKUP.FART:
 			pass
 		#KIFE_GUN
 		PickUp.PICKUP.GUN:
 			Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.GUN
 		PickUp.PICKUP.KNIFE:
 			Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.KNIFE
+		PickUp.PICKUP.ZEUS:
+			Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.ZEUS
 		_:
 			pass
 	Pickup_Stats.clamp_stats()
@@ -165,7 +173,6 @@ func die()->void:
 
 func place_bomb()->void:
 	if Bomb_Ref_List.size()<(1+Pickup_Stats.BOMB_UP):
-		bomb_place_check.enabled=true
 		bomb_place_check.force_raycast_update()
 		if !(bomb_place_check.is_colliding()):
 			var tmp_bomb:BombBase
@@ -178,10 +185,10 @@ func place_bomb()->void:
 					tmp_bomb.placed_with_power=1+randi_range(0,5)
 				BombList.BOMBTYPE.BANANA:
 					tmp_bomb=BombList.Banana.instantiate() as BananaBomb
-					(tmp_bomb as BananaBomb).placed_with_direction=get_priority_4_way_direction(current_view_direction)
+					tmp_bomb.placed_with_direction=get_priority_4_way_direction(current_view_direction)
 				BombList.BOMBTYPE.E:
 					tmp_bomb=BombList.E.instantiate() as EBomb
-					(tmp_bomb as EBomb).placed_with_direction=get_priority_4_way_direction(current_view_direction)
+					tmp_bomb.placed_with_direction=get_priority_4_way_direction(current_view_direction)
 				BombList.BOMBTYPE.PLASMA:
 					tmp_bomb=BombList.Plasma.instantiate() as PlasmaBomb
 					tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
@@ -195,13 +202,14 @@ func place_bomb()->void:
 					tmp_bomb=BombList.Default.instantiate()
 			
 			tmp_bomb.affiliated_player=self
+			tmp_bomb.affiliated_map=map
 			
 			tmp_bomb.placed_with_color=Body_Color
 			
 			Bomb_Ref_List.append(tmp_bomb)
 			map.bomb_nodes.add_child(tmp_bomb)
 			tmp_bomb.position=(map.base_ground_tilemap.local_to_map(self.position)*16)+Vector2i(8,8)
-		bomb_place_check.enabled=false
+			tmp_bomb.throw(Vector2i(-1,0))
 
 func fire_gun()->void:
 	var view_direction_4_way:Vector2i=get_priority_4_way_direction(current_view_direction)
@@ -286,7 +294,7 @@ func _physics_process(_delta:float)->void:
 		KickerRayCast.rotation=Vector2(get_priority_4_way_direction(current_view_direction)).angle()-0.5*PI
 		var kicker_target:Object=KickerRayCast.get_collider()
 		if kicker_target&&kicker_target is BombBase:
-			print("HIT SOMETHING POGGERS")
+			#print("HIT SOMETHING POGGERS")
 			if (kicker_target as BombBase).kickable:
 				var direction:Vector2=Vector2((kicker_target as Node2D).global_position-KickerRayCast.get_collision_point())
 				#direction=direction.normalized()
@@ -296,7 +304,7 @@ func _physics_process(_delta:float)->void:
 					direction_i.x=roundi(signf(direction.x))
 				else:
 					direction_i.y=roundi(signf(direction.y))
-				print(direction_i)
+				#print(direction_i)
 				#(kicker_target as BombBase).kick(get_priority_4_way_direction(current_view_direction))
 				#print(direction_i)
 				(kicker_target as BombBase).kick(direction_i)
