@@ -49,8 +49,6 @@ func toggle_collisions()->void:
 
 func bounce(direction:Vector2i,length:int,amplitude:int,duration:float)->void:
 	var offset:Vector2=Vector2(0.0,-12.0) 
-	#make bomb over head of stuff
-	z_index=3
 	bomb_sprite.offset=offset
 	position=Vector2((roundi(position.x)/16)*16+(signi(position.x)*8),(roundi(position.y)/16)*16+(signi(position.y)*8))
 	var tween:Tween=create_tween()
@@ -78,7 +76,7 @@ func on_bounce_finished()->void:
 				pass
 			hit=true
 	if hit:
-		bounce(Vector2i(-1,0),16,16,0.4)
+		bounce(motion_vec,16,16,0.4)
 	else:
 		#make bomb normal height again
 		z_index=2
@@ -86,6 +84,7 @@ func on_bounce_finished()->void:
 		tween.tween_property(bomb_sprite,"offset",Vector2(0.0,0.0),0.05)
 		explosion_timer.start()
 		toggle_collisions()
+		motion_vec=Vector2i.ZERO
 		is_flying=false
 		disabled=false
 
@@ -97,11 +96,14 @@ func kick(direction:Vector2i)->void:
 
 func throw(direction:Vector2i)->void:
 	if !is_flying:
+		#make bomb over head of stuff
+		z_index=4
+		motion_vec=direction
 		explosion_timer.stop()
 		toggle_collisions()
 		is_flying=true
 		disabled=true
-		bounce(Vector2i(-1,0),32,16,0.6)
+		bounce(direction,32,16,0.6)
 
 func explode()->void:
 	if !disabled:

@@ -1183,7 +1183,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c8sd1"]
 size = Vector2(14, 14)
 
-[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("BodyAnimation", "FaceAnimation", "IFramesAnimation", "Face", "Body", "bomb_place_check", "KnifeGunSprite", "KnifeHurtBox", "GunRayCast", "KickerRayCast", "death_timer")]
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("BodyAnimation", "FaceAnimation", "IFramesAnimation", "Face", "Body", "bomb_place_check", "KnifeGunSprite", "KnifeHurtBox", "GunRayCast", "KickerRayCast", "DunkerRayCast", "death_timer")]
 z_index = 2
 collision_mask = 280
 motion_mode = 1
@@ -1198,6 +1198,7 @@ KnifeGunSprite = NodePath("Visuals/KinfeGun/Holding")
 KnifeHurtBox = NodePath("KifeDmgArea/CollisionShape2D")
 GunRayCast = NodePath("GunCast2D")
 KickerRayCast = NodePath("KickerCast2D")
+DunkerRayCast = NodePath("DunkerCast2D")
 death_timer = NodePath("DeathTimer")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
@@ -1271,6 +1272,12 @@ collision_mask = 31
 enabled = false
 target_position = Vector2(0, 10)
 collision_mask = 4
+
+[node name="DunkerCast2D" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(0, 1)
+collision_mask = 4
+hit_from_inside = true
 
 [node name="PlaceableBombCheck" type="RayCast2D" parent="."]
 enabled = false

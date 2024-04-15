@@ -233,6 +233,7 @@ grow_vertical = 2
 text = "Save"
 
 [node name="Video" type="PanelContainer" parent="Control" node_paths=PackedStringArray("res_label", "CRT_check")]
+visible = false
 layout_mode = 0
 offset_left = 276.0
 offset_top = 54.0
@@ -311,6 +312,7 @@ grow_vertical = 2
 text = "Save"
 
 [node name="FaceCustom" parent="Control" instance=ExtResource("3_gloqi")]
+visible = false
 layout_mode = 1
 offset_left = 140.0
 offset_top = 160.0
@@ -318,6 +320,7 @@ offset_right = -241.0
 offset_bottom = -61.0
 
 [node name="PanelContainer" type="PanelContainer" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = 410.0
 offset_top = 44.0

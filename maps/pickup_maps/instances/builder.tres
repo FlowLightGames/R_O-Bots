@@ -1,7 +1,12 @@
-[gd_resource type="Resource" script_class="PickUpMap" load_steps=12 format=3 uid="uid://bau8cj2gm4rd8"]
+[gd_resource type="Resource" script_class="PickUpMap" load_steps=11 format=3 uid="uid://bau8cj2gm4rd8"]
 
 [ext_resource type="Script" path="res://maps/pickup_option_struct.gd" id="1_crytv"]
 [ext_resource type="Script" path="res://maps/pickup_maps/pickup_map_base.gd" id="1_k7c3g"]
+
+[sub_resource type="Resource" id="Resource_cutfl"]
+script = ExtResource("1_crytv")
+what = 10
+weight = 10
 
 [sub_resource type="Resource" id="Resource_6slqq"]
 script = ExtResource("1_crytv")
@@ -18,37 +23,27 @@ script = ExtResource("1_crytv")
 what = 9
 weight = 10
 
-[sub_resource type="Resource" id="Resource_nirtx"]
-script = ExtResource("1_crytv")
-what = 6
-weight = 10
-
-[sub_resource type="Resource" id="Resource_8kxai"]
-script = ExtResource("1_crytv")
-what = 1
-weight = 2
-
 [sub_resource type="Resource" id="Resource_6byqe"]
 script = ExtResource("1_crytv")
 what = 0
 weight = 2
 
-[sub_resource type="Resource" id="Resource_g2nq8"]
+[sub_resource type="Resource" id="Resource_2tbr8"]
 script = ExtResource("1_crytv")
-what = 20
+what = 1
 weight = 2
 
-[sub_resource type="Resource" id="Resource_v0uw3"]
+[sub_resource type="Resource" id="Resource_blu4f"]
 script = ExtResource("1_crytv")
-what = 24
-weight = 10
+what = 4
+weight = 2
 
-[sub_resource type="Resource" id="Resource_kno06"]
+[sub_resource type="Resource" id="Resource_g2nq8"]
 script = ExtResource("1_crytv")
-what = 23
-weight = 10
+what = 21
+weight = 2
 
 [resource]
 script = ExtResource("1_k7c3g")
-map = Array[ExtResource("1_crytv")]([SubResource("Resource_6slqq"), SubResource("Resource_jinl4"), SubResource("Resource_kppsx"), SubResource("Resource_nirtx"), SubResource("Resource_8kxai"), SubResource("Resource_6byqe"), SubResource("Resource_g2nq8"), SubResource("Resource_v0uw3"), SubResource("Resource_kno06")])
-pickup_chance = 0.86
+map = Array[ExtResource("1_crytv")]([SubResource("Resource_cutfl"), SubResource("Resource_6slqq"), SubResource("Resource_jinl4"), SubResource("Resource_kppsx"), SubResource("Resource_6byqe"), SubResource("Resource_2tbr8"), SubResource("Resource_blu4f"), SubResource("Resource_g2nq8")])
+pickup_chance = 0.64

@@ -14,6 +14,7 @@ var gunshot:PackedScene=load("res://player_character/gun_shot.tscn")
 @export var KnifeHurtBox:CollisionShape2D
 @export var GunRayCast:RayCast2D
 @export var KickerRayCast:RayCast2D
+@export var DunkerRayCast:RayCast2D
 @export var death_timer:Timer
 
 var i_frames:bool=false
@@ -171,10 +172,10 @@ func die()->void:
 	BodyAnimation.play("death")
 	death_timer.start(0.6)
 
-func place_bomb()->void:
-	if Bomb_Ref_List.size()<(1+Pickup_Stats.BOMB_UP):
-		bomb_place_check.force_raycast_update()
-		if !(bomb_place_check.is_colliding()):
+func action_one()->void:
+	bomb_place_check.force_raycast_update()
+	if !(bomb_place_check.is_colliding()):
+		if Bomb_Ref_List.size()<(1+Pickup_Stats.BOMB_UP):
 			var tmp_bomb:BombBase
 			match Pickup_Stats.BOMB_TYPE:
 				BombList.BOMBTYPE.DEFAULT:
@@ -197,7 +198,6 @@ func place_bomb()->void:
 				BombList.BOMBTYPE.MINE:
 					tmp_bomb=BombList.Mine.instantiate() as MineBomb
 					tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
-
 				_:
 					tmp_bomb=BombList.Default.instantiate()
 			
@@ -209,7 +209,15 @@ func place_bomb()->void:
 			Bomb_Ref_List.append(tmp_bomb)
 			map.bomb_nodes.add_child(tmp_bomb)
 			tmp_bomb.position=(map.base_ground_tilemap.local_to_map(self.position)*16)+Vector2i(8,8)
-			tmp_bomb.throw(Vector2i(-1,0))
+	else:
+		if Pickup_Stats.DUNKER:
+			DunkerRayCast.force_raycast_update()
+			if (DunkerRayCast.is_colliding()):
+				print(DunkerRayCast.get_collider().name)
+				var throwable_bomb:BombBase=DunkerRayCast.get_collider() as BombBase
+				if throwable_bomb:
+					if throwable_bomb.throwable:
+						throwable_bomb.throw(current_view_direction)
 
 func fire_gun()->void:
 	var view_direction_4_way:Vector2i=get_priority_4_way_direction(current_view_direction)
@@ -315,7 +323,7 @@ func _physics_process(_delta:float)->void:
 		move_and_slide()
 		
 		if Input.is_action_just_pressed(Action_0):
-			place_bomb()
+			action_one()
 		if Input.is_action_just_pressed(Action_1):
 			match Pickup_Stats.SPECIAL_STATE:
 				PickUpStats.SPECIALSTATE.GUN:

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PickUpMap" load_steps=13 format=3 uid="uid://pom4x0sy2j4x"]
+[gd_resource type="Resource" script_class="PickUpMap" load_steps=10 format=3 uid="uid://pom4x0sy2j4x"]
 
 [ext_resource type="Script" path="res://maps/pickup_option_struct.gd" id="1_2h0t4"]
 [ext_resource type="Script" path="res://maps/pickup_maps/pickup_map_base.gd" id="1_fqk8s"]
@@ -20,40 +20,25 @@ weight = 10
 
 [sub_resource type="Resource" id="Resource_r8hmr"]
 script = ExtResource("1_2h0t4")
-what = 18
-weight = 2
+what = 10
+weight = 10
 
 [sub_resource type="Resource" id="Resource_um57k"]
 script = ExtResource("1_2h0t4")
 what = 19
-weight = 2
+weight = 10
 
-[sub_resource type="Resource" id="Resource_d85wk"]
+[sub_resource type="Resource" id="Resource_k7b6q"]
 script = ExtResource("1_2h0t4")
-what = 5
-weight = 1
+what = 20
+weight = 100
 
-[sub_resource type="Resource" id="Resource_ojtll"]
+[sub_resource type="Resource" id="Resource_g3ned"]
 script = ExtResource("1_2h0t4")
-what = 22
-weight = 4
-
-[sub_resource type="Resource" id="Resource_3uvob"]
-script = ExtResource("1_2h0t4")
-what = 23
-weight = 3
-
-[sub_resource type="Resource" id="Resource_mdnpw"]
-script = ExtResource("1_2h0t4")
-what = 1
-weight = 50
-
-[sub_resource type="Resource" id="Resource_y5xbb"]
-script = ExtResource("1_2h0t4")
-what = 3
-weight = 50
+what = 21
+weight = 10
 
 [resource]
 script = ExtResource("1_fqk8s")
-map = Array[ExtResource("1_2h0t4")]([SubResource("Resource_6kd45"), SubResource("Resource_pn1ns"), SubResource("Resource_wq8vg"), SubResource("Resource_r8hmr"), SubResource("Resource_um57k"), SubResource("Resource_d85wk"), SubResource("Resource_ojtll"), SubResource("Resource_3uvob"), SubResource("Resource_mdnpw"), SubResource("Resource_y5xbb")])
+map = Array[ExtResource("1_2h0t4")]([SubResource("Resource_6kd45"), SubResource("Resource_pn1ns"), SubResource("Resource_wq8vg"), SubResource("Resource_r8hmr"), SubResource("Resource_um57k"), SubResource("Resource_k7b6q"), SubResource("Resource_g3ned")])
 pickup_chance = 0.64
