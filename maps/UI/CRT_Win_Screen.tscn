@@ -1,10 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://b22lw6j64bdgr"]
+[gd_scene load_steps=26 format=3 uid="uid://b22lw6j64bdgr"]
 
 [ext_resource type="Texture2D" uid="uid://cif2kt1cimkyq" path="res://maps/UI/win_bg.png" id="1_oixa2"]
 [ext_resource type="Script" path="res://maps/UI/CRT_Win_Screen.gd" id="1_yor1v"]
 [ext_resource type="Shader" path="res://UI/background/BG_scroll.gdshader" id="3_5tni4"]
 [ext_resource type="Texture2D" uid="uid://bfy868wgqoe6l" path="res://maps/UI/winner_bg.png" id="4_rg4mo"]
 [ext_resource type="Texture2D" uid="uid://s4q5uerinfsi" path="res://maps/UI/win_bg_add.png" id="4_y1lb0"]
+[ext_resource type="Texture2D" uid="uid://cv1as0j0ekcha" path="res://UI/theme/style_panel_solid.png" id="5_aq3va"]
 [ext_resource type="Texture2D" uid="uid://ca0lorpv2dukl" path="res://maps/UI/win_peda.png" id="5_txo7g"]
 [ext_resource type="PackedScene" uid="uid://c84hpry15spwm" path="res://maps/effects/instances/confetti.tscn" id="7_hsofk"]
 [ext_resource type="Texture2D" uid="uid://b15nl8vm76x7e" path="res://player_character/shadow.png" id="7_pgdi6"]
@@ -30,76 +31,21 @@ shader_parameter/scale = 1.0
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/palette = SubResource("GradientTexture1D_86wue")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_17m4m"]
+resource_local_to_scene = true
+shader = ExtResource("3_5tni4")
+shader_parameter/motion = Vector2(16, 0)
+shader_parameter/scale = 1.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/palette = SubResource("GradientTexture1D_86wue")
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ge5ff"]
 blend_mode = 1
-
-[sub_resource type="Animation" id="Animation_or0e6"]
-resource_name = "Default"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Clap2:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Clap:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_dida2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Clap2:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Clap:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_x70ng"]
-_data = {
-"Default": SubResource("Animation_or0e6"),
-"RESET": SubResource("Animation_dida2")
-}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0egie"]
 resource_local_to_scene = true
 shader = ExtResource("9_7ahio")
 shader_parameter/vignette_intensity = 0.025
-shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 shader_parameter/screen_size = Vector2(640, 360)
 shader_parameter/texture_size = Vector2(500, 306)
 shader_parameter/texture_offset = Vector2(29, 27)
@@ -314,9 +260,10 @@ follow_viewport_enabled = true
 z_index = 5
 
 [node name="Camera2D" type="Camera2D" parent="Scene/CRT_WinScreen"]
+position = Vector2(0, -6)
 offset = Vector2(8, 0)
 enabled = false
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 
 [node name="BG" type="Sprite2D" parent="Scene/CRT_WinScreen"]
 scale = Vector2(2, 2)
@@ -324,12 +271,36 @@ texture = ExtResource("1_oixa2")
 
 [node name="TextureRect" type="TextureRect" parent="Scene/CRT_WinScreen"]
 material = SubResource("ShaderMaterial_uf5ph")
-offset_left = -128.0
-offset_top = -128.0
-offset_right = 128.0
-offset_bottom = 128.0
+offset_left = -155.0
+offset_top = -259.0
+offset_right = 127.0
+offset_bottom = -7.0
 texture = ExtResource("4_rg4mo")
 stretch_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Scene/CRT_WinScreen"]
+material = SubResource("ShaderMaterial_17m4m")
+offset_left = -155.0
+offset_top = 246.0
+offset_right = 127.0
+offset_bottom = 499.0
+scale = Vector2(1, -1)
+texture = ExtResource("4_rg4mo")
+stretch_mode = 1
+
+[node name="ColorRect" type="NinePatchRect" parent="Scene/CRT_WinScreen"]
+offset_left = -155.0
+offset_top = -7.0
+offset_right = 127.0
+offset_bottom = 115.0
+texture = ExtResource("5_aq3va")
+patch_margin_left = 8
+patch_margin_top = 11
+patch_margin_right = 7
+patch_margin_bottom = 4
+
+[node name="GPUParticles2D2" parent="Scene/CRT_WinScreen" instance=ExtResource("7_hsofk")]
+position = Vector2(0, -64)
 
 [node name="SpotLight" type="Sprite2D" parent="Scene/CRT_WinScreen"]
 material = SubResource("CanvasItemMaterial_ge5ff")
@@ -360,16 +331,6 @@ theme = ExtResource("8_qdd4o")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="ColorRect" type="ColorRect" parent="Scene/CRT_WinScreen/Control"]
-visible = false
-show_behind_parent = true
-layout_mode = 0
-offset_left = -46.0
-offset_top = -41.0
-offset_right = 52.0
-offset_bottom = -28.0
-color = Color(0, 0, 0, 1)
-
 [node name="Winner" type="RichTextLabel" parent="Scene/CRT_WinScreen/Control"]
 layout_mode = 0
 offset_left = -45.0
@@ -381,28 +342,6 @@ text = "[wave amp=16
  freq=2][rainbow freq=1 sat=1 val=1]WINNNNNNNNNNER[/rainbow][/wave]
 "
 scroll_active = false
-
-[node name="Clap" type="Label" parent="Scene/CRT_WinScreen/Control"]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 28.0
-offset_right = 64.0
-offset_bottom = 38.0
-text = "*Clap*"
-
-[node name="Clap2" type="Label" parent="Scene/CRT_WinScreen/Control"]
-layout_mode = 0
-offset_left = -68.0
-offset_top = 28.0
-offset_right = -28.0
-offset_bottom = 38.0
-text = "*Clap*"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Scene/CRT_WinScreen/Control"]
-libraries = {
-"": SubResource("AnimationLibrary_x70ng")
-}
-autoplay = "Default"
 
 [node name="CRT_Frame" type="CanvasLayer" parent="."]
 layer = 5

@@ -48,7 +48,7 @@ func toggle_collisions()->void:
 		toggled_on=true
 
 func bounce(direction:Vector2i,length:int,amplitude:int,duration:float)->void:
-	var offset:Vector2=Vector2(0.0,-12.0) 
+	var offset:Vector2=Vector2(0.0,-10.0) 
 	bomb_sprite.offset=offset
 	position=Vector2((roundi(position.x)/16)*16+(signi(position.x)*8),(roundi(position.y)/16)*16+(signi(position.y)*8))
 	var tween:Tween=create_tween()

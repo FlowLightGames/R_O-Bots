@@ -5,6 +5,7 @@ uniform int Type =0;
 uniform sampler2D palett;
 uniform float displacement_strength=0.0;
 uniform sampler2D displacement_map: source_color;
+uniform float opacity=1.0;
 uniform ivec2 displacement_map_size=ivec2(12,9);
 
 
@@ -15,7 +16,7 @@ void fragment(){
 	//vec4 fetched_texture=texelFetch(TEXTURE,coordinates+ivec2(displacement,0),0);
 	vec4 fetched_texture=texelFetch(TEXTURE,ivec2(UV*vec2(textureSize(TEXTURE,0)))+ivec2(displacement,0),0);
 	float tmp_color=(float(Type)*2.0+1.0)*(1.0/(float(Max_types)*2.0));
-	COLOR=vec4(texture(palett,vec2(tmp_color,fetched_texture.r)).rgb,fetched_texture.a);
+	COLOR=vec4(texture(palett,vec2(tmp_color,fetched_texture.r)).rgb,fetched_texture.a*opacity);
 	//COLOR=fetched_texture;
 	
 	//vec2 float_coordinates=UV*TEXTURE_PIXEL_SIZE*scale;

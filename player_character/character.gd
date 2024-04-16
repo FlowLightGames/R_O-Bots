@@ -217,7 +217,7 @@ func action_one()->void:
 				var throwable_bomb:BombBase=DunkerRayCast.get_collider() as BombBase
 				if throwable_bomb:
 					if throwable_bomb.throwable:
-						throwable_bomb.throw(current_view_direction)
+						throwable_bomb.throw(get_priority_4_way_direction(current_view_direction))
 
 func fire_gun()->void:
 	var view_direction_4_way:Vector2i=get_priority_4_way_direction(current_view_direction)
