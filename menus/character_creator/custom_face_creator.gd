@@ -10,7 +10,7 @@ var example_character_1:PlayerCharacter
 @export
 var max_number_body_color:int=8
 @export
-var max_number_body_base:int=5
+var max_number_body_base:int=6
 @export
 var max_number_face_color:int=8
 

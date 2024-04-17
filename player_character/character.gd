@@ -213,7 +213,6 @@ func action_one()->void:
 		if Pickup_Stats.DUNKER:
 			DunkerRayCast.force_raycast_update()
 			if (DunkerRayCast.is_colliding()):
-				print(DunkerRayCast.get_collider().name)
 				var throwable_bomb:BombBase=DunkerRayCast.get_collider() as BombBase
 				if throwable_bomb:
 					if throwable_bomb.throwable:

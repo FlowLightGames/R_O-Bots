@@ -23,7 +23,7 @@ class_name LobbyCharacterCustom
 var player_ready:bool=false
 
 var max_number_body_color:int=8
-var max_number_body_base:int=5
+var max_number_body_base:int=6
 var max_number_face_color:int=8
 var max_number_face_base:int=0
 
