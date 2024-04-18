@@ -102,7 +102,7 @@ func picked_up(what:PickUp.PICKUP)->void:
 		PickUp.PICKUP.FIRE_MAX:
 			Pickup_Stats.FIRE_UP+=10
 		PickUp.PICKUP.BOMB_MAX:
-			Pickup_Stats.BOMB_UP+=10
+			Pickup_Stats.BOMB_UP+=16
 		PickUp.PICKUP.SPEED_MAX:
 			Pickup_Stats.SPEED_UP+=10
 		#BALLS
@@ -114,13 +114,15 @@ func picked_up(what:PickUp.PICKUP)->void:
 			Pickup_Stats.BRICK_WALKER=true
 		#SPECIAL YET
 		PickUp.PICKUP.PILL:
-			pass
+			var possible_pickups:Array[int]=PickUp.PICKUP.values()
+			possible_pickups.erase(int(PickUp.PICKUP.PILL))
+			picked_up(possible_pickups.pick_random())
 		PickUp.PICKUP.POOP:
-			pass
+			Pickup_Stats.add_state(PickUpStats.STATE.POOP)
 		PickUp.PICKUP.FIRE:
-			pass
+			Pickup_Stats.add_state(PickUpStats.STATE.FIRE)
 		PickUp.PICKUP.FART:
-			pass
+			Pickup_Stats.add_state(PickUpStats.STATE.FART)
 		#KIFE_GUN
 		PickUp.PICKUP.GUN:
 			Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.GUN
@@ -181,6 +183,9 @@ func action_one()->void:
 				BombList.BOMBTYPE.DEFAULT:
 					tmp_bomb=BombList.Default.instantiate() as DefaultBomb
 					tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
+				BombList.BOMBTYPE.REMOTE:
+					tmp_bomb=BombList.Remote.instantiate() as RemoteBomb
+					tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
 				BombList.BOMBTYPE.DICE:
 					tmp_bomb=BombList.Dice.instantiate() as DiceBomb
 					tmp_bomb.placed_with_power=1+randi_range(0,5)
@@ -207,8 +212,9 @@ func action_one()->void:
 			tmp_bomb.placed_with_color=Body_Color
 			
 			Bomb_Ref_List.append(tmp_bomb)
-			map.bomb_nodes.add_child(tmp_bomb)
 			tmp_bomb.position=(map.base_ground_tilemap.local_to_map(self.position)*16)+Vector2i(8,8)
+			map.bomb_nodes.add_child(tmp_bomb)
+			
 	else:
 		if Pickup_Stats.DUNKER:
 			DunkerRayCast.force_raycast_update()
@@ -217,6 +223,18 @@ func action_one()->void:
 				if throwable_bomb:
 					if throwable_bomb.throwable:
 						throwable_bomb.throw(get_priority_4_way_direction(current_view_direction))
+
+func action_two()->void:
+	if Pickup_Stats.BOMB_TYPE==BombList.BOMBTYPE.REMOTE:
+		for n:BombBase in Bomb_Ref_List:
+			if n is RemoteBomb:
+				(n as RemoteBomb).explode()
+				break
+	match Pickup_Stats.SPECIAL_STATE:
+				PickUpStats.SPECIALSTATE.GUN:
+					fire_gun()
+				_:
+					pass
 
 func fire_gun()->void:
 	var view_direction_4_way:Vector2i=get_priority_4_way_direction(current_view_direction)
@@ -324,11 +342,7 @@ func _physics_process(_delta:float)->void:
 		if Input.is_action_just_pressed(Action_0):
 			action_one()
 		if Input.is_action_just_pressed(Action_1):
-			match Pickup_Stats.SPECIAL_STATE:
-				PickUpStats.SPECIALSTATE.GUN:
-					fire_gun()
-				_:
-					pass
+			action_two()
 
 func _ready()->void:
 	update_state()

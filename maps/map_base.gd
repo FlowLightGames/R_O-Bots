@@ -2,6 +2,7 @@ extends Node2D
 class_name MapBase
 var player_scene:PackedScene=load("res://player_character/character.tscn")
 var pickup_scene:PackedScene=load("res://pickup/pickup.tscn")
+var bomb_out_of_bound_scene:PackedScene=load("res://bombs/bomb_out_of_bound_anim.tscn")
 var draw_overlay:PackedScene=load("res://maps/UI/draw.tscn")
 var win_overlay:PackedScene=load("res://maps/UI/CRT_Win_Screen.tscn")
 var countdown_overlay:PackedScene=load("res://maps/UI/countdown.tscn")
@@ -123,3 +124,15 @@ func _on_round_timer_timeout()->void:
 func get_gamestate()->GameState:
 	var output:GameState=GameState.new()
 	return output
+
+
+func _on_out_of_bound_body_entered(body:Node2D)->void:
+	if body is BombBase:
+		#spawn glitch
+		var tmp:Sprite2D=bomb_out_of_bound_scene.instantiate() as Sprite2D
+		bomb_nodes.add_child(tmp)
+		tmp.global_position=body.global_position
+		if is_instance_valid((body as BombBase).affiliated_player):
+			(body as BombBase).affiliated_player.Bomb_Ref_List.erase(body)
+		body.queue_free()
+		#spawn glith animation

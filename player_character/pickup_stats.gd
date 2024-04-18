@@ -2,13 +2,15 @@ extends Resource
 
 class_name PickUpStats
 
+#CAN only have one
 enum SPECIALSTATE{
 	NONE,GUN,KNIFE,ZEUS
 }
 
-
-
-
+#Can have multiple
+enum STATE{
+	POOP,FIRE,FART
+}
 
 var BOMB_TYPE:BombList.BOMBTYPE=BombList.BOMBTYPE.DEFAULT
 var SPEED_UP:int=0
@@ -19,6 +21,11 @@ var KICKER:bool=false
 var DUNKER:bool=false
 var BRICK_WALKER:bool=false
 var SPECIAL_STATE:SPECIALSTATE=SPECIALSTATE.NONE
+#MAP
+#0: POOP
+#1: FIRE
+#2: FART
+var STATES:Array[int]=[0,0,0]
 
 func get_speed_scale()->float:
 	## max speed scale 6 min speedscale 0.5
@@ -77,8 +84,19 @@ func _init(speedup:int=0,bombup:int=0,fireup:int=0,lifeup:int=0,kicker:bool=fals
 	DUNKER=dunker
 	SPECIAL_STATE=specialstate
 
+func add_state(state:STATE)->void:
+	match state:
+		STATE.POOP:
+			STATES[0]+=1
+		STATE.FIRE:
+			STATES[1]+=1
+		STATE.FART:
+			STATES[2]+=1
+		_:
+			pass
+
 func clamp_stats()->void:
 	SPEED_UP=clampi(SPEED_UP,-10,10)
-	BOMB_UP=clampi(BOMB_UP,0,10)
+	BOMB_UP=clampi(BOMB_UP,0,16)
 	FIRE_UP=clampi(FIRE_UP,0,10)
 	LIFE_UP=clampi(LIFE_UP,-1,10)

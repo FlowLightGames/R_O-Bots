@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://p8sealut80t1"]
+[gd_scene load_steps=20 format=3 uid="uid://p8sealut80t1"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_4rd1t"]
 [ext_resource type="Texture2D" uid="uid://sg68vkk5s2nx" path="res://maps/tilesets/sky.png" id="2_3wj7d"]
@@ -156,6 +156,18 @@ scenes/1/scene = ExtResource("4_xa4cd")
 [sub_resource type="TileSet" id="TileSet_w3u7x"]
 sources/0 = SubResource("TileSetScenesCollectionSource_kgoi5")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tjne5"]
+size = Vector2(560, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rw67g"]
+size = Vector2(560, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cacin"]
+size = Vector2(136, 272)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0gq1k"]
+size = Vector2(136, 272)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yhih3"]
 shader = ExtResource("5_k3di6")
 shader_parameter/motion = Vector2(4, 4)
@@ -171,7 +183,7 @@ shader_parameter/offset = Vector2(0, 0)
 [node name="MapBase" instance=ExtResource("1_4rd1t")]
 players_spawned = 1
 possible_pickups = ExtResource("2_xcj5q")
-round_time = 60.0
+round_time = 300.0
 metadata/_edit_lock_ = true
 
 [node name="BaseGround" parent="." index="0"]
@@ -188,11 +200,30 @@ fill_percent = 0.57
 tile_set = SubResource("TileSet_w3u7x")
 layer_0/tile_data = PackedInt32Array(458755, 0, 65536, 327683, 0, 65536, 196613, 0, 65536, 196615, 0, 65536, 196617, 0, 65536, 196621, 0, 65536, 196619, 0, 65536, 327693, 0, 65536, 327691, 0, 65536, 327689, 0, 65536, 327687, 0, 65536, 327685, 0, 65536, 458757, 0, 65536, 458759, 0, 65536, 458761, 0, 65536, 458763, 0, 65536, 458765, 0, 65536, 589837, 0, 65536, 589835, 0, 65536, 589833, 0, 65536, 589831, 0, 65536, 589829, 0, 65536, 327695, 0, 65536, 458767, 0, 65536, 196611, 0, 65536, 196623, 0, 65536, 589827, 0, 65536, 589839, 0, 65536, 720899, 0, 65536, 851971, 0, 65536, 851973, 0, 65536, 720901, 0, 65536, 720903, 0, 65536, 851975, 0, 65536, 720905, 0, 65536, 851977, 0, 65536, 851979, 0, 65536, 720907, 0, 65536, 720909, 0, 65536, 851981, 0, 65536, 851983, 0, 65536, 720911, 0, 65536, 851985, 0, 65536, 589841, 0, 65536, 720913, 0, 65536, 458769, 0, 65536, 327697, 0, 65536, 196625, 0, 65536, 196627, 0, 65536, 327699, 0, 65536, 458771, 0, 65536, 589843, 0, 65536, 720915, 0, 65536, 851987, 0, 65536)
 
-[node name="SpawnPoints" parent="." index="4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBound" index="0"]
+position = Vector2(184, -44)
+shape = SubResource("RectangleShape2D_tjne5")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="OutOfBound" index="1"]
+position = Vector2(184, 316)
+shape = SubResource("RectangleShape2D_rw67g")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="OutOfBound" index="2"]
+position = Vector2(-68, 136)
+shape = SubResource("RectangleShape2D_cacin")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="OutOfBound" index="3"]
+position = Vector2(436, 136)
+shape = SubResource("RectangleShape2D_0gq1k")
+
+[node name="SpawnPoints" parent="." index="5"]
 layer_0/tile_data = PackedInt32Array(131074, 0, 0, 917506, 0, 0, 917524, 0, 0, 131092, 0, 0, 393222, 0, 0, 655366, 0, 0, 655376, 0, 0, 393232, 0, 0)
 
-[node name="Camera2D" parent="." index="9"]
+[node name="Camera2D" parent="." index="10"]
 position = Vector2(184, 120)
+
+[node name="UI" parent="Camera2D/CanvasLayer" index="0"]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="11"]
 
@@ -205,6 +236,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_vwopo")
 stretch_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." index="12"]
 layer = -1
@@ -216,6 +248,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.839216, 0.976471, 1)
+metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer2" index="1"]
 material = SubResource("ShaderMaterial_bxo6c")
@@ -226,3 +259,4 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("8_m1ir1")
 stretch_mode = 1
+metadata/_edit_lock_ = true

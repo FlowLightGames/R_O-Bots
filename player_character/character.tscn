@@ -1239,7 +1239,7 @@ material = SubResource("ShaderMaterial_lna21")
 texture = ExtResource("1_gp3n5")
 vframes = 10
 region_enabled = true
-region_rect = Rect2(54, 0, 18, 340)
+region_rect = Rect2(0, 0, 18, 340)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 

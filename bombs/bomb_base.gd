@@ -106,9 +106,8 @@ func throw(direction:Vector2i)->void:
 		bounce(direction,32,16,0.6)
 
 func explode()->void:
-	if !disabled:
-		disabled=true
-		placed_with_power=max(placed_with_power,1)
+	#meant to be virtual
+	pass
 
 func _on_explosion_timer_timeout()->void:
 	explode()
