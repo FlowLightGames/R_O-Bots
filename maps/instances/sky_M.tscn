@@ -222,9 +222,6 @@ layer_0/tile_data = PackedInt32Array(131074, 0, 0, 917506, 0, 0, 917524, 0, 0, 1
 [node name="Camera2D" parent="." index="10"]
 position = Vector2(184, 120)
 
-[node name="UI" parent="Camera2D/CanvasLayer" index="0"]
-visible = false
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="11"]
 
 [node name="TextureRect2" type="TextureRect" parent="CanvasLayer" index="0"]

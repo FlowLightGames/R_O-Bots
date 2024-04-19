@@ -3,6 +3,7 @@ extends CharacterBody2D
 class_name PlayerCharacter
 
 var gunshot:PackedScene=load("res://player_character/gun_shot.tscn")
+var zeus_lightning:PackedScene=load("res://player_character/zeus_lightning.tscn")
 
 @export var BodyAnimation:AnimationPlayer
 @export var FaceAnimation:AnimationPlayer
@@ -11,6 +12,7 @@ var gunshot:PackedScene=load("res://player_character/gun_shot.tscn")
 @export var Body:Sprite2D
 @export var bomb_place_check:RayCast2D
 @export var KnifeGunSprite:Sprite2D
+@export var ZeusReticle:Node2D
 @export var KnifeHurtBox:CollisionShape2D
 @export var GunRayCast:RayCast2D
 @export var KickerRayCast:RayCast2D
@@ -139,12 +141,21 @@ func update_state()->void:
 	if Pickup_Stats.LIFE_UP>=0:
 		match Pickup_Stats.SPECIAL_STATE:
 			PickUpStats.SPECIALSTATE.KNIFE:
+				ZeusReticle.visible=false
 				KnifeGunSprite.frame=1
 				KnifeHurtBox.set_deferred("disabled",false)
 			PickUpStats.SPECIALSTATE.GUN:
+				ZeusReticle.visible=false
 				KnifeGunSprite.frame=2
 				KnifeHurtBox.set_deferred("disabled",true)
+			PickUpStats.SPECIALSTATE.ZEUS:
+				ZeusReticle.position=position
+				ZeusReticle.visible=true
+				KnifeGunSprite.frame=0
+				KnifeHurtBox.set_deferred("disabled",true)
 			_:
+				ZeusReticle.position=position
+				ZeusReticle.visible=false
 				KnifeGunSprite.frame=0
 				KnifeHurtBox.set_deferred("disabled",true)
 		if Pickup_Stats.BRICK_WALKER:
@@ -236,14 +247,18 @@ func action_two()->void:
 				_:
 					pass
 
+func fire_lightning()->void:
+	var tmp:ZeusLightning=zeus_lightning.instantiate() as ZeusLightning
+	tmp.global_position=ZeusReticle.global_position
+	tmp.set_color(Body_Color)
+	get_parent().add_child(tmp)
+
 func fire_gun()->void:
 	var view_direction_4_way:Vector2i=get_priority_4_way_direction(current_view_direction)
 	Pickup_Stats.SPECIAL_STATE=PickUpStats.SPECIALSTATE.NONE
 	GunRayCast.target_position=view_direction_4_way*1000
-	GunRayCast.enabled=true
 	GunRayCast.force_raycast_update()
 	var hit_target:Object=GunRayCast.get_collider()
-	GunRayCast.enabled=false
 	if hit_target:
 		
 		var target_hit_pos:Vector2=GunRayCast.get_collision_point()
@@ -287,62 +302,77 @@ func get_player_state()->PlayerState:
 
 func _physics_process(_delta:float)->void:
 	if(!disabled):
-		var move_vec:Vector2i=Vector2i.ZERO
-		move_vec.x+=-int(Input.is_action_pressed(Action_LEFT))+int(Input.is_action_pressed(Action_RIGHT))
-		move_vec.y+=-int(Input.is_action_pressed(Action_UP))+int(Input.is_action_pressed(Action_DOWN))
-		
-		var animation_string:String=""
-		
-		if move_vec!=Vector2i.ZERO:
-			current_view_direction=move_vec
-			animation_string+="run_"
-		else:
-			animation_string+="idle_"
-		
-		match current_view_direction.y:
-			1:
-				front_back="front_"
-			-1:
-				front_back="back_"
-			_:
-				if current_view_direction.x!=0:
-					front_back="front_"
-		
-		match current_view_direction.x:
-			1:
-				left_right="right"
-			-1:
-				left_right="left"
-			_:
-				pass
-		
-		KickerRayCast.rotation=Vector2(get_priority_4_way_direction(current_view_direction)).angle()-0.5*PI
-		var kicker_target:Object=KickerRayCast.get_collider()
-		if kicker_target&&kicker_target is BombBase:
-			#print("HIT SOMETHING POGGERS")
-			if (kicker_target as BombBase).kickable:
-				var direction:Vector2=Vector2((kicker_target as Node2D).global_position-KickerRayCast.get_collision_point())
-				#direction=direction.normalized()
+		if Pickup_Stats.SPECIAL_STATE==PickUpStats.SPECIALSTATE.ZEUS:
+			BodyAnimation.play("zeus")
+			var move_vec:Vector2i=Vector2i.ZERO
+			move_vec.x+=-int(Input.is_action_pressed(Action_LEFT))+int(Input.is_action_pressed(Action_RIGHT))
+			move_vec.y+=-int(Input.is_action_pressed(Action_UP))+int(Input.is_action_pressed(Action_DOWN))
+			ZeusReticle.position=ZeusReticle.position+_delta*move_vec*60
+			
+			if Input.is_action_just_pressed(Action_1):
+				fire_lightning()
 				
-				var direction_i:Vector2i=Vector2i.ZERO
-				if abs(direction.x)>=abs(direction.y):
-					direction_i.x=roundi(signf(direction.x))
-				else:
-					direction_i.y=roundi(signf(direction.y))
-				#print(direction_i)
-				#(kicker_target as BombBase).kick(get_priority_4_way_direction(current_view_direction))
-				#print(direction_i)
-				(kicker_target as BombBase).kick(direction_i)
-		
-		BodyAnimation.play(animation_string+front_back+left_right)
-		var normalized_move_vec:Vector2=Vector2(move_vec).normalized()
-		velocity=normalized_move_vec*BASE_MOVEMENT_SPEED*(Pickup_Stats.get_speed_scale())
-		move_and_slide()
-		
-		if Input.is_action_just_pressed(Action_0):
-			action_one()
-		if Input.is_action_just_pressed(Action_1):
-			action_two()
+				Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.NONE
+				
+				ZeusReticle.visible=false
+				ZeusReticle.position=Vector2.ZERO
+		else:
+			var move_vec:Vector2i=Vector2i.ZERO
+			move_vec.x+=-int(Input.is_action_pressed(Action_LEFT))+int(Input.is_action_pressed(Action_RIGHT))
+			move_vec.y+=-int(Input.is_action_pressed(Action_UP))+int(Input.is_action_pressed(Action_DOWN))
+			
+			var animation_string:String=""
+			
+			if move_vec!=Vector2i.ZERO:
+				current_view_direction=move_vec
+				animation_string+="run_"
+			else:
+				animation_string+="idle_"
+			
+			match current_view_direction.y:
+				1:
+					front_back="front_"
+				-1:
+					front_back="back_"
+				_:
+					if current_view_direction.x!=0:
+						front_back="front_"
+			
+			match current_view_direction.x:
+				1:
+					left_right="right"
+				-1:
+					left_right="left"
+				_:
+					pass
+			
+			KickerRayCast.rotation=Vector2(get_priority_4_way_direction(current_view_direction)).angle()-0.5*PI
+			var kicker_target:Object=KickerRayCast.get_collider()
+			if kicker_target&&kicker_target is BombBase:
+				#print("HIT SOMETHING POGGERS")
+				if (kicker_target as BombBase).kickable:
+					var direction:Vector2=Vector2((kicker_target as Node2D).global_position-KickerRayCast.get_collision_point())
+					#direction=direction.normalized()
+					
+					var direction_i:Vector2i=Vector2i.ZERO
+					if abs(direction.x)>=abs(direction.y):
+						direction_i.x=roundi(signf(direction.x))
+					else:
+						direction_i.y=roundi(signf(direction.y))
+					#print(direction_i)
+					#(kicker_target as BombBase).kick(get_priority_4_way_direction(current_view_direction))
+					#print(direction_i)
+					(kicker_target as BombBase).kick(direction_i)
+			
+			BodyAnimation.play(animation_string+front_back+left_right)
+			var normalized_move_vec:Vector2=Vector2(move_vec).normalized()
+			velocity=normalized_move_vec*BASE_MOVEMENT_SPEED*(Pickup_Stats.get_speed_scale())
+			move_and_slide()
+			
+			if Input.is_action_just_pressed(Action_0):
+				action_one()
+			if Input.is_action_just_pressed(Action_1):
+				action_two()
 
 func _ready()->void:
 	update_state()

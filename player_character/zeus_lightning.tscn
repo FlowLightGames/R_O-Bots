@@ -1,0 +1,115 @@
+[gd_scene load_steps=9 format=3 uid="uid://cu2dhivwmy5gq"]
+
+[ext_resource type="Texture2D" uid="uid://b0ppaqlessix1" path="res://player_character/zeus_lightning.png" id="1_2b0eq"]
+[ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="1_lp8sw"]
+[ext_resource type="Script" path="res://player_character/zeus_lightning.gd" id="1_mqbxl"]
+[ext_resource type="Texture2D" uid="uid://00et7mgdndui" path="res://player_character/base_color_palette.png" id="2_2fuxf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lna21"]
+resource_local_to_scene = true
+shader = ExtResource("1_lp8sw")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 6
+shader_parameter/palett = ExtResource("2_2fuxf")
+
+[sub_resource type="Animation" id="Animation_ulnsu"]
+resource_name = "Default"
+length = 0.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lightning:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lightning:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_0bvev"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lightning:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lightning:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fnkn5"]
+_data = {
+"Default": SubResource("Animation_ulnsu"),
+"RESET": SubResource("Animation_0bvev")
+}
+
+[node name="ZeusLightning" type="Node2D" node_paths=PackedStringArray("dmg_raycast", "lightning_sprite")]
+z_index = 2
+script = ExtResource("1_mqbxl")
+dmg_raycast = NodePath("DamageRayCast")
+lightning_sprite = NodePath("Lightning")
+
+[node name="Lightning" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_lna21")
+position = Vector2(-16, -352)
+texture = ExtResource("1_2b0eq")
+centered = false
+hframes = 3
+
+[node name="DamageRayCast" type="RayCast2D" parent="."]
+position = Vector2(0, -4)
+enabled = false
+target_position = Vector2(0, 8)
+collision_mask = 15
+hit_from_inside = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fnkn5")
+}
+autoplay = "Default"

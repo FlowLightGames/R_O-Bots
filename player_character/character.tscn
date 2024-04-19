@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cd27yl8tl5qd6"]
+[gd_scene load_steps=37 format=3 uid="uid://cd27yl8tl5qd6"]
 
 [ext_resource type="Script" path="res://player_character/character.gd" id="1_arre1"]
 [ext_resource type="Texture2D" uid="uid://dtjkf0bsqsk5m" path="res://player_character/base_character_sprite.png" id="1_gp3n5"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bw335sbq0nqxa" path="res://player_character/face_base_color_palette.png" id="5_er4tu"]
 [ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="6_hlhnq"]
 [ext_resource type="Texture2D" uid="uid://bwy8smpq2xf1" path="res://player_character/knife_gun.png" id="9_i1ueb"]
+[ext_resource type="Texture2D" uid="uid://obuc3onp21l3" path="res://player_character/zeus_reticle.png" id="10_lcotw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qqfp6"]
 radius = 6.0
@@ -1092,6 +1093,46 @@ tracks/8/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_84ddp"]
+resource_name = "zeus"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Face:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tyoif"]
 _data = {
 "RESET": SubResource("Animation_nyhl6"),
@@ -1104,7 +1145,8 @@ _data = {
 "run_back_left": SubResource("Animation_af2vt"),
 "run_back_right": SubResource("Animation_uq6n5"),
 "run_front_left": SubResource("Animation_jqku2"),
-"run_front_right": SubResource("Animation_3k3rl")
+"run_front_right": SubResource("Animation_3k3rl"),
+"zeus": SubResource("Animation_84ddp")
 }
 
 [sub_resource type="Animation" id="Animation_7qnsr"]
@@ -1205,10 +1247,47 @@ _data = {
 "i_frames": SubResource("Animation_kotkr")
 }
 
+[sub_resource type="Animation" id="Animation_e12j2"]
+resource_name = "Default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_alh15"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aym1l"]
+_data = {
+"Default": SubResource("Animation_e12j2"),
+"RESET": SubResource("Animation_alh15")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c8sd1"]
 size = Vector2(14, 14)
 
-[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("BodyAnimation", "FaceAnimation", "IFramesAnimation", "Face", "Body", "bomb_place_check", "KnifeGunSprite", "KnifeHurtBox", "GunRayCast", "KickerRayCast", "DunkerRayCast", "death_timer")]
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("BodyAnimation", "FaceAnimation", "IFramesAnimation", "Face", "Body", "bomb_place_check", "KnifeGunSprite", "ZeusReticle", "KnifeHurtBox", "GunRayCast", "KickerRayCast", "DunkerRayCast", "death_timer")]
 z_index = 2
 collision_mask = 280
 motion_mode = 1
@@ -1220,6 +1299,7 @@ Face = NodePath("Visuals/Face")
 Body = NodePath("Visuals/Body")
 bomb_place_check = NodePath("PlaceableBombCheck")
 KnifeGunSprite = NodePath("Visuals/KinfeGun/Holding")
+ZeusReticle = NodePath("Visuals/ZeusReticle")
 KnifeHurtBox = NodePath("KifeDmgArea/CollisionShape2D")
 GunRayCast = NodePath("GunCast2D")
 KickerRayCast = NodePath("KickerCast2D")
@@ -1278,6 +1358,23 @@ autoplay = "DEFAULT"
 libraries = {
 "": SubResource("AnimationLibrary_1trot")
 }
+
+[node name="ZeusReticle" type="Node2D" parent="Visuals"]
+visible = false
+top_level = true
+z_index = 5
+z_as_relative = false
+
+[node name="ReticleSprite" type="Sprite2D" parent="Visuals/ZeusReticle"]
+material = SubResource("ShaderMaterial_lna21")
+texture = ExtResource("10_lcotw")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals/ZeusReticle/ReticleSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_aym1l")
+}
+autoplay = "Default"
 
 [node name="KifeDmgArea" type="Area2D" parent="."]
 scale = Vector2(1, -1)
