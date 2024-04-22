@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://cu2dhivwmy5gq"]
 
-[ext_resource type="Texture2D" uid="uid://b0ppaqlessix1" path="res://player_character/zeus_lightning.png" id="1_2b0eq"]
+[ext_resource type="Texture2D" uid="uid://b0ppaqlessix1" path="res://player_character/zeus/zeus_lightning.png" id="1_2b0eq"]
 [ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="1_lp8sw"]
-[ext_resource type="Script" path="res://player_character/zeus_lightning.gd" id="1_mqbxl"]
+[ext_resource type="Script" path="res://player_character/zeus/zeus_lightning.gd" id="1_mqbxl"]
 [ext_resource type="Texture2D" uid="uid://00et7mgdndui" path="res://player_character/base_color_palette.png" id="2_2fuxf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lna21"]

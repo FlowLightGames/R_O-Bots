@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0ppaqlessix1"
-path="res://.godot/imported/zeus_lightning.png-274ffd9d08953f83f771ab8c6ceca879.ctex"
+uid="uid://dmfy3avy14qap"
+path="res://.godot/imported/R.png-4a4804b294712e88051f7e283f07ac34.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player_character/zeus_lightning.png"
-dest_files=["res://.godot/imported/zeus_lightning.png-274ffd9d08953f83f771ab8c6ceca879.ctex"]
+source_file="res://UI/word_art/R.png"
+dest_files=["res://.godot/imported/R.png-4a4804b294712e88051f7e283f07ac34.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://67tlg7mgp1os"]
 
 [ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="1_7sreb"]
-[ext_resource type="Texture2D" uid="uid://bbfkldtav8bib" path="res://player_character/gun_shot_texture.png" id="1_77mss"]
-[ext_resource type="Script" path="res://player_character/gun_shot.gd" id="1_elke4"]
-[ext_resource type="Texture2D" uid="uid://l1xel3yu8tvh" path="res://player_character/gun_shot.png" id="1_kn55u"]
+[ext_resource type="Texture2D" uid="uid://bbfkldtav8bib" path="res://player_character/gun_knife/gun_shot_texture.png" id="1_77mss"]
+[ext_resource type="Script" path="res://player_character/gun_knife/gun_shot.gd" id="1_elke4"]
+[ext_resource type="Texture2D" uid="uid://l1xel3yu8tvh" path="res://player_character/gun_knife/gun_shot.png" id="1_kn55u"]
 [ext_resource type="Texture2D" uid="uid://00et7mgdndui" path="res://player_character/base_color_palette.png" id="2_vtox8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wgnj8"]

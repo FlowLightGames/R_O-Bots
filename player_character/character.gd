@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 class_name PlayerCharacter
 
-var gunshot:PackedScene=load("res://player_character/gun_shot.tscn")
-var zeus_lightning:PackedScene=load("res://player_character/zeus_lightning.tscn")
+var gunshot:PackedScene=load("res://player_character/gun_knife/gun_shot.tscn")
+var zeus_lightning:PackedScene=load("res://player_character/zeus/zeus_lightning.tscn")
 
 @export var BodyAnimation:AnimationPlayer
 @export var FaceAnimation:AnimationPlayer
@@ -166,6 +166,10 @@ func update_state()->void:
 			KickerRayCast.enabled=true
 		else :
 			KickerRayCast.enabled=false
+		if Pickup_Stats.STATES[0]>0:
+			bomb_place_check.enabled=true
+		else:
+			bomb_place_check.enabled=false
 	else:
 		die()
 
@@ -188,44 +192,7 @@ func die()->void:
 func action_one()->void:
 	bomb_place_check.force_raycast_update()
 	if !(bomb_place_check.is_colliding()):
-		if Bomb_Ref_List.size()<(1+Pickup_Stats.BOMB_UP):
-			var tmp_bomb:BombBase
-			match Pickup_Stats.BOMB_TYPE:
-				BombList.BOMBTYPE.DEFAULT:
-					tmp_bomb=BombList.Default.instantiate() as DefaultBomb
-					tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
-				BombList.BOMBTYPE.REMOTE:
-					tmp_bomb=BombList.Remote.instantiate() as RemoteBomb
-					tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
-				BombList.BOMBTYPE.DICE:
-					tmp_bomb=BombList.Dice.instantiate() as DiceBomb
-					tmp_bomb.placed_with_power=1+randi_range(0,5)
-				BombList.BOMBTYPE.BANANA:
-					tmp_bomb=BombList.Banana.instantiate() as BananaBomb
-					tmp_bomb.placed_with_direction=get_priority_4_way_direction(current_view_direction)
-				BombList.BOMBTYPE.E:
-					tmp_bomb=BombList.E.instantiate() as EBomb
-					tmp_bomb.placed_with_direction=get_priority_4_way_direction(current_view_direction)
-				BombList.BOMBTYPE.PLASMA:
-					tmp_bomb=BombList.Plasma.instantiate() as PlasmaBomb
-					tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
-				BombList.BOMBTYPE.HYDROGEN:
-					tmp_bomb=BombList.Hydrogen.instantiate() as HydrogenBomb
-				BombList.BOMBTYPE.MINE:
-					tmp_bomb=BombList.Mine.instantiate() as MineBomb
-					tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
-				_:
-					tmp_bomb=BombList.Default.instantiate()
-			
-			tmp_bomb.affiliated_player=self
-			tmp_bomb.affiliated_map=map
-			
-			tmp_bomb.placed_with_color=Body_Color
-			
-			Bomb_Ref_List.append(tmp_bomb)
-			tmp_bomb.position=(map.base_ground_tilemap.local_to_map(self.position)*16)+Vector2i(8,8)
-			map.bomb_nodes.add_child(tmp_bomb)
-			
+		place_bomb()
 	else:
 		if Pickup_Stats.DUNKER:
 			DunkerRayCast.force_raycast_update()
@@ -246,6 +213,45 @@ func action_two()->void:
 					fire_gun()
 				_:
 					pass
+
+func place_bomb()->void:
+	if Bomb_Ref_List.size()<(1+Pickup_Stats.BOMB_UP):
+		var tmp_bomb:BombBase
+		match Pickup_Stats.BOMB_TYPE:
+			BombList.BOMBTYPE.DEFAULT:
+				tmp_bomb=BombList.Default.instantiate() as DefaultBomb
+				tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
+			BombList.BOMBTYPE.REMOTE:
+				tmp_bomb=BombList.Remote.instantiate() as RemoteBomb
+				tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
+			BombList.BOMBTYPE.DICE:
+				tmp_bomb=BombList.Dice.instantiate() as DiceBomb
+				tmp_bomb.placed_with_power=1+randi_range(0,5)
+			BombList.BOMBTYPE.BANANA:
+				tmp_bomb=BombList.Banana.instantiate() as BananaBomb
+				tmp_bomb.placed_with_direction=get_priority_4_way_direction(current_view_direction)
+			BombList.BOMBTYPE.E:
+				tmp_bomb=BombList.E.instantiate() as EBomb
+				tmp_bomb.placed_with_direction=get_priority_4_way_direction(current_view_direction)
+			BombList.BOMBTYPE.PLASMA:
+				tmp_bomb=BombList.Plasma.instantiate() as PlasmaBomb
+				tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
+			BombList.BOMBTYPE.HYDROGEN:
+				tmp_bomb=BombList.Hydrogen.instantiate() as HydrogenBomb
+			BombList.BOMBTYPE.MINE:
+				tmp_bomb=BombList.Mine.instantiate() as MineBomb
+				tmp_bomb.placed_with_power=1+Pickup_Stats.FIRE_UP
+			_:
+				tmp_bomb=BombList.Default.instantiate()
+		
+		tmp_bomb.affiliated_player=self
+		tmp_bomb.affiliated_map=map
+		
+		tmp_bomb.placed_with_color=Body_Color
+		
+		Bomb_Ref_List.append(tmp_bomb)
+		tmp_bomb.position=(map.base_ground_tilemap.local_to_map(self.position)*16)+Vector2i(8,8)
+		map.bomb_nodes.add_child(tmp_bomb)
 
 func fire_lightning()->void:
 	var tmp:ZeusLightning=zeus_lightning.instantiate() as ZeusLightning
@@ -368,6 +374,11 @@ func _physics_process(_delta:float)->void:
 			var normalized_move_vec:Vector2=Vector2(move_vec).normalized()
 			velocity=normalized_move_vec*BASE_MOVEMENT_SPEED*(Pickup_Stats.get_speed_scale())
 			move_and_slide()
+			
+			#Pooping
+			if Pickup_Stats.STATES[0]>0:
+				if !(bomb_place_check.is_colliding()):
+					place_bomb()
 			
 			if Input.is_action_just_pressed(Action_0):
 				action_one()

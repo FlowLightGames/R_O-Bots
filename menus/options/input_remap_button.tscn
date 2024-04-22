@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://doqxt21sixjlv"]
+
+[ext_resource type="Script" path="res://menus/options/input_remap_button.gd" id="1_1yups"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="1_we67g"]
+
+[node name="InputRemapButton" type="Button" node_paths=PackedStringArray("action_label", "key_scan_label")]
+custom_minimum_size = Vector2(128, 16)
+theme = ExtResource("1_we67g")
+script = ExtResource("1_1yups")
+action_name = "Up"
+key_scan = "W"
+action_label = NodePath("MarginContainer/Action")
+key_scan_label = NodePath("MarginContainer/Keybind")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -7.0
+offset_right = 61.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Action" type="Label" parent="MarginContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+text = "Up"
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="Keybind" type="Label" parent="MarginContainer"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 1
+text = "W"
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 1

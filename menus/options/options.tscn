@@ -51,6 +51,10 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Main/CenterContainer"]
 layout_mode = 2
 
+[node name="Spacer" type="Control" parent="Control/Main/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
 [node name="Audio" type="Button" parent="Control/Main/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(64, 16)
 layout_mode = 2
@@ -73,6 +77,10 @@ text = "Cancel"
 [node name="Save" type="Button" parent="Control/Main/CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Save"
+
+[node name="Spacer2" type="Control" parent="Control/Main/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
 
 [node name="Audio" type="PanelContainer" parent="Control" node_paths=PackedStringArray("master_val", "master_slider", "music_val", "music_slider", "SFX_val", "SFX_slider")]
 visible = false

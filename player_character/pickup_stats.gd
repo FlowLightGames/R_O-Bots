@@ -96,6 +96,10 @@ func add_state(state:STATE)->void:
 			pass
 
 func clamp_stats()->void:
+	STATES[0]=clampi(STATES[0],0,8)
+	STATES[1]=clampi(STATES[1],0,8)
+	STATES[2]=clampi(STATES[2],0,8)
+	
 	SPEED_UP=clampi(SPEED_UP,-10,10)
 	BOMB_UP=clampi(BOMB_UP,0,16)
 	FIRE_UP=clampi(FIRE_UP,0,10)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://obuc3onp21l3"
-path="res://.godot/imported/zeus_reticle.png-b12dc8c054f0b1f92f81a2288dd7acd5.ctex"
+uid="uid://gf74g6i1ttaa"
+path="res://.godot/imported/O-Bots.png-f01c0ac4ff569d4b83b12e6f52204158.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player_character/zeus_reticle.png"
-dest_files=["res://.godot/imported/zeus_reticle.png-b12dc8c054f0b1f92f81a2288dd7acd5.ctex"]
+source_file="res://UI/word_art/O-Bots.png"
+dest_files=["res://.godot/imported/O-Bots.png-f01c0ac4ff569d4b83b12e6f52204158.ctex"]
 
 [params]
 

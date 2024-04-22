@@ -19,13 +19,13 @@ func _ready()->void:
 	SFX_slider.value=GameConfig.SFX
 	SFX_val.text=str(GameConfig.SFX)
 
-func _on_master_slider_drag_ended(value_changed:bool)->void:
+func _on_master_slider_drag_ended(_value_changed:bool)->void:
 	master_val.text=str(master_slider.value)
 
-func _on_music_slider_drag_ended(value_changed:bool)->void:
+func _on_music_slider_drag_ended(_value_changed:bool)->void:
 	music_val.text=str(music_slider.value)
 
-func _on_sfxs_lider_drag_ended(value_changed:bool)->void:
+func _on_sfxs_lider_drag_ended(_value_changed:bool)->void:
 	SFX_val.text=str(SFX_slider.value)
 
 func _on_sfxs_lider_value_changed(_value:float)->void:

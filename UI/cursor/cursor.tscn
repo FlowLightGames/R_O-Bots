@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://UI/cursor/cursor.gd" id="2_i3lis"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
+process_mode = 3
 layer = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

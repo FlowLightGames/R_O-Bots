@@ -11,7 +11,7 @@ weight = 1
 [sub_resource type="Resource" id="Resource_2avrs"]
 script = ExtResource("1_bciml")
 what = 23
-weight = 1
+weight = 5
 
 [sub_resource type="Resource" id="Resource_xf4dk"]
 script = ExtResource("1_bciml")
@@ -25,18 +25,18 @@ weight = 1
 
 [sub_resource type="Resource" id="Resource_xtxw6"]
 script = ExtResource("1_bciml")
-what = 17
-weight = 2
+what = 9
+weight = 4
 
 [sub_resource type="Resource" id="Resource_6wls3"]
 script = ExtResource("1_bciml")
 what = 28
-weight = 4
+weight = 2
 
 [sub_resource type="Resource" id="Resource_uxxx0"]
 script = ExtResource("1_bciml")
 what = 27
-weight = 4
+weight = 2
 
 [resource]
 script = ExtResource("1_o2iqb")
