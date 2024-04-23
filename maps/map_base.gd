@@ -90,12 +90,14 @@ func spawn_players(how_many:int)->void:
 			var spawn:Vector2i=possible_spawns.pick_random()
 			var character:PlayerCharacter=player_scene.instantiate() as PlayerCharacter
 			player_nodes.add_child(character)
+			#imprtant to set first
 			character.Player_Number=n
 			if GameConfig.Online_Session:
 				character.Player_Name=Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n].steam_id)
 			else:
 				character.Player_Name="Player"+str(n)
 			character.config_init(PlayerConfigs.Player_Configs[n])
+			character.input_map_init()
 			character.position=spawn*16+Vector2i(8,8)
 			character.map=self
 			character.disabled=true

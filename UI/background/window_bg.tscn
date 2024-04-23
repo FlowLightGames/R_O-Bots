@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://qt42tjjxi7ge"]
+[gd_scene load_steps=13 format=3 uid="uid://qt42tjjxi7ge"]
 
 [ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="1_2hf1u"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="2_p1lxx"]
 [ext_resource type="Texture2D" uid="uid://bnc1l1woe8fmb" path="res://UI/theme/button_light.png" id="3_1wctv"]
 [ext_resource type="Texture2D" uid="uid://c2kl7qva5cxnr" path="res://UI/theme/button_medium.png" id="4_lr37v"]
 [ext_resource type="Texture2D" uid="uid://b86ni80kqlbbs" path="res://UI/background/recycle_icon.png" id="5_01ei0"]
+[ext_resource type="FontFile" uid="uid://binhnkh0687qg" path="res://UI/font/LanaPixel.ttf" id="6_cv4uy"]
 [ext_resource type="Texture2D" uid="uid://hx13ej7r828i" path="res://UI/background/desktop_icon.png" id="6_pl3ax"]
 [ext_resource type="Texture2D" uid="uid://dj8y6cfla1n2m" path="res://UI/background/directory_icon.png" id="7_qtb88"]
 
@@ -13,13 +14,16 @@ font_size = 8
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_huu74"]
-font_size = 8
+font = ExtResource("6_cv4uy")
+font_size = 11
 
 [sub_resource type="LabelSettings" id="LabelSettings_y34mi"]
-font_size = 8
+font = ExtResource("6_cv4uy")
+font_size = 11
 
 [sub_resource type="LabelSettings" id="LabelSettings_xl4xi"]
-font_size = 8
+font = ExtResource("6_cv4uy")
+font_size = 11
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = -1

@@ -21,6 +21,8 @@ var zeus_lightning:PackedScene=load("res://player_character/zeus/zeus_lightning.
 
 var i_frames:bool=false
 @export var disabled:bool=false
+#for multiplayer so we dont control other players
+var is_puppet:bool=false
 
 var Action_UP:String ="0_Up"
 var Action_DOWN:String ="0_Down"
@@ -62,6 +64,14 @@ func config_init(config:PlayerConfigMetaData)->void:
 	set_new_body_color(config.Body_Color)
 	set_new_face(config.Face_Texture)
 	set_new_face_color(config.Face_Color)
+
+func input_map_init()->void:
+	Action_UP =str(Player_Number)+"_Up"
+	Action_DOWN =str(Player_Number)+"_Down"
+	Action_LEFT =str(Player_Number)+"_Left"
+	Action_RIGHT =str(Player_Number)+"_Right"
+	Action_0 =str(Player_Number)+"_Action_0"
+	Action_1 =str(Player_Number)+"_Action_1"
 
 func picked_up(what:PickUp.PICKUP)->void:
 	match what:
@@ -307,83 +317,88 @@ func get_player_state()->PlayerState:
 	return output
 
 func _physics_process(_delta:float)->void:
-	if(!disabled):
-		if Pickup_Stats.SPECIAL_STATE==PickUpStats.SPECIALSTATE.ZEUS:
-			BodyAnimation.play("zeus")
-			var move_vec:Vector2i=Vector2i.ZERO
-			move_vec.x+=-int(Input.is_action_pressed(Action_LEFT))+int(Input.is_action_pressed(Action_RIGHT))
-			move_vec.y+=-int(Input.is_action_pressed(Action_UP))+int(Input.is_action_pressed(Action_DOWN))
-			ZeusReticle.position=ZeusReticle.position+_delta*move_vec*60
-			
-			if Input.is_action_just_pressed(Action_1):
-				fire_lightning()
+	if !disabled:
+		#if this is your PC
+		if !is_puppet:
+			if Pickup_Stats.SPECIAL_STATE==PickUpStats.SPECIALSTATE.ZEUS:
+				BodyAnimation.play("zeus")
+				var move_vec:Vector2i=Vector2i.ZERO
+				move_vec.x+=-int(Input.is_action_pressed(Action_LEFT))+int(Input.is_action_pressed(Action_RIGHT))
+				move_vec.y+=-int(Input.is_action_pressed(Action_UP))+int(Input.is_action_pressed(Action_DOWN))
+				ZeusReticle.position=ZeusReticle.position+_delta*move_vec*60
 				
-				Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.NONE
-				
-				ZeusReticle.visible=false
-				ZeusReticle.position=Vector2.ZERO
-		else:
-			var move_vec:Vector2i=Vector2i.ZERO
-			move_vec.x+=-int(Input.is_action_pressed(Action_LEFT))+int(Input.is_action_pressed(Action_RIGHT))
-			move_vec.y+=-int(Input.is_action_pressed(Action_UP))+int(Input.is_action_pressed(Action_DOWN))
-			
-			var animation_string:String=""
-			
-			if move_vec!=Vector2i.ZERO:
-				current_view_direction=move_vec
-				animation_string+="run_"
-			else:
-				animation_string+="idle_"
-			
-			match current_view_direction.y:
-				1:
-					front_back="front_"
-				-1:
-					front_back="back_"
-				_:
-					if current_view_direction.x!=0:
-						front_back="front_"
-			
-			match current_view_direction.x:
-				1:
-					left_right="right"
-				-1:
-					left_right="left"
-				_:
-					pass
-			
-			KickerRayCast.rotation=Vector2(get_priority_4_way_direction(current_view_direction)).angle()-0.5*PI
-			var kicker_target:Object=KickerRayCast.get_collider()
-			if kicker_target&&kicker_target is BombBase:
-				#print("HIT SOMETHING POGGERS")
-				if (kicker_target as BombBase).kickable:
-					var direction:Vector2=Vector2((kicker_target as Node2D).global_position-KickerRayCast.get_collision_point())
-					#direction=direction.normalized()
+				if Input.is_action_just_pressed(Action_1):
+					fire_lightning()
 					
-					var direction_i:Vector2i=Vector2i.ZERO
-					if abs(direction.x)>=abs(direction.y):
-						direction_i.x=roundi(signf(direction.x))
-					else:
-						direction_i.y=roundi(signf(direction.y))
-					#print(direction_i)
-					#(kicker_target as BombBase).kick(get_priority_4_way_direction(current_view_direction))
-					#print(direction_i)
-					(kicker_target as BombBase).kick(direction_i)
-			
-			BodyAnimation.play(animation_string+front_back+left_right)
-			var normalized_move_vec:Vector2=Vector2(move_vec).normalized()
-			velocity=normalized_move_vec*BASE_MOVEMENT_SPEED*(Pickup_Stats.get_speed_scale())
-			move_and_slide()
-			
-			#Pooping
-			if Pickup_Stats.STATES[0]>0:
-				if !(bomb_place_check.is_colliding()):
-					place_bomb()
-			
-			if Input.is_action_just_pressed(Action_0):
-				action_one()
-			if Input.is_action_just_pressed(Action_1):
-				action_two()
+					Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.NONE
+					
+					ZeusReticle.visible=false
+					ZeusReticle.position=Vector2.ZERO
+			else:
+				var move_vec:Vector2i=Vector2i.ZERO
+				move_vec.x+=-int(Input.is_action_pressed(Action_LEFT))+int(Input.is_action_pressed(Action_RIGHT))
+				move_vec.y+=-int(Input.is_action_pressed(Action_UP))+int(Input.is_action_pressed(Action_DOWN))
+				
+				var animation_string:String=""
+				
+				if move_vec!=Vector2i.ZERO:
+					current_view_direction=move_vec
+					animation_string+="run_"
+				else:
+					animation_string+="idle_"
+				
+				match current_view_direction.y:
+					1:
+						front_back="front_"
+					-1:
+						front_back="back_"
+					_:
+						if current_view_direction.x!=0:
+							front_back="front_"
+				
+				match current_view_direction.x:
+					1:
+						left_right="right"
+					-1:
+						left_right="left"
+					_:
+						pass
+				
+				KickerRayCast.rotation=Vector2(get_priority_4_way_direction(current_view_direction)).angle()-0.5*PI
+				var kicker_target:Object=KickerRayCast.get_collider()
+				if kicker_target&&kicker_target is BombBase:
+					#print("HIT SOMETHING POGGERS")
+					if (kicker_target as BombBase).kickable:
+						var direction:Vector2=Vector2((kicker_target as Node2D).global_position-KickerRayCast.get_collision_point())
+						#direction=direction.normalized()
+						
+						var direction_i:Vector2i=Vector2i.ZERO
+						if abs(direction.x)>=abs(direction.y):
+							direction_i.x=roundi(signf(direction.x))
+						else:
+							direction_i.y=roundi(signf(direction.y))
+						#print(direction_i)
+						#(kicker_target as BombBase).kick(get_priority_4_way_direction(current_view_direction))
+						#print(direction_i)
+						(kicker_target as BombBase).kick(direction_i)
+				
+				BodyAnimation.play(animation_string+front_back+left_right)
+				var normalized_move_vec:Vector2=Vector2(move_vec).normalized()
+				velocity=normalized_move_vec*BASE_MOVEMENT_SPEED*(Pickup_Stats.get_speed_scale())
+				move_and_slide()
+				
+				#Pooping
+				if Pickup_Stats.STATES[0]>0:
+					if !(bomb_place_check.is_colliding()):
+						place_bomb()
+				
+				if Input.is_action_just_pressed(Action_0):
+					action_one()
+				if Input.is_action_just_pressed(Action_1):
+					action_two()
+		#if were someone elses PC (puppet)
+		else:
+			pass
 
 func _ready()->void:
 	update_state()
