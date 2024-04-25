@@ -1,5 +1,8 @@
 extends Node
 
+#Version of current exe
+var game_version:String=""
+
 #session settings
 #wont be saved
 var Online_Session:bool=false
@@ -21,12 +24,10 @@ var Player_Input_Dicts:Array[Dictionary]=[{},{},{},{},{},{},{},{}]
 
 func _ready()->void:
 	load_data()
+	game_version=ProjectSettings.get_setting("application/config/version")
 
 func load_player_input_dicts()->void:
 	var curr_handled_player_num:int=0
-	print("Player data dicts length: "+str(Player_Input_Dicts.size()))
-	print("raw player input dicts: ")
-	print(Player_Input_Dicts)
 	for n:Dictionary in Player_Input_Dicts:
 		for action:String in n:
 			InputMap.action_erase_events(action)
@@ -124,6 +125,8 @@ func get_input_event(code:String)->InputEvent:
 
 func save_data()->void:
 	var save_dict:Dictionary={}
+	save_dict["Version"]=ProjectSettings.get_setting("application/config/version")
+	
 	save_dict["Master"]=Master
 	save_dict["Music"]=Music
 	save_dict["SFX"]=SFX
@@ -145,9 +148,18 @@ func save_data()->void:
 
 func load_data()->void:
 	if FileAccess.file_exists(save_path):
-		print("THE ONE PICE EXISTS")
 		var file:FileAccess=FileAccess.open(save_path,FileAccess.READ)
 		var load_dict:Dictionary=file.get_var()
+		
+		var check_version:String="NO_VERSION"
+		
+		if load_dict.has("Version"):
+			check_version=load_dict["Version"]
+		
+		if check_version!=game_version:
+			#TODO
+			#Save Version!= Game version
+			pass
 		
 		Master=load_dict["Master"]
 		Music=load_dict["Music"]
@@ -174,6 +186,7 @@ func load_data()->void:
 		
 		file.close()
 		
+	#SAVE FILE DOESA NOT EXIST:
 	else:
 		Master=100
 		Music=50
@@ -182,8 +195,6 @@ func load_data()->void:
 		CRT_Filer=false
 		
 		create_def_input_map()
-		print("PLAYER DICTS AFTER INIT LOAD")
-		print(Player_Input_Dicts)
 		FacesAutoload.custom_faces=[]
 		
 		save_data()

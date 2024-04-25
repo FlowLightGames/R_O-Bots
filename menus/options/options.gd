@@ -1,11 +1,12 @@
 extends Node2D
 
 enum State{
-	DEFAULT,AUDIO,VIDEO,CUSTOM
+	DEFAULT,AUDIO,VIDEO,CUSTOM,INPUT
 }
 @export var audio_panel:Control
 @export var video_panel:Control
 @export var custom_panel:Control
+@export var input_panel:Control
 @export var main_panel:MainOptionPanel
 
 var current_state:State=State.DEFAULT
@@ -28,6 +29,11 @@ func _on_customize_pressed()->void:
 		current_state=State.CUSTOM
 		main_panel.enable_buttons(false)
 
+func _on_input_pressed()->void:
+	if current_state==State.DEFAULT:
+		input_panel.visible=true
+		current_state=State.INPUT
+		main_panel.enable_buttons(false)
 
 func _on_cancel_pressed()->void:
 	match current_state:
@@ -43,6 +49,14 @@ func _on_cancel_pressed()->void:
 			custom_panel.visible=false
 			current_state=State.DEFAULT
 			main_panel.enable_buttons(true)
+		State.INPUT:
+			input_panel.visible=false
+			current_state=State.DEFAULT
+			main_panel.enable_buttons(true)
 		_:
 			pass
+
+
+
+
 

@@ -10,6 +10,6 @@ layer 1: Stage fx
 layer 2:
 layer 3: stageUI
 layer 4: countdown,match-draw,transition
-layer 5: win-crt
+layer 5: win-crt,version_label
 
 layer 10: Mouse Cursor

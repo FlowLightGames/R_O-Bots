@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c73jgxta38rfp"]
+[gd_scene load_steps=14 format=3 uid="uid://c73jgxta38rfp"]
 
 [ext_resource type="Script" path="res://menus/options/options.gd" id="1_kfknl"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="2_jh0ha"]
@@ -10,14 +10,16 @@
 [ext_resource type="PackedScene" uid="uid://qt42tjjxi7ge" path="res://UI/background/window_bg.tscn" id="4_b2kv2"]
 [ext_resource type="Script" path="res://menus/options/video.gd" id="4_lh087"]
 [ext_resource type="PackedScene" uid="uid://cbjorljnfyjlt" path="res://UI/buttons/inc.tscn" id="4_mhakd"]
-[ext_resource type="PackedScene" uid="uid://dg64dmkg3ves5" path="res://menus/options/custom_face_option.tscn" id="9_pekon"]
+[ext_resource type="Script" path="res://menus/options/custom_face_selector.gd" id="8_gaijy"]
 [ext_resource type="PackedScene" uid="uid://ogldl5edlenf" path="res://menus/options/player_input_settings.tscn" id="10_ccaiu"]
+[ext_resource type="Script" path="res://menus/options/player_input_selector.gd" id="10_hl4et"]
 
-[node name="Options" type="Node2D" node_paths=PackedStringArray("audio_panel", "video_panel", "custom_panel", "main_panel")]
+[node name="Options" type="Node2D" node_paths=PackedStringArray("audio_panel", "video_panel", "custom_panel", "input_panel", "main_panel")]
 script = ExtResource("1_kfknl")
 audio_panel = NodePath("Control/Audio")
 video_panel = NodePath("Control/Video")
-custom_panel = NodePath("Control/FaceCustom")
+custom_panel = NodePath("Control/CustomFaceSelector")
+input_panel = NodePath("Control/PlayerInputSelector")
 main_panel = NodePath("Control/Main")
 
 [node name="Control" type="Control" parent="."]
@@ -31,8 +33,9 @@ offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_jh0ha")
+metadata/_edit_lock_ = true
 
-[node name="Main" type="PanelContainer" parent="Control" node_paths=PackedStringArray("audio_button", "video_button", "custom_button", "save_button", "cancel_button")]
+[node name="Main" type="PanelContainer" parent="Control" node_paths=PackedStringArray("audio_button", "video_button", "custom_button", "save_button", "cancel_button", "input_button")]
 layout_mode = 0
 offset_left = 166.0
 offset_top = 49.0
@@ -44,6 +47,7 @@ video_button = NodePath("CenterContainer/VBoxContainer/Video")
 custom_button = NodePath("CenterContainer/VBoxContainer/Customize")
 save_button = NodePath("CenterContainer/VBoxContainer/Save")
 cancel_button = NodePath("CenterContainer/VBoxContainer/Cancel")
+input_button = NodePath("CenterContainer/VBoxContainer/Input")
 metadata/_edit_group_ = true
 
 [node name="CenterContainer" type="CenterContainer" parent="Control/Main"]
@@ -326,55 +330,48 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "Save"
 
-[node name="FaceCustom" parent="Control" instance=ExtResource("3_gloqi")]
+[node name="CustomFaceSelector" type="PanelContainer" parent="Control"]
 visible = false
-layout_mode = 1
-offset_left = 140.0
-offset_top = 160.0
-offset_right = -241.0
-offset_bottom = -61.0
-
-[node name="PanelContainer" type="PanelContainer" parent="Control"]
-visible = false
+custom_minimum_size = Vector2(168, 252)
 layout_mode = 0
 offset_left = 410.0
 offset_top = 44.0
-offset_right = 572.0
+offset_right = 578.0
 offset_bottom = 296.0
+script = ExtResource("8_gaijy")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CustomFaceSelector"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/CustomFaceSelector/VBoxContainer"]
 layout_mode = 2
 text = "24/24"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control/PanelContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/CustomFaceSelector/VBoxContainer"]
 custom_minimum_size = Vector2(152, 200)
 layout_mode = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CustomFaceSelector/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 
-[node name="CustomFaceOption" parent="Control/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("9_pekon")]
-layout_mode = 2
-
-[node name="HBoxContainer" type="Control" parent="Control/PanelContainer/VBoxContainer"]
+[node name="Save_Cancel" type="Control" parent="Control/CustomFaceSelector/VBoxContainer"]
 custom_minimum_size = Vector2(146, 16)
 layout_mode = 2
 
-[node name="Cancel" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Cancel" type="Button" parent="Control/CustomFaceSelector/VBoxContainer/Save_Cancel"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 1
 offset_right = 41.0
 offset_bottom = 14.0
 size_flags_horizontal = 8
 text = "Cancel"
 
-[node name="Save" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Save" type="Button" parent="Control/CustomFaceSelector/VBoxContainer/Save_Cancel"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -385,12 +382,73 @@ grow_horizontal = 0
 size_flags_horizontal = 8
 text = "Save"
 
-[node name="PlayerInputSettings" parent="Control" instance=ExtResource("10_ccaiu")]
+[node name="FaceCustom" parent="Control" instance=ExtResource("3_gloqi")]
+visible = false
+layout_mode = 1
+offset_left = 140.0
+offset_top = 160.0
+offset_right = -241.0
+offset_bottom = -61.0
+
+[node name="PlayerInputSettings" parent="Control" node_paths=PackedStringArray("player_input_selector") instance=ExtResource("10_ccaiu")]
+visible = false
 layout_mode = 0
 offset_left = 303.0
 offset_top = 90.0
 offset_right = 523.0
 offset_bottom = 276.0
+player_input_selector = NodePath("../PlayerInputSelector")
+
+[node name="PlayerInputSelector" type="PanelContainer" parent="Control" node_paths=PackedStringArray("list_root", "player_input_customizer_interface")]
+visible = false
+custom_minimum_size = Vector2(183, 242)
+layout_mode = 0
+offset_left = 336.0
+offset_top = 48.0
+offset_right = 519.0
+offset_bottom = 290.0
+script = ExtResource("10_hl4et")
+list_root = NodePath("VBoxContainer/ScrollContainer/VBoxContainer")
+player_input_customizer_interface = NodePath("../PlayerInputSettings")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PlayerInputSelector"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="Control/PlayerInputSelector/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/PlayerInputSelector/VBoxContainer"]
+custom_minimum_size = Vector2(152, 200)
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PlayerInputSelector/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="Save_Cancel" type="Control" parent="Control/PlayerInputSelector/VBoxContainer"]
+custom_minimum_size = Vector2(146, 16)
+layout_mode = 2
+
+[node name="Cancel" type="Button" parent="Control/PlayerInputSelector/VBoxContainer/Save_Cancel"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 1
+offset_right = 41.0
+offset_bottom = 14.0
+size_flags_horizontal = 8
+text = "Cancel"
+
+[node name="Save" type="Button" parent="Control/PlayerInputSelector/VBoxContainer/Save_Cancel"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -31.0
+offset_bottom = 14.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+text = "Save"
 
 [node name="Background" parent="." instance=ExtResource("3_rdeqp")]
 
@@ -399,6 +457,7 @@ offset_bottom = 276.0
 [connection signal="pressed" from="Control/Main/CenterContainer/VBoxContainer/Audio" to="." method="_on_audio_pressed"]
 [connection signal="pressed" from="Control/Main/CenterContainer/VBoxContainer/Video" to="." method="_on_video_pressed"]
 [connection signal="pressed" from="Control/Main/CenterContainer/VBoxContainer/Customize" to="." method="_on_customize_pressed"]
+[connection signal="pressed" from="Control/Main/CenterContainer/VBoxContainer/Input" to="." method="_on_input_pressed"]
 [connection signal="pressed" from="Control/Main/CenterContainer/VBoxContainer/Cancel" to="Control/Main" method="_on_cancel_pressed"]
 [connection signal="pressed" from="Control/Main/CenterContainer/VBoxContainer/Save" to="Control/Main" method="_on_save_pressed"]
 [connection signal="cancel" from="Control/Audio" to="." method="_on_cancel_pressed"]
@@ -415,4 +474,9 @@ offset_bottom = 276.0
 [connection signal="pressed" from="Control/Video/VBoxContainer/HBoxContainer/Inc" to="Control/Video" method="_on_inc_pressed"]
 [connection signal="pressed" from="Control/Video/VBoxContainer/Result/Cancel" to="Control/Video" method="_on_cancel_pressed"]
 [connection signal="pressed" from="Control/Video/VBoxContainer/Result/Save" to="Control/Video" method="_on_save_pressed"]
-[connection signal="cancel" from="Control/FaceCustom" to="." method="_on_cancel_pressed"]
+[connection signal="cancel" from="Control/CustomFaceSelector" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/CustomFaceSelector/VBoxContainer/Save_Cancel/Cancel" to="Control/CustomFaceSelector" method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/CustomFaceSelector/VBoxContainer/Save_Cancel/Save" to="Control/CustomFaceSelector" method="_on_save_pressed"]
+[connection signal="cancel" from="Control/PlayerInputSelector" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/PlayerInputSelector/VBoxContainer/Save_Cancel/Cancel" to="Control/PlayerInputSelector" method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/PlayerInputSelector/VBoxContainer/Save_Cancel/Save" to="Control/PlayerInputSelector" method="_on_save_pressed"]

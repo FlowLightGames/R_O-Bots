@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b33a2c617wpeh"]
+[gd_scene load_steps=35 format=3 uid="uid://b33a2c617wpeh"]
 
 [ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="1_wtp2m"]
 [ext_resource type="Script" path="res://menus/main_menu/main_menu.gd" id="1_wv75o"]
@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://fyjqyxmg724a" path="res://menus/main_menu/moving_tex.png" id="20_bnm3p"]
 [ext_resource type="Texture2D" uid="uid://dmfy3avy14qap" path="res://UI/word_art/R.png" id="21_vo6vu"]
 [ext_resource type="Texture2D" uid="uid://gf74g6i1ttaa" path="res://UI/word_art/O-Bots.png" id="22_khdki"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="23_h0oec"]
+[ext_resource type="FontFile" uid="uid://binhnkh0687qg" path="res://UI/font/LanaPixel.ttf" id="24_endfs"]
 
 [sub_resource type="Gradient" id="Gradient_v7xrr"]
 offsets = PackedFloat32Array(0.455847, 1)
@@ -259,7 +261,11 @@ _data = {
 "RESET": SubResource("Animation_urqgt")
 }
 
-[node name="MainMenu" type="Node2D" node_paths=PackedStringArray("animation_player", "game_start", "battle_start", "host_lobby", "join_lobby", "options")]
+[sub_resource type="LabelSettings" id="LabelSettings_exxbi"]
+font = ExtResource("24_endfs")
+font_size = 11
+
+[node name="MainMenu" type="Node2D" node_paths=PackedStringArray("animation_player", "game_start", "battle_start", "host_lobby", "join_lobby", "options", "version_label")]
 script = ExtResource("1_wv75o")
 animation_player = NodePath("AnimationPlayer")
 game_start = NodePath("CenterContainer/VBoxContainer/GameStart")
@@ -267,6 +273,7 @@ battle_start = NodePath("CenterContainer/VBoxContainer/BattleStart")
 host_lobby = NodePath("CenterContainer/VBoxContainer/HostLobby")
 join_lobby = NodePath("CenterContainer/VBoxContainer/JoinLobby")
 options = NodePath("CenterContainer/VBoxContainer/Options")
+version_label = NodePath("Version/VersionLabel")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 8
@@ -398,6 +405,21 @@ root_node = NodePath("../CRT/Static")
 libraries = {
 "": SubResource("AnimationLibrary_jgn4v")
 }
+
+[node name="Version" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="VersionLabel" type="Label" parent="Version"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -10.0
+offset_right = 42.0
+offset_bottom = 2.0
+grow_vertical = 0
+theme = ExtResource("23_h0oec")
+label_settings = SubResource("LabelSettings_exxbi")
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/BattleStart" to="." method="_on_battle_start_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HostLobby" to="." method="_on_host_lobby_pressed"]

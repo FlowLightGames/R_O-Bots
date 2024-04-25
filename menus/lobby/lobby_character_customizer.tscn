@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ca0ofo74p5we4"]
+[gd_scene load_steps=17 format=3 uid="uid://ca0ofo74p5we4"]
 
 [ext_resource type="Texture2D" uid="uid://c1c0hbjgbbtnl" path="res://menus/character_creator/menu_palette.png" id="2_0fqbj"]
 [ext_resource type="PackedScene" uid="uid://cd27yl8tl5qd6" path="res://player_character/character.tscn" id="2_6d3b8"]
@@ -33,9 +33,17 @@ shader = ExtResource("8_hvyq6")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/displacement_strength = 0.0
+shader_parameter/opacity = 1.0
 shader_parameter/displacement_map_size = Vector2i(12, 9)
 shader_parameter/palett = ExtResource("10_0fgjq")
 shader_parameter/displacement_map = ExtResource("9_ewlph")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oi60r"]
+resource_local_to_scene = true
+shader = ExtResource("6_rcmc8")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 6
+shader_parameter/palett = ExtResource("7_646sm")
 
 [node name="LobbyCharacterCustomizer" type="PanelContainer" node_paths=PackedStringArray("player_tag", "example_character_0", "example_character_1", "example_character_2", "example_character_3", "panel_content", "ready_overlay", "player_name", "body_color_txt", "body_txt", "face_color_txt", "face_custom_txt", "face_number_txt")]
 process_mode = 1
@@ -150,6 +158,9 @@ material = SubResource("ShaderMaterial_hfxrk")
 
 [node name="Face" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character/Visuals" index="1"]
 material = SubResource("ShaderMaterial_owlxl")
+
+[node name="ReticleSprite" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character/Visuals/ZeusReticle" index="0"]
+material = SubResource("ShaderMaterial_oi60r")
 
 [node name="Character2" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control" instance=ExtResource("2_6d3b8")]
 position = Vector2(16, 28)
@@ -311,6 +322,16 @@ text = "Bot"
 horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
+
+[node name="AddPlayer" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RemovePlayer" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Dec" to="." method="_on_bodytype_dec_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Inc" to="." method="_on_bodytype_inc_pressed"]

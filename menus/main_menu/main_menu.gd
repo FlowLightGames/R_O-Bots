@@ -10,6 +10,8 @@ var disabled:bool=false
 @export var join_lobby:TextureButton
 @export var options:TextureButton
 
+@export var version_label:Label
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready()->void:
@@ -17,6 +19,7 @@ func _ready()->void:
 		host_lobby.disabled=true
 		join_lobby.disabled=true
 	disabled=false
+	version_label.text=ProjectSettings.get_setting("application/config/version")
 	animation_player.play("Default")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

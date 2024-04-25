@@ -1,7 +1,9 @@
 extends PanelContainer
+class_name PlayerInputSetter
 
 @export var buttons:Array[InputRemapButton]=[]
 @export var curr_player_label:Label
+@export var player_input_selector:PlayerInputSelector
 
 signal cancel
 
@@ -92,13 +94,12 @@ func _on_default_pressed()->void:
 	GameConfig.create_def_input_map_player(curr_handled_player_num)
 
 func _on_save_pressed()->void:
-	for n:String in temp_input_event_dict:
-		if (temp_input_event_dict[n]):
-			InputMap.action_erase_events(n)
-			InputMap.action_add_event(n,GameConfig.get_input_event(temp_input_event_dict[n]))
-			GameConfig.Player_Input_Dicts[curr_handled_player_num][n]=temp_input_event_dict[n]
-
+	visible=false
+	player_input_selector.tmp_changes[curr_handled_player_num]=temp_input_event_dict
+	cancel.emit()
+	reset()
 
 func _on_cancel_pressed()->void:
+	visible=false
 	cancel.emit()
 	reset()

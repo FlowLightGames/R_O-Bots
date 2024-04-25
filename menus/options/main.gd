@@ -7,6 +7,7 @@ class_name MainOptionPanel
 @export var custom_button:Button
 @export var save_button:Button
 @export var cancel_button:Button
+@export var input_button:Button
 
 func enable_buttons(what:bool)->void:
 	audio_button.disabled=!what
@@ -14,6 +15,7 @@ func enable_buttons(what:bool)->void:
 	custom_button.disabled=!what
 	save_button.disabled=!what
 	cancel_button.disabled=!what
+	input_button.disabled=!what
 
 
 func _on_save_pressed()->void:
