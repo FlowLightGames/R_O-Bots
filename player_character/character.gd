@@ -5,6 +5,7 @@ class_name PlayerCharacter
 var gunshot:PackedScene=load("res://player_character/gun_knife/gun_shot.tscn")
 var zeus_lightning:PackedScene=load("res://player_character/zeus/zeus_lightning.tscn")
 
+@export var name_label:Label
 @export var BodyAnimation:AnimationPlayer
 @export var FaceAnimation:AnimationPlayer
 @export var IFramesAnimation:AnimationPlayer
@@ -46,6 +47,11 @@ var current_view_direction:Vector2i=Vector2i(-1,1)
 #special stuff for visual behavior
 var front_back:String="front_"
 var left_right:String="left"
+
+func set_player_name(to:String)->void:
+	Player_Name=to
+	name_label.text=Player_Name
+	(name_label.material as ShaderMaterial).set_shader_parameter("Type",Player_Number)
 
 func set_new_face(to:Texture2D)->void:
 	Face.texture=to

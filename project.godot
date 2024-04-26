@@ -54,14 +54,18 @@ window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/resizable=false
 window/size/borderless=true
-window/size/window_width_override=1920
-window/size/window_height_override=1080
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
 [dotnet]
 
 project/assembly_name="Robots"
+
+[editor]
+
+naming/defaults/default_clear_color=Color(0.145098, 0.145098, 0.145098, 1)
 
 [file_customization]
 
@@ -116,6 +120,6 @@ ui_right_mouse={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.145098, 0.137255, 0.223529, 1)
+environment/defaults/default_clear_color=Color(0.145098, 0.145098, 0.145098, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true

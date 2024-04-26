@@ -1,0 +1,346 @@
+[gd_scene load_steps=26 format=3 uid="uid://dbkg81o4mkfc6"]
+
+[ext_resource type="Script" path="res://menus/lobby/offline_lobby.gd" id="1_rhpcm"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="2_x6hru"]
+[ext_resource type="PackedScene" uid="uid://ca0ofo74p5we4" path="res://menus/lobby/lobby_character_customizer.tscn" id="3_8r2mr"]
+[ext_resource type="Texture2D" uid="uid://c1c0hbjgbbtnl" path="res://menus/character_creator/menu_palette.png" id="4_ve03o"]
+[ext_resource type="Texture2D" uid="uid://bawyihwqwdvsu" path="res://menus/character_creator/+_default.png" id="5_flnsh"]
+[ext_resource type="PackedScene" uid="uid://b1ilbhdx0c8p2" path="res://UI/background/background_scroll.tscn" id="5_xrrkl"]
+[ext_resource type="Texture2D" uid="uid://c4q0n6hagbxsm" path="res://menus/character_creator/+_pressed.png" id="6_56hjt"]
+[ext_resource type="Texture2D" uid="uid://cuwujcpyfqj7h" path="res://menus/character_creator/-_default.png" id="7_vuhxi"]
+[ext_resource type="Texture2D" uid="uid://c6bip4iaysbdf" path="res://menus/character_creator/-_pressed.png" id="8_np0m7"]
+
+[sub_resource type="Shader" id="Shader_pverw"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform int Max_types=0;
+uniform int Type =0;
+uniform sampler2D palett;
+void fragment(){
+	float tmp=(float(Type)*2.0+1.0)*(1.0/(float(Max_types)*2.0));
+	vec4 tex=texture(TEXTURE,UV);
+
+	COLOR=vec4(texture(palett,vec2(tmp,tex.r)).rgb,tex.a);
+		
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h62vj"]
+resource_local_to_scene = true
+shader = SubResource("Shader_pverw")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_ve03o")
+
+[sub_resource type="Shader" id="Shader_vbh15"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform int Max_types=0;
+uniform int Type =0;
+uniform sampler2D palett;
+void fragment(){
+	float tmp=(float(Type)*2.0+1.0)*(1.0/(float(Max_types)*2.0));
+	vec4 tex=texture(TEXTURE,UV);
+
+	COLOR=vec4(texture(palett,vec2(tmp,tex.r)).rgb,tex.a);
+		
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7e2k"]
+resource_local_to_scene = true
+shader = SubResource("Shader_vbh15")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_ve03o")
+
+[sub_resource type="Shader" id="Shader_2upl3"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform int Max_types=0;
+uniform int Type =0;
+uniform sampler2D palett;
+void fragment(){
+	float tmp=(float(Type)*2.0+1.0)*(1.0/(float(Max_types)*2.0));
+	vec4 tex=texture(TEXTURE,UV);
+
+	COLOR=vec4(texture(palett,vec2(tmp,tex.r)).rgb,tex.a);
+		
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_88fua"]
+resource_local_to_scene = true
+shader = SubResource("Shader_2upl3")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_ve03o")
+
+[sub_resource type="Shader" id="Shader_iwe57"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform int Max_types=0;
+uniform int Type =0;
+uniform sampler2D palett;
+void fragment(){
+	float tmp=(float(Type)*2.0+1.0)*(1.0/(float(Max_types)*2.0));
+	vec4 tex=texture(TEXTURE,UV);
+
+	COLOR=vec4(texture(palett,vec2(tmp,tex.r)).rgb,tex.a);
+		
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8dsxe"]
+resource_local_to_scene = true
+shader = SubResource("Shader_iwe57")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_ve03o")
+
+[sub_resource type="Shader" id="Shader_digta"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform int Max_types=0;
+uniform int Type =0;
+uniform sampler2D palett;
+void fragment(){
+	float tmp=(float(Type)*2.0+1.0)*(1.0/(float(Max_types)*2.0));
+	vec4 tex=texture(TEXTURE,UV);
+
+	COLOR=vec4(texture(palett,vec2(tmp,tex.r)).rgb,tex.a);
+		
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h3kn5"]
+resource_local_to_scene = true
+shader = SubResource("Shader_digta")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_ve03o")
+
+[sub_resource type="Shader" id="Shader_m6fve"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform int Max_types=0;
+uniform int Type =0;
+uniform sampler2D palett;
+void fragment(){
+	float tmp=(float(Type)*2.0+1.0)*(1.0/(float(Max_types)*2.0));
+	vec4 tex=texture(TEXTURE,UV);
+
+	COLOR=vec4(texture(palett,vec2(tmp,tex.r)).rgb,tex.a);
+		
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1mq1e"]
+resource_local_to_scene = true
+shader = SubResource("Shader_m6fve")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_ve03o")
+
+[sub_resource type="Shader" id="Shader_e53ws"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform int Max_types=0;
+uniform int Type =0;
+uniform sampler2D palett;
+void fragment(){
+	float tmp=(float(Type)*2.0+1.0)*(1.0/(float(Max_types)*2.0));
+	vec4 tex=texture(TEXTURE,UV);
+
+	COLOR=vec4(texture(palett,vec2(tmp,tex.r)).rgb,tex.a);
+		
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8b51h"]
+resource_local_to_scene = true
+shader = SubResource("Shader_e53ws")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_ve03o")
+
+[sub_resource type="Shader" id="Shader_e41fh"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform int Max_types=0;
+uniform int Type =0;
+uniform sampler2D palett;
+void fragment(){
+	float tmp=(float(Type)*2.0+1.0)*(1.0/(float(Max_types)*2.0));
+	vec4 tex=texture(TEXTURE,UV);
+
+	COLOR=vec4(texture(palett,vec2(tmp,tex.r)).rgb,tex.a);
+		
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyk73"]
+resource_local_to_scene = true
+shader = SubResource("Shader_e41fh")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("4_ve03o")
+
+[node name="OfflineLobby" type="Node2D" node_paths=PackedStringArray("player_boxes")]
+script = ExtResource("1_rhpcm")
+player_boxes = [NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer2"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer3"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer4"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer5"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer6"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer7"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer8")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("2_x6hru")
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 600.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="LobbyCharacterCustomizer" parent="Control/CenterContainer/VBoxContainer/GridContainer" instance=ExtResource("3_8r2mr")]
+material = SubResource("ShaderMaterial_h62vj")
+layout_mode = 2
+
+[node name="LobbyCharacterCustomizer2" parent="Control/CenterContainer/VBoxContainer/GridContainer" instance=ExtResource("3_8r2mr")]
+material = SubResource("ShaderMaterial_b7e2k")
+layout_mode = 2
+type = 1
+
+[node name="LobbyCharacterCustomizer3" parent="Control/CenterContainer/VBoxContainer/GridContainer" instance=ExtResource("3_8r2mr")]
+material = SubResource("ShaderMaterial_88fua")
+layout_mode = 2
+type = 2
+
+[node name="LobbyCharacterCustomizer4" parent="Control/CenterContainer/VBoxContainer/GridContainer" instance=ExtResource("3_8r2mr")]
+material = SubResource("ShaderMaterial_8dsxe")
+layout_mode = 2
+type = 3
+
+[node name="LobbyCharacterCustomizer5" parent="Control/CenterContainer/VBoxContainer/GridContainer" instance=ExtResource("3_8r2mr")]
+material = SubResource("ShaderMaterial_h3kn5")
+layout_mode = 2
+type = 4
+
+[node name="LobbyCharacterCustomizer6" parent="Control/CenterContainer/VBoxContainer/GridContainer" instance=ExtResource("3_8r2mr")]
+material = SubResource("ShaderMaterial_1mq1e")
+layout_mode = 2
+type = 5
+
+[node name="LobbyCharacterCustomizer7" parent="Control/CenterContainer/VBoxContainer/GridContainer" instance=ExtResource("3_8r2mr")]
+material = SubResource("ShaderMaterial_8b51h")
+layout_mode = 2
+type = 6
+
+[node name="LobbyCharacterCustomizer8" parent="Control/CenterContainer/VBoxContainer/GridContainer" instance=ExtResource("3_8r2mr")]
+material = SubResource("ShaderMaterial_gyk73")
+layout_mode = 2
+type = 7
+
+[node name="Spacer" type="Control" parent="Control/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Control/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/VBoxContainer/Control"]
+layout_mode = 1
+offset_left = 7.0
+offset_top = -6.0
+offset_right = 86.0
+offset_bottom = 55.0
+metadata/_edit_group_ = true
+
+[node name="Panel" type="PanelContainer" parent="Control/CenterContainer/VBoxContainer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/CenterContainer/VBoxContainer/Control/VBoxContainer/Panel"]
+layout_mode = 2
+text = "Add/Remove"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/CenterContainer/VBoxContainer/Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AddPlayer" type="TextureButton" parent="Control/CenterContainer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_flnsh")
+texture_pressed = ExtResource("6_56hjt")
+texture_hover = ExtResource("5_flnsh")
+texture_disabled = ExtResource("6_56hjt")
+
+[node name="RemovePlayer" type="TextureButton" parent="Control/CenterContainer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("7_vuhxi")
+texture_pressed = ExtResource("8_np0m7")
+texture_hover = ExtResource("7_vuhxi")
+texture_disabled = ExtResource("8_np0m7")
+
+[node name="Panel" type="Panel" parent="Control/CenterContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 12.0
+offset_right = 597.0
+offset_bottom = 45.0
+metadata/_edit_group_ = true
+
+[node name="Cancel" type="Button" parent="Control/CenterContainer/VBoxContainer/Control/Panel"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -4.5
+offset_right = 53.0
+offset_bottom = 11.5
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "CANCEL"
+
+[node name="StageSelect" type="Button" parent="Control/CenterContainer/VBoxContainer/Control/Panel"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -4.5
+offset_right = -5.0
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "STAGE SELECT
+"
+
+[node name="Background" parent="." instance=ExtResource("5_xrrkl")]
+
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Control/VBoxContainer/HBoxContainer/AddPlayer" to="." method="_on_add_player_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Control/VBoxContainer/HBoxContainer/RemovePlayer" to="." method="_on_remove_player_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Control/Panel/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Control/Panel/StageSelect" to="." method="_on_stage_select_pressed"]

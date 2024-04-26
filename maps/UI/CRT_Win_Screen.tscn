@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b22lw6j64bdgr"]
+[gd_scene load_steps=25 format=3 uid="uid://b22lw6j64bdgr"]
 
 [ext_resource type="Texture2D" uid="uid://cif2kt1cimkyq" path="res://maps/UI/win_bg.png" id="1_oixa2"]
 [ext_resource type="Script" path="res://maps/UI/CRT_Win_Screen.gd" id="1_yor1v"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://ca0lorpv2dukl" path="res://maps/UI/win_peda.png" id="5_txo7g"]
 [ext_resource type="PackedScene" uid="uid://c84hpry15spwm" path="res://maps/effects/instances/confetti.tscn" id="7_hsofk"]
 [ext_resource type="Texture2D" uid="uid://b15nl8vm76x7e" path="res://player_character/shadow.png" id="7_pgdi6"]
-[ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="8_qdd4o"]
 [ext_resource type="Shader" path="res://UI/shader/CRT.gdshader" id="9_7ahio"]
 [ext_resource type="Texture2D" uid="uid://blirwqch763b4" path="res://maps/UI/size_texture.png" id="10_8ox4x"]
 [ext_resource type="Texture2D" uid="uid://bj7d41o8lmqdm" path="res://maps/UI/scanlines.png" id="11_3sgp5"]
@@ -327,7 +326,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme = ExtResource("8_qdd4o")
+theme = ExtResource("14_ubxp5")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 

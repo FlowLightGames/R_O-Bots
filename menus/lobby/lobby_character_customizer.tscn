@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ca0ofo74p5we4"]
+[gd_scene load_steps=18 format=3 uid="uid://ca0ofo74p5we4"]
 
 [ext_resource type="Texture2D" uid="uid://c1c0hbjgbbtnl" path="res://menus/character_creator/menu_palette.png" id="2_0fqbj"]
 [ext_resource type="PackedScene" uid="uid://cd27yl8tl5qd6" path="res://player_character/character.tscn" id="2_6d3b8"]
@@ -45,10 +45,17 @@ shader_parameter/Max_types = 8
 shader_parameter/Type = 6
 shader_parameter/palett = ExtResource("7_646sm")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qdfhl"]
+resource_local_to_scene = true
+shader = ExtResource("6_rcmc8")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 7
+shader_parameter/palett = ExtResource("7_646sm")
+
 [node name="LobbyCharacterCustomizer" type="PanelContainer" node_paths=PackedStringArray("player_tag", "example_character_0", "example_character_1", "example_character_2", "example_character_3", "panel_content", "ready_overlay", "player_name", "body_color_txt", "body_txt", "face_color_txt", "face_custom_txt", "face_number_txt")]
 process_mode = 1
 material = SubResource("ShaderMaterial_m4yiq")
-custom_minimum_size = Vector2(150, 128)
+custom_minimum_size = Vector2(144, 128)
 offset_right = 6.0
 offset_bottom = 11.0
 theme = ExtResource("5_4ciyq")
@@ -73,7 +80,7 @@ layout_mode = 2
 metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-custom_minimum_size = Vector2(134, 0)
+custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 theme_override_constants/separation = 9
 metadata/_edit_group_ = true
@@ -104,6 +111,7 @@ text = "BodyBase"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase"]
 layout_mode = 2
+theme_override_constants/separation = 2
 alignment = 1
 
 [node name="Dec" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer" instance=ExtResource("6_f72pg")]
@@ -129,6 +137,7 @@ text = "BodyClr"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor"]
 layout_mode = 2
+theme_override_constants/separation = 2
 alignment = 1
 
 [node name="Dec" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer" instance=ExtResource("6_f72pg")]
@@ -162,6 +171,9 @@ material = SubResource("ShaderMaterial_owlxl")
 [node name="ReticleSprite" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character/Visuals/ZeusReticle" index="0"]
 material = SubResource("ShaderMaterial_oi60r")
 
+[node name="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character" index="8"]
+material = SubResource("ShaderMaterial_qdfhl")
+
 [node name="Character2" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control" instance=ExtResource("2_6d3b8")]
 position = Vector2(16, 28)
 disabled = true
@@ -184,6 +196,7 @@ text = "FaceCstm"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset"]
 layout_mode = 2
+theme_override_constants/separation = 1
 alignment = 1
 
 [node name="Dec" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer" instance=ExtResource("6_f72pg")]
@@ -210,6 +223,7 @@ text = "FaceNum"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType"]
 layout_mode = 2
+theme_override_constants/separation = 2
 alignment = 1
 
 [node name="Dec" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer" instance=ExtResource("6_f72pg")]
@@ -236,6 +250,7 @@ text = "FaceClr"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor"]
 layout_mode = 2
+theme_override_constants/separation = 2
 alignment = 1
 
 [node name="Dec" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer" instance=ExtResource("6_f72pg")]
@@ -322,16 +337,6 @@ text = "Bot"
 horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
-
-[node name="AddPlayer" type="TextureButton" parent="Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="RemovePlayer" type="TextureButton" parent="Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Dec" to="." method="_on_bodytype_dec_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Inc" to="." method="_on_bodytype_inc_pressed"]

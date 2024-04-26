@@ -65,7 +65,7 @@ func get_curr_player_action_dict(player_num:int)->void:
 	temp_input_event_dict[(str(player_num)+"_Action_1")]=GameConfig.get_input_code(InputMap.action_get_events((str(player_num)+"_Action_1")).front())
 
 func assign_input_remap_buttons(player_num:int)->void:
-	curr_player_label.text="Player_"+str(player_num)
+	curr_player_label.text="Player"+str(player_num)
 	get_curr_player_action_dict(player_num)
 	var idx:int=0
 	for action:String in curr_action_dict:

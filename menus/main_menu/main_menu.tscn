@@ -1,6 +1,5 @@
-[gd_scene load_steps=35 format=3 uid="uid://b33a2c617wpeh"]
+[gd_scene load_steps=34 format=3 uid="uid://b33a2c617wpeh"]
 
-[ext_resource type="Theme" uid="uid://dy5u7q4gd4umg" path="res://UI/theme/new_theme.tres" id="1_wtp2m"]
 [ext_resource type="Script" path="res://menus/main_menu/main_menu.gd" id="1_wv75o"]
 [ext_resource type="Texture2D" uid="uid://du2ycui0mnds2" path="res://UI/word_art/GAME_START.png" id="2_iwafk"]
 [ext_resource type="Texture2D" uid="uid://5nejtyp6mix8" path="res://UI/word_art/BATTLE_START.png" id="3_cx1dl"]
@@ -286,7 +285,6 @@ offset_right = 640.0
 offset_bottom = 424.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_wtp2m")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -419,6 +417,7 @@ offset_right = 42.0
 offset_bottom = 2.0
 grow_vertical = 0
 theme = ExtResource("23_h0oec")
+text = "0.0.0.0.0.0.1"
 label_settings = SubResource("LabelSettings_exxbi")
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/BattleStart" to="." method="_on_battle_start_pressed"]

@@ -61,7 +61,17 @@ func _ready()->void:
 	body_color_txt.text=str(current_body_color)
 	face_color_txt.text=str(current_face_color)
 	
-	player_tag.text=GlobalSteam.steam_username
+	player_tag.text="Player_"+str(type)
+	
+	example_character_0.Player_Number=type
+	example_character_1.Player_Number=type
+	example_character_2.Player_Number=type
+	example_character_3.Player_Number=type
+	
+	example_character_0.set_player_name("Player"+str(type))
+	example_character_1.set_player_name("Player"+str(type))
+	example_character_2.set_player_name("Player"+str(type))
+	example_character_3.set_player_name("Player"+str(type))
 	
 	max_number_face_base=FacesAutoload.preset_faces.size()
 
@@ -69,11 +79,12 @@ func enable()->void:
 	_ready()
 	panel_content.visible=true
 	player_name.visible=true
+
 func disable()->void:
 	panel_content.visible=false
 	player_name.visible=false
 
-func update_character_custom(player_number:int)->void:
+func update_to_player_config(player_number:int)->void:
 	var config:PlayerConfigMetaData=PlayerConfigs.Player_Configs[player_number]
 	
 	current_body_color=config.Body_Color
@@ -101,8 +112,14 @@ func update_character_custom(player_number:int)->void:
 		example_character_0.set_new_face(FacesAutoload.preset_faces[current_face_base])
 		example_character_1.set_new_face(FacesAutoload.preset_faces[current_face_base])
 	face_number_txt.text=str(current_face_base)
-	
-	player_tag.text=Steam.getFriendPersonaName(config.steam_id)
+
+func update_offline_character_custom(player_number:int)->void:
+	update_to_player_config(player_number)
+	player_tag.text="Player"+str(player_number)
+
+func update_online_character_custom(player_number:int)->void:
+	update_to_player_config(player_number)
+	player_tag.text=Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[player_number].steam_id)
 
 func _on_bodycolor_dec_pressed()->void:
 	if(!disabled):
@@ -110,7 +127,6 @@ func _on_bodycolor_dec_pressed()->void:
 		example_character_0.set_new_body_color(current_body_color)
 		example_character_1.set_new_body_color(current_body_color)
 		body_color_txt.text=str(current_body_color)
-
 
 func _on_bodycolor_inc_pressed()->void:
 	if(!disabled):

@@ -7,7 +7,6 @@ var draw_overlay:PackedScene=load("res://maps/UI/draw.tscn")
 var win_overlay:PackedScene=load("res://maps/UI/CRT_Win_Screen.tscn")
 var countdown_overlay:PackedScene=load("res://maps/UI/countdown.tscn")
 
-@export var players_spawned:int=4
 @export var spawnpoint_tilemap:TileMap
 @export var base_ground_tilemap:TileMap
 @export var statics_tilemap:TileMap
@@ -89,13 +88,15 @@ func spawn_players(how_many:int)->void:
 		for n:int in range(0,how_many):
 			var spawn:Vector2i=possible_spawns.pick_random()
 			var character:PlayerCharacter=player_scene.instantiate() as PlayerCharacter
-			player_nodes.add_child(character)
 			#imprtant to set first
 			character.Player_Number=n
+			player_nodes.add_child(character)
+			
+			
 			if GameConfig.Online_Session:
-				character.Player_Name=Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n].steam_id)
+				character.set_player_name(Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n].steam_id))
 			else:
-				character.Player_Name="Player"+str(n)
+				character.set_player_name("Playera"+str(n))
 			character.config_init(PlayerConfigs.Player_Configs[n])
 			character.input_map_init()
 			character.position=spawn*16+Vector2i(8,8)
@@ -113,7 +114,7 @@ func unlock_players()->void:
 	stage_ui.start()
 
 func _ready()->void:
-	spawn_players(players_spawned)
+	spawn_players(GameConfig.Current_Number_Of_Players)
 	round_timer.wait_time=round_time
 	stage_ui.initial_time(round_time)
 	var tmp_countdown:Countdown=countdown_overlay.instantiate() as Countdown

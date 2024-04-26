@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cd27yl8tl5qd6"]
+[gd_scene load_steps=39 format=3 uid="uid://cd27yl8tl5qd6"]
 
 [ext_resource type="Script" path="res://player_character/character.gd" id="1_arre1"]
 [ext_resource type="Texture2D" uid="uid://dtjkf0bsqsk5m" path="res://player_character/base_character_sprite.png" id="1_gp3n5"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="6_hlhnq"]
 [ext_resource type="Texture2D" uid="uid://bwy8smpq2xf1" path="res://player_character/gun_knife/knife_gun.png" id="9_i1ueb"]
 [ext_resource type="Texture2D" uid="uid://obuc3onp21l3" path="res://player_character/zeus/zeus_reticle.png" id="10_lcotw"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="11_ny1ly"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qqfp6"]
 radius = 6.0
@@ -18,7 +19,7 @@ radius = 6.0
 resource_local_to_scene = true
 shader = ExtResource("3_ykf1j")
 shader_parameter/Max_types = 8
-shader_parameter/Type = 6
+shader_parameter/Type = 7
 shader_parameter/palett = ExtResource("2_hxxlk")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hbvyt"]
@@ -1287,11 +1288,19 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c8sd1"]
 size = Vector2(14, 14)
 
-[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("BodyAnimation", "FaceAnimation", "IFramesAnimation", "Face", "Body", "bomb_place_check", "KnifeGunSprite", "ZeusReticle", "KnifeHurtBox", "GunRayCast", "KickerRayCast", "DunkerRayCast", "death_timer")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bitwe"]
+resource_local_to_scene = true
+shader = ExtResource("3_ykf1j")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 7
+shader_parameter/palett = ExtResource("2_hxxlk")
+
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("name_label", "BodyAnimation", "FaceAnimation", "IFramesAnimation", "Face", "Body", "bomb_place_check", "KnifeGunSprite", "ZeusReticle", "KnifeHurtBox", "GunRayCast", "KickerRayCast", "DunkerRayCast", "death_timer")]
 z_index = 2
 collision_mask = 280
 motion_mode = 1
 script = ExtResource("1_arre1")
+name_label = NodePath("Label")
 BodyAnimation = NodePath("Visuals/BodyAnimation")
 FaceAnimation = NodePath("Visuals/FaceAnimation")
 IFramesAnimation = NodePath("Visuals/IFramesAnimation")
@@ -1306,7 +1315,6 @@ KickerRayCast = NodePath("KickerCast2D")
 DunkerRayCast = NodePath("DunkerCast2D")
 death_timer = NodePath("DeathTimer")
 metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qqfp6")
@@ -1410,6 +1418,20 @@ collide_with_areas = true
 
 [node name="DeathTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Label" type="Label" parent="."]
+visible = false
+self_modulate = Color(0.74978, 0.74978, 0.74978, 1)
+material = SubResource("ShaderMaterial_bitwe")
+offset_left = -25.0
+offset_top = -35.0
+offset_right = 26.0
+offset_bottom = -25.0
+theme = ExtResource("11_ny1ly")
+text = "Player_1"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
 
 [connection signal="animation_finished" from="Visuals/BodyAnimation" to="." method="_on_body_animation_animation_finished"]
 [connection signal="animation_finished" from="Visuals/IFramesAnimation" to="." method="_on_i_frames_animation_animation_finished"]

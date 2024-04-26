@@ -55,7 +55,7 @@ func _on_battle_start_pressed()->void:
 		GameConfig.Online_Session=false
 		disabled=true
 		SteamLobby.is_host=true
-		get_tree().change_scene_to_packed(SceneCollection.stage_select)
+		get_tree().change_scene_to_packed(SceneCollection.offline_lobby)
 
 
 func _on_options_pressed()->void:
