@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="6_hlhnq"]
 [ext_resource type="Texture2D" uid="uid://bwy8smpq2xf1" path="res://player_character/gun_knife/knife_gun.png" id="9_i1ueb"]
 [ext_resource type="Texture2D" uid="uid://obuc3onp21l3" path="res://player_character/zeus/zeus_reticle.png" id="10_lcotw"]
-[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="11_ny1ly"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="11_tx0pb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qqfp6"]
 radius = 6.0
@@ -1427,7 +1427,7 @@ offset_left = -25.0
 offset_top = -35.0
 offset_right = 26.0
 offset_bottom = -25.0
-theme = ExtResource("11_ny1ly")
+theme = ExtResource("11_tx0pb")
 text = "Player_1"
 horizontal_alignment = 1
 vertical_alignment = 1

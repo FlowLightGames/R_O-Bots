@@ -132,9 +132,11 @@ func picked_up(what:PickUp.PICKUP)->void:
 			Pickup_Stats.BRICK_WALKER=true
 		#SPECIAL YET
 		PickUp.PICKUP.PILL:
-			var possible_pickups:Array[int]=PickUp.PICKUP.values()
+			var possible_pickups:Array=PickUp.PICKUP.values()
 			possible_pickups.erase(int(PickUp.PICKUP.PILL))
-			picked_up(possible_pickups.pick_random())
+			var picked:int=possible_pickups.pick_random() as int
+			print(PickUp.PICKUP.find_key(picked))
+			picked_up(picked)
 		PickUp.PICKUP.POOP:
 			Pickup_Stats.add_state(PickUpStats.STATE.POOP)
 		PickUp.PICKUP.FIRE:
@@ -219,11 +221,10 @@ func action_one()->void:
 						throwable_bomb.throw(get_priority_4_way_direction(current_view_direction))
 
 func action_two()->void:
-	if Pickup_Stats.BOMB_TYPE==BombList.BOMBTYPE.REMOTE:
-		for n:BombBase in Bomb_Ref_List:
-			if n is RemoteBomb:
-				(n as RemoteBomb).explode()
-				break
+	for n:BombBase in Bomb_Ref_List:
+		if n is RemoteBomb:
+			(n as RemoteBomb).explode()
+			break
 	match Pickup_Stats.SPECIAL_STATE:
 				PickUpStats.SPECIALSTATE.GUN:
 					fire_gun()

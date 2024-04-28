@@ -1,18 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://c73jgxta38rfp"]
+[gd_scene load_steps=13 format=3 uid="uid://c73jgxta38rfp"]
 
 [ext_resource type="Script" path="res://menus/options/options.gd" id="1_kfknl"]
-[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="2_jh0ha"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="2_jh0ha"]
 [ext_resource type="Script" path="res://menus/options/main.gd" id="3_1itm5"]
 [ext_resource type="PackedScene" uid="uid://c5g77somkggcq" path="res://UI/buttons/dec.tscn" id="3_aymlg"]
 [ext_resource type="PackedScene" uid="uid://ckvahyw454yty" path="res://menus/character_creator/custom_face.tscn" id="3_gloqi"]
-[ext_resource type="PackedScene" uid="uid://b1ilbhdx0c8p2" path="res://UI/background/background_scroll.tscn" id="3_rdeqp"]
 [ext_resource type="Script" path="res://menus/options/audio.gd" id="3_w0bh2"]
-[ext_resource type="PackedScene" uid="uid://qt42tjjxi7ge" path="res://UI/background/window_bg.tscn" id="4_b2kv2"]
 [ext_resource type="Script" path="res://menus/options/video.gd" id="4_lh087"]
 [ext_resource type="PackedScene" uid="uid://cbjorljnfyjlt" path="res://UI/buttons/inc.tscn" id="4_mhakd"]
 [ext_resource type="Script" path="res://menus/options/custom_face_selector.gd" id="8_gaijy"]
 [ext_resource type="PackedScene" uid="uid://ogldl5edlenf" path="res://menus/options/player_input_settings.tscn" id="10_ccaiu"]
 [ext_resource type="Script" path="res://menus/options/player_input_selector.gd" id="10_hl4et"]
+[ext_resource type="PackedScene" uid="uid://boh6gftujg2q0" path="res://UI/background/window_bg_100.tscn" id="12_87k0k"]
 
 [node name="Options" type="Node2D" node_paths=PackedStringArray("audio_panel", "video_panel", "custom_panel", "input_panel", "main_panel")]
 script = ExtResource("1_kfknl")
@@ -37,10 +36,10 @@ metadata/_edit_lock_ = true
 
 [node name="Main" type="PanelContainer" parent="Control" node_paths=PackedStringArray("audio_button", "video_button", "custom_button", "save_button", "cancel_button", "input_button")]
 layout_mode = 0
-offset_left = 166.0
-offset_top = 49.0
-offset_right = 246.0
-offset_bottom = 155.0
+offset_left = 130.0
+offset_top = 46.0
+offset_right = 210.0
+offset_bottom = 182.0
 script = ExtResource("3_1itm5")
 audio_button = NodePath("CenterContainer/VBoxContainer/Audio")
 video_button = NodePath("CenterContainer/VBoxContainer/Video")
@@ -94,10 +93,10 @@ layout_mode = 2
 [node name="Audio" type="PanelContainer" parent="Control" node_paths=PackedStringArray("master_val", "master_slider", "music_val", "music_slider", "SFX_val", "SFX_slider")]
 visible = false
 layout_mode = 0
-offset_left = 278.0
-offset_top = 54.0
-offset_right = 394.0
-offset_bottom = 172.0
+offset_left = 249.0
+offset_top = 29.0
+offset_right = 365.0
+offset_bottom = 147.0
 script = ExtResource("3_w0bh2")
 master_val = NodePath("VBoxContainer/Master/Val")
 master_slider = NodePath("VBoxContainer/MasterSlider")
@@ -251,16 +250,17 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "Save"
 
-[node name="Video" type="PanelContainer" parent="Control" node_paths=PackedStringArray("res_label", "CRT_check")]
+[node name="Video" type="PanelContainer" parent="Control" node_paths=PackedStringArray("res_label", "CRT_check", "fullscreen_check")]
 visible = false
 layout_mode = 0
-offset_left = 276.0
-offset_top = 54.0
-offset_right = 396.0
-offset_bottom = 155.0
+offset_left = 247.0
+offset_top = 65.0
+offset_right = 367.0
+offset_bottom = 166.0
 script = ExtResource("4_lh087")
 res_label = NodePath("VBoxContainer/HBoxContainer/Label")
 CRT_check = NodePath("VBoxContainer/HBoxContainer2/CheckBox")
+fullscreen_check = NodePath("VBoxContainer/HBoxContainer3/CheckBox")
 metadata/_edit_group_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Video"]
@@ -301,6 +301,22 @@ flat = true
 layout_mode = 2
 text = "Enabled"
 
+[node name="Fullscreen" type="Label" parent="Control/Video/VBoxContainer"]
+layout_mode = 2
+text = "Fullscreen
+"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/Video/VBoxContainer"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="Control/Video/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+flat = true
+
+[node name="Label" type="Label" parent="Control/Video/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Enabled"
+
 [node name="Result" type="Control" parent="Control/Video/VBoxContainer"]
 custom_minimum_size = Vector2(100, 18)
 layout_mode = 2
@@ -330,15 +346,19 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "Save"
 
-[node name="CustomFaceSelector" type="PanelContainer" parent="Control"]
+[node name="CustomFaceSelector" type="PanelContainer" parent="Control" node_paths=PackedStringArray("list_root", "num_of_slots_label", "add_slot_button", "face_customizer")]
 visible = false
 custom_minimum_size = Vector2(168, 252)
 layout_mode = 0
-offset_left = 410.0
+offset_left = 389.0
 offset_top = 44.0
-offset_right = 578.0
+offset_right = 557.0
 offset_bottom = 296.0
 script = ExtResource("8_gaijy")
+list_root = NodePath("VBoxContainer/ScrollContainer/VBoxContainer")
+num_of_slots_label = NodePath("VBoxContainer/Label")
+add_slot_button = NodePath("VBoxContainer/Save_Cancel/HBoxContainer/AddSlot")
+face_customizer = NodePath("../FaceCustom")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/CustomFaceSelector"]
 layout_mode = 2
@@ -370,33 +390,49 @@ offset_bottom = 14.0
 size_flags_horizontal = 8
 text = "Cancel"
 
-[node name="Save" type="Button" parent="Control/CustomFaceSelector/VBoxContainer/Save_Cancel"]
-custom_minimum_size = Vector2(0, 16)
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/CustomFaceSelector/VBoxContainer/Save_Cancel"]
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = 6
 anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-offset_left = -31.0
-offset_bottom = 14.0
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -8.0
+offset_bottom = 8.0
 grow_horizontal = 0
+grow_vertical = 2
+
+[node name="AddSlot" type="Button" parent="Control/CustomFaceSelector/VBoxContainer/Save_Cancel/HBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+text = "Add Slot"
+
+[node name="Save" type="Button" parent="Control/CustomFaceSelector/VBoxContainer/Save_Cancel/HBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
 size_flags_horizontal = 8
 text = "Save"
 
-[node name="FaceCustom" parent="Control" instance=ExtResource("3_gloqi")]
+[node name="FaceCustom" parent="Control" node_paths=PackedStringArray("custom_face_selector") instance=ExtResource("3_gloqi")]
 visible = false
 layout_mode = 1
-offset_left = 140.0
-offset_top = 160.0
-offset_right = -241.0
-offset_bottom = -61.0
+offset_left = 257.0
+offset_top = 94.0
+offset_right = -124.0
+offset_bottom = -127.0
+custom_face_selector = NodePath("../CustomFaceSelector")
+max_number_body_color = null
+max_number_body_base = null
+max_number_face_color = null
 
 [node name="PlayerInputSettings" parent="Control" node_paths=PackedStringArray("player_input_selector") instance=ExtResource("10_ccaiu")]
 visible = false
 layout_mode = 0
-offset_left = 303.0
-offset_top = 90.0
-offset_right = 523.0
-offset_bottom = 276.0
+offset_left = 313.0
+offset_top = 77.0
+offset_right = 533.0
+offset_bottom = 263.0
 player_input_selector = NodePath("../PlayerInputSelector")
 
 [node name="PlayerInputSelector" type="PanelContainer" parent="Control" node_paths=PackedStringArray("list_root", "player_input_customizer_interface")]
@@ -450,9 +486,7 @@ grow_horizontal = 0
 size_flags_horizontal = 8
 text = "Save"
 
-[node name="Background" parent="." instance=ExtResource("3_rdeqp")]
-
-[node name="CanvasLayer" parent="." instance=ExtResource("4_b2kv2")]
+[node name="Win98" parent="." instance=ExtResource("12_87k0k")]
 
 [connection signal="pressed" from="Control/Main/CenterContainer/VBoxContainer/Audio" to="." method="_on_audio_pressed"]
 [connection signal="pressed" from="Control/Main/CenterContainer/VBoxContainer/Video" to="." method="_on_video_pressed"]
@@ -476,7 +510,10 @@ text = "Save"
 [connection signal="pressed" from="Control/Video/VBoxContainer/Result/Save" to="Control/Video" method="_on_save_pressed"]
 [connection signal="cancel" from="Control/CustomFaceSelector" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="Control/CustomFaceSelector/VBoxContainer/Save_Cancel/Cancel" to="Control/CustomFaceSelector" method="_on_cancel_pressed"]
-[connection signal="pressed" from="Control/CustomFaceSelector/VBoxContainer/Save_Cancel/Save" to="Control/CustomFaceSelector" method="_on_save_pressed"]
+[connection signal="pressed" from="Control/CustomFaceSelector/VBoxContainer/Save_Cancel/HBoxContainer/AddSlot" to="Control/CustomFaceSelector" method="_on_add_slot_pressed"]
+[connection signal="pressed" from="Control/CustomFaceSelector/VBoxContainer/Save_Cancel/HBoxContainer/Save" to="Control/CustomFaceSelector" method="_on_save_pressed"]
+[connection signal="cancel" from="Control/FaceCustom" to="Control/CustomFaceSelector" method="_on_face_custom_cancel"]
+[connection signal="cancel" from="Control/PlayerInputSettings" to="Control/PlayerInputSelector" method="_on_player_input_settings_cancel"]
 [connection signal="cancel" from="Control/PlayerInputSelector" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="Control/PlayerInputSelector/VBoxContainer/Save_Cancel/Cancel" to="Control/PlayerInputSelector" method="_on_cancel_pressed"]
 [connection signal="pressed" from="Control/PlayerInputSelector/VBoxContainer/Save_Cancel/Save" to="Control/PlayerInputSelector" method="_on_save_pressed"]

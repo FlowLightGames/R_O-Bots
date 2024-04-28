@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c1c0hbjgbbtnl" path="res://menus/character_creator/menu_palette.png" id="2_0fqbj"]
 [ext_resource type="PackedScene" uid="uid://cd27yl8tl5qd6" path="res://player_character/character.tscn" id="2_6d3b8"]
-[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="5_4ciyq"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="5_4ciyq"]
 [ext_resource type="Script" path="res://menus/lobby/lobby_character_customizer.gd" id="5_h4pye"]
 [ext_resource type="PackedScene" uid="uid://c5g77somkggcq" path="res://UI/buttons/dec.tscn" id="6_f72pg"]
 [ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="6_rcmc8"]
@@ -271,15 +271,15 @@ text = "READY "
 
 [node name="NinePatchRect" type="Panel" parent="CenterContainer"]
 visible = false
-custom_minimum_size = Vector2(134, 40)
+custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
+metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/NinePatchRect"]
-custom_minimum_size = Vector2(133, 33)
 layout_mode = 2
 offset_top = 7.0
-offset_right = 133.0
+offset_right = 128.0
 offset_bottom = 40.0
 bbcode_enabled = true
 text = "[center]

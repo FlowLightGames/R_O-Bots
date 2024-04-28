@@ -40,3 +40,6 @@ func _on_save_pressed()->void:
 
 func _on_cancel_pressed()->void:
 	cancel.emit()
+
+func _on_player_input_settings_cancel()->void:
+	visible=true

@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://bwrl3y4hbd2k7"]
 
 [ext_resource type="Script" path="res://menus/lobby/online_lobby_list.gd" id="1_wrpf2"]
-[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="2_ahmaw"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="2_ahmaw"]
 [ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="3_hpj01"]
-[ext_resource type="PackedScene" uid="uid://b1ilbhdx0c8p2" path="res://UI/background/background_scroll.tscn" id="5_7cy3n"]
+[ext_resource type="PackedScene" uid="uid://boh6gftujg2q0" path="res://UI/background/window_bg_100.tscn" id="4_ppg0q"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f235l"]
 texture = ExtResource("3_hpj01")
@@ -26,13 +26,12 @@ grow_vertical = 2
 theme = ExtResource("2_ahmaw")
 
 [node name="CenterContainer" type="CenterContainer" parent="Control"]
-custom_minimum_size = Vector2(640, 360)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 640.0
-offset_bottom = 360.0
+offset_bottom = 339.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -44,6 +43,7 @@ layout_mode = 2
 alignment = 2
 
 [node name="Cancel" type="Button" parent="Control/CenterContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -55,7 +55,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_f235l")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/CenterContainer/HBoxContainer/PanelContainer"]
-custom_minimum_size = Vector2(258, 250)
+custom_minimum_size = Vector2(258, 226)
 layout_mode = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
@@ -68,13 +68,13 @@ layout_mode = 2
 alignment = 2
 
 [node name="FriendSearch" type="Button" parent="Control/CenterContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "SEARCH FRIEND
-LOBBY"
+text = "SEARCH FRIEND LOBBY"
 
-[node name="Background" parent="." instance=ExtResource("5_7cy3n")]
+[node name="Win98" parent="." instance=ExtResource("4_ppg0q")]
 
 [connection signal="pressed" from="Control/CenterContainer/HBoxContainer/VBoxContainer2/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="Control/CenterContainer/HBoxContainer/VBoxContainer/FriendSearch" to="." method="_on_friend_search_pressed"]

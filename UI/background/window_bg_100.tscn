@@ -1,0 +1,185 @@
+[gd_scene load_steps=13 format=3 uid="uid://boh6gftujg2q0"]
+
+[ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="1_qtmcg"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="2_yl204"]
+[ext_resource type="Texture2D" uid="uid://bnc1l1woe8fmb" path="res://UI/theme/button_light.png" id="3_4kql5"]
+[ext_resource type="Texture2D" uid="uid://c2kl7qva5cxnr" path="res://UI/theme/button_medium.png" id="4_dkn3h"]
+[ext_resource type="Texture2D" uid="uid://b86ni80kqlbbs" path="res://UI/background/recycle_icon.png" id="5_21skw"]
+[ext_resource type="FontFile" uid="uid://binhnkh0687qg" path="res://UI/font/LanaPixel.ttf" id="6_14g4x"]
+[ext_resource type="Texture2D" uid="uid://hx13ej7r828i" path="res://UI/background/desktop_icon.png" id="7_fiudo"]
+[ext_resource type="Texture2D" uid="uid://dj8y6cfla1n2m" path="res://UI/background/directory_icon.png" id="8_gq1xs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e2amk"]
+font_size = 8
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_huu74"]
+font = ExtResource("6_14g4x")
+font_size = 11
+
+[sub_resource type="LabelSettings" id="LabelSettings_y34mi"]
+font = ExtResource("6_14g4x")
+font_size = 11
+
+[sub_resource type="LabelSettings" id="LabelSettings_xl4xi"]
+font = ExtResource("6_14g4x")
+font_size = 11
+
+[node name="Win98" type="CanvasLayer"]
+layer = -1
+
+[node name="PanelContainer" type="NinePatchRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_qtmcg")
+patch_margin_left = 8
+patch_margin_top = 10
+patch_margin_right = 7
+patch_margin_bottom = 4
+metadata/_edit_lock_ = true
+
+[node name="Window" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 10.0
+offset_right = -2.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_yl204")
+color = Color(0.192157, 0.282353, 0.54902, 1)
+
+[node name="Taskbar" type="NinePatchRect" parent="Window"]
+layout_mode = 0
+offset_top = 327.0
+offset_right = 636.0
+offset_bottom = 347.0
+texture = ExtResource("3_4kql5")
+patch_margin_left = 3
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Window/Taskbar"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 18.0
+metadata/_edit_group_ = true
+
+[node name="Button" type="NinePatchRect" parent="Window/Taskbar/HBoxContainer"]
+custom_minimum_size = Vector2(46, 16)
+layout_mode = 2
+texture = ExtResource("3_4kql5")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+metadata/_edit_group_ = true
+
+[node name="Start" type="Label" parent="Window/Taskbar/HBoxContainer/Button"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 1.0
+offset_right = 44.0
+offset_bottom = 13.0
+text = "# Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="NinePatchRect" parent="Window/Taskbar/HBoxContainer"]
+custom_minimum_size = Vector2(58.645, 14)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_dkn3h")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+metadata/_edit_group_ = true
+
+[node name="Start" type="Label" parent="Window/Taskbar/HBoxContainer/Button2"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 1.0
+offset_right = 44.0
+offset_bottom = 11.0
+text = "R_O-Bots"
+label_settings = SubResource("LabelSettings_e2amk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icons" type="VBoxContainer" parent="Window"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 66.0
+offset_bottom = 126.0
+theme_override_constants/separation = 0
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="Recycle" type="TextureRect" parent="Window/Icons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_21skw")
+stretch_mode = 2
+
+[node name="Bin" type="Label" parent="Window/Icons"]
+layout_mode = 2
+text = "Recycle Bin"
+label_settings = SubResource("LabelSettings_huu74")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="Window/Icons"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="Desktop" type="TextureRect" parent="Window/Icons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_fiudo")
+stretch_mode = 2
+
+[node name="Computer" type="Label" parent="Window/Icons"]
+layout_mode = 2
+text = "Computer
+"
+label_settings = SubResource("LabelSettings_y34mi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer3" type="Control" parent="Window/Icons"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="Directory" type="TextureRect" parent="Window/Icons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_gq1xs")
+stretch_mode = 2
+
+[node name="Document" type="Label" parent="Window/Icons"]
+layout_mode = 2
+text = "Docouments
+"
+label_settings = SubResource("LabelSettings_xl4xi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer2" type="Control" parent="Window/Icons"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2

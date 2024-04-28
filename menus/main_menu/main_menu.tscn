@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://fyjqyxmg724a" path="res://menus/main_menu/moving_tex.png" id="20_bnm3p"]
 [ext_resource type="Texture2D" uid="uid://dmfy3avy14qap" path="res://UI/word_art/R.png" id="21_vo6vu"]
 [ext_resource type="Texture2D" uid="uid://gf74g6i1ttaa" path="res://UI/word_art/O-Bots.png" id="22_khdki"]
-[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="23_h0oec"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="23_h0oec"]
 [ext_resource type="FontFile" uid="uid://binhnkh0687qg" path="res://UI/font/LanaPixel.ttf" id="24_endfs"]
 
 [sub_resource type="Gradient" id="Gradient_v7xrr"]

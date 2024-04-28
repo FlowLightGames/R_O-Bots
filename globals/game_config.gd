@@ -16,6 +16,7 @@ var SFX:int=50
 #Video Settings
 var Resolution:Vector2i=Vector2i(1920,1080)
 var CRT_Filer:bool=false
+var Fullscreen:bool=false
 
 #SAVE/LOAD
 var save_path:String="user://R_O-Bots_Config.save"
@@ -26,6 +27,21 @@ var Player_Input_Dicts:Array[Dictionary]=[{},{},{},{},{},{},{},{}]
 func _ready()->void:
 	load_data()
 	game_version=ProjectSettings.get_setting("application/config/version")
+
+func apply_video_settings()->void:
+	var window:Window=get_window()
+	window.borderless=true
+	window.size=Resolution
+	#DisplayServer.window_set_size(Resolution)
+	if Fullscreen:
+		window.mode=Window.MODE_EXCLUSIVE_FULLSCREEN
+		#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+	else:
+		window.mode=Window.MODE_WINDOWED
+		#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	window.move_to_center()
+	#TODO CRT FILTER
+	
 
 func load_player_input_dicts()->void:
 	var curr_handled_player_num:int=0

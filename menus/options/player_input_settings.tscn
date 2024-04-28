@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ogldl5edlenf"]
 
-[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="1_e4fh6"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="1_e4fh6"]
 [ext_resource type="Script" path="res://menus/options/player_input_settings.gd" id="2_5hndy"]
 [ext_resource type="PackedScene" uid="uid://doqxt21sixjlv" path="res://menus/options/input_remap_button.tscn" id="3_rvmbt"]
 

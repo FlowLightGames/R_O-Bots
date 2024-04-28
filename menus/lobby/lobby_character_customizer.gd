@@ -204,8 +204,12 @@ func _on_facepreset_dec_pressed()->void:
 		if current_face_custom:
 			max_number_face_base=maxi(FacesAutoload.custom_faces.size(),1)
 			face_custom_txt.text="Custom"
-			example_character_0.set_new_face(null)
-			example_character_1.set_new_face(null)
+			if FacesAutoload.custom_faces.is_empty():
+				example_character_0.set_new_face(null)
+				example_character_1.set_new_face(null)
+			else:
+				example_character_0.set_new_face(FacesAutoload.custom_faces[0])
+				example_character_1.set_new_face(FacesAutoload.custom_faces[0])
 		else:
 			max_number_face_base=FacesAutoload.preset_faces.size()
 			face_custom_txt.text="Preset"
@@ -220,8 +224,12 @@ func _on_facepreset_inc_pressed()->void:
 		if current_face_custom:
 			max_number_face_base=maxi(FacesAutoload.custom_faces.size(),1)
 			face_custom_txt.text="Custom"
-			example_character_0.set_new_face(null)
-			example_character_1.set_new_face(null)
+			if FacesAutoload.custom_faces.is_empty():
+				example_character_0.set_new_face(null)
+				example_character_1.set_new_face(null)
+			else:
+				example_character_0.set_new_face(FacesAutoload.custom_faces[0])
+				example_character_1.set_new_face(FacesAutoload.custom_faces[0])
 		else:
 			max_number_face_base=FacesAutoload.preset_faces.size()
 			face_custom_txt.text="Preset"

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bsbs004ae4h2a"]
 
-[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="1_ts18e"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="1_ts18e"]
 [ext_resource type="Script" path="res://menus/options/player_input_option.gd" id="2_xoqqx"]
 
 [node name="PlayerInputOption" type="PanelContainer" node_paths=PackedStringArray("player_num_label")]

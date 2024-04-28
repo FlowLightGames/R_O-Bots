@@ -1,6 +1,12 @@
 extends Control
 
+class_name FaceCustomizer
+
 signal cancel
+
+@export var custom_face_selector:CustomFaceSelector
+@export var custom_focus_UI:CustomFocusUI
+var currently_handled_index:int=0
 
 @export
 var example_character_0:PlayerCharacter
@@ -84,4 +90,12 @@ func _on_inc_face_color_pressed()->void:
 
 
 func _on_cancel_pressed()->void:
+	visible=false
+	cancel.emit()
+
+
+func _on_save_pressed()->void:
+	var texture:ImageTexture=custom_focus_UI.build_texture()
+	custom_face_selector.finished_custom(currently_handled_index,texture)
+	visible=false
 	cancel.emit()

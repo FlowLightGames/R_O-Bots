@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bj7d41o8lmqdm" path="res://maps/UI/scanlines.png" id="11_3sgp5"]
 [ext_resource type="Texture2D" uid="uid://dybwn6afguk2n" path="res://maps/UI/win_crt.png" id="12_m88r4"]
 [ext_resource type="PackedScene" uid="uid://5w2ex05brd33" path="res://UI/transition.tscn" id="13_ey60s"]
-[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="14_ubxp5"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="14_ubxp5"]
 
 [sub_resource type="Gradient" id="Gradient_fe8j2"]
 colors = PackedColorArray(0, 0, 0, 1, 0.207843, 0.203922, 0.247059, 1)
@@ -370,7 +370,7 @@ metadata/_edit_lock_ = true
 
 [node name="Scanlines" type="TextureRect" parent="CRT_Frame"]
 visible = false
-self_modulate = Color(1, 1, 1, 0.290196)
+self_modulate = Color(1, 1, 1, 0.415686)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("11_3sgp5")

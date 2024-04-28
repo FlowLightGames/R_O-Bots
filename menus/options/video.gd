@@ -8,6 +8,7 @@ var list_of_common_res:Array[Vector2i]=[
 	Vector2i(1920,1080),
 	Vector2i(1366,768),
 	Vector2i(1280,720),
+	Vector2i(640,360),
 	#16:10
 	Vector2i(1920,1200),
 	Vector2i(1680,1050),
@@ -21,6 +22,7 @@ var list_of_common_res:Array[Vector2i]=[
 
 @export var res_label:Label
 @export var CRT_check:CheckBox
+@export var fullscreen_check:CheckBox
 
 var current_res_idx:int=0
 
@@ -30,6 +32,7 @@ func _ready()->void:
 	if current_res_idx<0:
 		current_res_idx=0
 	CRT_check.button_pressed=GameConfig.CRT_Filer
+	fullscreen_check.button_pressed=GameConfig.Fullscreen
 	update_res_label()
 
 func update_res_label()->void:
@@ -43,11 +46,11 @@ func _on_inc_pressed()->void:
 	current_res_idx=posmod(current_res_idx+1,list_of_common_res.size())
 	update_res_label()
 
-
-
 func _on_save_pressed()->void:
 	GameConfig.Resolution=list_of_common_res[current_res_idx]
 	GameConfig.CRT_Filer=CRT_check.button_pressed
+	GameConfig.Fullscreen=fullscreen_check.button_pressed
+	GameConfig.apply_video_settings()
 	cancel.emit()
 
 

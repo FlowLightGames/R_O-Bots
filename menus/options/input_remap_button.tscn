@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://doqxt21sixjlv"]
 
 [ext_resource type="Script" path="res://menus/options/input_remap_button.gd" id="1_1yups"]
-[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="1_we67g"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="1_we67g"]
 
 [node name="InputRemapButton" type="Button" node_paths=PackedStringArray("action_label", "key_scan_label")]
 custom_minimum_size = Vector2(204, 16)

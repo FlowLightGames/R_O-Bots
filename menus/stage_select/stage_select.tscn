@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://cj7kdptcelfix"]
+[gd_scene load_steps=12 format=3 uid="uid://cj7kdptcelfix"]
 
-[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/new_theme_outlined.tres" id="1_65nkd"]
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="1_65nkd"]
 [ext_resource type="Script" path="res://menus/stage_select/stage_select.gd" id="1_p8ugr"]
 [ext_resource type="PackedScene" uid="uid://c5g77somkggcq" path="res://UI/buttons/dec.tscn" id="2_bfhf8"]
 [ext_resource type="Resource" uid="uid://1fmhmk2wgv0l" path="res://menus/stage_select/stage_select_meta_datas/default.tres" id="2_ogmd1"]
@@ -9,9 +9,8 @@
 [ext_resource type="Resource" uid="uid://dxgqhi8f283ad" path="res://menus/stage_select/stage_select_meta_datas/forest.tres" id="4_byyl7"]
 [ext_resource type="Resource" uid="uid://d2s8me31yw22c" path="res://menus/stage_select/stage_select_meta_datas/lab.tres" id="5_cgtbc"]
 [ext_resource type="PackedScene" uid="uid://b8d0vrsqampkv" path="res://menus/stage_select/stage_preview.tscn" id="5_mr6la"]
-[ext_resource type="PackedScene" uid="uid://b1ilbhdx0c8p2" path="res://UI/background/background_scroll.tscn" id="6_0mgp2"]
 [ext_resource type="Resource" uid="uid://cjo1qr6v85uvh" path="res://menus/stage_select/stage_select_meta_datas/sky.tres" id="6_br88h"]
-[ext_resource type="PackedScene" uid="uid://qt42tjjxi7ge" path="res://UI/background/window_bg.tscn" id="12_epcmt"]
+[ext_resource type="PackedScene" uid="uid://boh6gftujg2q0" path="res://UI/background/window_bg_100.tscn" id="11_ymbcm"]
 
 [node name="StageSelect" type="Node2D" node_paths=PackedStringArray("stage_label", "size_label", "stage_preview")]
 script = ExtResource("1_p8ugr")
@@ -142,9 +141,7 @@ size_flags_vertical = 4
 theme_override_constants/outline_size = 0
 text = "LETS GOOOO"
 
-[node name="Background" parent="." instance=ExtResource("6_0mgp2")]
-
-[node name="CanvasLayer" parent="." instance=ExtResource("12_epcmt")]
+[node name="Win98" parent="." instance=ExtResource("11_ymbcm")]
 
 [connection signal="pressed" from="Control/Panel/Selector/VBoxContainer/StageSelect/StageDec" to="." method="_on_stage_dec_pressed"]
 [connection signal="pressed" from="Control/Panel/Selector/VBoxContainer/StageSelect/StageInc" to="." method="_on_stage_inc_pressed"]
