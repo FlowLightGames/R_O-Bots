@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://6mm35ooxdona"]
+
+[ext_resource type="PackedScene" uid="uid://n7lkku2i7eso" path="res://menus/main_menu/memes/meme_base.tscn" id="1_c45mw"]
+[ext_resource type="Texture2D" uid="uid://ojuvy5q0nsdy" path="res://menus/main_menu/memes/k_knife_base.png" id="2_yy0rk"]
+[ext_resource type="Shader" path="res://UI/shader/displacement.gdshader" id="3_cnimv"]
+[ext_resource type="Texture2D" uid="uid://kf8ssn47lyw3" path="res://menus/main_menu/memes/k_knife_led.png" id="3_udfjn"]
+[ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="4_jcrlo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sdbux"]
+resource_local_to_scene = true
+shader = ExtResource("3_cnimv")
+shader_parameter/displacement_strength = 0.0
+shader_parameter/opacity = 1.0
+shader_parameter/displacement_map_size = Vector2i(12, 9)
+shader_parameter/displacement_map = ExtResource("4_jcrlo")
+
+[node name="MemeBase" instance=ExtResource("1_c45mw")]
+
+[node name="Base" parent="." index="0"]
+texture = ExtResource("2_yy0rk")
+
+[node name="LED" parent="Base" index="0"]
+material = SubResource("ShaderMaterial_sdbux")
+position = Vector2(-1, -4)
+texture = ExtResource("3_udfjn")
+
+[node name="Panel" parent="Base" index="1"]
+offset_left = -43.0
+offset_top = -53.0
+offset_bottom = 47.0

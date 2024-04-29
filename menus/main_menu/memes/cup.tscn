@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://wnge5pvgn22f"]
+
+[ext_resource type="PackedScene" uid="uid://n7lkku2i7eso" path="res://menus/main_menu/memes/meme_base.tscn" id="1_uo625"]
+[ext_resource type="Texture2D" uid="uid://caa70k3amlmd0" path="res://menus/main_menu/memes/cup_base.png" id="2_813i7"]
+[ext_resource type="Shader" path="res://UI/shader/displacement.gdshader" id="3_njgh0"]
+[ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="4_61h2t"]
+[ext_resource type="Texture2D" uid="uid://bc84cjod6i7su" path="res://menus/main_menu/memes/cup_led.png" id="5_um8j6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p8vpa"]
+resource_local_to_scene = true
+shader = ExtResource("3_njgh0")
+shader_parameter/displacement_strength = 0.0
+shader_parameter/opacity = 1.0
+shader_parameter/displacement_map_size = Vector2i(12, 9)
+shader_parameter/displacement_map = ExtResource("4_61h2t")
+
+[node name="MemeBase" instance=ExtResource("1_uo625")]
+
+[node name="Base" parent="." index="0"]
+texture = ExtResource("2_813i7")
+
+[node name="LED" parent="Base" index="0"]
+material = SubResource("ShaderMaterial_p8vpa")
+position = Vector2(6, 5)
+texture = ExtResource("5_um8j6")
+
+[node name="Panel" parent="Base" index="1"]
+offset_left = -57.0
+offset_top = -70.0
+offset_right = 32.0
+offset_bottom = 35.0

@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://dbowg3kjnkg0v"]
+
+[ext_resource type="Texture2D" uid="uid://b5fwrr3i37qqm" path="res://player_character/fart/fart_particles.png" id="1_kranq"]
+[ext_resource type="Script" path="res://player_character/fart/fart.gd" id="2_dtehk"]
+[ext_resource type="AudioStream" uid="uid://cd2pgkhmt0kl4" path="res://player_character/fart/fart.wav" id="3_hov7k"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rx3k8"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_hp8vd"]
+colors = PackedColorArray(1, 0.851074, 0.046875, 1, 0.405518, 0.464844, 0.372238, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_prx1u"]
+gradient = SubResource("Gradient_hp8vd")
+
+[sub_resource type="Gradient" id="Gradient_y6li0"]
+colors = PackedColorArray(1, 1, 1, 1, 0.286275, 0.278431, 0.101961, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_w6lq6"]
+gradient = SubResource("Gradient_y6li0")
+
+[sub_resource type="Curve" id="Curve_b8ahq"]
+_data = [Vector2(0.00707965, 1), 0.0, 0.0, 0, 0, Vector2(0.469027, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_75wpd"]
+curve_x = SubResource("Curve_b8ahq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ojo3k"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(16, 4, 1)
+angular_velocity_max = 60.0
+directional_velocity_min = -120.0
+directional_velocity_max = 120.0
+directional_velocity_curve = SubResource("CurveXYZTexture_75wpd")
+scale_min = 0.5
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_w6lq6")
+color_initial_ramp = SubResource("GradientTexture1D_prx1u")
+hue_variation_min = -0.2
+hue_variation_max = 0.2
+anim_offset_max = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_86b8c"]
+size = Vector2(18, 18)
+
+[node name="GPUParticles2D" type="GPUParticles2D" node_paths=PackedStringArray("audio")]
+material = SubResource("CanvasItemMaterial_rx3k8")
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_ojo3k")
+texture = ExtResource("1_kranq")
+one_shot = true
+explosiveness = 1.0
+randomness = 0.23
+script = ExtResource("2_dtehk")
+audio = NodePath("AudioStreamPlayer")
+
+[node name="TTL" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+autostart = true
+
+[node name="Hurtbox" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hov7k")
+volume_db = -5.56
+autoplay = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_86b8c")
+
+[connection signal="timeout" from="TTL" to="." method="_on_ttl_timeout"]
+[connection signal="timeout" from="Hurtbox" to="." method="_on_hurtbox_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

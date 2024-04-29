@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6hbc7e77ncf1"]
+
+[ext_resource type="PackedScene" uid="uid://n7lkku2i7eso" path="res://menus/main_menu/memes/meme_base.tscn" id="1_e1xtq"]
+[ext_resource type="Texture2D" uid="uid://dg8i2eym0rlwy" path="res://menus/main_menu/memes/god_l_base.png" id="2_oy1w1"]
+[ext_resource type="Shader" path="res://UI/shader/displacement.gdshader" id="3_ym1t0"]
+[ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="4_ck8eh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ik2qd"]
+resource_local_to_scene = true
+shader = ExtResource("3_ym1t0")
+shader_parameter/displacement_strength = 0.0
+shader_parameter/opacity = 1.0
+shader_parameter/displacement_map_size = Vector2i(12, 9)
+shader_parameter/displacement_map = ExtResource("4_ck8eh")
+
+[node name="MemeBase" instance=ExtResource("1_e1xtq")]
+
+[node name="Base" parent="." index="0"]
+texture = ExtResource("2_oy1w1")
+
+[node name="LED" parent="Base" index="0"]
+material = SubResource("ShaderMaterial_ik2qd")
+
+[node name="Panel" parent="Base" index="1"]
+offset_left = -90.0
+offset_top = -59.0
+offset_right = 111.0
+offset_bottom = 72.0
