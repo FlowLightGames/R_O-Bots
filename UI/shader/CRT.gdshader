@@ -49,7 +49,7 @@ void fragment()
 	//float r = texture(SCREEN_TEXTURE, converted_uv + vec2(SCREEN_PIXEL_SIZE.x*1.0,0.0), 0.0).r;
 	//float g = texture(SCREEN_TEXTURE, converted_uv + vec2(SCREEN_PIXEL_SIZE.x*-1.0,0.0), 0.0).g;
 	//float b = texture(SCREEN_TEXTURE, converted_uv + vec2(SCREEN_PIXEL_SIZE.x*0.0,0.0), 0.0).b;
-	float r = texture(SCREEN_TEXTURE, converted_uv + vec2(TEXTURE_PIXEL_SIZE.x*0.0,0.0)).r;
+	float r = texture(SCREEN_TEXTURE, converted_uv + vec2(TEXTURE_PIXEL_SIZE.x*+0.5,0.0)).r;
 	float g = texture(SCREEN_TEXTURE, converted_uv + vec2(TEXTURE_PIXEL_SIZE.x*-0.5,0.0)).g;
 	float b = texture(SCREEN_TEXTURE, converted_uv + vec2(TEXTURE_PIXEL_SIZE.x*0.0,0.0)).b;
 	

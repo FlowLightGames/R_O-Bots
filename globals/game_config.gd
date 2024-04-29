@@ -215,3 +215,4 @@ func load_data()->void:
 		FacesAutoload.custom_faces=[]
 		
 		save_data()
+	apply_video_settings()

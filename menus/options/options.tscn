@@ -422,9 +422,6 @@ offset_top = 94.0
 offset_right = -124.0
 offset_bottom = -127.0
 custom_face_selector = NodePath("../CustomFaceSelector")
-max_number_body_color = null
-max_number_body_base = null
-max_number_face_color = null
 
 [node name="PlayerInputSettings" parent="Control" node_paths=PackedStringArray("player_input_selector") instance=ExtResource("10_ccaiu")]
 visible = false

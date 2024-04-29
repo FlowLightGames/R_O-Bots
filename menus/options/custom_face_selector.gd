@@ -37,11 +37,24 @@ func finished_custom(idx:int,texture:Texture2D)->void:
 func _on_option_custom_pressed(idx:int)->void:
 	visible=false
 	face_customizer.currently_handled_index=idx
+	face_customizer.custom_focus_UI.load_texture((list_root.get_child(idx) as CustomFaceOption).current_texture)
 	face_customizer.visible=true
 
 func _on_option_delete_pressed(idx:int)->void:
-	#TODO
-	pass
+	#var child_to_free:Node=list_root.get_child(idx)
+	#child_to_free.free()
+	var all_children:Array[Node]=list_root.get_children()
+	var move_up:bool=false
+	var iter_idx:int=0
+	for n:CustomFaceOption in all_children:
+		if iter_idx==idx:
+			n.queue_free()
+			move_up=true
+		elif move_up:
+			n.index=n.index-1
+		iter_idx+=1
+	current_num_of_slots-=1
+	num_of_slots_label.text=str(current_num_of_slots)+"/"+str(FacesAutoload.max_custom_faces)
 
 func _on_cancel_pressed()->void:
 	visible=false

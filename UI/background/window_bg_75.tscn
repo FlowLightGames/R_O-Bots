@@ -176,7 +176,7 @@ stretch_mode = 2
 
 [node name="Document" type="Label" parent="Window/Icons"]
 layout_mode = 2
-text = "Docouments
+text = "Documents
 "
 label_settings = SubResource("LabelSettings_xl4xi")
 horizontal_alignment = 1

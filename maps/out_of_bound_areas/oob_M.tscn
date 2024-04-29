@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cappgjndrnmpe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tjne5"]
+size = Vector2(560, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rw67g"]
+size = Vector2(560, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cacin"]
+size = Vector2(136, 272)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0gq1k"]
+size = Vector2(136, 272)
+
+[node name="OOB" type="Area2D"]
+self_modulate = Color(1, 0, 1, 1)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(184, -44)
+shape = SubResource("RectangleShape2D_tjne5")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(184, 316)
+shape = SubResource("RectangleShape2D_rw67g")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(-68, 136)
+shape = SubResource("RectangleShape2D_cacin")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(436, 136)
+shape = SubResource("RectangleShape2D_0gq1k")

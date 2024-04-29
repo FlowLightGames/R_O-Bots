@@ -15,15 +15,15 @@ font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_huu74"]
 font = ExtResource("6_14g4x")
-font_size = 11
+font_size = 7
 
 [sub_resource type="LabelSettings" id="LabelSettings_y34mi"]
 font = ExtResource("6_14g4x")
-font_size = 11
+font_size = 7
 
 [sub_resource type="LabelSettings" id="LabelSettings_xl4xi"]
 font = ExtResource("6_14g4x")
-font_size = 11
+font_size = 7
 
 [node name="Win98" type="CanvasLayer"]
 layer = -1
@@ -174,7 +174,7 @@ stretch_mode = 2
 
 [node name="Document" type="Label" parent="Window/Icons"]
 layout_mode = 2
-text = "Docouments
+text = "Documents
 "
 label_settings = SubResource("LabelSettings_xl4xi")
 horizontal_alignment = 1

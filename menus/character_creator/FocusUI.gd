@@ -28,6 +28,20 @@ func _ready()->void:
 	Example_char_0.BodyAnimation.play("run_front_left")
 	Example_char_1.BodyAnimation.play("run_front_right")
 
+func load_texture(tex:Texture2D)->void:
+	if tex:
+		var tmp_image:Image=tex.get_image()
+		tmp_image=tmp_image.get_region(Rect2i(Vector2i(0,0),Vector2i(12,9)))
+		image=tmp_image
+		canvas.texture=ImageTexture.create_from_image(image)
+		set_example_face(build_texture())
+	else:
+		var tmp_image:Image=Image.create(12,9,false,Image.FORMAT_RGBA8)
+		image=tmp_image
+		canvas.texture=ImageTexture.create_from_image(image)
+		set_example_face(build_texture())
+
+
 func set_example_face(input:ImageTexture)->void:
 	Example_char_0.set_new_face(input)
 	Example_char_1.set_new_face(input)

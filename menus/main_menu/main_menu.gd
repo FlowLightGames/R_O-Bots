@@ -35,6 +35,7 @@ func _on_host_lobby_pressed()->void:
 		await Steam.lobby_created
 		
 		PlayerConfigs.reset_full()
+		GameConfig.Current_Number_Of_Players=1
 		PlayerConfigs.set_player_custom_faces(0,FacesAutoload.custom_faces)
 		PlayerConfigs.set_steamID(0,GlobalSteam.steam_id)
 		PlayerConfigs.set_player_initial_data_ack(0)
@@ -44,6 +45,8 @@ func _on_host_lobby_pressed()->void:
 
 func _on_join_lobby_pressed()->void:
 	if !disabled:
+		PlayerConfigs.reset_full()
+		GameConfig.Current_Number_Of_Players=1
 		GameConfig.Online_Session=true
 		disabled=true
 		SteamLobby.is_host=false
@@ -52,6 +55,8 @@ func _on_join_lobby_pressed()->void:
 
 func _on_battle_start_pressed()->void:
 	if !disabled:
+		PlayerConfigs.reset_full()
+		GameConfig.Current_Number_Of_Players=1
 		GameConfig.Online_Session=false
 		disabled=true
 		SteamLobby.is_host=true
@@ -64,3 +69,6 @@ func _on_options_pressed()->void:
 		disabled=true
 		SteamLobby.is_host=true
 		get_tree().change_scene_to_packed(SceneCollection.options)
+
+func _on_exit_pressed()->void:
+	get_tree().quit()

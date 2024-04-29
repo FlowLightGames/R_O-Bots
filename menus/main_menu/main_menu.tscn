@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b33a2c617wpeh"]
+[gd_scene load_steps=35 format=3 uid="uid://b33a2c617wpeh"]
 
 [ext_resource type="Script" path="res://menus/main_menu/main_menu.gd" id="1_wv75o"]
 [ext_resource type="Texture2D" uid="uid://du2ycui0mnds2" path="res://UI/word_art/GAME_START.png" id="2_iwafk"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://dmfy3avy14qap" path="res://UI/word_art/R.png" id="21_vo6vu"]
 [ext_resource type="Texture2D" uid="uid://gf74g6i1ttaa" path="res://UI/word_art/O-Bots.png" id="22_khdki"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="23_h0oec"]
+[ext_resource type="PackedScene" uid="uid://boh6gftujg2q0" path="res://UI/background/window_bg_100.tscn" id="24_bbiac"]
 [ext_resource type="FontFile" uid="uid://binhnkh0687qg" path="res://UI/font/LanaPixel.ttf" id="24_endfs"]
 
 [sub_resource type="Gradient" id="Gradient_v7xrr"]
@@ -190,8 +191,8 @@ tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
+"update": 1,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -202,8 +203,8 @@ tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
+"update": 1,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -272,7 +273,7 @@ battle_start = NodePath("CenterContainer/VBoxContainer/BattleStart")
 host_lobby = NodePath("CenterContainer/VBoxContainer/HostLobby")
 join_lobby = NodePath("CenterContainer/VBoxContainer/JoinLobby")
 options = NodePath("CenterContainer/VBoxContainer/Options")
-version_label = NodePath("Version/VersionLabel")
+version_label = NodePath("VersionExit/VersionLabel")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 8
@@ -364,7 +365,6 @@ expand_mode = 1
 stretch_mode = 1
 
 [node name="StaticBlack" type="ColorRect" parent="CRT"]
-self_modulate = Color(0, 0, 0, 1)
 show_behind_parent = true
 offset_left = -113.0
 offset_top = -82.0
@@ -374,7 +374,6 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Static" type="TextureRect" parent="CRT"]
-self_modulate = Color(0, 0, 0, 1)
 show_behind_parent = true
 offset_left = -113.0
 offset_top = -82.0
@@ -404,23 +403,35 @@ libraries = {
 "": SubResource("AnimationLibrary_jgn4v")
 }
 
-[node name="Version" type="CanvasLayer" parent="."]
+[node name="VersionExit" type="CanvasLayer" parent="."]
 layer = 5
 
-[node name="VersionLabel" type="Label" parent="Version"]
+[node name="VersionLabel" type="Label" parent="VersionExit"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -10.0
-offset_right = 42.0
-offset_bottom = 2.0
+offset_left = 4.0
+offset_top = -33.0
+offset_right = 56.0
+offset_bottom = -21.0
 grow_vertical = 0
 theme = ExtResource("23_h0oec")
 text = "0.0.0.0.0.0.1"
 label_settings = SubResource("LabelSettings_exxbi")
 
+[node name="Exit" type="Button" parent="VersionExit"]
+custom_minimum_size = Vector2(0, 16)
+offset_left = 604.0
+offset_top = 338.0
+offset_right = 637.0
+offset_bottom = 357.0
+theme = ExtResource("23_h0oec")
+text = "EXIT"
+
+[node name="Win98" parent="." instance=ExtResource("24_bbiac")]
+
 [connection signal="pressed" from="CenterContainer/VBoxContainer/BattleStart" to="." method="_on_battle_start_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HostLobby" to="." method="_on_host_lobby_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/JoinLobby" to="." method="_on_join_lobby_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VersionExit/Exit" to="." method="_on_exit_pressed"]

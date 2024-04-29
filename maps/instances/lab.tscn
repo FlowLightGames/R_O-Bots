@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://co7hjdghmwk16"]
+[gd_scene load_steps=18 format=3 uid="uid://co7hjdghmwk16"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_wk1v3"]
 [ext_resource type="Texture2D" uid="uid://dv51jsjvx0fls" path="res://maps/tilesets/lab.png" id="2_li7t2"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dgt6y35hdxgxv" path="res://maps/bricks/instances/lab_7.tscn" id="10_1em04"]
 [ext_resource type="PackedScene" uid="uid://5kosa3r4t0th" path="res://maps/statics/instances/lab_0.tscn" id="11_oswjm"]
 [ext_resource type="PackedScene" uid="uid://bta55ts2p8tmh" path="res://maps/statics/instances/lab_1.tscn" id="12_17dnm"]
+[ext_resource type="PackedScene" uid="uid://cappgjndrnmpe" path="res://maps/out_of_bound_areas/oob_M.tscn" id="13_y22v4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eoxx2"]
 texture = ExtResource("2_li7t2")
@@ -190,3 +191,7 @@ layer_0/tile_data = PackedInt32Array(131074, 0, 0, 655362, 0, 0, 655376, 0, 0, 1
 
 [node name="Camera2D" parent="." index="9"]
 position = Vector2(152, 104)
+
+[node name="OOB" parent="." index="11" instance=ExtResource("13_y22v4")]
+
+[connection signal="body_entered" from="OOB" to="." method="_on_out_of_bound_body_entered"]

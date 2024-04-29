@@ -58,12 +58,6 @@ format = 2
 layer_0/y_sort_enabled = true
 metadata/_edit_lock_ = true
 
-[node name="OutOfBound" type="Area2D" parent="."]
-self_modulate = Color(1, 0, 1, 1)
-collision_layer = 0
-collision_mask = 4
-monitorable = false
-
 [node name="SpawnPoints" type="TileMap" parent="."]
 self_modulate = Color(0.501961, 1, 0, 1)
 tile_set = SubResource("TileSet_levuw")
@@ -100,5 +94,4 @@ map = NodePath("../../..")
 [node name="RoundTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="body_entered" from="OutOfBound" to="." method="_on_out_of_bound_body_entered"]
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]

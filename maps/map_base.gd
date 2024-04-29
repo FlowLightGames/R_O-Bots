@@ -96,7 +96,7 @@ func spawn_players(how_many:int)->void:
 			if GameConfig.Online_Session:
 				character.set_player_name(Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n].steam_id))
 			else:
-				character.set_player_name("Playera"+str(n))
+				character.set_player_name("Player"+str(n))
 			character.config_init(PlayerConfigs.Player_Configs[n])
 			character.input_map_init()
 			character.position=spawn*16+Vector2i(8,8)

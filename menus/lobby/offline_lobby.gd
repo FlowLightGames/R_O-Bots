@@ -6,8 +6,7 @@ class_name OfflineCustomLobby
 var num_of_players:int=1
 
 func _ready()->void:
-	PlayerConfigs.reset_full()
-	num_of_players=1
+	num_of_players=GameConfig.Current_Number_Of_Players
 	update_player_boxes()
 
 func update_player_boxes()->void:

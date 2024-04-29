@@ -125,21 +125,21 @@ layout_mode = 2
 alignment = 1
 
 [node name="Cancel" type="Button" parent="Control/Panel/Buttons/HBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/outline_size = 0
 text = "CANCEL"
 
 [node name="Spacer" type="Control" parent="Control/Panel/Buttons/HBoxContainer"]
 layout_mode = 2
 
 [node name="Go" type="Button" parent="Control/Panel/Buttons/HBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/outline_size = 0
-text = "LETS GOOOO"
+text = "START"
 
 [node name="Win98" parent="." instance=ExtResource("11_ymbcm")]
 

@@ -61,7 +61,7 @@ func _ready()->void:
 	body_color_txt.text=str(current_body_color)
 	face_color_txt.text=str(current_face_color)
 	
-	player_tag.text="Player_"+str(type)
+	player_tag.text="Player"+str(type)
 	
 	example_character_0.Player_Number=type
 	example_character_1.Player_Number=type

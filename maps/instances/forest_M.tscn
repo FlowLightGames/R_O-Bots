@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d2bnlyda5ph3q"]
+[gd_scene load_steps=25 format=3 uid="uid://d2bnlyda5ph3q"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_4wjk5"]
 [ext_resource type="Resource" uid="uid://bb2nqesc37rsm" path="res://maps/pickup_maps/instances/forest.tres" id="2_7181u"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://0lg5ehhj3vnb" path="res://maps/bricks/instances/forest_1.tscn" id="4_u6r7s"]
 [ext_resource type="PackedScene" uid="uid://k8a76hrw1be2" path="res://maps/statics/instances/forest_0.tscn" id="5_b0ewj"]
 [ext_resource type="Texture2D" uid="uid://dtclvavboo0eb" path="res://maps/shadows/sky.png" id="7_hn70u"]
+[ext_resource type="PackedScene" uid="uid://cappgjndrnmpe" path="res://maps/out_of_bound_areas/oob_M.tscn" id="8_c6djf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7y861"]
 texture = ExtResource("2_st7xo")
@@ -206,7 +207,6 @@ _data = {
 }
 
 [node name="MapBase" instance=ExtResource("1_4wjk5")]
-players_spawned = 8
 possible_pickups = ExtResource("2_7181u")
 round_time = 110.0
 metadata/_edit_lock_ = true
@@ -264,3 +264,7 @@ libraries = {
 }
 autoplay = "Default"
 speed_scale = 0.024
+
+[node name="OOB" parent="." index="13" instance=ExtResource("8_c6djf")]
+
+[connection signal="body_entered" from="OOB" to="." method="_on_out_of_bound_body_entered"]

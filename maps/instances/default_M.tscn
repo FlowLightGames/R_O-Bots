@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1taip4gl5ew5"]
+[gd_scene load_steps=11 format=3 uid="uid://d1taip4gl5ew5"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_w5a5a"]
 [ext_resource type="Resource" uid="uid://pom4x0sy2j4x" path="res://maps/pickup_maps/instances/default.tres" id="2_2kdd3"]
 [ext_resource type="Texture2D" uid="uid://dn77v8fftvbnl" path="res://maps/tilesets/default.png" id="2_t0jha"]
 [ext_resource type="PackedScene" uid="uid://dd0kxf6lm6rav" path="res://maps/bricks/instances/default_0.tscn" id="3_bou51"]
+[ext_resource type="PackedScene" uid="uid://cappgjndrnmpe" path="res://maps/out_of_bound_areas/oob_M.tscn" id="6_6wjyg"]
 [ext_resource type="PackedScene" uid="uid://dvmhesayqhg82" path="res://maps/statics/instances/default_0.tscn" id="11_nfcvr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qrnlf"]
@@ -143,8 +144,12 @@ possible_spawns = Array[PackedScene]([ExtResource("3_bou51")])
 tile_set = SubResource("TileSet_hl10g")
 layer_0/tile_data = PackedInt32Array(458755, 0, 65536, 327683, 0, 65536, 196613, 0, 65536, 196615, 0, 65536, 196617, 0, 65536, 196621, 0, 65536, 196619, 0, 65536, 327693, 0, 65536, 327691, 0, 65536, 327689, 0, 65536, 327687, 0, 65536, 327685, 0, 65536, 458757, 0, 65536, 458759, 0, 65536, 458761, 0, 65536, 458763, 0, 65536, 458765, 0, 65536, 589837, 0, 65536, 589835, 0, 65536, 589833, 0, 65536, 589831, 0, 65536, 589829, 0, 65536, 327695, 0, 65536, 458767, 0, 65536, 196611, 0, 65536, 196623, 0, 65536, 589827, 0, 65536, 589839, 0, 65536, 720899, 0, 65536, 851971, 0, 65536, 851973, 0, 65536, 720901, 0, 65536, 720903, 0, 65536, 851975, 0, 65536, 720905, 0, 65536, 851977, 0, 65536, 851979, 0, 65536, 720907, 0, 65536, 720909, 0, 65536, 851981, 0, 65536, 851983, 0, 65536, 720911, 0, 65536, 851985, 0, 65536, 589841, 0, 65536, 720913, 0, 65536, 458769, 0, 65536, 327697, 0, 65536, 196625, 0, 65536, 196627, 0, 65536, 327699, 0, 65536, 458771, 0, 65536, 589843, 0, 65536, 720915, 0, 65536, 851987, 0, 65536)
 
-[node name="SpawnPoints" parent="." index="5"]
+[node name="SpawnPoints" parent="." index="4"]
 layer_0/tile_data = PackedInt32Array(131074, 0, 0, 917506, 0, 0, 917524, 0, 0, 131092, 0, 0, 393222, 0, 0, 655366, 0, 0, 655376, 0, 0, 393232, 0, 0)
 
-[node name="Camera2D" parent="." index="10"]
+[node name="Camera2D" parent="." index="9"]
 position = Vector2(184, 120)
+
+[node name="OOB" parent="." index="11" instance=ExtResource("6_6wjyg")]
+
+[connection signal="body_entered" from="OOB" to="." method="_on_out_of_bound_body_entered"]
