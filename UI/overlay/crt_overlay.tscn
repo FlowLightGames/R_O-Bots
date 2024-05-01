@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://cru0p00ocdy0e"]
+
+[ext_resource type="Shader" path="res://UI/shader/crt_overlay.gdshader" id="1_e7pv3"]
+[ext_resource type="Texture2D" uid="uid://bj7d41o8lmqdm" path="res://maps/UI/scanlines.png" id="2_8hug2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ssohu"]
+resource_local_to_scene = true
+shader = ExtResource("1_e7pv3")
+shader_parameter/noise_strength = 0.02
+shader_parameter/scanline_strength = 0.3
+shader_parameter/vignette_intensity = 0.003
+shader_parameter/warp_intensity_x = 8.0
+shader_parameter/warp_intensity_y = 8.0
+shader_parameter/scanline_tex = ExtResource("2_8hug2")
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 11
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+texture_filter = 1
+copy_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+material = SubResource("ShaderMaterial_ssohu")
+custom_minimum_size = Vector2(640, 360)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

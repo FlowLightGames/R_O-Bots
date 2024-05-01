@@ -150,6 +150,18 @@ tracks/7/keys = {
 "method": &"switch_cams"
 }]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:can_move_on")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_a3ceo"]
 length = 0.001
@@ -232,6 +244,18 @@ tracks/6/path = NodePath("CRT_Frame/ColorRect:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:can_move_on")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -383,15 +407,6 @@ offset_bottom = 40.0
 pivot_offset = Vector2(279, 180)
 texture = ExtResource("12_m88r4")
 metadata/_edit_lock_ = true
-
-[node name="Button" type="Button" parent="CRT_Frame/TextureRect"]
-layout_mode = 0
-offset_left = 565.0
-offset_top = 293.0
-offset_right = 627.0
-offset_bottom = 314.0
-theme = ExtResource("14_ubxp5")
-text = "OK."
 
 [node name="Transition" parent="." instance=ExtResource("13_ey60s")]
 

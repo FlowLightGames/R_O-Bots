@@ -25,7 +25,14 @@ position = Vector2(-19, -13)
 texture = ExtResource("3_ux4vg")
 
 [node name="Panel" parent="Base" index="1"]
-offset_left = -76.0
+offset_left = -68.0
 offset_top = -61.0
-offset_right = 47.0
+offset_right = 67.0
 offset_bottom = 48.0
+
+[node name="Label" parent="Base/Panel" index="0"]
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 42.0
+offset_bottom = 11.0
+text = "gun.exe"

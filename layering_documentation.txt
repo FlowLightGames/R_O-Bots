@@ -13,3 +13,4 @@ layer 4: countdown,match-draw,transition
 layer 5: win-crt,version_label
 
 layer 10: Mouse Cursor
+layer 11: CRT_OVERLAY

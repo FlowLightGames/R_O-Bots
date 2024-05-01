@@ -22,7 +22,14 @@ texture = ExtResource("2_oy1w1")
 material = SubResource("ShaderMaterial_ik2qd")
 
 [node name="Panel" parent="Base" index="1"]
-offset_left = -90.0
-offset_top = -59.0
-offset_right = 111.0
+offset_left = -84.0
+offset_top = -80.0
+offset_right = 102.0
 offset_bottom = 72.0
+
+[node name="Label" parent="Base/Panel" index="0"]
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 48.0
+offset_bottom = 11.0
+text = "human.exe"

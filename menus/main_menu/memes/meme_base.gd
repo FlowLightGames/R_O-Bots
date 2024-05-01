@@ -21,7 +21,7 @@ func _process(delta:float)->void:
 	time_elapsed+=delta
 	
 	body_base.position.y=start_pos.y+sin(time_elapsed*y_speed+global_start_pos.y)*y_amp
-	body_base.position.x=start_pos.x+sin(time_elapsed*x_speed+global_start_pos.x)*x_amp
+	#body_base.position.x=start_pos.x+sin(time_elapsed*x_speed+global_start_pos.x)*x_amp
 	
 	if time_elapsed>=120.0:
 		time_elapsed-=120.0

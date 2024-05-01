@@ -28,3 +28,10 @@ texture = ExtResource("3_anq4f")
 offset_left = -50.0
 offset_top = -46.0
 offset_right = 51.0
+
+[node name="Label" parent="Base/Panel" index="0"]
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 42.0
+offset_bottom = 11.0
+text = "soy.exe"

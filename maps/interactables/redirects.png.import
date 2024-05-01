@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvffq8wbdsdr"
-path="res://.godot/imported/box_inner.png-b563377d2ecc6c453699259dad5b3fcd.ctex"
+uid="uid://bgd73vvh6vaoq"
+path="res://.godot/imported/redirects.png-479cb9642e2f356e2463cfeaf5bcc13e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://maps/UI/box_inner.png"
-dest_files=["res://.godot/imported/box_inner.png-b563377d2ecc6c453699259dad5b3fcd.ctex"]
+source_file="res://maps/interactables/redirects.png"
+dest_files=["res://.godot/imported/redirects.png-479cb9642e2f356e2463cfeaf5bcc13e.ctex"]
 
 [params]
 

@@ -23,6 +23,13 @@ material = SubResource("ShaderMaterial_rh77d")
 
 [node name="Panel" parent="Base" index="1"]
 offset_left = -91.0
-offset_top = -52.0
+offset_top = -65.0
 offset_right = 82.0
-offset_bottom = 59.0
+offset_bottom = 56.0
+
+[node name="Label" parent="Base/Panel" index="0"]
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 42.0
+offset_bottom = 11.0
+text = "god.exe"

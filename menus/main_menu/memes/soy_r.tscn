@@ -25,7 +25,14 @@ position = Vector2(-1, 4)
 texture = ExtResource("3_ds3is")
 
 [node name="Panel" parent="Base" index="1"]
-offset_left = -41.0
+offset_left = -67.0
 offset_top = -53.0
-offset_right = 59.0
+offset_right = 47.0
 offset_bottom = 43.0
+
+[node name="Label" parent="Base/Panel" index="0"]
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 42.0
+offset_bottom = 11.0
+text = "soy.exe"

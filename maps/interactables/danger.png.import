@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5tml0ksf7jux"
-path="res://.godot/imported/box_outer.png-e8de52a6b0448ef5c4a9c7340559626b.ctex"
+uid="uid://ck2b6htx62t58"
+path="res://.godot/imported/danger.png-79309f055427d1d1707bdaa5482580d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://maps/UI/box_outer.png"
-dest_files=["res://.godot/imported/box_outer.png-e8de52a6b0448ef5c4a9c7340559626b.ctex"]
+source_file="res://maps/interactables/danger.png"
+dest_files=["res://.godot/imported/danger.png-79309f055427d1d1707bdaa5482580d3.ctex"]
 
 [params]
 

@@ -41,6 +41,10 @@ func apply_video_settings()->void:
 		#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	window.move_to_center()
 	#TODO CRT FILTER
+	if CRT_Filer:
+		CrtOverlay.visible=true
+	else:
+		CrtOverlay.visible=false
 	
 
 func load_player_input_dicts()->void:
@@ -150,6 +154,7 @@ func save_data()->void:
 	
 	save_dict["Res"]=Resolution
 	save_dict["CRT"]=CRT_Filer
+	save_dict["Fullscreen"]=Fullscreen
 	
 	save_dict["Input"]=Player_Input_Dicts
 	
@@ -184,6 +189,7 @@ func load_data()->void:
 		
 		Resolution=load_dict["Res"]
 		CRT_Filer=load_dict["CRT"]
+		Fullscreen=load_dict["Fullscreen"]
 		
 		#create default to ensure we at least have someting
 		create_def_input_map()
@@ -210,6 +216,7 @@ func load_data()->void:
 		SFX=50
 		Resolution=Vector2i(1280,720)
 		CRT_Filer=false
+		Fullscreen=false
 		
 		create_def_input_map()
 		FacesAutoload.custom_faces=[]

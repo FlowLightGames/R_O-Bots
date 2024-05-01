@@ -6,6 +6,7 @@ var player_scene:PackedScene=load("res://player_character/character.tscn")
 @export var animation_player:AnimationPlayer
 @export var old_cam:Camera2D
 @export var new_cam:Camera2D
+@export var can_move_on:bool=false
 
 func set_winner(player_config:PlayerConfigMetaData)->void:
 	var tmp_char:PlayerCharacter=player_scene.instantiate() as PlayerCharacter
@@ -24,3 +25,8 @@ func switch_cams()->void:
 
 func _on_transition_finished_transition()->void:
 	animation_player.play("Default")
+
+func _process(delta:float)->void:
+	if can_move_on:
+		if Input.is_action_just_pressed("ui_accept")||Input.is_action_just_pressed("ui_cancel"):
+			get_tree().change_scene_to_packed(SceneCollection.stage_select)

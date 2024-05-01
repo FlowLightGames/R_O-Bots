@@ -54,7 +54,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_yl204")
-color = Color(0.192157, 0.282353, 0.54902, 1)
+color = Color(0.0898438, 0.0898438, 0.0898438, 1)
 
 [node name="Taskbar" type="NinePatchRect" parent="Window"]
 layout_mode = 0
@@ -120,9 +120,9 @@ vertical_alignment = 1
 
 [node name="Icons" type="VBoxContainer" parent="Window"]
 layout_mode = 0
-offset_left = 5.0
+offset_left = 10.0
 offset_top = 6.0
-offset_right = 66.0
+offset_right = 71.0
 offset_bottom = 126.0
 theme_override_constants/separation = 0
 alignment = 1
