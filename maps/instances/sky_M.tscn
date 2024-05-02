@@ -231,3 +231,5 @@ stretch_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="OOB" parent="." index="13" instance=ExtResource("10_5lwfj")]
+
+[connection signal="body_entered" from="OOB" to="." method="_on_out_of_bound_body_entered"]

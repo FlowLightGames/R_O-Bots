@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7fkhop3q3tp0"]
+
+[ext_resource type="Script" path="res://maps/interactables/instances/danger_lightning.gd" id="1_5vbwn"]
+[ext_resource type="Texture2D" uid="uid://ck2b6htx62t58" path="res://maps/interactables/danger.png" id="2_1la5m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xicdq"]
+size = Vector2(14, 14)
+
+[node name="DangerLightning" type="Area2D" node_paths=PackedStringArray("cd_timer", "strike_timer")]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_5vbwn")
+cd_timer = NodePath("CDTimer")
+strike_timer = NodePath("StrikeTimer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xicdq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_1la5m")
+
+[node name="CDTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StrikeTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="CDTimer" to="." method="_on_cd_timer_timeout"]
+[connection signal="timeout" from="StrikeTimer" to="." method="_on_strike_timer_timeout"]
