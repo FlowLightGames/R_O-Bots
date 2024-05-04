@@ -45,7 +45,13 @@ func update_icons(players:Array[PlayerCharacter])->void:
 		player_icons[n.Player_Number].set_player_name(n.Player_Name)
 		player_icons[n.Player_Number].update_state(n.Pickup_Stats.LIFE_UP)
 
+func disable_unused()->void:
+	for i:int in player_icons.size():
+		if i>=GameConfig.Current_Number_Of_Players:
+			player_icons[i].visible=false
+
 func _ready()->void:
+	disable_unused()
 	set_physics_process(false)
 
 func _physics_process(_delta:float)->void:

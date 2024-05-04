@@ -1,8 +1,10 @@
 extends GPUParticles2D
+class_name Fart
 
 @export var audio:AudioStreamPlayer
+@export var hurtbox:Area2D
+
 var ignored_bodies:Array[Node2D]=[]
-var hurtbox:Area2D
 
 func _on_ttl_timeout()->void:
 	queue_free()

@@ -11,10 +11,10 @@ func _ready()->void:
 func explode()->void:
 	if !disabled:
 		position=Vector2((roundi(position.x)/16)*16+(signi(position.x)*8),(roundi(position.y)/16)*16+(signi(position.y)*8))
-		piercing_explosion_raycast.enable(true)
+		#piercing_explosion_raycast.enable(true)
 		piercing_explosion_raycast.resize_raycasts(placed_with_power)
 		var result:Dictionary=piercing_explosion_raycast.get_raycast_targets_and_extents()
-		piercing_explosion_raycast.enable(false)
+		#piercing_explosion_raycast.enable(false)
 		var extents:Vector4i=Vector4i(placed_with_power,placed_with_power,placed_with_power,placed_with_power)
 		if result.has("Extents"):
 			extents=result["Extents"]

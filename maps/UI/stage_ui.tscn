@@ -51,6 +51,7 @@ alignment = 1
 metadata/_edit_group_ = true
 
 [node name="GridContainer" type="HBoxContainer" parent="NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(196, 23)
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
@@ -72,6 +73,7 @@ layout_mode = 2
 number = 3
 
 [node name="GridContainer2" type="HBoxContainer" parent="NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(196, 23)
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1

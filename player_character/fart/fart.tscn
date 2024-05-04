@@ -48,7 +48,8 @@ anim_offset_max = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_86b8c"]
 size = Vector2(18, 18)
 
-[node name="GPUParticles2D" type="GPUParticles2D" node_paths=PackedStringArray("audio")]
+[node name="GPUParticles2D" type="GPUParticles2D" node_paths=PackedStringArray("audio", "hurtbox")]
+z_index = 2
 material = SubResource("CanvasItemMaterial_rx3k8")
 emitting = false
 amount = 16
@@ -59,6 +60,7 @@ explosiveness = 1.0
 randomness = 0.23
 script = ExtResource("2_dtehk")
 audio = NodePath("AudioStreamPlayer")
+hurtbox = NodePath("Area2D")
 
 [node name="TTL" type="Timer" parent="."]
 wait_time = 1.2

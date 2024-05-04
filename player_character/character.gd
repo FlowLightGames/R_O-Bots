@@ -4,6 +4,7 @@ class_name PlayerCharacter
 
 var gunshot:PackedScene=load("res://player_character/gun_knife/gun_shot.tscn")
 var zeus_lightning:PackedScene=load("res://player_character/zeus/zeus_lightning.tscn")
+var fart:PackedScene=load("res://player_character/fart/fart.tscn")
 
 @export var name_label:Label
 @export var BodyAnimation:AnimationPlayer
@@ -18,6 +19,7 @@ var zeus_lightning:PackedScene=load("res://player_character/zeus/zeus_lightning.
 @export var GunRayCast:RayCast2D
 @export var KickerRayCast:RayCast2D
 @export var DunkerRayCast:RayCast2D
+@export var fart_timer:Timer
 @export var death_timer:Timer
 
 var i_frames:bool=false
@@ -398,6 +400,11 @@ func _physics_process(_delta:float)->void:
 				if Pickup_Stats.STATES[0]>0:
 					if !(bomb_place_check.is_colliding()):
 						place_bomb()
+				#Farting
+				if Pickup_Stats.STATES[2]>0:
+					if fart_timer.is_stopped():
+						print("fart timer is paused.... staring")
+						fart_timer.start(2.0)
 				
 				if Input.is_action_just_pressed(Action_0):
 					action_one()
@@ -426,3 +433,9 @@ func _on_death_timer_timeout()->void:
 	map.player_ref_list.erase(self)
 	map.check_winner()
 	queue_free()
+
+func _on_fart_timer_timeout()->void:
+	var tmp:Fart=fart.instantiate() as Fart
+	tmp.position=position
+	tmp.ignored_bodies.append(self)
+	get_parent().add_child(tmp)

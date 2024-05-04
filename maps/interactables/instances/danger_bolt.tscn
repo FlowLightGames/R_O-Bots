@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c75v6sj412w3d"]
+
+[ext_resource type="Script" path="res://maps/interactables/instances/danger_bolt.gd" id="1_sirww"]
+[ext_resource type="Texture2D" uid="uid://dtoxxv2bj48vc" path="res://maps/interactables/danger_bolt.png" id="2_dovpr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xicdq"]
+size = Vector2(14, 14)
+
+[node name="DangerLightning" type="Area2D" node_paths=PackedStringArray("cd_timer")]
+collision_layer = 0
+collision_mask = 160
+script = ExtResource("1_sirww")
+cd_timer = NodePath("CDTimer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xicdq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dovpr")
+
+[node name="CDTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="CDTimer" to="." method="_on_cd_timer_timeout"]
