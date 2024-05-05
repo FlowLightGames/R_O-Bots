@@ -1295,7 +1295,7 @@ shader_parameter/Max_types = 8
 shader_parameter/Type = 7
 shader_parameter/palett = ExtResource("2_hxxlk")
 
-[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("name_label", "BodyAnimation", "FaceAnimation", "IFramesAnimation", "Face", "Body", "bomb_place_check", "KnifeGunSprite", "ZeusReticle", "KnifeHurtBox", "GunRayCast", "KickerRayCast", "DunkerRayCast", "fart_timer", "death_timer")]
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("name_label", "BodyAnimation", "FaceAnimation", "IFramesAnimation", "Face", "Body", "bomb_place_check", "KnifeGunSprite", "ZeusReticle", "KnifeHurtBox", "GunRayCast", "KickerRayCast", "DunkerRayCast", "fart_timer", "fire_timer", "death_timer")]
 z_index = 2
 collision_mask = 280
 motion_mode = 1
@@ -1314,6 +1314,7 @@ GunRayCast = NodePath("GunCast2D")
 KickerRayCast = NodePath("KickerCast2D")
 DunkerRayCast = NodePath("DunkerCast2D")
 fart_timer = NodePath("FartTimer")
+fire_timer = NodePath("FireTimer")
 death_timer = NodePath("DeathTimer")
 metadata/_edit_lock_ = true
 
@@ -1422,6 +1423,8 @@ one_shot = true
 
 [node name="FartTimer" type="Timer" parent="."]
 
+[node name="FireTimer" type="Timer" parent="."]
+
 [node name="Label" type="Label" parent="."]
 visible = false
 self_modulate = Color(0.74978, 0.74978, 0.74978, 1)
@@ -1441,3 +1444,4 @@ text_overrun_behavior = 1
 [connection signal="body_entered" from="KifeDmgArea" to="." method="_on_kife_dmg_area_body_entered"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="timeout" from="FartTimer" to="." method="_on_fart_timer_timeout"]
+[connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]
