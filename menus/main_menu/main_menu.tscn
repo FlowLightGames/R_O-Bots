@@ -426,7 +426,7 @@ z_index = -8
 position = Vector2(493, 86)
 
 [node name="gun" parent="Memes" instance=ExtResource("25_urfxm")]
-position = Vector2(165, 202)
+position = Vector2(159, 214)
 
 [node name="knife" parent="Memes" instance=ExtResource("24_stkql")]
 position = Vector2(65, 230)
@@ -441,7 +441,7 @@ position = Vector2(555, 225)
 position = Vector2(494, 279)
 
 [node name="soy_l" parent="Memes" instance=ExtResource("22_hhjs3")]
-position = Vector2(150, 273)
+position = Vector2(163, 286)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../CRT/Static")

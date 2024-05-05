@@ -7,7 +7,7 @@
 resource_local_to_scene = true
 shader = ExtResource("1_e7pv3")
 shader_parameter/noise_strength = 0.02
-shader_parameter/scanline_strength = 0.3
+shader_parameter/scanline_strength = 0.2
 shader_parameter/vignette_intensity = 0.003
 shader_parameter/warp_intensity_x = 8.0
 shader_parameter/warp_intensity_y = 8.0

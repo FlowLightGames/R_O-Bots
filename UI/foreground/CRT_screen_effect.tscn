@@ -8,7 +8,6 @@
 resource_local_to_scene = true
 shader = ExtResource("1_75rkg")
 shader_parameter/vignette_intensity = 0.01
-shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 shader_parameter/screen_size = Vector2(640, 360)
 shader_parameter/texture_size = Vector2(640, 360)
 shader_parameter/texture_offset = Vector2(0, 0)
