@@ -41,4 +41,4 @@ weight = 10
 [resource]
 script = ExtResource("1_fqk8s")
 map = Array[ExtResource("1_2h0t4")]([SubResource("Resource_6kd45"), SubResource("Resource_pn1ns"), SubResource("Resource_wq8vg"), SubResource("Resource_r8hmr"), SubResource("Resource_um57k"), SubResource("Resource_k7b6q"), SubResource("Resource_g3ned")])
-pickup_chance = 0.64
+pickup_chance = 0.58

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bthyc8utjqbym"]
+
+[ext_resource type="Script" path="res://maps/interactables/instances/redirect.gd" id="1_8pgsk"]
+[ext_resource type="Texture2D" uid="uid://bgd73vvh6vaoq" path="res://maps/interactables/redirects.png" id="2_4nw01"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gsaki"]
+size = Vector2(2, 2)
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("1_8pgsk")
+direction = Vector2i(-1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gsaki")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4nw01")
+hframes = 4
+frame = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

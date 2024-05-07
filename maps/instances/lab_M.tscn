@@ -168,7 +168,6 @@ scenes/2/scene = ExtResource("12_jisve")
 sources/0 = SubResource("TileSetScenesCollectionSource_bpa2w")
 
 [node name="MapBase" instance=ExtResource("1_gvyec")]
-players_spawned = 8
 possible_pickups = ExtResource("2_fjkc1")
 metadata/_edit_lock_ = true
 

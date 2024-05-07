@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://p8sealut80t1"]
+[gd_scene load_steps=23 format=3 uid="uid://p8sealut80t1"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_4rd1t"]
 [ext_resource type="Texture2D" uid="uid://sg68vkk5s2nx" path="res://maps/tilesets/sky.png" id="2_3wj7d"]
@@ -8,8 +8,12 @@
 [ext_resource type="Shader" path="res://maps/effects/cloud_scroll.gdshader" id="5_k3di6"]
 [ext_resource type="Shader" path="res://maps/effects/cloud_scroll_add.gdshader" id="5_lj1j2"]
 [ext_resource type="Texture2D" uid="uid://btaw8ks4qdmyh" path="res://maps/effects/sprites/cloud_effect.png" id="6_vwopo"]
+[ext_resource type="PackedScene" uid="uid://bthyc8utjqbym" path="res://maps/interactables/instances/redirect_l.tscn" id="7_7mibq"]
+[ext_resource type="PackedScene" uid="uid://dp7rwu7555ctg" path="res://maps/interactables/instances/redirect_u.tscn" id="8_71mft"]
 [ext_resource type="Texture2D" uid="uid://dlrkvpmjduln8" path="res://maps/effects/sprites/cloud_effect_add.png" id="8_m1ir1"]
+[ext_resource type="PackedScene" uid="uid://b164ejct0nrup" path="res://maps/interactables/instances/redirect_d.tscn" id="9_g5vnr"]
 [ext_resource type="PackedScene" uid="uid://cappgjndrnmpe" path="res://maps/out_of_bound_areas/oob_M.tscn" id="10_5lwfj"]
+[ext_resource type="PackedScene" uid="uid://sgj42a0vhqxd" path="res://maps/interactables/instances/redirect_r.tscn" id="11_la0qw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_anpf4"]
 texture = ExtResource("2_3wj7d")
@@ -157,6 +161,15 @@ scenes/1/scene = ExtResource("4_xa4cd")
 [sub_resource type="TileSet" id="TileSet_w3u7x"]
 sources/0 = SubResource("TileSetScenesCollectionSource_kgoi5")
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_m3omc"]
+scenes/1/scene = ExtResource("11_la0qw")
+scenes/2/scene = ExtResource("7_7mibq")
+scenes/3/scene = ExtResource("8_71mft")
+scenes/4/scene = ExtResource("9_g5vnr")
+
+[sub_resource type="TileSet" id="TileSet_0ix5h"]
+sources/0 = SubResource("TileSetScenesCollectionSource_m3omc")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yhih3"]
 shader = ExtResource("5_k3di6")
 shader_parameter/motion = Vector2(4, 4)
@@ -190,6 +203,10 @@ layer_0/tile_data = PackedInt32Array(458755, 0, 65536, 327683, 0, 65536, 196613,
 
 [node name="SpawnPoints" parent="." index="4"]
 layer_0/tile_data = PackedInt32Array(131074, 0, 0, 917506, 0, 0, 917524, 0, 0, 131092, 0, 0, 393222, 0, 0, 655366, 0, 0, 655376, 0, 0, 393232, 0, 0)
+
+[node name="Interactables" parent="." index="5"]
+tile_set = SubResource("TileSet_0ix5h")
+layer_0/tile_data = PackedInt32Array(393222, 0, 65536, 655376, 0, 131072, 655366, 0, 196608, 393232, 0, 262144)
 
 [node name="Camera2D" parent="." index="9"]
 position = Vector2(184, 120)
@@ -232,4 +249,8 @@ metadata/_edit_lock_ = true
 
 [node name="OOB" parent="." index="13" instance=ExtResource("10_5lwfj")]
 
+[connection signal="body_entered" from="Interactables/Area2D" to="Interactables/Area2D" method="_on_body_entered"]
+[connection signal="body_entered" from="Interactables/@Area2D@50516" to="Interactables/@Area2D@50516" method="_on_body_entered"]
+[connection signal="body_entered" from="Interactables/@Area2D@50517" to="Interactables/@Area2D@50517" method="_on_body_entered"]
+[connection signal="body_entered" from="Interactables/@Area2D@50518" to="Interactables/@Area2D@50518" method="_on_body_entered"]
 [connection signal="body_entered" from="OOB" to="." method="_on_out_of_bound_body_entered"]
