@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://p8sealut80t1"]
+[gd_scene load_steps=27 format=3 uid="uid://p8sealut80t1"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_4rd1t"]
 [ext_resource type="Texture2D" uid="uid://sg68vkk5s2nx" path="res://maps/tilesets/sky.png" id="2_3wj7d"]
@@ -176,6 +176,23 @@ shader_parameter/motion = Vector2(4, 4)
 shader_parameter/scale = 1.0
 shader_parameter/offset = Vector2(500, 500)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_swggx"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_pp4yx"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.289326, 0.488764, 0.710674)
+colors = PackedColorArray(0, 0, 0, 1, 0.0562916, 0.0562916, 0.0562915, 1, 0.129559, 0.129558, 0.129558, 1, 0.174655, 0.174397, 0.156013, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ajtr6"]
+noise_type = 2
+frequency = 0.0052
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uris4"]
+invert = true
+color_ramp = SubResource("Gradient_pp4yx")
+noise = SubResource("FastNoiseLite_ajtr6")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bxo6c"]
 shader = ExtResource("5_lj1j2")
 shader_parameter/motion = Vector2(1, 1)
@@ -236,6 +253,16 @@ grow_vertical = 2
 color = Color(0, 0.839216, 0.976471, 1)
 metadata/_edit_lock_ = true
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2/ColorRect" index="0"]
+material = SubResource("CanvasItemMaterial_swggx")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_uris4")
+
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer2" index="1"]
 material = SubResource("ShaderMaterial_bxo6c")
 anchors_preset = 15
@@ -249,8 +276,4 @@ metadata/_edit_lock_ = true
 
 [node name="OOB" parent="." index="13" instance=ExtResource("10_5lwfj")]
 
-[connection signal="body_entered" from="Interactables/Area2D" to="Interactables/Area2D" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@50516" to="Interactables/@Area2D@50516" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@50517" to="Interactables/@Area2D@50517" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@50518" to="Interactables/@Area2D@50518" method="_on_body_entered"]
 [connection signal="body_entered" from="OOB" to="." method="_on_out_of_bound_body_entered"]

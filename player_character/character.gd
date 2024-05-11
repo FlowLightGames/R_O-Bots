@@ -83,6 +83,16 @@ func input_map_init()->void:
 	Action_0 =str(Player_Number)+"_Action_0"
 	Action_1 =str(Player_Number)+"_Action_1"
 
+func disable()->void:
+	disabled=true
+	fart_timer.stop()
+	fire_timer.stop()
+	death_timer.stop()
+
+func enable()->void:
+	#TODO start timers if we have the pickup[[
+	disabled=false
+
 func picked_up(what:PickUp.PICKUP)->void:
 	match what:
 		#BOMBTYPE

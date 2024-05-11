@@ -45,7 +45,6 @@ func apply_video_settings()->void:
 		CrtOverlay.visible=true
 	else:
 		CrtOverlay.visible=false
-	
 
 func load_player_input_dicts()->void:
 	var curr_handled_player_num:int=0
@@ -118,6 +117,82 @@ func create_def_input_map_player(curr_handled_player_num:int)->void:
 	
 	Player_Input_Dicts[curr_handled_player_num]=output
 
+func get_new_input_event_button(device:int,id:JoyButton)->InputEvent:
+	var inputevent:InputEventJoypadButton=InputEventJoypadButton.new()
+	inputevent.device=device
+	inputevent.button_index=id
+	return inputevent
+
+func get_new_input_event_axis(device:int,axis:JoyAxis,value:float)->InputEvent:
+	var inputevent:InputEventJoypadMotion=InputEventJoypadMotion.new()
+	inputevent.device=device
+	inputevent.axis=axis
+	inputevent.axis_value=value
+	return inputevent
+
+func add_gamepad_input(curr_handled_player_num:int)->void:
+	#var button_event:InputEventJoypadButton=InputEventJoypadButton.new()
+	#var stick_event:InputEventJoypadMotion=InputEventJoypadMotion.new()
+	#
+	#button_event.device=curr_handled_player_num
+	#stick_event.device=curr_handled_player_num
+	
+	if !InputMap.has_action(str(curr_handled_player_num)+"_Up"):
+		InputMap.add_action(str(curr_handled_player_num)+"_Up")
+	
+	#button_event.button_index=JOY_BUTTON_DPAD_UP
+	#stick_event.axis=JOY_AXIS_LEFT_Y
+	#stick_event.axis_value=-1.0
+	
+	InputMap.action_add_event(str(curr_handled_player_num)+"_Up",get_new_input_event_button(curr_handled_player_num,JOY_BUTTON_DPAD_UP))
+	InputMap.action_add_event(str(curr_handled_player_num)+"_Up",get_new_input_event_axis(curr_handled_player_num,JOY_AXIS_LEFT_Y,-1.0))
+	
+	if !InputMap.has_action(str(curr_handled_player_num)+"_Down"):
+		InputMap.add_action(str(curr_handled_player_num)+"_Down")
+	
+	#button_event.button_index=JOY_BUTTON_DPAD_DOWN
+	#stick_event.axis=JOY_AXIS_LEFT_Y
+	#stick_event.axis_value=1.0
+	
+	InputMap.action_add_event(str(curr_handled_player_num)+"_Down",get_new_input_event_button(curr_handled_player_num,JOY_BUTTON_DPAD_DOWN))
+	InputMap.action_add_event(str(curr_handled_player_num)+"_Down",get_new_input_event_axis(curr_handled_player_num,JOY_AXIS_LEFT_Y,1.0))
+	
+	if !InputMap.has_action(str(curr_handled_player_num)+"_Left"):
+		InputMap.add_action(str(curr_handled_player_num)+"_Left")
+	
+	#button_event.button_index=JOY_BUTTON_DPAD_LEFT
+	#stick_event.axis=JOY_AXIS_LEFT_X
+	#stick_event.axis_value=-1.0
+	
+	InputMap.action_add_event(str(curr_handled_player_num)+"_Left",get_new_input_event_button(curr_handled_player_num,JOY_BUTTON_DPAD_LEFT))
+	InputMap.action_add_event(str(curr_handled_player_num)+"_Left",get_new_input_event_axis(curr_handled_player_num,JOY_AXIS_LEFT_X,-1.0))
+	
+	if !InputMap.has_action(str(curr_handled_player_num)+"_Right"):
+		InputMap.add_action(str(curr_handled_player_num)+"_Right")
+	
+	#button_event.button_index=JOY_BUTTON_DPAD_RIGHT
+	#stick_event.axis=JOY_AXIS_LEFT_X
+	#stick_event.axis_value=1.0
+	
+	InputMap.action_add_event(str(curr_handled_player_num)+"_Right",get_new_input_event_button(curr_handled_player_num,JOY_BUTTON_DPAD_RIGHT))
+	InputMap.action_add_event(str(curr_handled_player_num)+"_Right",get_new_input_event_axis(curr_handled_player_num,JOY_AXIS_LEFT_X,1.0))
+	
+	if !InputMap.has_action(str(curr_handled_player_num)+"_Action_0"):
+		InputMap.add_action(str(curr_handled_player_num)+"_Action_0")
+	
+	#button_event.button_index=JOY_BUTTON_A
+	InputMap.action_add_event(str(curr_handled_player_num)+"_Action_0",get_new_input_event_button(curr_handled_player_num,JOY_BUTTON_A))
+	#button_event.button_index=JOY_BUTTON_B
+	InputMap.action_add_event(str(curr_handled_player_num)+"_Action_0",get_new_input_event_button(curr_handled_player_num,JOY_BUTTON_B))
+	
+	if !InputMap.has_action(str(curr_handled_player_num)+"_Action_1"):
+		InputMap.add_action(str(curr_handled_player_num)+"_Action_1")
+	
+	#button_event.button_index=JOY_BUTTON_X
+	InputMap.action_add_event(str(curr_handled_player_num)+"_Action_1",get_new_input_event_button(curr_handled_player_num,JOY_BUTTON_X))
+	#button_event.button_index=JOY_BUTTON_Y
+	InputMap.action_add_event(str(curr_handled_player_num)+"_Action_1",get_new_input_event_button(curr_handled_player_num,JOY_BUTTON_Y))
+
 func get_input_code(event:InputEvent)->String:
 	if event:
 		if event is InputEventKey:
@@ -143,6 +218,11 @@ func get_input_event(code:String)->InputEvent:
 			key.physical_keycode=int(check[0]) as Key
 			return key
 
+#func _input(event:InputEvent)->void:
+	#print(event)
+#
+#func _unhandled_input(event:InputEvent)->void:
+	#print(event)
 
 func save_data()->void:
 	var save_dict:Dictionary={}
@@ -198,7 +278,12 @@ func load_data()->void:
 		for i:int in range(0,tmp_dicts.size()):
 			Player_Input_Dicts[i]=tmp_dicts[i] as Dictionary
 		load_player_input_dicts()
+		#add gamepad input
+		print("loading gamepad input")
+		for i:int in 8:
+			add_gamepad_input(i)
 		
+		print(InputMap.action_get_events("0_Up"))
 		
 		var custom_face_bytes:Array=load_dict["CstmFcs"] 
 		

@@ -41,7 +41,7 @@ func draw()->void:
 	disabled=true
 	round_timer.stop()
 	for n:PlayerCharacter in player_ref_list:
-		n.disabled=true
+		n.disable()
 	var tmp:DrawOverlay=draw_overlay.instantiate() as DrawOverlay
 	add_child(tmp)
 
@@ -49,7 +49,7 @@ func win(player:int)->void:
 	disabled=true
 	round_timer.stop()
 	for n:PlayerCharacter in player_ref_list:
-		n.disabled=true
+		n.disable()
 	var tmp:WinOverlay=win_overlay.instantiate() as WinOverlay
 	tmp.old_cam=camera
 	tmp.set_winner(PlayerConfigs.Player_Configs[player])
@@ -69,7 +69,7 @@ func check_winner()->void:
 func time_out()->void:
 	if !disabled:
 		for n:PlayerCharacter in player_ref_list:
-			n.disabled=true
+			n.disable()
 		if player_ref_list.size()>0:
 			if player_ref_list.size()==1:
 				if player_ref_list[0].BodyAnimation.current_animation=="death":
@@ -109,7 +109,7 @@ func spawn_players(how_many:int)->void:
 
 func unlock_players()->void:
 	for n:PlayerCharacter in player_ref_list:
-		n.disabled=false
+		n.enable()
 	round_timer.start()
 	stage_ui.start()
 
