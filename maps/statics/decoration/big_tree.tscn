@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://0wlcyr335lgt"]
 
-[ext_resource type="Texture2D" uid="uid://d0srfblkup5ig" path="res://maps/statics/forest_big.png" id="1_t6o68"]
+[ext_resource type="Texture2D" uid="uid://d0srfblkup5ig" path="res://maps/statics/decoration/forest_big.png" id="1_t6o68"]
 [ext_resource type="Texture2D" uid="uid://l6gwea4guq1q" path="res://maps/shadows/forest_big.png" id="2_684g8"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2hfcb"]

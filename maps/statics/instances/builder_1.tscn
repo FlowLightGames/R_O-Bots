@@ -12,6 +12,7 @@ hframes = 2
 frame = 1
 
 [node name="Shadow" parent="VisualSprite" index="0"]
+visible = false
 texture = ExtResource("3_t7sxq")
 centered = true
 offset = Vector2(0, 10)

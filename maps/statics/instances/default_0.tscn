@@ -10,6 +10,7 @@
 texture = ExtResource("2_wxo8y")
 
 [node name="Shadow" parent="VisualSprite" index="0"]
+visible = false
 position = Vector2(0, 10)
 texture = ExtResource("3_l5p86")
 centered = true

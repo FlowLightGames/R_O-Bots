@@ -10,6 +10,7 @@
 texture = ExtResource("2_ouiqc")
 
 [node name="Shadow" parent="VisualSprite" index="0"]
+visible = false
 position = Vector2(0, 9)
 texture = ExtResource("3_k2mfv")
 vframes = 2

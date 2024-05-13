@@ -126,6 +126,7 @@ hframes = 2
 frame = 1
 
 [node name="Shadow" type="Sprite2D" parent="VisualSprite"]
+visible = false
 z_index = 1
 z_as_relative = false
 material = SubResource("CanvasItemMaterial_utkpk")

@@ -6,13 +6,14 @@
 
 [node name="Brick_Base" instance=ExtResource("1_epfaf")]
 
-[node name="VisualSprite" parent="." index="1"]
+[node name="VisualSprite" parent="." index="0"]
 texture = ExtResource("2_hflbo")
 hframes = 4
 vframes = 2
 frame = 7
 
 [node name="Shadow" parent="VisualSprite" index="0"]
+visible = false
 texture = ExtResource("3_2h2ef")
 offset = Vector2(0, 12)
 vframes = 2

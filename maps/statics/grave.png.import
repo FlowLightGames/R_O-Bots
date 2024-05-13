@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0srfblkup5ig"
-path="res://.godot/imported/forest_big.png-0cee7509ee2650d8f600de5e078f2897.ctex"
+uid="uid://bghyh8biivihh"
+path="res://.godot/imported/grave.png-521c7698054813e06135e9dee037d9ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://maps/statics/forest_big.png"
-dest_files=["res://.godot/imported/forest_big.png-0cee7509ee2650d8f600de5e078f2897.ctex"]
+source_file="res://maps/statics/grave.png"
+dest_files=["res://.godot/imported/grave.png-521c7698054813e06135e9dee037d9ee.ctex"]
 
 [params]
 

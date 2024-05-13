@@ -11,6 +11,7 @@ texture = ExtResource("2_480yl")
 hframes = 2
 
 [node name="Shadow" parent="VisualSprite" index="0"]
+visible = false
 texture = ExtResource("3_3wsy3")
 offset = Vector2(-8, 3)
 vframes = 2

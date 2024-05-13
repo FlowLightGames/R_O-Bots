@@ -1,0 +1,141 @@
+[gd_scene load_steps=12 format=3 uid="uid://iurmb2pn12m7"]
+
+[ext_resource type="PackedScene" uid="uid://dmwiq03g3nyh1" path="res://maps/statics/static_base.tscn" id="1_0jjid"]
+[ext_resource type="Texture2D" uid="uid://dea6gp4w1uqm8" path="res://maps/statics/decoration/grave_candle.png" id="2_4g1ot"]
+[ext_resource type="Texture2D" uid="uid://cv1isohf4c2xu" path="res://maps/statics/decoration/grave_candle_flame.png" id="3_d5v74"]
+[ext_resource type="Texture2D" uid="uid://j5yhyiqv0bwt" path="res://maps/statics/decoration/grave_candle_illumination.png" id="4_gryxj"]
+
+[sub_resource type="Animation" id="Animation_yce4j"]
+resource_name = "Default"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_o3ec5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5t4lm"]
+_data = {
+"Default": SubResource("Animation_yce4j"),
+"RESET": SubResource("Animation_o3ec5")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tgq5k"]
+light_mode = 2
+
+[sub_resource type="Animation" id="Animation_dyqf6"]
+resource_name = "Default"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.0, 1.05]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../VisualSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_tufc5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../VisualSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6m2es"]
+_data = {
+"Default": SubResource("Animation_dyqf6"),
+"RESET": SubResource("Animation_tufc5")
+}
+
+[node name="Static_Base" instance=ExtResource("1_0jjid")]
+
+[node name="VisualSprite" parent="." index="1"]
+texture = ExtResource("2_4g1ot")
+hframes = 2
+
+[node name="Flame" type="Sprite2D" parent="." index="2"]
+position = Vector2(1, -12)
+texture = ExtResource("3_d5v74")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Flame" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_5t4lm")
+}
+autoplay = "Default"
+speed_scale = 1.6
+
+[node name="FlameLight" type="PointLight2D" parent="." index="3"]
+z_index = 4096
+material = SubResource("CanvasItemMaterial_tgq5k")
+energy = 0.0
+range_layer_max = 1
+texture = ExtResource("4_gryxj")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FlameLight" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_6m2es")
+}
+autoplay = "Default"

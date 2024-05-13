@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c12ysn8w4rtro"]
+
+[ext_resource type="PackedScene" uid="uid://w6opehj3w17t" path="res://maps/bricks/brick_base.tscn" id="1_a7e8l"]
+[ext_resource type="Texture2D" uid="uid://csync1csv8vp2" path="res://maps/bricks/sprites/grave.png" id="2_5c0r2"]
+
+[node name="Brick_Base" instance=ExtResource("1_a7e8l")]
+
+[node name="VisualSprite" parent="." index="0"]
+texture = ExtResource("2_5c0r2")
+hframes = 2
+frame = 1

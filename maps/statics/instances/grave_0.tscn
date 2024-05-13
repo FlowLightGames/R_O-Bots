@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bigaqr8ed0ghd"]
+
+[ext_resource type="PackedScene" uid="uid://dmwiq03g3nyh1" path="res://maps/statics/static_base.tscn" id="1_gfbvm"]
+[ext_resource type="Texture2D" uid="uid://bghyh8biivihh" path="res://maps/statics/grave.png" id="2_p8hso"]
+
+[node name="Static_Base" instance=ExtResource("1_gfbvm")]
+
+[node name="VisualSprite" parent="." index="1"]
+texture = ExtResource("2_p8hso")
