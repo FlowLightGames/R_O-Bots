@@ -15,6 +15,7 @@ shader_parameter/scanline_tex = ExtResource("2_8hug2")
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 11
+visible = false
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 texture_filter = 1

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PickUpMap" load_steps=10 format=3 uid="uid://pom4x0sy2j4x"]
+[gd_resource type="Resource" script_class="PickUpMap" load_steps=11 format=3 uid="uid://pom4x0sy2j4x"]
 
 [ext_resource type="Script" path="res://maps/pickup_option_struct.gd" id="1_2h0t4"]
 [ext_resource type="Script" path="res://maps/pickup_maps/pickup_map_base.gd" id="1_fqk8s"]
@@ -38,7 +38,12 @@ script = ExtResource("1_2h0t4")
 what = 21
 weight = 10
 
+[sub_resource type="Resource" id="Resource_aj2gp"]
+script = ExtResource("1_2h0t4")
+what = 24
+weight = 100000
+
 [resource]
 script = ExtResource("1_fqk8s")
-map = Array[ExtResource("1_2h0t4")]([SubResource("Resource_6kd45"), SubResource("Resource_pn1ns"), SubResource("Resource_wq8vg"), SubResource("Resource_r8hmr"), SubResource("Resource_um57k"), SubResource("Resource_k7b6q"), SubResource("Resource_g3ned")])
-pickup_chance = 0.58
+map = Array[ExtResource("1_2h0t4")]([SubResource("Resource_6kd45"), SubResource("Resource_pn1ns"), SubResource("Resource_wq8vg"), SubResource("Resource_r8hmr"), SubResource("Resource_um57k"), SubResource("Resource_k7b6q"), SubResource("Resource_g3ned"), SubResource("Resource_aj2gp")])
+pickup_chance = 1.0

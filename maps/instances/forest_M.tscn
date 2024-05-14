@@ -146,7 +146,7 @@ shader = SubResource("Shader_y8rdi")
 [sub_resource type="Gradient" id="Gradient_scoli"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.286517, 0.365169, 0.497191)
-colors = PackedColorArray(0.767972, 0.859799, 0.723932, 1, 0.510004, 0.626508, 0.452062, 1, 0.310105, 0.413105, 0.365964, 1, 0.183784, 0.227144, 0.215835, 1)
+colors = PackedColorArray(0.765973, 0.86, 0.7224, 1, 0.510004, 0.626508, 0.452062, 1, 0.310105, 0.413105, 0.365964, 1, 0.183784, 0.227144, 0.215835, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_lj6cd"]
 noise_type = 4

@@ -1,7 +1,7 @@
 //---CRT Shader---
 shader_type canvas_item;
 
-uniform sampler2D SCREEN_TEXTURE:hint_screen_texture,filter_nearest_mipmap;
+uniform sampler2D SCREEN_TEXTURE:hint_screen_texture,repeat_disable,filter_nearest;
 
 uniform float vignette_intensity = 0.4;
 //uniform vec4 vignette_rgb :source_color = vec4(0.0, 0.0, 0.0, 1.0);

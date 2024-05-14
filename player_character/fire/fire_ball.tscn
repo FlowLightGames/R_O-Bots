@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c7xquheb8o2fj"]
+[gd_scene load_steps=16 format=3 uid="uid://c7xquheb8o2fj"]
 
 [ext_resource type="Texture2D" uid="uid://eurk4ejuin3p" path="res://player_character/fire/fire_ball.png" id="1_ab0qb"]
 [ext_resource type="Script" path="res://player_character/fire/fire_ball.gd" id="1_xpvd3"]
@@ -13,8 +13,36 @@ particles_anim_h_frames = 3
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
+[sub_resource type="Gradient" id="Gradient_r5unh"]
+colors = PackedColorArray(1, 1, 1, 1, 0.10705, 0.0876989, 0.309918, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lc5aw"]
+gradient = SubResource("Gradient_r5unh")
+
+[sub_resource type="Curve" id="Curve_kvb62"]
+max_value = 1.5
+_data = [Vector2(0, 0.770085), 0.0, 0.0, 0, 0, Vector2(1, 1.00152), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4x8cl"]
+curve = SubResource("Curve_kvb62")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_07jjv"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector3(-1, 0, 0)
+spread = 30.0
+initial_velocity_min = 8.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_4x8cl")
+color_ramp = SubResource("GradientTexture1D_lc5aw")
+anim_offset_max = 1.0
+
 [sub_resource type="Gradient" id="Gradient_7c34l"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0.308992, 1, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.105882, 0.0862745, 0.309804, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_vtt88"]
 gradient = SubResource("Gradient_7c34l")
@@ -33,7 +61,7 @@ particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 3.0
 direction = Vector3(-1, 0, 0)
-spread = 30.0
+spread = 180.0
 initial_velocity_min = 16.0
 initial_velocity_max = 16.0
 gravity = Vector3(0, 0, 0)
@@ -41,17 +69,22 @@ scale_curve = SubResource("CurveTexture_mvmuo")
 color_ramp = SubResource("GradientTexture1D_vtt88")
 anim_offset_max = 1.0
 
-[node name="AnimatableBody2D" type="Area2D" node_paths=PackedStringArray("sprite")]
+[node name="AnimatableBody2D" type="Area2D" node_paths=PackedStringArray("sprite", "death_poof", "trail")]
 z_index = 2
 collision_layer = 0
 collision_mask = 19
 script = ExtResource("1_xpvd3")
 sprite = NodePath("Sprite2D")
+death_poof = NodePath("DiePoof")
+trail = NodePath("Sprite2D/GPUParticles2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4fa06")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 3
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(0, -6)
 texture = ExtResource("1_ab0qb")
 metadata/_edit_group_ = true
@@ -59,8 +92,23 @@ metadata/_edit_group_ = true
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 self_modulate = Color(1, 1, 1, 0.788235)
 material = SubResource("CanvasItemMaterial_kmmop")
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_07jjv")
+texture = ExtResource("2_wayyg")
+
+[node name="DiePoof" type="GPUParticles2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.788235)
+z_index = 3
+z_as_relative = false
+y_sort_enabled = true
+material = SubResource("CanvasItemMaterial_kmmop")
+position = Vector2(0, -6)
+emitting = false
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_11wbs")
 texture = ExtResource("2_wayyg")
+one_shot = true
+explosiveness = 1.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="DiePoof" to="." method="_on_die_poof_finished"]

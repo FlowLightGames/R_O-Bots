@@ -17,27 +17,7 @@ float vignette(vec2 uv){
 	vignette=clamp(vignette,0.0,1.0);
 	return pow(vignette, vignette_intensity );
 }
-//vec2 uv_to_screen_uv(vec2 uv){
-	//uv.x=uv.x*(texture_size.x/screen_size.x);
-	//uv.y=uv.y*(texture_size.y/screen_size.y);
-	//
-	//uv.x=uv.x+(texture_offset.x/screen_size.x);
-	//uv.y=uv.y+(texture_offset.y/screen_size.y);
-	//return uv;
-//}
-vec2 uv_curve(vec2 uv)
-{
-	uv = (uv - 0.5) * 2.0;
-	//You can modify the numbers and try different values
-	uv.x *= 1.0 + pow(abs(uv.y) / warp_intensity_y, 2.0);
-	uv.y *= 1.0 + pow(abs(uv.x) / warp_intensity_x, 2.0);
-	
-	//The scale part (you can delete it when you want)
-	//uv /= 0.5;
-	
-	uv = (uv/2.0) + 0.5;
-	return uv;
-}
+
 float random(vec2 uv){
 	return fract(sin(dot(uv,vec2(12.9898,78.233)))*43758.5453);
 }
