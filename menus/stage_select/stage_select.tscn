@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cj7kdptcelfix"]
+[gd_scene load_steps=14 format=3 uid="uid://cj7kdptcelfix"]
 
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="1_65nkd"]
 [ext_resource type="Script" path="res://menus/stage_select/stage_select.gd" id="1_p8ugr"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b8d0vrsqampkv" path="res://menus/stage_select/stage_preview.tscn" id="5_mr6la"]
 [ext_resource type="Resource" uid="uid://cjo1qr6v85uvh" path="res://menus/stage_select/stage_select_meta_datas/sky.tres" id="6_br88h"]
 [ext_resource type="Resource" uid="uid://c5qdnlla8f3qt" path="res://menus/stage_select/stage_select_meta_datas/grave.tres" id="7_8k31k"]
+[ext_resource type="Resource" uid="uid://c6o5xoyci0rjr" path="res://menus/stage_select/stage_select_meta_datas/street.tres" id="8_qi5wo"]
 [ext_resource type="PackedScene" uid="uid://boh6gftujg2q0" path="res://UI/background/window_bg_100.tscn" id="11_ymbcm"]
 
 [node name="StageSelect" type="Node2D" node_paths=PackedStringArray("stage_label", "size_label", "stage_preview")]
@@ -18,7 +19,7 @@ script = ExtResource("1_p8ugr")
 stage_label = NodePath("Control/Panel/Selector/VBoxContainer/StageSelect/Label")
 size_label = NodePath("Control/Panel/Selector/VBoxContainer/SizeSelect/Label")
 stage_preview = NodePath("Control/Panel/StageInfo")
-stage_select_meta_datas = Array[Resource("res://menus/stage_select/stage_select_meta_data.gd")]([ExtResource("2_ogmd1"), ExtResource("3_13x4f"), ExtResource("4_byyl7"), ExtResource("5_cgtbc"), ExtResource("6_br88h"), ExtResource("7_8k31k")])
+stage_select_meta_datas = Array[Resource("res://menus/stage_select/stage_select_meta_data.gd")]([ExtResource("2_ogmd1"), ExtResource("3_13x4f"), ExtResource("4_byyl7"), ExtResource("5_cgtbc"), ExtResource("6_br88h"), ExtResource("7_8k31k"), ExtResource("8_qi5wo")])
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

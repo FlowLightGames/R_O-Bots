@@ -291,6 +291,14 @@ join_lobby = NodePath("CenterContainer/VBoxContainer/JoinLobby")
 options = NodePath("CenterContainer/VBoxContainer/Options")
 version_label = NodePath("VersionExit/VersionLabel")
 
+[node name="Panel" type="Panel" parent="."]
+z_index = -7
+offset_left = 196.0
+offset_top = 144.0
+offset_right = 440.0
+offset_bottom = 337.0
+theme = ExtResource("23_h0oec")
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -426,21 +434,27 @@ z_index = -8
 position = Vector2(493, 86)
 
 [node name="gun" parent="Memes" instance=ExtResource("25_urfxm")]
+visible = false
 position = Vector2(159, 214)
 
 [node name="knife" parent="Memes" instance=ExtResource("24_stkql")]
+visible = false
 position = Vector2(65, 230)
 
 [node name="sus" parent="Memes" instance=ExtResource("27_2gpix")]
+visible = false
 position = Vector2(468, 188)
 
 [node name="cup" parent="Memes" instance=ExtResource("26_47nha")]
+visible = false
 position = Vector2(555, 225)
 
 [node name="soy_r" parent="Memes" instance=ExtResource("23_8lyr0")]
+visible = false
 position = Vector2(494, 279)
 
 [node name="soy_l" parent="Memes" instance=ExtResource("22_hhjs3")]
+visible = false
 position = Vector2(163, 286)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

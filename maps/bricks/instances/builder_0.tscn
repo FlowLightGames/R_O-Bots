@@ -8,7 +8,7 @@
 
 [node name="VisualSprite" parent="." index="0"]
 texture = ExtResource("2_ysb52")
-hframes = 4
+hframes = 5
 
 [node name="Shadow" parent="VisualSprite" index="0"]
 visible = false

@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="StageSelectMetaData" load_steps=5 format=3 uid="uid://c5qdnlla8f3qt"]
 
-[ext_resource type="PackedScene" uid="uid://cwuldm4dkklas" path="res://menus/stage_select/stage_previews/default.tscn" id="1_188jw"]
+[ext_resource type="PackedScene" uid="uid://soq7128pu2aa" path="res://menus/stage_select/stage_previews/grave.tscn" id="1_74mhn"]
 [ext_resource type="Script" path="res://menus/stage_select/stage_select_meta_data.gd" id="2_5x4gf"]
 [ext_resource type="PackedScene" uid="uid://dhibw8upfo3u8" path="res://maps/instances/grave_M.tscn" id="3_jcil7"]
 [ext_resource type="Resource" uid="uid://pom4x0sy2j4x" path="res://maps/pickup_maps/instances/default.tres" id="4_dv71t"]
 
 [resource]
 script = ExtResource("2_5x4gf")
-preview = ExtResource("1_188jw")
+preview = ExtResource("1_74mhn")
 stage_pickup_map = ExtResource("4_dv71t")
 stage_m = ExtResource("3_jcil7")
