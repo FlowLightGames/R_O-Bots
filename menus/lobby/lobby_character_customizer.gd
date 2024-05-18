@@ -13,6 +13,7 @@ class_name LobbyCharacterCustom
 @export var ready_overlay:Control
 @export var player_name:Control
 @export var lobby_ref:MultiplayerCustomLobby
+@export var gamepad_cursor:GamepadCharacterCustomCursor
 
 @export var body_color_txt:Label
 @export var body_txt:Label
@@ -36,6 +37,7 @@ var current_face_custom:bool=false
 
 func _ready()->void:
 	(material as ShaderMaterial).set_shader_parameter("Type",type)
+	gamepad_cursor.assigned_player=type
 	
 	example_character_0.BodyAnimation.play("idle_front_left")
 	example_character_1.BodyAnimation.play("idle_front_right")
@@ -79,10 +81,12 @@ func enable()->void:
 	_ready()
 	panel_content.visible=true
 	player_name.visible=true
-
+	gamepad_cursor.enable()
 func disable()->void:
 	panel_content.visible=false
 	player_name.visible=false
+	gamepad_cursor.disable()
+	
 
 func update_to_player_config(player_number:int)->void:
 	var config:PlayerConfigMetaData=PlayerConfigs.Player_Configs[player_number]
@@ -203,7 +207,7 @@ func _on_facepreset_dec_pressed()->void:
 		current_face_custom=!current_face_custom
 		if current_face_custom:
 			max_number_face_base=maxi(FacesAutoload.custom_faces.size(),1)
-			face_custom_txt.text="Custom"
+			face_custom_txt.text="CSTM"
 			if FacesAutoload.custom_faces.is_empty():
 				example_character_0.set_new_face(null)
 				example_character_1.set_new_face(null)
@@ -212,7 +216,7 @@ func _on_facepreset_dec_pressed()->void:
 				example_character_1.set_new_face(FacesAutoload.custom_faces[0])
 		else:
 			max_number_face_base=FacesAutoload.preset_faces.size()
-			face_custom_txt.text="Preset"
+			face_custom_txt.text="DEF"
 			example_character_0.set_new_face(FacesAutoload.preset_faces[0])
 			example_character_1.set_new_face(FacesAutoload.preset_faces[0])
 		face_number_txt.text=str(current_face_base)
@@ -223,7 +227,7 @@ func _on_facepreset_inc_pressed()->void:
 		current_face_custom=!current_face_custom
 		if current_face_custom:
 			max_number_face_base=maxi(FacesAutoload.custom_faces.size(),1)
-			face_custom_txt.text="Custom"
+			face_custom_txt.text="CSTM"
 			if FacesAutoload.custom_faces.is_empty():
 				example_character_0.set_new_face(null)
 				example_character_1.set_new_face(null)
@@ -232,7 +236,7 @@ func _on_facepreset_inc_pressed()->void:
 				example_character_1.set_new_face(FacesAutoload.custom_faces[0])
 		else:
 			max_number_face_base=FacesAutoload.preset_faces.size()
-			face_custom_txt.text="Preset"
+			face_custom_txt.text="DEF"
 			example_character_0.set_new_face(FacesAutoload.preset_faces[0])
 			example_character_1.set_new_face(FacesAutoload.preset_faces[0])
 		face_number_txt.text=str(current_face_base)

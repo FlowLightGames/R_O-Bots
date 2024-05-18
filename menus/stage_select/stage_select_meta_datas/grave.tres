@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://soq7128pu2aa" path="res://menus/stage_select/stage_previews/grave.tscn" id="1_74mhn"]
 [ext_resource type="Script" path="res://menus/stage_select/stage_select_meta_data.gd" id="2_5x4gf"]
 [ext_resource type="PackedScene" uid="uid://dhibw8upfo3u8" path="res://maps/instances/grave_M.tscn" id="3_jcil7"]
-[ext_resource type="Resource" uid="uid://pom4x0sy2j4x" path="res://maps/pickup_maps/instances/default.tres" id="4_dv71t"]
+[ext_resource type="Resource" uid="uid://o7wypewmd1mq" path="res://maps/pickup_maps/instances/grave.tres" id="4_23mts"]
 
 [resource]
 script = ExtResource("2_5x4gf")
 preview = ExtResource("1_74mhn")
-stage_pickup_map = ExtResource("4_dv71t")
+stage_pickup_map = ExtResource("4_23mts")
 stage_m = ExtResource("3_jcil7")

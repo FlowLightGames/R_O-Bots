@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ca0ofo74p5we4"]
+[gd_scene load_steps=21 format=3 uid="uid://ca0ofo74p5we4"]
 
 [ext_resource type="Texture2D" uid="uid://c1c0hbjgbbtnl" path="res://menus/character_creator/menu_palette.png" id="2_0fqbj"]
 [ext_resource type="PackedScene" uid="uid://cd27yl8tl5qd6" path="res://player_character/character.tscn" id="2_6d3b8"]
@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="9_ewlph"]
 [ext_resource type="Texture2D" uid="uid://bw335sbq0nqxa" path="res://player_character/face_base_color_palette.png" id="10_0fgjq"]
 [ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="12_1tuyl"]
+[ext_resource type="Texture2D" uid="uid://byx1a3xtgp4am" path="res://UI/word_art/#.png" id="13_iy8pe"]
+[ext_resource type="Script" path="res://menus/lobby/gamepad_cursor.gd" id="14_satqh"]
+[ext_resource type="Script" path="res://menus/lobby/gamepad_UI_binding.gd" id="15_2qbew"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m4yiq"]
 resource_local_to_scene = true
@@ -52,7 +55,7 @@ shader_parameter/Max_types = 8
 shader_parameter/Type = 7
 shader_parameter/palett = ExtResource("7_646sm")
 
-[node name="LobbyCharacterCustomizer" type="PanelContainer" node_paths=PackedStringArray("player_tag", "example_character_0", "example_character_1", "example_character_2", "example_character_3", "panel_content", "ready_overlay", "player_name", "body_color_txt", "body_txt", "face_color_txt", "face_custom_txt", "face_number_txt")]
+[node name="LobbyCharacterCustomizer" type="PanelContainer" node_paths=PackedStringArray("player_tag", "example_character_0", "example_character_1", "example_character_2", "example_character_3", "panel_content", "ready_overlay", "player_name", "gamepad_cursor", "body_color_txt", "body_txt", "face_color_txt", "face_custom_txt", "face_number_txt")]
 process_mode = 1
 material = SubResource("ShaderMaterial_m4yiq")
 custom_minimum_size = Vector2(144, 128)
@@ -68,6 +71,7 @@ example_character_3 = NodePath("CenterContainer/NinePatchRect/Control/Character2
 panel_content = NodePath("CenterContainer/VBoxContainer")
 ready_overlay = NodePath("CenterContainer/NinePatchRect")
 player_name = NodePath("Control")
+gamepad_cursor = NodePath("GamepadCursor")
 body_color_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer/Label")
 body_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Label")
 face_color_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer/Label")
@@ -89,6 +93,7 @@ metadata/_edit_lock_ = true
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 2
+alignment = 1
 
 [node name="Spacer" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -97,17 +102,19 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 0
+theme_override_constants/separation = 2
 alignment = 1
 
 [node name="BodyBase" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Body"]
 layout_mode = 2
+theme_override_constants/separation = 1
 alignment = 1
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "BodyBase"
+text = "Body "
+uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase"]
 layout_mode = 2
@@ -128,12 +135,14 @@ layout_mode = 2
 
 [node name="BodyColor" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Body"]
 layout_mode = 2
+theme_override_constants/separation = 1
 alignment = 1
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "BodyClr"
+text = "Body Clr"
+uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor"]
 layout_mode = 2
@@ -159,7 +168,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Character" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control" instance=ExtResource("2_6d3b8")]
-position = Vector2(-16, 28)
+position = Vector2(-16, 25)
 disabled = true
 
 [node name="Body" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character/Visuals" index="0"]
@@ -171,28 +180,30 @@ material = SubResource("ShaderMaterial_owlxl")
 [node name="ReticleSprite" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character/Visuals/ZeusReticle" index="0"]
 material = SubResource("ShaderMaterial_oi60r")
 
-[node name="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character" index="8"]
+[node name="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character" index="11"]
 material = SubResource("ShaderMaterial_qdfhl")
 
 [node name="Character2" parent="CenterContainer/VBoxContainer/HBoxContainer/Body/Control" instance=ExtResource("2_6d3b8")]
-position = Vector2(16, 28)
+position = Vector2(16, 25)
 disabled = true
 
 [node name="Face" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 0
+theme_override_constants/separation = 2
 alignment = 1
 
 [node name="FacePreset" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face"]
 layout_mode = 2
+theme_override_constants/separation = 1
 alignment = 1
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "FaceCstm"
+text = "Face"
+uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset"]
 layout_mode = 2
@@ -203,9 +214,9 @@ alignment = 1
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer"]
-custom_minimum_size = Vector2(38, 0)
+custom_minimum_size = Vector2(29, 0)
 layout_mode = 2
-text = "Preset"
+text = "DEF"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -214,12 +225,14 @@ layout_mode = 2
 
 [node name="FaceType" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face"]
 layout_mode = 2
+theme_override_constants/separation = 1
 alignment = 1
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "FaceNum"
+text = "Face Num"
+uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType"]
 layout_mode = 2
@@ -241,12 +254,14 @@ layout_mode = 2
 
 [node name="FaceColor" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face"]
 layout_mode = 2
+theme_override_constants/separation = 1
 alignment = 1
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "FaceClr"
+text = "Face Clr"
+uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor"]
 layout_mode = 2
@@ -329,14 +344,71 @@ patch_margin_bottom = 3
 
 [node name="Label" type="Label" parent="Control/Panel"]
 layout_mode = 2
-offset_left = 8.0
-offset_top = 6.0
-offset_right = 86.0
-offset_bottom = 22.0
-text = "Bot"
+offset_left = 3.0
+offset_top = 8.0
+offset_right = 91.0
+offset_bottom = 21.0
+text = "Player"
 horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
+
+[node name="UIMarkers" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="UIMarkers"]
+position = Vector2(12, 35)
+
+[node name="Marker2D2" type="Marker2D" parent="UIMarkers"]
+position = Vector2(11, 61)
+
+[node name="Marker2D3" type="Marker2D" parent="UIMarkers"]
+position = Vector2(137, 35)
+
+[node name="Marker2D4" type="Marker2D" parent="UIMarkers"]
+position = Vector2(130, 61)
+
+[node name="Marker2D5" type="Marker2D" parent="UIMarkers"]
+position = Vector2(127, 87)
+
+[node name="GamepadCursor" type="Sprite2D" parent="." node_paths=PackedStringArray("list_of_options")]
+texture = ExtResource("13_iy8pe")
+script = ExtResource("14_satqh")
+list_of_options = [NodePath("Bodybase"), NodePath("Bodycolor"), NodePath("Facecustom"), NodePath("Facenum"), NodePath("Facecolor")]
+
+[node name="Bodybase" type="Node" parent="GamepadCursor" node_paths=PackedStringArray("option", "L_button", "R_button", "position_marker")]
+script = ExtResource("15_2qbew")
+option = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer")
+L_button = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Dec")
+R_button = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Inc")
+position_marker = NodePath("../../UIMarkers/Marker2D")
+
+[node name="Bodycolor" type="Node" parent="GamepadCursor" node_paths=PackedStringArray("option", "L_button", "R_button", "position_marker")]
+script = ExtResource("15_2qbew")
+option = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer")
+L_button = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer/Dec")
+R_button = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer/Inc")
+position_marker = NodePath("../../UIMarkers/Marker2D2")
+
+[node name="Facecustom" type="Node" parent="GamepadCursor" node_paths=PackedStringArray("option", "L_button", "R_button", "position_marker")]
+script = ExtResource("15_2qbew")
+option = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer")
+L_button = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer/Dec")
+R_button = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Face/FacePreset/HBoxContainer/Inc")
+position_marker = NodePath("../../UIMarkers/Marker2D3")
+
+[node name="Facenum" type="Node" parent="GamepadCursor" node_paths=PackedStringArray("option", "L_button", "R_button", "position_marker")]
+script = ExtResource("15_2qbew")
+option = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer")
+L_button = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer/Dec")
+R_button = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Face/FaceType/HBoxContainer/Inc")
+position_marker = NodePath("../../UIMarkers/Marker2D4")
+
+[node name="Facecolor" type="Node" parent="GamepadCursor" node_paths=PackedStringArray("option", "L_button", "R_button", "position_marker")]
+script = ExtResource("15_2qbew")
+option = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer")
+L_button = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer/Dec")
+R_button = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer/Face/FaceColor/HBoxContainer/Inc")
+position_marker = NodePath("../../UIMarkers/Marker2D5")
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Dec" to="." method="_on_bodytype_dec_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Body/BodyBase/HBoxContainer/Inc" to="." method="_on_bodytype_inc_pressed"]

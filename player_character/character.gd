@@ -20,9 +20,13 @@ var fire_ball:PackedScene=load("res://player_character/fire/fire_ball.tscn") as 
 @export var GunRayCast:RayCast2D
 @export var KickerRayCast:RayCast2D
 @export var DunkerRayCast:RayCast2D
+#TIMERS
 @export var fart_timer:Timer
 @export var fire_timer:Timer
 @export var death_timer:Timer
+#AUDIO
+@export var gunshot_audio:AudioStreamPlayer
+@export var knifeshiv_audio:AudioStreamPlayer
 
 var i_frames:bool=false
 @export var disabled:bool=false
@@ -306,6 +310,7 @@ func fire_gun()->void:
 		get_parent().add_child(tmp_gunshot)
 		tmp_gunshot.set_length_and_rotation(length,rotation_deg)
 		tmp_gunshot.position=position+Vector2(0,-8)
+		gunshot_audio.play(0.0)
 		if hit_target is BrickBase:
 			(hit_target as BrickBase).spawn_pickup_and_free()
 		elif hit_target is BombBase:
@@ -437,6 +442,7 @@ func _on_kife_dmg_area_body_entered(body:Node2D)->void:
 		if body is PlayerCharacter:
 			if !((body as PlayerCharacter).i_frames):
 				if !((body as PlayerCharacter).disabled):
+					knifeshiv_audio.play(0.0)
 					(body as PlayerCharacter).damage()
 					Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.NONE
 					update_state()

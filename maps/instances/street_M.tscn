@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://drqj3do1iwath"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_8te5a"]
-[ext_resource type="Resource" uid="uid://pom4x0sy2j4x" path="res://maps/pickup_maps/instances/default.tres" id="2_ej6bd"]
+[ext_resource type="Resource" uid="uid://d2qcdbsgy535t" path="res://maps/pickup_maps/instances/street.tres" id="2_1hr31"]
 [ext_resource type="Texture2D" uid="uid://dt7hiwfjtmorc" path="res://maps/tilesets/street.png" id="3_sj5k6"]
 [ext_resource type="PackedScene" uid="uid://bl03qg1yaqiqw" path="res://maps/bricks/instances/street_0.tscn" id="4_n4lqa"]
 [ext_resource type="PackedScene" uid="uid://g02wfgrtmxh5" path="res://maps/bricks/instances/street_1.tscn" id="5_0apfk"]
@@ -152,7 +152,7 @@ scenes/4/scene = ExtResource("9_wq5c4")
 sources/0 = SubResource("TileSetScenesCollectionSource_lokyd")
 
 [node name="MapBase" instance=ExtResource("1_8te5a")]
-possible_pickups = ExtResource("2_ej6bd")
+possible_pickups = ExtResource("2_1hr31")
 metadata/_edit_lock_ = true
 
 [node name="BaseGround" parent="." index="0"]
@@ -182,12 +182,4 @@ position = Vector2(184, 120)
 
 [node name="OOB" parent="." index="11" instance=ExtResource("12_o3u42")]
 
-[connection signal="body_entered" from="Interactables/Area2D" to="Interactables/Area2D" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@31277" to="Interactables/@Area2D@31277" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@31278" to="Interactables/@Area2D@31278" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@31279" to="Interactables/@Area2D@31279" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@31280" to="Interactables/@Area2D@31280" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@31281" to="Interactables/@Area2D@31281" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@31282" to="Interactables/@Area2D@31282" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@31283" to="Interactables/@Area2D@31283" method="_on_body_entered"]
 [connection signal="body_entered" from="OOB" to="." method="_on_out_of_bound_body_entered"]

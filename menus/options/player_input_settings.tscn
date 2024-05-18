@@ -62,11 +62,11 @@ grow_vertical = 2
 
 [node name="Default" type="Button" parent="VBoxContainer/Control/HBoxContainer"]
 layout_mode = 2
-text = "Default"
+text = "DEFAULT"
 
 [node name="Cancel" type="Button" parent="VBoxContainer/Control/HBoxContainer"]
 layout_mode = 2
-text = "Cancel"
+text = "CANCEL"
 
 [node name="Save" type="Button" parent="VBoxContainer/Control"]
 custom_minimum_size = Vector2(0, 16)
@@ -82,7 +82,7 @@ offset_bottom = 9.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
-text = "Save"
+text = "SAVE"
 
 [node name="Spacer" type="Control" parent="VBoxContainer"]
 layout_mode = 2

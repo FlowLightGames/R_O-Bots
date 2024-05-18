@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://dhibw8upfo3u8"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_nddxn"]
-[ext_resource type="Resource" uid="uid://pom4x0sy2j4x" path="res://maps/pickup_maps/instances/default.tres" id="2_aodu5"]
+[ext_resource type="Resource" uid="uid://o7wypewmd1mq" path="res://maps/pickup_maps/instances/grave.tres" id="2_vqpue"]
 [ext_resource type="Texture2D" uid="uid://bltv3r4r1thr4" path="res://maps/tilesets/grave.png" id="3_8vn7r"]
 [ext_resource type="PackedScene" uid="uid://p8djpuslomvg" path="res://maps/bricks/instances/grave_0.tscn" id="4_fidn3"]
 [ext_resource type="PackedScene" uid="uid://bigaqr8ed0ghd" path="res://maps/statics/instances/grave_0.tscn" id="5_6ku50"]
@@ -197,7 +197,7 @@ void fragment(){
 shader = SubResource("Shader_e5fly")
 
 [node name="MapBase" instance=ExtResource("1_nddxn")]
-possible_pickups = ExtResource("2_aodu5")
+possible_pickups = ExtResource("2_vqpue")
 metadata/_edit_lock_ = true
 
 [node name="BaseGround" parent="." index="0"]

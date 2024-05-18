@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cd27yl8tl5qd6"]
+[gd_scene load_steps=41 format=3 uid="uid://cd27yl8tl5qd6"]
 
 [ext_resource type="Script" path="res://player_character/character.gd" id="1_arre1"]
 [ext_resource type="Texture2D" uid="uid://dtjkf0bsqsk5m" path="res://player_character/base_character_sprite.png" id="1_gp3n5"]
@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="6_hlhnq"]
 [ext_resource type="Texture2D" uid="uid://bwy8smpq2xf1" path="res://player_character/gun_knife/knife_gun.png" id="9_i1ueb"]
 [ext_resource type="Texture2D" uid="uid://obuc3onp21l3" path="res://player_character/zeus/zeus_reticle.png" id="10_lcotw"]
+[ext_resource type="AudioStream" uid="uid://bekw1o1jffch2" path="res://player_character/gun_knife/gun.wav" id="11_gfy4j"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="11_tx0pb"]
+[ext_resource type="AudioStream" uid="uid://b4eto78885q1g" path="res://player_character/gun_knife/knife.wav" id="12_to44d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qqfp6"]
 radius = 6.0
@@ -1295,7 +1297,7 @@ shader_parameter/Max_types = 8
 shader_parameter/Type = 7
 shader_parameter/palett = ExtResource("2_hxxlk")
 
-[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("name_label", "BodyAnimation", "FaceAnimation", "IFramesAnimation", "Face", "Body", "bomb_place_check", "KnifeGunSprite", "ZeusReticle", "KnifeHurtBox", "GunRayCast", "KickerRayCast", "DunkerRayCast", "fart_timer", "fire_timer", "death_timer")]
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("name_label", "BodyAnimation", "FaceAnimation", "IFramesAnimation", "Face", "Body", "bomb_place_check", "KnifeGunSprite", "ZeusReticle", "KnifeHurtBox", "GunRayCast", "KickerRayCast", "DunkerRayCast", "fart_timer", "fire_timer", "death_timer", "gunshot_audio", "knifeshiv_audio")]
 z_index = 2
 collision_mask = 280
 motion_mode = 1
@@ -1316,6 +1318,8 @@ DunkerRayCast = NodePath("DunkerCast2D")
 fart_timer = NodePath("FartTimer")
 fire_timer = NodePath("FireTimer")
 death_timer = NodePath("DeathTimer")
+gunshot_audio = NodePath("Audio/GunShot")
+knifeshiv_audio = NodePath("Audio/KnifeShiv")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1385,6 +1389,14 @@ libraries = {
 "": SubResource("AnimationLibrary_aym1l")
 }
 autoplay = "Default"
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="GunShot" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("11_gfy4j")
+
+[node name="KnifeShiv" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("12_to44d")
 
 [node name="KifeDmgArea" type="Area2D" parent="."]
 scale = Vector2(1, -1)

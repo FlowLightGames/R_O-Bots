@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="PickUpMap" load_steps=9 format=3 uid="uid://d2qcdbsgy535t"]
+
+[ext_resource type="Script" path="res://maps/pickup_option_struct.gd" id="1_ophd7"]
+[ext_resource type="Script" path="res://maps/pickup_maps/pickup_map_base.gd" id="1_vgvsd"]
+
+[sub_resource type="Resource" id="Resource_cs0ej"]
+script = ExtResource("1_ophd7")
+what = 18
+weight = 1
+
+[sub_resource type="Resource" id="Resource_nhlp7"]
+script = ExtResource("1_ophd7")
+what = 10
+weight = 10
+
+[sub_resource type="Resource" id="Resource_ig8uu"]
+script = ExtResource("1_ophd7")
+what = 14
+weight = 3
+
+[sub_resource type="Resource" id="Resource_04rfc"]
+script = ExtResource("1_ophd7")
+what = 19
+weight = 8
+
+[sub_resource type="Resource" id="Resource_abaub"]
+script = ExtResource("1_ophd7")
+what = 9
+weight = 6
+
+[sub_resource type="Resource" id="Resource_ihglh"]
+script = ExtResource("1_ophd7")
+what = 8
+weight = 6
+
+[resource]
+script = ExtResource("1_vgvsd")
+map = Array[ExtResource("1_ophd7")]([SubResource("Resource_cs0ej"), SubResource("Resource_nhlp7"), SubResource("Resource_ig8uu"), SubResource("Resource_04rfc"), SubResource("Resource_abaub"), SubResource("Resource_ihglh")])
+pickup_chance = 0.805
