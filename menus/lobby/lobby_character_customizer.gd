@@ -78,7 +78,7 @@ func _ready()->void:
 	max_number_face_base=FacesAutoload.preset_faces.size()
 
 func enable()->void:
-	_ready()
+	#_ready()
 	panel_content.visible=true
 	player_name.visible=true
 	gamepad_cursor.enable()

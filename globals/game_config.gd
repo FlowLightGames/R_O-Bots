@@ -46,6 +46,11 @@ func apply_video_settings()->void:
 	else:
 		CrtOverlay.visible=false
 
+func apply_audio_settings()->void:
+	AudioServer.set_bus_volume_db(0,linear_to_db(float(Master)/100.0))
+	AudioServer.set_bus_volume_db(1,linear_to_db(float(Music)/100.0))
+	AudioServer.set_bus_volume_db(2,linear_to_db(float(SFX)/100.0))
+
 func load_player_input_dicts()->void:
 	var curr_handled_player_num:int=0
 	for n:Dictionary in Player_Input_Dicts:
@@ -218,12 +223,6 @@ func get_input_event(code:String)->InputEvent:
 			key.physical_keycode=int(check[0]) as Key
 			return key
 
-#func _input(event:InputEvent)->void:
-	#print(event)
-#
-#func _unhandled_input(event:InputEvent)->void:
-	#print(event)
-
 func save_data()->void:
 	var save_dict:Dictionary={}
 	save_dict["Version"]=ProjectSettings.get_setting("application/config/version")
@@ -283,8 +282,6 @@ func load_data()->void:
 		for i:int in 8:
 			add_gamepad_input(i)
 		
-		print(InputMap.action_get_events("0_Up"))
-		
 		var custom_face_bytes:Array=load_dict["CstmFcs"] 
 		
 		var custom_faces:Array[Texture2D]=[]
@@ -308,3 +305,4 @@ func load_data()->void:
 		
 		save_data()
 	apply_video_settings()
+	apply_audio_settings()

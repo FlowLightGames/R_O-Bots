@@ -76,6 +76,7 @@ autostart = true
 stream = ExtResource("3_hov7k")
 volume_db = -5.56
 autoplay = true
+bus = &"SFX"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

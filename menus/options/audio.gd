@@ -41,6 +41,7 @@ func _on_save_pressed()->void:
 	GameConfig.Master=master_slider.value
 	GameConfig.Music=music_slider.value
 	GameConfig.SFX=SFX_slider.value
+	GameConfig.apply_audio_settings()
 	cancel.emit()
 
 

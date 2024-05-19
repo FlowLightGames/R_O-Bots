@@ -1394,9 +1394,11 @@ autoplay = "Default"
 
 [node name="GunShot" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("11_gfy4j")
+bus = &"SFX"
 
 [node name="KnifeShiv" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("12_to44d")
+bus = &"SFX"
 
 [node name="KifeDmgArea" type="Area2D" parent="."]
 scale = Vector2(1, -1)

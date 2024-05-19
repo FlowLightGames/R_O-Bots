@@ -286,6 +286,7 @@ text = "READY "
 
 [node name="NinePatchRect" type="Panel" parent="CenterContainer"]
 visible = false
+material = SubResource("ShaderMaterial_m4yiq")
 custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 metadata/_edit_group_ = true
@@ -330,6 +331,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Panel" type="NinePatchRect" parent="Control"]
+material = SubResource("ShaderMaterial_m4yiq")
 custom_minimum_size = Vector2(94, 24)
 layout_mode = 0
 offset_left = 17.0
@@ -356,19 +358,19 @@ clip_text = true
 [node name="UIMarkers" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="UIMarkers"]
-position = Vector2(12, 35)
+position = Vector2(11, 35)
 
 [node name="Marker2D2" type="Marker2D" parent="UIMarkers"]
-position = Vector2(11, 61)
+position = Vector2(11, 63)
 
 [node name="Marker2D3" type="Marker2D" parent="UIMarkers"]
-position = Vector2(137, 35)
+position = Vector2(137, 34)
 
 [node name="Marker2D4" type="Marker2D" parent="UIMarkers"]
-position = Vector2(130, 61)
+position = Vector2(130, 62)
 
 [node name="Marker2D5" type="Marker2D" parent="UIMarkers"]
-position = Vector2(127, 87)
+position = Vector2(127, 90)
 
 [node name="GamepadCursor" type="Sprite2D" parent="." node_paths=PackedStringArray("list_of_options")]
 texture = ExtResource("13_iy8pe")

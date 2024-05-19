@@ -2,6 +2,16 @@ extends CharacterBody2D
 
 class_name PlayerCharacter
 
+class PuppetState extends RefCounted:
+	var movement_dir:Vector2i=Vector2i.ZERO
+
+enum TAKEN_ACTION{
+	ZEUS,
+	GUN,
+	PLACE_BOMB,
+	DETONATE_BOMB
+	}
+
 var gunshot:PackedScene=load("res://player_character/gun_knife/gun_shot.tscn") as PackedScene
 var zeus_lightning:PackedScene=load("res://player_character/zeus/zeus_lightning.tscn") as PackedScene
 var fart:PackedScene=load("res://player_character/fart/fart.tscn") as PackedScene
@@ -32,6 +42,7 @@ var i_frames:bool=false
 @export var disabled:bool=false
 #for multiplayer so we dont control other players
 var is_puppet:bool=false
+var puppet_state:PuppetState=PuppetState.new()
 
 var Action_UP:String ="0_Up"
 var Action_DOWN:String ="0_Down"
@@ -337,10 +348,42 @@ func get_player_state()->PlayerState:
 	var output:PlayerState = PlayerState.new()
 	output.player_number=Player_Number
 	output.position=global_position
-	output.velocity=velocity
+	output.reticle_position=ZeusReticle.global_position
+	output.direction=current_view_direction
 	output.pickup_stats=Pickup_Stats
 	output.taken_aktions=[]
 	return output
+
+func handle_passive_actions()->void:
+	KickerRayCast.rotation=Vector2(get_priority_4_way_direction(current_view_direction)).angle()-0.5*PI
+	var kicker_target:Object=KickerRayCast.get_collider()
+	if kicker_target&&kicker_target is BombBase:
+		#print("HIT SOMETHING POGGERS")
+		if (kicker_target as BombBase).kickable:
+			var direction:Vector2=Vector2((kicker_target as Node2D).global_position-KickerRayCast.get_collision_point())
+			#direction=direction.normalized()
+			
+			var direction_i:Vector2i=Vector2i.ZERO
+			if abs(direction.x)>=abs(direction.y):
+				direction_i.x=roundi(signf(direction.x))
+			else:
+				direction_i.y=roundi(signf(direction.y))
+			#print(direction_i)
+			#(kicker_target as BombBase).kick(get_priority_4_way_direction(current_view_direction))
+			#print(direction_i)
+			(kicker_target as BombBase).kick(direction_i)
+	#Pooping
+	if Pickup_Stats.STATES[0]>0:
+		if !(bomb_place_check.is_colliding()):
+			place_bomb()
+	#Fire ing
+	if Pickup_Stats.STATES[1]>0:
+		if fire_timer.is_stopped():
+			fire_timer.start(1.5)
+	#Farting
+	if Pickup_Stats.STATES[2]>0:
+		if fart_timer.is_stopped():
+			fart_timer.start(2.0)
 
 func _physics_process(_delta:float)->void:
 	if !disabled:
@@ -390,41 +433,12 @@ func _physics_process(_delta:float)->void:
 					_:
 						pass
 				
-				KickerRayCast.rotation=Vector2(get_priority_4_way_direction(current_view_direction)).angle()-0.5*PI
-				var kicker_target:Object=KickerRayCast.get_collider()
-				if kicker_target&&kicker_target is BombBase:
-					#print("HIT SOMETHING POGGERS")
-					if (kicker_target as BombBase).kickable:
-						var direction:Vector2=Vector2((kicker_target as Node2D).global_position-KickerRayCast.get_collision_point())
-						#direction=direction.normalized()
-						
-						var direction_i:Vector2i=Vector2i.ZERO
-						if abs(direction.x)>=abs(direction.y):
-							direction_i.x=roundi(signf(direction.x))
-						else:
-							direction_i.y=roundi(signf(direction.y))
-						#print(direction_i)
-						#(kicker_target as BombBase).kick(get_priority_4_way_direction(current_view_direction))
-						#print(direction_i)
-						(kicker_target as BombBase).kick(direction_i)
-				
 				BodyAnimation.play(animation_string+front_back+left_right)
 				var normalized_move_vec:Vector2=Vector2(move_vec).normalized()
 				velocity=normalized_move_vec*BASE_MOVEMENT_SPEED*(Pickup_Stats.get_speed_scale())
 				move_and_slide()
 				
-				#Pooping
-				if Pickup_Stats.STATES[0]>0:
-					if !(bomb_place_check.is_colliding()):
-						place_bomb()
-				#Fire ing
-				if Pickup_Stats.STATES[1]>0:
-					if fire_timer.is_stopped():
-						fire_timer.start(1.5)
-				#Farting
-				if Pickup_Stats.STATES[2]>0:
-					if fart_timer.is_stopped():
-						fart_timer.start(2.0)
+				handle_passive_actions()
 				
 				if Input.is_action_just_pressed(Action_0):
 					action_one()
@@ -432,7 +446,40 @@ func _physics_process(_delta:float)->void:
 					action_two()
 		#if were someone elses PC (puppet)
 		else:
-			pass
+			if Pickup_Stats.SPECIAL_STATE==PickUpStats.SPECIALSTATE.ZEUS:
+				BodyAnimation.play("zeus")
+			else:
+				
+				var animation_string:String=""
+				if puppet_state.movement_dir!=Vector2i.ZERO:
+					current_view_direction=puppet_state.movement_dir
+					animation_string+="run_"
+				else:
+					animation_string+="idle_"
+				
+				match current_view_direction.y:
+					1:
+						front_back="front_"
+					-1:
+						front_back="back_"
+					_:
+						if current_view_direction.x!=0:
+							front_back="front_"
+				
+				match current_view_direction.x:
+					1:
+						left_right="right"
+					-1:
+						left_right="left"
+					_:
+						pass
+				
+				BodyAnimation.play(animation_string+front_back+left_right)
+				var normalized_move_vec:Vector2=Vector2(puppet_state.movement_dir).normalized()
+				velocity=normalized_move_vec*BASE_MOVEMENT_SPEED*(Pickup_Stats.get_speed_scale())
+				move_and_slide()
+				
+				handle_passive_actions()
 
 func _ready()->void:
 	update_state()
