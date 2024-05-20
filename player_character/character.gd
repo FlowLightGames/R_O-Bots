@@ -240,6 +240,8 @@ func action_one()->void:
 	bomb_place_check.force_raycast_update()
 	if !(bomb_place_check.is_colliding()):
 		place_bomb()
+		if MultiplayerStatus.Current_Status== MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
+			send_taken_action(PlayerState.ACTIONS.BOMB_PLACED)
 	else:
 		if Pickup_Stats.DUNKER:
 			DunkerRayCast.force_raycast_update()
@@ -248,15 +250,21 @@ func action_one()->void:
 				if throwable_bomb:
 					if throwable_bomb.throwable:
 						throwable_bomb.throw(get_priority_4_way_direction(current_view_direction))
+						if MultiplayerStatus.Current_Status== MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
+							send_taken_action(PlayerState.ACTIONS.BOMB_THROW)
 
 func action_two()->void:
 	for n:BombBase in Bomb_Ref_List:
 		if n is RemoteBomb:
 			(n as RemoteBomb).explode()
+			if MultiplayerStatus.Current_Status== MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
+				send_taken_action(PlayerState.ACTIONS.BOMB_DETONATE)
 			break
 	match Pickup_Stats.SPECIAL_STATE:
 				PickUpStats.SPECIALSTATE.GUN:
 					fire_gun()
+					if MultiplayerStatus.Current_Status== MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
+						send_taken_action(PlayerState.ACTIONS.GUN_FIRED)
 				_:
 					pass
 
@@ -344,14 +352,16 @@ func get_priority_4_way_direction(input:Vector2i)->Vector2i:
 	return output
 
 func get_player_state()->PlayerState:
-	#TODO PLAYER ACTIONS
 	var output:PlayerState = PlayerState.new()
 	output.player_number=Player_Number
+	if velocity.x !=0.0||velocity.y!=0.0:
+		output.moving=true
+	output.dead=false
 	output.position=global_position
 	output.reticle_position=ZeusReticle.global_position
 	output.direction=current_view_direction
 	output.pickup_stats=Pickup_Stats
-	output.taken_aktions=[]
+	output.taken_actions=[]
 	return output
 
 func handle_passive_actions()->void:
@@ -385,6 +395,15 @@ func handle_passive_actions()->void:
 		if fart_timer.is_stopped():
 			fart_timer.start(2.0)
 
+func send_taken_action(input:PlayerState.ACTIONS)->void:
+	if !(SteamLobby.is_host):
+		var player_state:PlayerState=get_player_state()
+		player_state.taken_action=input
+		#TODO send the thing
+	else:
+		#TODO HOST CASE
+		pass
+
 func _physics_process(_delta:float)->void:
 	if !disabled:
 		#if this is your PC
@@ -398,7 +417,8 @@ func _physics_process(_delta:float)->void:
 				
 				if Input.is_action_just_pressed(Action_1):
 					fire_lightning()
-					
+					if MultiplayerStatus.Current_Status== MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
+						send_taken_action(PlayerState.ACTIONS.ZEUS_FIRED)
 					Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.NONE
 					
 					ZeusReticle.visible=false

@@ -10,6 +10,8 @@ class_name PlayerConfigMetaData
 @export var Starting_Stats:PickUpStats=PickUpStats.new()
 
 var initial_data_received:bool=false
+#latest recieved message timestamp in clinet time
+var elapsed_time:int=Time.get_ticks_msec()
 var steam_id:int=-1
 
 var custom_faces:Array[Texture2D]=[]

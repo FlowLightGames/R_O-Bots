@@ -56,7 +56,7 @@ func _on_size_inc_pressed()->void:
 		apply_new_selection()
 
 func _on_cancel_pressed()->void:
-	if GameConfig.Online_Session:
+	if MultiplayerStatus.Online_Session:
 		get_tree().change_scene_to_packed(SceneCollection.online_lobby)
 	else:
 		get_tree().change_scene_to_packed(SceneCollection.offline_lobby)

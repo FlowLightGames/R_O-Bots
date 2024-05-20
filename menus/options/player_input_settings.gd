@@ -46,36 +46,67 @@ func reset()->void:
 func get_curr_player_action_dict(player_num:int)->void:
 	curr_action_dict={}
 	temp_input_event_dict={}
+	
 	curr_action_dict["UP"]=(str(player_num)+"_Up")
-	temp_input_event_dict[(str(player_num)+"_Up")]=GameConfig.get_input_code(InputMap.action_get_events((str(player_num)+"_Up")).front())
+	if player_input_selector.tmp_changes[player_num].has((str(player_num)+"_Up")):
+		print("HAS IN TMP CHANGES")
+		temp_input_event_dict[(str(player_num)+"_Up")]=player_input_selector.tmp_changes[player_num][(str(player_num)+"_Up")]
+		print("IT IS")
+		print(temp_input_event_dict[(str(player_num)+"_Up")])
+	else:
+		print("NOT HAS IN TMP CHANGES")
+		temp_input_event_dict[(str(player_num)+"_Up")]=GameConfig.get_input_code(InputMap.action_get_events((str(player_num)+"_Up")).front())
 	
 	curr_action_dict["DOWN"]=(str(player_num)+"_Down")
-	temp_input_event_dict[(str(player_num)+"_Down")]=GameConfig.get_input_code(InputMap.action_get_events((str(player_num)+"_Down")).front())
+	if player_input_selector.tmp_changes[player_num].has((str(player_num)+"_Down")):
+		temp_input_event_dict[(str(player_num)+"_Down")]=player_input_selector.tmp_changes[player_num][(str(player_num)+"_Down")]
+	else:
+		temp_input_event_dict[(str(player_num)+"_Down")]=GameConfig.get_input_code(InputMap.action_get_events((str(player_num)+"_Down")).front())
 	
 	curr_action_dict["LEFT"]=(str(player_num)+"_Left")
-	temp_input_event_dict[(str(player_num)+"_Left")]=GameConfig.get_input_code(InputMap.action_get_events((str(player_num)+"_Left")).front())
+	if player_input_selector.tmp_changes[player_num].has((str(player_num)+"_Left")):
+		temp_input_event_dict[(str(player_num)+"_Left")]=player_input_selector.tmp_changes[player_num][(str(player_num)+"_Left")]
+	else:
+		temp_input_event_dict[(str(player_num)+"_Left")]=GameConfig.get_input_code(InputMap.action_get_events((str(player_num)+"_Left")).front())
 	
 	curr_action_dict["RIGHT"]=(str(player_num)+"_Right")
-	temp_input_event_dict[(str(player_num)+"_Right")]=GameConfig.get_input_code(InputMap.action_get_events((str(player_num)+"_Right")).front())
+	if player_input_selector.tmp_changes[player_num].has((str(player_num)+"_Right")):
+		temp_input_event_dict[(str(player_num)+"_Right")]=player_input_selector.tmp_changes[player_num][(str(player_num)+"_Right")]
+	else:
+		temp_input_event_dict[(str(player_num)+"_Right")]=GameConfig.get_input_code(InputMap.action_get_events((str(player_num)+"_Right")).front())
 	
 	curr_action_dict["ACTION_0"]=(str(player_num)+"_Action_0")
-	temp_input_event_dict[(str(player_num)+"_Action_0")]=GameConfig.get_input_code(InputMap.action_get_events((str(player_num)+"_Action_0")).front())
+	if player_input_selector.tmp_changes[player_num].has((str(player_num)+"_Action_0")):
+		temp_input_event_dict[(str(player_num)+"_Action_0")]=player_input_selector.tmp_changes[player_num][(str(player_num)+"_Action_0")]
+	else:
+		temp_input_event_dict[(str(player_num)+"_Action_0")]=GameConfig.get_input_code(InputMap.action_get_events((str(player_num)+"_Action_0")).front())
 	
 	curr_action_dict["ACTION_1"]=(str(player_num)+"_Action_1")
-	temp_input_event_dict[(str(player_num)+"_Action_1")]=GameConfig.get_input_code(InputMap.action_get_events((str(player_num)+"_Action_1")).front())
+	if player_input_selector.tmp_changes[player_num].has((str(player_num)+"_Action_1")):
+		temp_input_event_dict[(str(player_num)+"_Action_1")]=player_input_selector.tmp_changes[player_num][(str(player_num)+"_Action_1")]
+	else:
+		temp_input_event_dict[(str(player_num)+"_Action_1")]=GameConfig.get_input_code(InputMap.action_get_events((str(player_num)+"_Action_1")).front())
 
 func assign_input_remap_buttons(player_num:int)->void:
+	curr_handled_player_num=player_num
 	curr_player_label.text="Player"+str(player_num)
 	get_curr_player_action_dict(player_num)
 	var idx:int=0
 	for action:String in curr_action_dict:
-		var events:Array[InputEvent]=InputMap.action_get_events(curr_action_dict[action])
-		if !(events.is_empty()):
+		var event:String=temp_input_event_dict[curr_action_dict[action]]
+		if (event):
 			buttons[idx].action_name=action
-			buttons[idx].key_scan=events[0].as_text().trim_suffix(" (Physical)").to_upper()
+			buttons[idx].key_scan=GameConfig.get_input_event(event).as_text().trim_suffix(" (Physical)").to_upper()
 		else:
 			buttons[idx].action_name=action
 			buttons[idx].key_scan="Null"
+		#var events:Array[InputEvent]=InputMap.action_get_events(curr_action_dict[action])
+		#if !(events.is_empty()):
+			#buttons[idx].action_name=action
+			#buttons[idx].key_scan=events[0].as_text().trim_suffix(" (Physical)").to_upper()
+		#else:
+			#buttons[idx].action_name=action
+			#buttons[idx].key_scan="Null"
 		
 		buttons[idx].update_text()
 		idx+=1

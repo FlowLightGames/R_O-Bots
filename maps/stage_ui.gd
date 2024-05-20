@@ -47,7 +47,7 @@ func update_icons(players:Array[PlayerCharacter])->void:
 
 func disable_unused()->void:
 	for i:int in player_icons.size():
-		if i>=GameConfig.Current_Number_Of_Players:
+		if i>=MultiplayerStatus.Current_Number_Of_Players:
 			player_icons[i].visible=false
 
 func _ready()->void:

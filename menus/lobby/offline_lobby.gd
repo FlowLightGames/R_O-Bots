@@ -6,7 +6,7 @@ class_name OfflineCustomLobby
 var num_of_players:int=1
 
 func _ready()->void:
-	num_of_players=GameConfig.Current_Number_Of_Players
+	num_of_players=MultiplayerStatus.Current_Number_Of_Players
 	update_player_boxes()
 
 func update_player_boxes()->void:
@@ -59,6 +59,6 @@ func _on_stage_select_pressed()->void:
 			PickUpStats.new()
 		)
 		PlayerConfigs.Player_Configs[n]=tmp_meta
-	GameConfig.Current_Number_Of_Players=num_of_players
+	MultiplayerStatus.Current_Number_Of_Players=num_of_players
 	#change to stage select
 	get_tree().change_scene_to_packed(SceneCollection.stage_select)

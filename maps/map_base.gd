@@ -93,7 +93,7 @@ func spawn_players(how_many:int)->void:
 			player_nodes.add_child(character)
 			
 			
-			if GameConfig.Online_Session:
+			if MultiplayerStatus.Online_Session:
 				character.set_player_name(Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n].steam_id))
 			else:
 				character.set_player_name("Player"+str(n))
@@ -114,7 +114,7 @@ func unlock_players()->void:
 	stage_ui.start()
 
 func _ready()->void:
-	spawn_players(GameConfig.Current_Number_Of_Players)
+	spawn_players(MultiplayerStatus.Current_Number_Of_Players)
 	round_timer.wait_time=round_time
 	stage_ui.initial_time(round_time)
 	var tmp_countdown:Countdown=countdown_overlay.instantiate() as Countdown
@@ -128,6 +128,23 @@ func get_gamestate()->GameState:
 	var output:GameState=GameState.new()
 	return output
 
+func get_player_by_number(player_num:int)->PlayerCharacter:
+	for n:PlayerCharacter in player_ref_list:
+		if n.Player_Number==player_num:
+			return n
+	return null
+
+func get_playerstate(player_num:int)->PlayerState:
+	var player:PlayerCharacter=get_player_by_number(player_num)
+	#player is alive
+	if player:
+		return player.get_player_state()
+	#player is dead
+	else:
+		var output:PlayerState=PlayerState.new()
+		output.player_number=player_num
+		output.dead=true
+		return output
 
 func _on_out_of_bound_body_entered(body:Node2D)->void:
 	if body is BombBase:

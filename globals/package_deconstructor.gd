@@ -15,11 +15,12 @@ extends Node
 #4: Character data update
 #5: Character ready tru/false (if true send also character config)
 #6: lobby start game data (Random Seed)
-#7: game state update
+#7: game state update (from host)
 #8: finished game
 #9: assign playernumber
 #10: clock sync (estimate tcp,udp delay)
 #11: Character Custom Finished Master
+#12: PlayerStateUpdate (from clients)
 
 signal player_initial_data_transfer_ack(player_number:int)
 signal player_number_assignment_ack(player_number:int)
@@ -42,7 +43,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 					var test:int=SteamLobby.add_player_assignment(req_steam_id)
 					print("sending assignment !=0: "+str(test))
 					if test>0:
-						var msg:PackedByteArray=PackageConstructor.player_number_assignment(req_steam_id,test)
+						var msg:PackedByteArray=PackageConstructor.player_number_assignment(test)
 						SteamLobby.send_p2p_packet(req_steam_id,Steam.P2P_SEND_RELIABLE, msg)
 				1:
 					print("got initial data request")
@@ -61,12 +62,12 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			var data:PackedByteArray=input
 			match ack_type:
 				0:
-					
-					var player_number:int=data.decode_u8(0)
-					data.remove_at(0)
-					var steamID:int=bytes_to_var(data)
+					var dict:Dictionary=bytes_to_var(data) as Dictionary
+					var player_number:int=dict["PN"]
+					var steamID:int=dict["SID"]
+					var elapsed_time:int=dict["ET"]
 					PlayerConfigs.set_steamID(player_number,steamID)
-					
+					PlayerConfigs.set_elapsed_time(player_number,elapsed_time)
 					print("got number assignment ack: "+str(player_number))
 					
 					player_number_assignment_ack.emit(player_number)
@@ -172,5 +173,12 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			print("got player ready config master list")
 			character_custom_finished.emit()
 			#TODO switch scene logic
+		12:
+			var dict:Dictionary=bytes_to_var(input)
+			var who_steam_id:int=dict["SID"]
+			var elapsed_time:int=dict["ET"]
+			var player_state:PlayerState=PlayerState.new()
+			player_state.deserialize(dict["PS"])
+			#TODO Actually update gamestate
 		_:
 			pass

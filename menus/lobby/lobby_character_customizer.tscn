@@ -286,7 +286,6 @@ text = "READY "
 
 [node name="NinePatchRect" type="Panel" parent="CenterContainer"]
 visible = false
-material = SubResource("ShaderMaterial_m4yiq")
 custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 metadata/_edit_group_ = true

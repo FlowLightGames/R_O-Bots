@@ -1320,6 +1320,7 @@ fire_timer = NodePath("FireTimer")
 death_timer = NodePath("DeathTimer")
 gunshot_audio = NodePath("Audio/GunShot")
 knifeshiv_audio = NodePath("Audio/KnifeShiv")
+disabled = null
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1409,7 +1410,6 @@ shape = SubResource("RectangleShape2D_c8sd1")
 disabled = true
 
 [node name="GunCast2D" type="RayCast2D" parent="."]
-visible = false
 enabled = false
 target_position = Vector2(45, 0)
 collision_mask = 31

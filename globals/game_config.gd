@@ -3,11 +3,6 @@ extends Node
 #Version of current exe
 var game_version:String=""
 
-#session settings
-#wont be saved
-var Online_Session:bool=false
-var Current_Number_Of_Players:int=0
-
 #Audio Settings
 var Master:int=100
 var Music:int=50

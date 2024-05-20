@@ -25,6 +25,15 @@ func on_player_input_option_pressed(player_num:int)->void:
 
 
 func _on_save_pressed()->void:
+	#test before:
+	
+	print("playerinputdicts before")
+	for a:Dictionary in GameConfig.Player_Input_Dicts:
+		print(a)
+	
+	print("tmp changes before")
+	for a:Dictionary in tmp_changes:
+		print(a)
 	#save tmp changes
 	var player_idx:int=0
 	for dict:Dictionary in tmp_changes:
@@ -34,6 +43,10 @@ func _on_save_pressed()->void:
 				InputMap.action_add_event(n,GameConfig.get_input_event(dict[n]))
 				GameConfig.Player_Input_Dicts[player_idx][n]=dict[n]
 		player_idx+=1
+	
+	print("playerinputdicts after")
+	for a:Dictionary in GameConfig.Player_Input_Dicts:
+		print(a)
 	
 	cancel.emit()
 

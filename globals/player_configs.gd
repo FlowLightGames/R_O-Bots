@@ -75,6 +75,10 @@ func set_steamID(player_number:int,steamID:int)->void:
 	if player_number >=0 && player_number<=7:
 		Player_Configs[player_number].steam_id=steamID
 
+func set_elapsed_time(player_number:int,time:int)->void:
+	if player_number >=0 && player_number<=7:
+		Player_Configs[player_number]. elapsed_time=time
+
 func set_player_initial_data_ack(player_number:int)->void:
 	if player_number >=0 && player_number<=7:
 		Player_Configs[player_number].initial_data_received=true
@@ -83,32 +87,4 @@ func reset_player_start_stats()->void:
 	for n:PlayerConfigMetaData in Player_Configs:
 		n.Starting_Stats=PickUpStats.new()
 
-func get_package_delay(player_number:int)->void:
-	pass
 
-class DelayCounter extends RefCounted:
-	signal player_delay_timeout(player_steam_id:int)
-	
-	var timeout:float
-	var timeout_timer:Timer
-	var associated_player_id:int
-	
-	func _init(timeout_sec:float,player_id:int)->void:
-		timeout=timeout_sec
-		timeout_timer=Timer.new()
-		associated_player_id=player_id
-		timeout_timer.start(timeout_sec)
-		timeout_timer.timeout.connect(_on_timeout)
-	
-	func _on_timeout()->void:
-		player_delay_timeout.emit(associated_player_id)
-	
-	func _on_ack()->float:
-		timeout_timer.stop()
-		var delay_time:float=(timeout-timeout_timer.time_left)/2.0
-		return delay_time
-
-func _on_delay_timeout(player_Steam_id:int)->void:
-	pass
-	#TODO check if player still in lobby, redo request or whatever try3 times then kick player
-	#do stuff

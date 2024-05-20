@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c6bip4iaysbdf" path="res://menus/character_creator/-_pressed.png" id="8_np0m7"]
 [ext_resource type="PackedScene" uid="uid://boh6gftujg2q0" path="res://UI/background/window_bg_100.tscn" id="10_bcotd"]
 
-[sub_resource type="Shader" id="Shader_mgqm6"]
+[sub_resource type="Shader" id="Shader_ctc6q"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -27,12 +27,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h62vj"]
 resource_local_to_scene = true
-shader = SubResource("Shader_mgqm6")
+shader = SubResource("Shader_ctc6q")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_f416x"]
+[sub_resource type="Shader" id="Shader_wtoqx"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -49,12 +49,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b7e2k"]
 resource_local_to_scene = true
-shader = SubResource("Shader_f416x")
+shader = SubResource("Shader_wtoqx")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_pxcp4"]
+[sub_resource type="Shader" id="Shader_2so85"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -71,12 +71,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88fua"]
 resource_local_to_scene = true
-shader = SubResource("Shader_pxcp4")
+shader = SubResource("Shader_2so85")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_xdl3a"]
+[sub_resource type="Shader" id="Shader_2hshu"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -93,12 +93,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8dsxe"]
 resource_local_to_scene = true
-shader = SubResource("Shader_xdl3a")
+shader = SubResource("Shader_2hshu")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_jc4l3"]
+[sub_resource type="Shader" id="Shader_o1ytb"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -115,12 +115,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h3kn5"]
 resource_local_to_scene = true
-shader = SubResource("Shader_jc4l3")
+shader = SubResource("Shader_o1ytb")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_c045b"]
+[sub_resource type="Shader" id="Shader_f2hap"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -137,12 +137,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1mq1e"]
 resource_local_to_scene = true
-shader = SubResource("Shader_c045b")
+shader = SubResource("Shader_f2hap")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_480lt"]
+[sub_resource type="Shader" id="Shader_fusvv"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -159,12 +159,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8b51h"]
 resource_local_to_scene = true
-shader = SubResource("Shader_480lt")
+shader = SubResource("Shader_fusvv")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_8r0mv"]
+[sub_resource type="Shader" id="Shader_yh1gt"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -181,7 +181,7 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyk73"]
 resource_local_to_scene = true
-shader = SubResource("Shader_8r0mv")
+shader = SubResource("Shader_yh1gt")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")

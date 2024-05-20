@@ -34,7 +34,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 1
 text = "Up"
-vertical_alignment = 1
+vertical_alignment = 2
 text_overrun_behavior = 1
 
 [node name="Keybind" type="Label" parent="MarginContainer"]
@@ -44,5 +44,5 @@ size_flags_horizontal = 8
 mouse_filter = 1
 text = "W"
 horizontal_alignment = 2
-vertical_alignment = 1
+vertical_alignment = 2
 text_overrun_behavior = 2

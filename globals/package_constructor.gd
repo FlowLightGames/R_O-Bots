@@ -15,11 +15,12 @@ extends Node
 #4: Character data update
 #5: Character ready tru/false (if true send also character config)
 #6: lobby start game data (Random Seed)
-#7: game state update
+#7: game state update (from host)
 #8: finished game
 #9: assign playernumber
 #10: clock sync (estimate tcp,udp delay)
 #11: Character Custom Finished Master
+#12: PlayerStateUpdate (from clients)
 
 func handshake_req(reqester_steam_id:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
@@ -104,12 +105,15 @@ func player_number_ack()->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(1)
 	output.append(0)
-	output.append(SteamLobby.player_number)
-	output.append_array(var_to_bytes(GlobalSteam.steam_id))
+	var output_dict:Dictionary={}
+	output_dict["PN"]=SteamLobby.player_number
+	output_dict["SID"]=GlobalSteam.steam_id
+	output_dict["ET"]=Time.get_ticks_msec()
+	output.append_array(var_to_bytes(output_dict))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func player_number_assignment(who_steam_id:int,number:int)->PackedByteArray:
+func player_number_assignment(number:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(9)
 	output.append(number)
@@ -142,6 +146,17 @@ func stage_start_up_master(random_seed:int,package_delay:float)->PackedByteArray
 	var output:PackedByteArray=PackedByteArray()
 	output.append(6)
 	var dict:Dictionary={"RS":random_seed,"PD":package_delay}
+	output.append_array(var_to_bytes(dict))
+	output=output.compress(FileAccess.COMPRESSION_GZIP)
+	return output
+
+func player_state_update(player_state:PlayerState,who_steam_id:int)->PackedByteArray:
+	var output:PackedByteArray=PackedByteArray()
+	output.append(12)
+	var dict:Dictionary={}
+	dict["SID"]=who_steam_id
+	dict["ET"]=Time.get_ticks_msec()
+	dict["PS"]=player_state.serialize()
 	output.append_array(var_to_bytes(dict))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output

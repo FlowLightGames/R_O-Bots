@@ -33,6 +33,7 @@ PackageConstructor="*res://globals/package_constructor.gd"
 SceneCollection="*res://globals/scene_collection.gd"
 Cursor="*res://UI/cursor/cursor.tscn"
 CrtOverlay="*res://UI/overlay/crt_overlay.tscn"
+MultiplayerStatus="*res://globals/multiplayer_status.tscn"
 
 [debug]
 
