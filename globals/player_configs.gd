@@ -87,4 +87,8 @@ func reset_player_start_stats()->void:
 	for n:PlayerConfigMetaData in Player_Configs:
 		n.Starting_Stats=PickUpStats.new()
 
-
+func get_player_index_by_steam_id(steamID:int)->int:
+	for n:int in Player_Configs.size():
+		if Player_Configs[n].steam_id==steamID:
+			return n
+	return -1

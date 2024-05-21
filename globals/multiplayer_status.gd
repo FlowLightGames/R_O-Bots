@@ -2,23 +2,22 @@ extends Node
 
 enum STATE{HOST_LOBBY,JOINED_LOBBY,SEARCH_LOBBY,SINGLEPLAYER,ONLINE_MULTIPLAYER,OFFLINE_MULTIPLAYER}
 
-@export var sync_timer:Timer
+@export var multiplayer_sync_timer:Timer
 
 #session settings
 #wont be saved
-var Online_Session:bool=false
 var Current_Number_Of_Players:int=0
 var Current_Status:int=STATE.SINGLEPLAYER
 
-var current_loaded_map:MapBase=null
+var Current_Loaded_Map:MapBase=null
 
 
 func _on_multiplayer_sync_timer_timeout()->void:
-	if current_loaded_map:
+	if Current_Loaded_Map:
 		#we're not host
 		if !SteamLobby.is_host:
 			if Current_Status==STATE.ONLINE_MULTIPLAYER:
-				current_loaded_map.get_gamestate()
+				Current_Loaded_Map.get_playerstate(SteamLobby.player_number)
 		#we're the host
 		else:
 			pass

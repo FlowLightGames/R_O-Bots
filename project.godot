@@ -34,6 +34,7 @@ SceneCollection="*res://globals/scene_collection.gd"
 Cursor="*res://UI/cursor/cursor.tscn"
 CrtOverlay="*res://UI/overlay/crt_overlay.tscn"
 MultiplayerStatus="*res://globals/multiplayer_status.tscn"
+GameDebugInfo="*res://globals/game_debug_info.tscn"
 
 [debug]
 

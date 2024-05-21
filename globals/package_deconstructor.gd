@@ -14,7 +14,7 @@ extends Node
 #3: Player Config Master List Update
 #4: Character data update
 #5: Character ready tru/false (if true send also character config)
-#6: lobby start game data (Random Seed)
+#6: lobby start game data (Random Seed,stage selected,package delay)
 #7: game state update (from host)
 #8: finished game
 #9: assign playernumber
@@ -25,9 +25,15 @@ extends Node
 signal player_initial_data_transfer_ack(player_number:int)
 signal player_number_assignment_ack(player_number:int)
 signal player_master_list
+
+#in customizer lobby signals
 signal character_custom_finished
 signal character_custom_data_update(player_number:int,data:Array[int])
 signal character_custom_ready_update(player_number:int,ready:bool,data:Array[int])
+#host selected map:
+signal stage_selected(seed:int,package_delay:int,selected_map_index:int,selected_map_size:int)
+#multiplayer ingame signals
+signal player_state_update(who_steam_id:int,elapsed_time:int,player_state:PlayerState) 
 
 func handle_data(input:PackedByteArray,packet_sender:int)->void:
 	var type:int=input.decode_u8(0)
@@ -111,6 +117,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			print("got player config master list")
 			player_master_list.emit()
 		4:
+			#we are host and got player ready signal from client
 			#0 (body_base)
 			#1 (body_color)
 			#2 (face_base)
@@ -144,10 +151,15 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			PlayerConfigs.update_player_confi(player_number,character_data)
 			#TODO set rady var in relevant script
 		6:
+			#{"RS":random_seed,"PD":package_delay_msec,"STID":stage_index,"STSI":stage_size}
 			var data_dict:Dictionary=bytes_to_var(input)
 			var package_delay:float=data_dict["PD"]
 			var random_seed:int=data_dict["RS"]
-			#TODO set variables and emit signal to change scene
+			var stage_index:int=data_dict["STID"]
+			var stage_size:int=data_dict["STSI"]
+			
+			MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.ONLINE_MULTIPLAYER
+			stage_selected.emit(random_seed,package_delay,stage_index,stage_size)
 		7:
 			pass
 		8:
@@ -166,19 +178,20 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 		10:
 			pass
 		11:
+			#we are client and got all player configs from host
 			var ser_player_configs:Array=bytes_to_var(input)
 			for n:int in ser_player_configs.size():
 				PlayerConfigs.Player_Configs[n].deserialize(ser_player_configs[n] as Dictionary)
 				PlayerConfigs.Player_Configs[n].initial_data_received=true
 			print("got player ready config master list")
 			character_custom_finished.emit()
-			#TODO switch scene logic
 		12:
+			#we are host and got info from client
 			var dict:Dictionary=bytes_to_var(input)
 			var who_steam_id:int=dict["SID"]
 			var elapsed_time:int=dict["ET"]
 			var player_state:PlayerState=PlayerState.new()
 			player_state.deserialize(dict["PS"])
-			#TODO Actually update gamestate
+			player_state_update.emit(who_steam_id,elapsed_time,player_state)
 		_:
 			pass

@@ -56,7 +56,8 @@ func _on_size_inc_pressed()->void:
 		apply_new_selection()
 
 func _on_cancel_pressed()->void:
-	if MultiplayerStatus.Online_Session:
+	#TODO way more logic for host and infrom clients?
+	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
 		get_tree().change_scene_to_packed(SceneCollection.online_lobby)
 	else:
 		get_tree().change_scene_to_packed(SceneCollection.offline_lobby)
@@ -74,7 +75,7 @@ func _on_go_pressed()->void:
 				selected_scene=stage_select_meta_datas[current_stage].stage_l
 			_:
 				selected_scene=null
-		#change this TODO
+		#change this TODO currently test to default for all clinets and host
 		if selected_scene:
+			var msg:PackedByteArray=PackageConstructor.stage_start_up_master(0,0,0,0)
 			get_tree().change_scene_to_packed(selected_scene)
-			var msg:PackedByteArray=PackageConstructor.stage_start_up_master(0,0)

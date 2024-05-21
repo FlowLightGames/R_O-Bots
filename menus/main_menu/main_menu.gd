@@ -15,6 +15,7 @@ var disabled:bool=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready()->void:
+	MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.SINGLEPLAYER
 	if !GlobalSteam.steam_init:
 		host_lobby.disabled=true
 		join_lobby.disabled=true
@@ -30,7 +31,6 @@ func _on_game_start_pressed()->void:
 	if !disabled:
 		MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.SINGLEPLAYER
 		MultiplayerStatus.Current_Number_Of_Players=1
-		MultiplayerStatus.Online_Session=false
 		disabled=true
 		SteamLobby.is_host=true
 
@@ -45,7 +45,6 @@ func _on_host_lobby_pressed()->void:
 		
 		MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.HOST_LOBBY
 		MultiplayerStatus.Current_Number_Of_Players=1
-		MultiplayerStatus.Online_Session=true
 		
 		PlayerConfigs.set_player_custom_faces(0,FacesAutoload.custom_faces)
 		PlayerConfigs.set_steamID(0,GlobalSteam.steam_id)
@@ -59,7 +58,6 @@ func _on_join_lobby_pressed()->void:
 		PlayerConfigs.reset_full()
 		MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.SEARCH_LOBBY
 		MultiplayerStatus.Current_Number_Of_Players=1
-		MultiplayerStatus.Online_Session=true
 		disabled=true
 		SteamLobby.is_host=false
 		get_tree().change_scene_to_packed(SceneCollection.lobby_search)
@@ -70,7 +68,6 @@ func _on_battle_start_pressed()->void:
 		PlayerConfigs.reset_full()
 		MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.OFFLINE_MULTIPLAYER
 		MultiplayerStatus.Current_Number_Of_Players=1
-		MultiplayerStatus.Online_Session=false
 		disabled=true
 		SteamLobby.is_host=true
 		get_tree().change_scene_to_packed(SceneCollection.offline_lobby)
@@ -80,7 +77,6 @@ func _on_options_pressed()->void:
 	if !disabled:
 		MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.SINGLEPLAYER
 		MultiplayerStatus.Current_Number_Of_Players=1
-		MultiplayerStatus.Online_Session=false
 		disabled=true
 		SteamLobby.is_host=true
 		get_tree().change_scene_to_packed(SceneCollection.options)

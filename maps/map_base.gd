@@ -23,6 +23,23 @@ var countdown_overlay:PackedScene=load("res://maps/UI/countdown.tscn")
 var disabled:bool=false
 var player_ref_list:Array[PlayerCharacter]=[]
 
+func _ready()->void:
+	spawn_players(MultiplayerStatus.Current_Number_Of_Players)
+	round_timer.wait_time=round_time
+	stage_ui.initial_time(round_time)
+	var tmp_countdown:Countdown=countdown_overlay.instantiate() as Countdown
+	tmp_countdown.map=self
+	add_child(tmp_countdown)
+	
+	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
+		PackageDeconstructor.player_state_update.connect(on_player_state_update_recieved)
+		MultiplayerStatus.Current_Loaded_Map=self
+		MultiplayerStatus.player_state_sync_timer.start(0.1)
+
+#for multiplayer
+func on_player_state_update_recieved(who_steam_id:int,elapsed_time:int,player_state:PlayerState)->void:
+	PlayerConfigs
+
 func pick_up_with_weights()->PickUpOptionStruct:
 	if !possible_pickups.map.is_empty():
 		var total_weight:int=0
@@ -93,7 +110,7 @@ func spawn_players(how_many:int)->void:
 			player_nodes.add_child(character)
 			
 			
-			if MultiplayerStatus.Online_Session:
+			if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
 				character.set_player_name(Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n].steam_id))
 			else:
 				character.set_player_name("Player"+str(n))
@@ -113,20 +130,23 @@ func unlock_players()->void:
 	round_timer.start()
 	stage_ui.start()
 
-func _ready()->void:
-	spawn_players(MultiplayerStatus.Current_Number_Of_Players)
-	round_timer.wait_time=round_time
-	stage_ui.initial_time(round_time)
-	var tmp_countdown:Countdown=countdown_overlay.instantiate() as Countdown
-	tmp_countdown.map=self
-	add_child(tmp_countdown)
-
 func _on_round_timer_timeout()->void:
 	time_out()
 
 func get_gamestate()->GameState:
 	var output:GameState=GameState.new()
 	return output
+
+func get_player_state(player_num:int)->PlayerState:
+	var player:PlayerCharacter=get_player_by_number(player_num)
+	if player:
+		return player.get_player_state()
+	else:
+		#player is dead
+		var output:PlayerState=PlayerState.new()
+		output.dead=true
+		output.player_number=player_num
+		return output
 
 func get_player_by_number(player_num:int)->PlayerCharacter:
 	for n:PlayerCharacter in player_ref_list:

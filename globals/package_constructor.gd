@@ -14,7 +14,7 @@ extends Node
 #3: Player Config Master List Update
 #4: Character data update
 #5: Character ready tru/false (if true send also character config)
-#6: lobby start game data (Random Seed)
+#6: lobby start game data (Random Seed,stage selected,package delay)
 #7: game state update (from host)
 #8: finished game
 #9: assign playernumber
@@ -105,10 +105,7 @@ func player_number_ack()->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(1)
 	output.append(0)
-	var output_dict:Dictionary={}
-	output_dict["PN"]=SteamLobby.player_number
-	output_dict["SID"]=GlobalSteam.steam_id
-	output_dict["ET"]=Time.get_ticks_msec()
+	var output_dict:Dictionary={"PN":SteamLobby.player_number,"SID":GlobalSteam.steam_id,"ET":Time.get_ticks_msec()}
 	output.append_array(var_to_bytes(output_dict))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
@@ -142,10 +139,10 @@ func character_custom_finished_master(player_configs:Array[PlayerConfigMetaData]
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func stage_start_up_master(random_seed:int,package_delay:float)->PackedByteArray:
+func stage_start_up_master(random_seed:int,package_delay_msec:int,stage_index:int,stage_size:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(6)
-	var dict:Dictionary={"RS":random_seed,"PD":package_delay}
+	var dict:Dictionary={"RS":random_seed,"PD":package_delay_msec,"STID":stage_index,"STSI":stage_size}
 	output.append_array(var_to_bytes(dict))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
@@ -153,10 +150,7 @@ func stage_start_up_master(random_seed:int,package_delay:float)->PackedByteArray
 func player_state_update(player_state:PlayerState,who_steam_id:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(12)
-	var dict:Dictionary={}
-	dict["SID"]=who_steam_id
-	dict["ET"]=Time.get_ticks_msec()
-	dict["PS"]=player_state.serialize()
+	var dict:Dictionary={"SID":who_steam_id,"ET":Time.get_ticks_msec(),"PS":player_state.serialize()}
 	output.append_array(var_to_bytes(dict))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
