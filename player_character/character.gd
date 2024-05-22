@@ -372,7 +372,6 @@ func get_player_state()->PlayerState:
 	return output
 
 func apply_player_state(player_state:PlayerState)->void:
-	print(player_state)
 	global_position=player_state.position
 	ZeusReticle.global_position=player_state.reticle_position
 	#Pickup_Stats=player_state.pickup_stats
