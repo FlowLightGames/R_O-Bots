@@ -11,6 +11,8 @@ func _ready()->void:
 	
 	if !SteamLobby.is_host:
 		stage_select_button.free()
+	else:
+		stage_select_button.disabled=false
 	apply_player_configs()
 	##MultiplayerSpecific:
 	PackageDeconstructor.player_initial_data_transfer_ack.connect(init_player)
@@ -18,8 +20,6 @@ func _ready()->void:
 	
 	PlayerConfigs.player_config_changed.connect(on_character_custom_data_update)
 	lobby_name_label.text=str(SteamLobby.lobby_id)
-	
-	stage_select_button.disabled=false
 
 func apply_player_configs()->void:
 	for i:int in PlayerConfigs.Player_Configs.size():
