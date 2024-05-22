@@ -111,6 +111,8 @@ func disable()->void:
 
 func enable()->void:
 	#TODO start timers if we have the pickup[[
+	update_state()
+	moving=false
 	disabled=false
 
 func picked_up(what:PickUp.PICKUP)->void:
@@ -524,9 +526,10 @@ func _physics_process(_delta:float)->void:
 						pass
 				
 				BodyAnimation.play(animation_string+front_back+left_right)
-				var normalized_move_vec:Vector2=Vector2(current_view_direction).normalized()
-				velocity=normalized_move_vec*BASE_MOVEMENT_SPEED*(Pickup_Stats.get_speed_scale())
-				move_and_slide()
+				if moving:
+					var normalized_move_vec:Vector2=Vector2(current_view_direction).normalized()
+					velocity=normalized_move_vec*BASE_MOVEMENT_SPEED*(Pickup_Stats.get_speed_scale())
+					move_and_slide()
 				
 				handle_passive_actions()
 
