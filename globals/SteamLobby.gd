@@ -112,6 +112,8 @@ func send_p2p_packet(this_target: int,send_type:int, packet_data:PackedByteArray
 func get_lobby_members()->void:
 	lobby_members.clear()
 	var num_of_members: int = Steam.getNumLobbyMembers(lobby_id)
+	#update current members in lobby
+	MultiplayerStatus.Current_Number_Of_Players=num_of_members
 	for this_member:int in range(0, num_of_members):
 		var member_steam_id: int = Steam.getLobbyMemberByIndex(lobby_id, this_member)
 		var member_steam_name: String = Steam.getFriendPersonaName(member_steam_id)

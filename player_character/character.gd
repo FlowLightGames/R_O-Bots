@@ -2,9 +2,6 @@ extends CharacterBody2D
 
 class_name PlayerCharacter
 
-class PuppetState extends RefCounted:
-	var movement_dir:Vector2i=Vector2i.ZERO
-
 enum TAKEN_ACTION{
 	ZEUS,
 	GUN,
@@ -42,7 +39,7 @@ var i_frames:bool=false
 @export var disabled:bool=false
 #for multiplayer so we dont control other players
 var is_puppet:bool=false
-var puppet_state:PuppetState=PuppetState.new()
+var moving:bool=false
 
 var Action_UP:String ="0_Up"
 var Action_DOWN:String ="0_Down"
@@ -91,12 +88,20 @@ func config_init(config:PlayerConfigMetaData)->void:
 	set_new_face_color(config.Face_Color)
 
 func input_map_init()->void:
-	Action_UP =str(Player_Number)+"_Up"
-	Action_DOWN =str(Player_Number)+"_Down"
-	Action_LEFT =str(Player_Number)+"_Left"
-	Action_RIGHT =str(Player_Number)+"_Right"
-	Action_0 =str(Player_Number)+"_Action_0"
-	Action_1 =str(Player_Number)+"_Action_1"
+	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
+		Action_UP ="0_Up"
+		Action_DOWN ="0_Down"
+		Action_LEFT ="0_Left"
+		Action_RIGHT ="0_Right"
+		Action_0 ="0_Action_0"
+		Action_1 ="0_Action_1"
+	else:
+		Action_UP =str(Player_Number)+"_Up"
+		Action_DOWN =str(Player_Number)+"_Down"
+		Action_LEFT =str(Player_Number)+"_Left"
+		Action_RIGHT =str(Player_Number)+"_Right"
+		Action_0 =str(Player_Number)+"_Action_0"
+		Action_1 =str(Player_Number)+"_Action_1"
 
 func disable()->void:
 	disabled=true
@@ -361,8 +366,33 @@ func get_player_state()->PlayerState:
 	output.reticle_position=ZeusReticle.global_position
 	output.direction=current_view_direction
 	output.pickup_stats=Pickup_Stats
-	output.taken_actions=[]
+	output.taken_action=PlayerState.ACTIONS.NOTHING
 	return output
+
+func apply_player_state(player_state:PlayerState)->void:
+	global_position=player_state.position
+	ZeusReticle.global_position=player_state.reticle_position
+	Pickup_Stats=player_state.pickup_stats
+	current_view_direction=player_state.direction
+	moving=player_state.moving
+	
+	update_state()
+	
+	match player_state.taken_action:
+		PlayerState.ACTIONS.NOTHING:
+			pass
+		PlayerState.ACTIONS.BOMB_PLACED:
+			pass
+		PlayerState.ACTIONS.BOMB_THROW:
+			pass
+		PlayerState.ACTIONS.BOMB_DETONATE:
+			pass
+		PlayerState.ACTIONS.GUN_FIRED:
+			pass
+		PlayerState.ACTIONS.ZEUS_FIRED:
+			pass
+		_:
+			pass
 
 func handle_passive_actions()->void:
 	KickerRayCast.rotation=Vector2(get_priority_4_way_direction(current_view_direction)).angle()-0.5*PI
@@ -471,8 +501,7 @@ func _physics_process(_delta:float)->void:
 			else:
 				
 				var animation_string:String=""
-				if puppet_state.movement_dir!=Vector2i.ZERO:
-					current_view_direction=puppet_state.movement_dir
+				if moving==true:
 					animation_string+="run_"
 				else:
 					animation_string+="idle_"
@@ -495,7 +524,7 @@ func _physics_process(_delta:float)->void:
 						pass
 				
 				BodyAnimation.play(animation_string+front_back+left_right)
-				var normalized_move_vec:Vector2=Vector2(puppet_state.movement_dir).normalized()
+				var normalized_move_vec:Vector2=Vector2(current_view_direction).normalized()
 				velocity=normalized_move_vec*BASE_MOVEMENT_SPEED*(Pickup_Stats.get_speed_scale())
 				move_and_slide()
 				

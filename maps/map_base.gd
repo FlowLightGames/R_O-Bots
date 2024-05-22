@@ -37,8 +37,13 @@ func _ready()->void:
 		MultiplayerStatus.multiplayer_sync_timer.start(0.1)
 
 #for multiplayer
+#were host
 func on_player_state_update_recieved(who_steam_id:int,elapsed_time:int,player_state:PlayerState)->void:
-	PlayerConfigs
+	if player_state.player_number in range(0,PlayerConfigs.Player_Configs.size()):
+		if PlayerConfigs.Player_Configs[player_state.player_number].steam_id==who_steam_id:
+			var player:PlayerCharacter=get_player_by_number(player_state.player_number)
+			if player:
+				pass
 
 func pick_up_with_weights()->PickUpOptionStruct:
 	if !possible_pickups.map.is_empty():
@@ -112,6 +117,8 @@ func spawn_players(how_many:int)->void:
 			
 			if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
 				character.set_player_name(Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n].steam_id))
+				if !(n==SteamLobby.player_number):
+					character.is_puppet=true
 			else:
 				character.set_player_name("Player"+str(n))
 			character.config_init(PlayerConfigs.Player_Configs[n])

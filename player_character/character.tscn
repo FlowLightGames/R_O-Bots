@@ -1320,7 +1320,6 @@ fire_timer = NodePath("FireTimer")
 death_timer = NodePath("DeathTimer")
 gunshot_audio = NodePath("Audio/GunShot")
 knifeshiv_audio = NodePath("Audio/KnifeShiv")
-disabled = null
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
