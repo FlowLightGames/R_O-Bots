@@ -23,4 +23,4 @@ func _on_multiplayer_sync_timer_timeout()->void:
 		else:
 			if Current_Status==STATE.ONLINE_MULTIPLAYER:
 				var msg:PackedByteArray=PackageConstructor.player_state_update(Current_Loaded_Map.get_playerstate(SteamLobby.player_number),GlobalSteam.steam_id)
-				SteamLobby.send_p2p_packet(-1,Steam.P2P_SEND_RELIABLE,msg)
+				SteamLobby.send_p2p_packet(-1,Steam.P2P_SEND_UNRELIABLE,msg)
