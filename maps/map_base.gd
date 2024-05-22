@@ -34,7 +34,7 @@ func _ready()->void:
 	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
 		PackageDeconstructor.player_state_update.connect(on_player_state_update_recieved)
 		MultiplayerStatus.Current_Loaded_Map=self
-		MultiplayerStatus.multiplayer_sync_timer.start(0.1)
+		MultiplayerStatus.start_timer()
 
 #for multiplayer
 #were host

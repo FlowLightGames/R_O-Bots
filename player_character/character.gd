@@ -374,7 +374,7 @@ func get_player_state()->PlayerState:
 func apply_player_state(player_state:PlayerState)->void:
 	global_position=player_state.position
 	ZeusReticle.global_position=player_state.reticle_position
-	Pickup_Stats=player_state.pickup_stats
+	#Pickup_Stats=player_state.pickup_stats
 	current_view_direction=player_state.direction
 	moving=player_state.moving
 	

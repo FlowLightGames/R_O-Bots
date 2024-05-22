@@ -11,6 +11,8 @@ var Current_Status:int=STATE.SINGLEPLAYER
 
 var Current_Loaded_Map:MapBase=null
 
+func start_timer()->void:
+	multiplayer_sync_timer.start(4.0)
 
 func _on_multiplayer_sync_timer_timeout()->void:
 	if Current_Loaded_Map:
