@@ -16,7 +16,7 @@ func serialize()->Dictionary:
 	var output:Dictionary={}
 	output["PN"]=player_number
 	output["DED"]=dead
-	output["MOV"]=dead
+	output["MOV"]=moving
 	output["POS"]=position
 	output["RPOS"]=reticle_position
 	output["DIR"]=direction

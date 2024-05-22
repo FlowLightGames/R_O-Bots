@@ -37,7 +37,7 @@ func _ready()->void:
 		MultiplayerStatus.start_timer()
 
 #for multiplayer
-#were host
+#we're the host
 func on_player_state_update_recieved(who_steam_id:int,elapsed_time:int,player_state:PlayerState)->void:
 	print("got playerState")
 	if player_state.player_number in range(0,PlayerConfigs.Player_Configs.size()):
