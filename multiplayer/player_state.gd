@@ -20,7 +20,7 @@ func serialize()->Dictionary:
 	output["POS"]=position
 	output["RPOS"]=reticle_position
 	output["DIR"]=direction
-	#output["PST"]=var_to_bytes_with_objects(pickup_stats)
+	output["PST"]=inst_to_dict(pickup_stats)
 	output["TA"]= taken_action
 	return output
 
@@ -31,5 +31,5 @@ func deserialize(dict:Dictionary)->void:
 	position=dict["POS"]
 	reticle_position=dict["RPOS"]
 	direction=dict["DIR"]
-	#pickup_stats=bytes_to_var_with_objects(dict["PST"])
+	pickup_stats=dict_to_inst(dict["PST"])
 	taken_action=dict["TA"]

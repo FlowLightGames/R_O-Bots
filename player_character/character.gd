@@ -40,6 +40,7 @@ var i_frames:bool=false
 #for multiplayer so we dont control other players
 var is_puppet:bool=false
 var moving:bool=false
+var flagged_for_sync:bool=false
 
 var Action_UP:String ="0_Up"
 var Action_DOWN:String ="0_Down"
@@ -190,6 +191,7 @@ func picked_up(what:PickUp.PICKUP)->void:
 			pass
 	Pickup_Stats.clamp_stats()
 	update_state()
+	send_taken_action(PlayerState.ACTIONS.NOTHING)
 
 func update_state()->void:
 	if Pickup_Stats.LIFE_UP>=0:
@@ -247,31 +249,15 @@ func action_one()->void:
 	bomb_place_check.force_raycast_update()
 	if !(bomb_place_check.is_colliding()):
 		place_bomb()
-		if MultiplayerStatus.Current_Status== MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
-			send_taken_action(PlayerState.ACTIONS.BOMB_PLACED)
 	else:
-		if Pickup_Stats.DUNKER:
-			DunkerRayCast.force_raycast_update()
-			if (DunkerRayCast.is_colliding()):
-				var throwable_bomb:BombBase=DunkerRayCast.get_collider() as BombBase
-				if throwable_bomb:
-					if throwable_bomb.throwable:
-						throwable_bomb.throw(get_priority_4_way_direction(current_view_direction))
-						if MultiplayerStatus.Current_Status== MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
-							send_taken_action(PlayerState.ACTIONS.BOMB_THROW)
+		throw_bomb()
 
 func action_two()->void:
-	for n:BombBase in Bomb_Ref_List:
-		if n is RemoteBomb:
-			(n as RemoteBomb).explode()
-			if MultiplayerStatus.Current_Status== MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
-				send_taken_action(PlayerState.ACTIONS.BOMB_DETONATE)
-			break
+	detonate_bomb()
 	match Pickup_Stats.SPECIAL_STATE:
 				PickUpStats.SPECIALSTATE.GUN:
 					fire_gun()
-					if MultiplayerStatus.Current_Status== MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
-						send_taken_action(PlayerState.ACTIONS.GUN_FIRED)
+					send_taken_action(PlayerState.ACTIONS.GUN_FIRED)
 				_:
 					pass
 
@@ -313,12 +299,31 @@ func place_bomb()->void:
 		Bomb_Ref_List.append(tmp_bomb)
 		tmp_bomb.position=(map.base_ground_tilemap.local_to_map(self.position)*16)+Vector2i(8,8)
 		map.bomb_nodes.add_child(tmp_bomb)
+		
+		send_taken_action(PlayerState.ACTIONS.BOMB_PLACED)
 
 func fire_lightning()->void:
 	var tmp:ZeusLightning=zeus_lightning.instantiate() as ZeusLightning
 	tmp.global_position=ZeusReticle.global_position
 	tmp.set_color(Body_Color)
 	get_parent().add_child(tmp)
+
+func detonate_bomb()->void:
+	for n:BombBase in Bomb_Ref_List:
+		if n is RemoteBomb:
+			(n as RemoteBomb).explode()
+			send_taken_action(PlayerState.ACTIONS.BOMB_DETONATE)
+			break
+
+func throw_bomb()->void:
+	if Pickup_Stats.DUNKER:
+		DunkerRayCast.force_raycast_update()
+		if (DunkerRayCast.is_colliding()):
+			var throwable_bomb:BombBase=DunkerRayCast.get_collider() as BombBase
+			if throwable_bomb:
+				if throwable_bomb.throwable:
+					throwable_bomb.throw(get_priority_4_way_direction(current_view_direction))
+					send_taken_action(PlayerState.ACTIONS.BOMB_THROW)
 
 func fire_gun()->void:
 	var view_direction_4_way:Vector2i=get_priority_4_way_direction(current_view_direction)
@@ -374,17 +379,16 @@ func get_player_state()->PlayerState:
 func apply_player_state(player_state:PlayerState)->void:
 	global_position=player_state.position
 	ZeusReticle.global_position=player_state.reticle_position
-	#Pickup_Stats=player_state.pickup_stats
+	Pickup_Stats=player_state.pickup_stats
 	current_view_direction=player_state.direction
 	moving=player_state.moving
-	
 	update_state()
 	
 	match player_state.taken_action:
 		PlayerState.ACTIONS.NOTHING:
 			pass
 		PlayerState.ACTIONS.BOMB_PLACED:
-			pass
+			place_bomb()
 		PlayerState.ACTIONS.BOMB_THROW:
 			pass
 		PlayerState.ACTIONS.BOMB_DETONATE:
@@ -428,18 +432,21 @@ func handle_passive_actions()->void:
 			fart_timer.start(2.0)
 
 func send_taken_action(input:PlayerState.ACTIONS)->void:
-	if !(SteamLobby.is_host):
-		var player_state:PlayerState=get_player_state()
-		player_state.taken_action=input
-		#TODO send the thing
-	else:
-		#TODO HOST CASE
-		pass
+	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
+		if SteamLobby.is_host:
+			pass
+			#TODO send the thing
+		else:
+			#TODO HOST CASE
+			var player_state:PlayerState=get_player_state()
+			player_state.taken_action=input
+			SteamLobby.send_p2p_packet(-1,Steam.P2P_SEND_UNRELIABLE,PackageConstructor.player_state_update(player_state,GlobalSteam.steam_id))
 
 func _physics_process(_delta:float)->void:
 	if !disabled:
 		#if this is your PC
 		if !is_puppet:
+			flagged_for_sync=false
 			if Pickup_Stats.SPECIAL_STATE==PickUpStats.SPECIALSTATE.ZEUS:
 				BodyAnimation.play("zeus")
 				var move_vec:Vector2i=Vector2i.ZERO
@@ -449,8 +456,7 @@ func _physics_process(_delta:float)->void:
 				
 				if Input.is_action_just_pressed(Action_1):
 					fire_lightning()
-					if MultiplayerStatus.Current_Status== MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
-						send_taken_action(PlayerState.ACTIONS.ZEUS_FIRED)
+					send_taken_action(PlayerState.ACTIONS.ZEUS_FIRED)
 					Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.NONE
 					
 					ZeusReticle.visible=false
@@ -461,12 +467,18 @@ func _physics_process(_delta:float)->void:
 				move_vec.y+=-int(Input.is_action_pressed(Action_UP))+int(Input.is_action_pressed(Action_DOWN))
 				
 				var animation_string:String=""
-				
+				var tmp_moving:bool=false
 				if move_vec!=Vector2i.ZERO:
+					tmp_moving=true
 					current_view_direction=move_vec
 					animation_string+="run_"
 				else:
 					animation_string+="idle_"
+					tmp_moving=false
+				
+				if tmp_moving!=moving:
+					flagged_for_sync=true
+				moving=tmp_moving
 				
 				match current_view_direction.y:
 					1:
@@ -496,6 +508,10 @@ func _physics_process(_delta:float)->void:
 					action_one()
 				if Input.is_action_just_pressed(Action_1):
 					action_two()
+				
+				if flagged_for_sync:
+					flagged_for_sync=false
+					send_taken_action(PlayerState.ACTIONS.NOTHING)
 		#if were someone elses PC (puppet)
 		else:
 			if Pickup_Stats.SPECIAL_STATE==PickUpStats.SPECIALSTATE.ZEUS:
