@@ -3,7 +3,7 @@ extends Node
 
 #first byte =type
 #0: Rquests
-	#0 player number assignment
+	#0 player number assignment also measuer package delay with ack
 	#1 send me yourinitial data
 	#2 handshake
 #1: Acknoledgement

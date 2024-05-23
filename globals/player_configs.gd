@@ -75,6 +75,10 @@ func set_steamID(player_number:int,steamID:int)->void:
 	if player_number >=0 && player_number<=7:
 		Player_Configs[player_number].steam_id=steamID
 
+func set_package_delay(player_number:int,delay:int)->void:
+	if player_number >=0 && player_number<=7:
+		Player_Configs[player_number].message_delay_tcp=delay
+
 func set_elapsed_time(player_number:int,time:int)->void:
 	if player_number >=0 && player_number<=7:
 		Player_Configs[player_number]. elapsed_time=time

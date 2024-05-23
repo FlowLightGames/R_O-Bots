@@ -12,7 +12,20 @@ var lobby_vote_kick: bool = false
 
 var player_assignment_dict:Dictionary={}
 
+var player_message_delay_buffer:Dictionary={}
+
 var random_seed:int=0
+
+func add_delay_measure_req(req_steam_id:int)->void:
+	player_message_delay_buffer[req_steam_id]=Time.get_ticks_msec()
+
+func on_delay_measure_ack(steamID:int)->int:
+	if player_message_delay_buffer.has(steamID):
+		var output:int= (Time.get_ticks_msec()-player_assignment_dict[steamID])/2
+		player_message_delay_buffer.erase(steamID)
+		return output
+	else:
+		return 0
 
 func _ready()->void:
 	random_seed=randi()

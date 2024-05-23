@@ -3,7 +3,7 @@ extends Node
 
 #first byte =type
 #0: Rquests
-	#0 player number assignment
+	#0 player number assignment also measuer package delay with ack
 	#1 send me yourinitial data
 	#2 handshake
 #1: Acknoledgement
@@ -50,6 +50,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 					print("sending assignment !=0: "+str(test))
 					if test>0:
 						var msg:PackedByteArray=PackageConstructor.player_number_assignment(test)
+						SteamLobby.add_delay_measure_req(req_steam_id)
 						SteamLobby.send_p2p_packet(req_steam_id,Steam.P2P_SEND_RELIABLE, msg)
 				1:
 					print("got initial data request")
@@ -72,14 +73,20 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 					var player_number:int=dict["PN"]
 					var steamID:int=dict["SID"]
 					var elapsed_time:int=dict["ET"]
+					var measure_delay_time:int=SteamLobby.on_delay_measure_ack(steamID)
+					if measure_delay_time==0:
+						#TODO FAIL PANIC WORLD END
+						print("END OF THE WORLD, 0 DELAY, IMPOSSSIBRU, WAAAAAAAAAAAAA. or didnt send a delay request before")
+					
 					PlayerConfigs.set_steamID(player_number,steamID)
+					PlayerConfigs.set_package_delay(player_number,measure_delay_time)
 					PlayerConfigs.set_elapsed_time(player_number,elapsed_time)
 					print("got number assignment ack: "+str(player_number))
 					
 					player_number_assignment_ack.emit(player_number)
 					if player_number!=0:
 						var msg:PackedByteArray=PackageConstructor.initial_data_req(GlobalSteam.steam_id)
-						SteamLobby.send_p2p_packet(steamID,Steam.P2P_SEND_RELIABLE,  msg)
+						SteamLobby.send_p2p_packet(steamID,Steam.P2P_SEND_RELIABLE,msg)
 				1:
 					
 					var player_number:int=data.decode_u8(0)
