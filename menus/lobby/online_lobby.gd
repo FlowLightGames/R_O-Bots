@@ -71,5 +71,6 @@ func _on_stage_select_pressed()->void:
 	get_tree().change_scene_to_packed(stage)
 
 func _on_stage_start_recieved(seed:int,package_delay:int,stage_index:int,stage_size:int)->void:
+	SteamLobby.random_seed=seed
 	MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.ONLINE_MULTIPLAYER
 	get_tree().change_scene_to_file("res://maps/instances/default_M.tscn")

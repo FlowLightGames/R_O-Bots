@@ -20,8 +20,9 @@ func add_delay_measure_req(req_steam_id:int)->void:
 	player_message_delay_buffer[req_steam_id]=Time.get_ticks_msec()
 
 func on_delay_measure_ack(steamID:int)->int:
+	print(player_message_delay_buffer)
 	if player_message_delay_buffer.has(steamID):
-		var output:int= (Time.get_ticks_msec()-player_assignment_dict[steamID])/2
+		var output:int= (Time.get_ticks_msec()-player_message_delay_buffer[steamID])/2
 		player_message_delay_buffer.erase(steamID)
 		return output
 	else:

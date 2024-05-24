@@ -24,6 +24,10 @@ var disabled:bool=false
 var player_ref_list:Array[PlayerCharacter]=[]
 
 func _ready()->void:
+	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
+		seed(SteamLobby.random_seed)
+	else:
+		randomize()
 	spawn_players(MultiplayerStatus.Current_Number_Of_Players)
 	round_timer.wait_time=round_time
 	stage_ui.initial_time(round_time)

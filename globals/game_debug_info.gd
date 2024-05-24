@@ -13,4 +13,5 @@ func _process(delta:float)->void:
 	+"current multiplayer_map: "+str(MultiplayerStatus.Current_Loaded_Map)+'\n'
 	+"current number of players: "+str(MultiplayerStatus.Current_Number_Of_Players)+'\n'
 	+"multiplayer_sync timer running: "+str(!MultiplayerStatus.multiplayer_sync_timer.is_stopped())+'\n'
+	+"player_assignment_dict: "+str(SteamLobby.player_assignment_dict)+'\n'
 )

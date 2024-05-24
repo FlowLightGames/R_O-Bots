@@ -50,6 +50,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 					print("sending assignment !=0: "+str(test))
 					if test>0:
 						var msg:PackedByteArray=PackageConstructor.player_number_assignment(test)
+						print("add req delay buffer: "+str(req_steam_id))
 						SteamLobby.add_delay_measure_req(req_steam_id)
 						SteamLobby.send_p2p_packet(req_steam_id,Steam.P2P_SEND_RELIABLE, msg)
 				1:

@@ -1,6 +1,6 @@
 extends Node
 
-enum STATE{HOST_LOBBY,JOINED_LOBBY,SEARCH_LOBBY,SINGLEPLAYER,ONLINE_MULTIPLAYER,OFFLINE_MULTIPLAYER}
+enum STATE{JOINED_LOBBY,SEARCH_LOBBY,SINGLEPLAYER,ONLINE_MULTIPLAYER,OFFLINE_MULTIPLAYER}
 
 @export var multiplayer_sync_timer:Timer
 
@@ -12,7 +12,7 @@ var Current_Status:int=STATE.SINGLEPLAYER
 var Current_Loaded_Map:MapBase=null
 
 func start_timer()->void:
-	multiplayer_sync_timer.start(0.1)
+	multiplayer_sync_timer.start(10000.1)
 
 func _on_multiplayer_sync_timer_timeout()->void:
 	if Current_Loaded_Map:
@@ -21,6 +21,5 @@ func _on_multiplayer_sync_timer_timeout()->void:
 			pass
 		#we're not the host
 		else:
-			if Current_Status==STATE.ONLINE_MULTIPLAYER:
-				var msg:PackedByteArray=PackageConstructor.player_state_update(Current_Loaded_Map.get_playerstate(SteamLobby.player_number),GlobalSteam.steam_id)
-				SteamLobby.send_p2p_packet(-1,Steam.P2P_SEND_UNRELIABLE,msg)
+			var msg:PackedByteArray=PackageConstructor.player_state_update(Current_Loaded_Map.get_playerstate(SteamLobby.player_number),GlobalSteam.steam_id)
+			SteamLobby.send_p2p_packet(-1,Steam.P2P_SEND_UNRELIABLE,msg)
