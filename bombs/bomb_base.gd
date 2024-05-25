@@ -105,6 +105,9 @@ func throw(direction:Vector2i)->void:
 		disabled=true
 		bounce(direction,32,16,0.6)
 
+func serialize()->Dictionary:
+	return {"BT":bomb_type,"PN":affiliated_player.Player_Number,"RT":explosion_timer.time_left,"POS":global_position}
+
 func explode()->void:
 	#meant to be virtual
 	pass

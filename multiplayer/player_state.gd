@@ -10,6 +10,7 @@ var position:Vector2=Vector2.ZERO
 var reticle_position:Vector2=Vector2.ZERO
 var direction:Vector2i=Vector2i.ZERO
 var pickup_stats:PickUpStats=PickUpStats.new()
+var bombs:Array[BombState]
 var taken_action:ACTIONS=ACTIONS.NOTHING
 
 func serialize()->Dictionary:

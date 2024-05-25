@@ -43,7 +43,7 @@ func _on_host_lobby_pressed()->void:
 		
 		PlayerConfigs.reset_full()
 		
-		MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.HOST_LOBBY
+		MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.LOBBY
 		MultiplayerStatus.Current_Number_Of_Players=1
 		
 		PlayerConfigs.set_player_custom_faces(0,FacesAutoload.custom_faces)
