@@ -80,10 +80,11 @@ _data = {
 "RESET": SubResource("Animation_kbmp5")
 }
 
-[node name="Win_Draw" type="CanvasLayer" node_paths=PackedStringArray("wordart_sprite")]
+[node name="Win_Draw" type="CanvasLayer" node_paths=PackedStringArray("wordart_sprite", "animation_player")]
 layer = 4
 script = ExtResource("1_lvljt")
 wordart_sprite = NodePath("CenterContainer/123GO/Sprite2D")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
