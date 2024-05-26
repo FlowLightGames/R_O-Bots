@@ -20,7 +20,7 @@ extends Node
 #9: assign playernumber
 #10: clock sync (estimate tcp,udp delay)
 #11: Character Custom Finished Master
-#12: PlayerStateUpdate (from clients)
+#12: PlayerStateUpdate (from everyone to everyone)
 
 signal player_initial_data_transfer_ack(player_number:int)
 signal player_number_assignment_ack(player_number:int)
@@ -34,6 +34,7 @@ signal character_custom_ready_update(player_number:int,ready:bool,data:Array[int
 signal stage_selected(seed:int,package_delay:int,selected_map_index:int,selected_map_size:int)
 #multiplayer ingame signals
 signal player_state_update(who_steam_id:int,elapsed_time:int,player_state:PlayerState) 
+signal game_state_state_update(who_steam_id:int,elapsed_time:int,game_state:GameState) 
 
 func handle_data(input:PackedByteArray,packet_sender:int)->void:
 	var type:int=input.decode_u8(0)
@@ -194,7 +195,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			print("got player ready config master list")
 			character_custom_finished.emit()
 		12:
-			#we are host and got info from client
+			#we go playerstate from non pc characers
 			var dict:Dictionary=bytes_to_var(input)
 			var who_steam_id:int=dict["SID"]
 			var elapsed_time:int=dict["ET"]

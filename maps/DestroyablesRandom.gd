@@ -26,12 +26,17 @@ func spawn_with_seed(seed:int)->void:
 	for i:int in range(int(fill_percent*number_of_marked_cells)):
 		var tmp_spawn:BrickBase=(possible_spawns.pick_random() as PackedScene).instantiate()
 		var tmp_pos:Vector2i= pick_random_from_array(rng,marked_cells)
+		tmp_spawn.tile_pos=tmp_pos
 		add_child(tmp_spawn)
 		tmp_spawn.position=tmp_pos*(tile_set.tile_size)+Vector2i(8,8)
 		tmp_spawn.map=map
+		map.destroyables_ref_dict[tmp_pos]=tmp_spawn
 	
 	clear()
 
 func _ready()->void:
-	spawn_with_seed(SteamLobby.random_seed)
+	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
+		spawn_with_seed(SteamLobby.random_seed)
+	else:
+		spawn_with_seed(randi())
 

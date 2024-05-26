@@ -240,10 +240,11 @@ func damage()->void:
 				IFramesAnimation.play("i_frames")
 
 func die()->void:
-	KnifeHurtBox.set_deferred("disabled",true)
-	disabled=true
-	BodyAnimation.play("death")
-	death_timer.start(0.6)
+	if !disabled:
+		KnifeHurtBox.set_deferred("disabled",true)
+		disabled=true
+		BodyAnimation.play("death")
+		death_timer.start(0.6)
 
 func action_one()->void:
 	bomb_place_check.force_raycast_update()

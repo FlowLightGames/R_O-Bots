@@ -58,6 +58,7 @@ func _on_cancel_pressed()->void:
 func finished_character_custom()->void:
 	MultiplayerStatus.Current_Loaded_Map=null
 	get_tree().change_scene_to_packed(SceneCollection.stage_select)
+	
 
 func _on_stage_select_pressed()->void:
 	#var msg:PackedByteArray=PackageConstructor.character_custom_finished_master(PlayerConfigs.Player_Configs)

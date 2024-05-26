@@ -22,6 +22,7 @@ var countdown_overlay:PackedScene=load("res://maps/UI/countdown.tscn")
 
 var disabled:bool=false
 var player_ref_list:Array[PlayerCharacter]=[]
+var destroyables_ref_dict:Dictionary={}
 
 func _ready()->void:
 	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
@@ -37,11 +38,11 @@ func _ready()->void:
 	
 	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
 		PackageDeconstructor.player_state_update.connect(on_player_state_update_recieved)
+		PackageDeconstructor.game_state_state_update.connect(on_game_state_update_recieved)
 		MultiplayerStatus.Current_Loaded_Map=self
 		MultiplayerStatus.start_timer()
 
 #for multiplayer
-#we're the host
 func on_player_state_update_recieved(who_steam_id:int,elapsed_time:int,player_state:PlayerState)->void:
 	if player_state.player_number in range(0,PlayerConfigs.Player_Configs.size()):
 		if PlayerConfigs.Player_Configs[player_state.player_number].steam_id==who_steam_id:
@@ -49,12 +50,35 @@ func on_player_state_update_recieved(who_steam_id:int,elapsed_time:int,player_st
 			if player:
 				player.apply_player_state(player_state)
 
-func pick_up_with_weights()->PickUpOptionStruct:
+func on_game_state_update_recieved(who_steam_id:int,elapsed_time:int,game_state:GameState)->void:
+	var tmp_alives:Array[int]=game_state.alive_players.duplicate()
+	for n:PlayerCharacter in player_ref_list:
+		if !(n.Player_Number in game_state.alive_players):
+			n.die()
+		else:
+			tmp_alives.erase(n.Player_Number)
+	#revive if the shoudld be any unjust deaths
+	for n:int in tmp_alives:
+		var character:PlayerCharacter=player_scene.instantiate() as PlayerCharacter
+		character.Player_Number=n
+		player_nodes.add_child(character)
+		character.set_player_name(Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n].steam_id))
+		if !(n==SteamLobby.player_number):
+			character.is_puppet=true
+		character.config_init(PlayerConfigs.Player_Configs[n])
+		character.input_map_init()
+		character.position=Vector2i(1024,1024)
+		character.map=self
+		character.disabled=false
+		player_ref_list.append(character)
+		stage_ui.update_icons(player_ref_list)
+
+func pick_up_with_weights(rng:RandomNumberGenerator)->PickUpOptionStruct:
 	if !possible_pickups.map.is_empty():
 		var total_weight:int=0
 		for i:PickUpOptionStruct in possible_pickups.map:
 			total_weight+=i.weight
-		var random_num:int=randi()%total_weight
+		var random_num:int=rng.randi()%total_weight
 		
 		var cumulative_weight:int=0
 		for p:PickUpOptionStruct in possible_pickups.map:
