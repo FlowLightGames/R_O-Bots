@@ -17,10 +17,11 @@ var player_message_delay_buffer:Dictionary={}
 var random_seed:int=0
 
 func add_delay_measure_req(req_steam_id:int)->void:
+	print("added delay measure req: "+str(player_message_delay_buffer))
 	player_message_delay_buffer[req_steam_id]=Time.get_ticks_msec()
 
 func on_delay_measure_ack(steamID:int)->int:
-	print(player_message_delay_buffer)
+	print("got delay measure ack: "+str(player_message_delay_buffer)+"at"+str(Time.get_ticks_msec()))
 	if player_message_delay_buffer.has(steamID):
 		var output:int= (Time.get_ticks_msec()-player_message_delay_buffer[steamID])/2
 		player_message_delay_buffer.erase(steamID)
