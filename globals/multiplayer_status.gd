@@ -8,6 +8,7 @@ enum STATE{LOBBY,SEARCH_LOBBY,SINGLEPLAYER,ONLINE_MULTIPLAYER,OFFLINE_MULTIPLAYE
 #wont be saved
 var Current_Number_Of_Players:int=0
 var Current_Status:int=STATE.SINGLEPLAYER
+var Delay_To_Host_TCP:int=0
 
 var Current_Loaded_Map:MapBase=null
 

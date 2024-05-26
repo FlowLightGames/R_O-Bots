@@ -14,4 +14,5 @@ func _process(delta:float)->void:
 	+"current number of players: "+str(MultiplayerStatus.Current_Number_Of_Players)+'\n'
 	+"multiplayer_sync timer running: "+str(!MultiplayerStatus.multiplayer_sync_timer.is_stopped())+'\n'
 	+"player_assignment_dict: "+str(SteamLobby.player_assignment_dict)+'\n'
+	+"delay_to_host_tcp_msec: "+str(MultiplayerStatus.Delay_To_Host_TCP)+'\n'
 )

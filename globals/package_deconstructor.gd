@@ -167,7 +167,6 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			var stage_index:int=data_dict["STID"]
 			var stage_size:int=data_dict["STSI"]
 			
-			MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.ONLINE_MULTIPLAYER
 			stage_selected.emit(random_seed,package_delay,stage_index,stage_size)
 		7:
 			pass

@@ -391,13 +391,13 @@ func apply_player_state(player_state:PlayerState)->void:
 		PlayerState.ACTIONS.BOMB_PLACED:
 			place_bomb()
 		PlayerState.ACTIONS.BOMB_THROW:
-			pass
+			throw_bomb()
 		PlayerState.ACTIONS.BOMB_DETONATE:
-			pass
+			detonate_bomb()
 		PlayerState.ACTIONS.GUN_FIRED:
-			pass
+			fire_gun()
 		PlayerState.ACTIONS.ZEUS_FIRED:
-			pass
+			fire_lightning()
 		_:
 			pass
 
@@ -570,7 +570,8 @@ func _on_i_frames_animation_animation_finished(_anim_name:String)->void:
 
 func _on_death_timer_timeout()->void:
 	map.player_ref_list.erase(self)
-	map.check_winner()
+	if SteamLobby.is_host:
+		map.check_winner()
 	queue_free()
 
 func _on_fart_timer_timeout()->void:
