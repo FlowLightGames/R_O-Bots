@@ -77,6 +77,7 @@ func on_game_state_update_recieved(who_steam_id:int,elapsed_time:int,game_state:
 		character.disabled=false
 		player_ref_list.append(character)
 		stage_ui.update_icons(player_ref_list)
+	#handlebricks TODO
 
 func pick_up_with_weights(rng:RandomNumberGenerator)->PickUpOptionStruct:
 	if !possible_pickups.map.is_empty():

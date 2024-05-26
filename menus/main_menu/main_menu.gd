@@ -16,6 +16,7 @@ var disabled:bool=false
 # Called when the node enters the scene tree for the first time.
 func _ready()->void:
 	MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.SINGLEPLAYER
+	MultiplayerStatus.Current_Number_Of_Players=1
 	if !GlobalSteam.steam_init:
 		host_lobby.disabled=true
 		join_lobby.disabled=true

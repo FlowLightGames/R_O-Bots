@@ -65,8 +65,9 @@ func _on_stage_select_pressed()->void:
 	#SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_RELIABLE, msg)
 	#finished_character_custom()
 	#TODO remove this test where we go straight to stages
-	var msg:PackedByteArray=PackageConstructor.stage_start_up_master(SteamLobby.random_seed,0,1,1)
-	SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_RELIABLE,msg)
+	for n:int in range(1,MultiplayerStatus.Current_Number_Of_Players):
+		var msg:PackedByteArray=PackageConstructor.stage_start_up_master(SteamLobby.random_seed,PlayerConfigs.Player_Configs[n].message_delay_tcp,1,1)
+		SteamLobby.send_p2p_packet(PlayerConfigs.Player_Configs[n].steam_id,Steam.P2P_SEND_RELIABLE,msg)
 	var stage:PackedScene=load("res://maps/instances/default_M.tscn") as PackedScene
 	MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.ONLINE_MULTIPLAYER
 	get_tree().change_scene_to_packed(stage)

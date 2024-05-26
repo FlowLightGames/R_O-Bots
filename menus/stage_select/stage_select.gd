@@ -77,6 +77,5 @@ func _on_go_pressed()->void:
 				selected_scene=null
 		#change this TODO currently test to default for all clinets and host
 		if selected_scene:
-			var msg:PackedByteArray=PackageConstructor.stage_start_up_master(SteamLobby.random_seed,0,0,0)
-			#TODO SEND IT
+			#TODO SEND IT for every player
 			get_tree().change_scene_to_packed(selected_scene)
