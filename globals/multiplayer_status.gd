@@ -13,7 +13,7 @@ var Delay_To_Host_TCP:int=0
 var Current_Loaded_Map:MapBase=null
 
 func start_timer()->void:
-	multiplayer_sync_timer.start(0.1)
+	multiplayer_sync_timer.start(10000)
 
 func _on_multiplayer_sync_timer_timeout()->void:
 	if Current_Loaded_Map:

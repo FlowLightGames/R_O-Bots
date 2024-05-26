@@ -154,7 +154,7 @@ func player_state_update(player_state:PlayerState,who_steam_id:int)->PackedByteA
 	output.append_array(var_to_bytes(dict))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
-	
+
 func game_state_update(game_state:GameState,who_steam_id:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(12)
