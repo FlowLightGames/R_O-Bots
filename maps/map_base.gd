@@ -44,8 +44,13 @@ func _ready()->void:
 
 #for multiplayer
 func on_player_state_update_recieved(who_steam_id:int,elapsed_time:int,player_state:PlayerState)->void:
-	if player_state.player_number in range(0,PlayerConfigs.Player_Configs.size()):
-		if PlayerConfigs.Player_Configs[player_state.player_number].steam_id==who_steam_id:
+	var config_idx:int=PlayerConfigs.get_player_index_by_steam_id(who_steam_id)
+	#check if info is correct
+	if config_idx in range(0,PlayerConfigs.Player_Configs.size())&&player_state.player_number==config_idx:
+		#check if info still relevant aka if udp is out of order:
+		if PlayerConfigs.Player_Configs[config_idx].elapsed_time<elapsed_time:
+			#update elapsed time
+			PlayerConfigs.set_elapsed_time(config_idx,elapsed_time)
 			var player:PlayerCharacter=get_player_by_number(player_state.player_number)
 			if player:
 				player.apply_player_state(player_state)

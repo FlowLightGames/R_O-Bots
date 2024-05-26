@@ -11,7 +11,7 @@ class_name PlayerConfigMetaData
 
 var initial_data_received:bool=false
 #latest recieved message timestamp in clinet time
-var elapsed_time:int=Time.get_ticks_msec()
+var elapsed_time:int=0
 var steam_id:int=-1
 
 var custom_faces:Array[Texture2D]=[]
