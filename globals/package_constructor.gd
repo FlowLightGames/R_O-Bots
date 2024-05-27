@@ -21,6 +21,8 @@ extends Node
 #10: clock sync (estimate tcp,udp delay)
 #11: Character Custom Finished Master
 #12: PlayerStateUpdate (from everyone to everyone)
+#13: GameStateUpdate (from host to clients)
+#14: RoundEnd (from host to clients)
 
 func handshake_req(reqester_steam_id:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
@@ -157,8 +159,17 @@ func player_state_update(player_state:PlayerState,who_steam_id:int)->PackedByteA
 
 func game_state_update(game_state:GameState,who_steam_id:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
-	output.append(12)
+	output.append(13)
 	var dict:Dictionary={"SID":who_steam_id,"ET":Time.get_ticks_msec(),"GS":game_state.serialize()}
+	output.append_array(var_to_bytes(dict))
+	output=output.compress(FileAccess.COMPRESSION_GZIP)
+	return output
+
+func round_end(win_draw:bool,winner_num:int,who_steam_id:int)->PackedByteArray:
+	var output:PackedByteArray=PackedByteArray()
+	output.append(14)
+	var round_end_dict:Dictionary={"WD":win_draw,"WN":winner_num}
+	var dict:Dictionary={"SID":who_steam_id,"ET":Time.get_ticks_msec(),"RE":round_end_dict}
 	output.append_array(var_to_bytes(dict))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output

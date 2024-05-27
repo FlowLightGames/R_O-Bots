@@ -21,6 +21,8 @@ extends Node
 #10: clock sync (estimate tcp,udp delay)
 #11: Character Custom Finished Master
 #12: PlayerStateUpdate (from everyone to everyone)
+#13: GameStateUpdate (from host to clients)
+#14: RoundEnd (from host to clients)
 
 signal player_initial_data_transfer_ack(player_number:int)
 signal player_number_assignment_ack(player_number:int)
@@ -34,7 +36,8 @@ signal character_custom_ready_update(player_number:int,ready:bool,data:Array[int
 signal stage_selected(seed:int,package_delay:int,selected_map_index:int,selected_map_size:int)
 #multiplayer ingame signals
 signal player_state_update(who_steam_id:int,elapsed_time:int,player_state:PlayerState) 
-signal game_state_state_update(who_steam_id:int,elapsed_time:int,game_state:GameState) 
+signal game_state_update(who_steam_id:int,elapsed_time:int,game_state:GameState) 
+signal round_end(who_steam_id:int,elapsed_time:int,win_draw:bool,winner_num:int) 
 
 func handle_data(input:PackedByteArray,packet_sender:int)->void:
 	var type:int=input.decode_u8(0)
@@ -201,5 +204,22 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			var player_state:PlayerState=PlayerState.new()
 			player_state.deserialize(dict["PS"])
 			player_state_update.emit(who_steam_id,elapsed_time,player_state)
+		13:
+			#we got gamestate update from host
+			var dict:Dictionary=bytes_to_var(input)
+			var who_steam_id:int=dict["SID"]
+			var elapsed_time:int=dict["ET"]
+			var game_state:GameState=GameState.new()
+			game_state.deserialize(dict["GS"])
+			game_state_update.emit(who_steam_id,elapsed_time,game_state)
+		14:
+			#we got round end from host:
+			var dict:Dictionary=bytes_to_var(input)
+			var who_steam_id:int=dict["SID"]
+			var elapsed_time:int=dict["ET"]
+			var re_dict:Dictionary=dict["RE"]
+			var win_draw:bool=re_dict["WD"]
+			var win_number:int=re_dict["WN"]
+			round_end.emit(who_steam_id,elapsed_time,win_draw,win_number)
 		_:
 			pass

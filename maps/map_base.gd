@@ -38,12 +38,14 @@ func _ready()->void:
 	
 	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
 		PackageDeconstructor.player_state_update.connect(on_player_state_update_recieved)
-		PackageDeconstructor.game_state_state_update.connect(on_game_state_update_recieved)
+		PackageDeconstructor.game_state_update.connect(on_game_state_update_recieved)
+		PackageDeconstructor.round_end.connect(on_round_end_recieved)
 		MultiplayerStatus.Current_Loaded_Map=self
 		MultiplayerStatus.start_timer()
 
 #for multiplayer
 func on_player_state_update_recieved(who_steam_id:int,elapsed_time:int,player_state:PlayerState)->void:
+	print("got playerstate")
 	var config_idx:int=PlayerConfigs.get_player_index_by_steam_id(who_steam_id)
 	#check if info is correct
 	if config_idx in range(0,PlayerConfigs.Player_Configs.size())&&player_state.player_number==config_idx:
@@ -84,6 +86,9 @@ func on_game_state_update_recieved(who_steam_id:int,elapsed_time:int,game_state:
 			if!(tmp_destroy_ref[n] as BrickBase).currently_being_destroyed:
 				(tmp_destroy_ref[n] as BrickBase).spawn_pickup_and_free()
 				tmp_destroy_ref.erase(n)
+
+func on_round_end_recieved(who_steam_id:int,elapsed_time:int,game_state:GameState)->void:
+	pass
 
 func pick_up_with_weights(rng:RandomNumberGenerator)->PickUpOptionStruct:
 	if !possible_pickups.map.is_empty():
