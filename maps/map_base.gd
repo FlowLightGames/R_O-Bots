@@ -77,7 +77,13 @@ func on_game_state_update_recieved(who_steam_id:int,elapsed_time:int,game_state:
 		character.disabled=false
 		player_ref_list.append(character)
 		stage_ui.update_icons(player_ref_list)
-	#handlebricks TODO
+	#handlebricks 
+	var tmp_destroy_ref:Dictionary=destroyables_ref_dict.duplicate()
+	for n:Vector2i in tmp_destroy_ref:
+		if !(game_state.destroyables_list.has(n)):
+			if!(tmp_destroy_ref[n] as BrickBase).currently_being_destroyed:
+				(tmp_destroy_ref[n] as BrickBase).spawn_pickup_and_free()
+				tmp_destroy_ref.erase(n)
 
 func pick_up_with_weights(rng:RandomNumberGenerator)->PickUpOptionStruct:
 	if !possible_pickups.map.is_empty():

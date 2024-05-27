@@ -471,8 +471,11 @@ func _physics_process(_delta:float)->void:
 				
 				var animation_string:String=""
 				var tmp_moving:bool=false
+				
 				if move_vec!=Vector2i.ZERO:
 					tmp_moving=true
+					if move_vec!=current_view_direction:
+						flagged_for_sync=true
 					current_view_direction=move_vec
 					animation_string+="run_"
 				else:
