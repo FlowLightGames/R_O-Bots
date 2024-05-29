@@ -111,8 +111,8 @@ func on_game_state_update_recieved(who_steam_id:int,elapsed_time:int,game_state:
 			if!(tmp_destroy_ref[n] as BrickBase).currently_being_destroyed:
 				(tmp_destroy_ref[n] as BrickBase).spawn_pickup_and_free()
 				tmp_destroy_ref.erase(n)
-	for n:Vector2i in tmp_destroy_ref:
-		destroyables_random_spawner.spawn_block(n)
+	#for n:Vector2i in tmp_destroy_ref:
+		#destroyables_random_spawner.spawn_block(n)
 
 func on_round_end_recieved(who_steam_id:int,elapsed_time:int,winner_num:int)->void:
 	if winner_num<0:
