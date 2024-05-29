@@ -59,6 +59,7 @@ func on_player_state_update_recieved(who_steam_id:int,elapsed_time:int,player_st
 				player.apply_player_state(player_state)
 
 func on_game_state_update_recieved(who_steam_id:int,elapsed_time:int,game_state:GameState)->void:
+	print("got GAMESTATE")
 	var tmp_alives:Array[PlayerState]=game_state.alive_players.duplicate()
 	for n:PlayerState in tmp_alives:
 		var pn:int=n.player_number
