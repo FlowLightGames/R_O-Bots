@@ -11,7 +11,7 @@ func serialize()->Dictionary:
 	return {"AP":ser_alive_player,"DESL":destroyables_list}
 
 func deserialize(dict:Dictionary)->void:
-	var ser_alive_players:Array[Dictionary]=dict["AP"]
+	var ser_alive_players:Array=dict["AP"]
 	var deser_alive_player:Array[PlayerState]=[]
 	for n:Dictionary in ser_alive_players:
 		var tmp_playerstate:PlayerState=PlayerState.new()
