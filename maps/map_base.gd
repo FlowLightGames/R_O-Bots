@@ -10,6 +10,7 @@ var countdown_overlay:PackedScene=load("res://maps/UI/countdown.tscn")
 @export var spawnpoint_tilemap:TileMap
 @export var base_ground_tilemap:TileMap
 @export var statics_tilemap:TileMap
+@export var destroyables_random_spawner:DestroyablesRandomSpawner
 @export var camera:Camera2D
 @export var stage_ui:StageUI
 @export var player_nodes:Node2D
@@ -58,27 +59,50 @@ func on_player_state_update_recieved(who_steam_id:int,elapsed_time:int,player_st
 				player.apply_player_state(player_state)
 
 func on_game_state_update_recieved(who_steam_id:int,elapsed_time:int,game_state:GameState)->void:
-	var tmp_alives:Array[int]=game_state.alive_players.duplicate()
-	for n:PlayerCharacter in player_ref_list:
-		if !(n.Player_Number in game_state.alive_players):
-			n.die()
-		else:
-			tmp_alives.erase(n.Player_Number)
+	var tmp_alives:Array[PlayerState]=game_state.alive_players.duplicate()
+	for n:PlayerState in tmp_alives:
+		var pn:int=n.player_number
+		var player:PlayerCharacter=get_player_by_number(pn)
+		if player:
+			player.apply_player_state(n)
+			tmp_alives.erase(n)
 	#revive if the shoudld be any unjust deaths
-	for n:int in tmp_alives:
+	for n:PlayerState in tmp_alives:
 		var character:PlayerCharacter=player_scene.instantiate() as PlayerCharacter
-		character.Player_Number=n
+		character.Player_Number=n.player_number
 		player_nodes.add_child(character)
-		character.set_player_name(Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n].steam_id))
-		if !(n==SteamLobby.player_number):
+		character.set_player_name(Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n.player_number].steam_id))
+		if n.player_number!=SteamLobby.player_number:
 			character.is_puppet=true
-		character.config_init(PlayerConfigs.Player_Configs[n])
+		character.config_init(PlayerConfigs.Player_Configs[n.player_number])
 		character.input_map_init()
 		character.position=Vector2i(1024,1024)
 		character.map=self
 		character.disabled=false
 		player_ref_list.append(character)
 		stage_ui.update_icons(player_ref_list)
+	#for n:PlayerCharacter in player_ref_list:
+		#var p:PlayerState=null
+		#for ps in tmp_alives
+		#if !(n.Player_Number in game_state.alive_players):
+			#n.die()
+		#else:
+			#tmp_alives.erase(n.Player_Number)
+	#revive if the shoudld be any unjust deaths
+	#for n:PlayerState in tmp_alives:
+		#var character:PlayerCharacter=player_scene.instantiate() as PlayerCharacter
+		#character.Player_Number=n
+		#player_nodes.add_child(character)
+		#character.set_player_name(Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n].steam_id))
+		#if !(n==SteamLobby.player_number):
+			#character.is_puppet=true
+		#character.config_init(PlayerConfigs.Player_Configs[n])
+		#character.input_map_init()
+		#character.position=Vector2i(1024,1024)
+		#character.map=self
+		#character.disabled=false
+		#player_ref_list.append(character)
+		#stage_ui.update_icons(player_ref_list)
 	#handlebricks 
 	var tmp_destroy_ref:Dictionary=destroyables_ref_dict.duplicate()
 	for n:Vector2i in tmp_destroy_ref:
@@ -86,6 +110,8 @@ func on_game_state_update_recieved(who_steam_id:int,elapsed_time:int,game_state:
 			if!(tmp_destroy_ref[n] as BrickBase).currently_being_destroyed:
 				(tmp_destroy_ref[n] as BrickBase).spawn_pickup_and_free()
 				tmp_destroy_ref.erase(n)
+	for n:Vector2i in tmp_destroy_ref:
+		destroyables_random_spawner.spawn_block(n)
 
 func on_round_end_recieved(who_steam_id:int,elapsed_time:int,winner_num:int)->void:
 	if winner_num<0:
