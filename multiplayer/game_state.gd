@@ -17,4 +17,7 @@ func deserialize(dict:Dictionary)->void:
 		var tmp_playerstate:PlayerState=PlayerState.new()
 		tmp_playerstate.deserialize(n)
 		deser_alive_player.append(tmp_playerstate)
-	destroyables_list=dict["DESL"]
+	var tmp_des:Array[Vector2i]=[]
+	for n:Vector2i in dict["DESL"]:
+		tmp_des.append(n)
+	destroyables_list=tmp_des
