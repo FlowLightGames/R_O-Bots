@@ -165,10 +165,10 @@ func game_state_update(game_state:GameState,who_steam_id:int)->PackedByteArray:
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func round_end(win_draw:bool,winner_num:int,who_steam_id:int)->PackedByteArray:
+func round_end(winner_num:int,who_steam_id:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(14)
-	var round_end_dict:Dictionary={"WD":win_draw,"WN":winner_num}
+	var round_end_dict:Dictionary={"WN":winner_num}
 	var dict:Dictionary={"SID":who_steam_id,"ET":Time.get_ticks_msec(),"RE":round_end_dict}
 	output.append_array(var_to_bytes(dict))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)

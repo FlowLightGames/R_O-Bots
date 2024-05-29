@@ -37,7 +37,7 @@ signal stage_selected(seed:int,package_delay:int,selected_map_index:int,selected
 #multiplayer ingame signals
 signal player_state_update(who_steam_id:int,elapsed_time:int,player_state:PlayerState) 
 signal game_state_update(who_steam_id:int,elapsed_time:int,game_state:GameState) 
-signal round_end(who_steam_id:int,elapsed_time:int,win_draw:bool,winner_num:int) 
+signal round_end(who_steam_id:int,elapsed_time:int,winner_num:int) 
 
 func handle_data(input:PackedByteArray,packet_sender:int)->void:
 	var type:int=input.decode_u8(0)
@@ -218,8 +218,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			var who_steam_id:int=dict["SID"]
 			var elapsed_time:int=dict["ET"]
 			var re_dict:Dictionary=dict["RE"]
-			var win_draw:bool=re_dict["WD"]
 			var win_number:int=re_dict["WN"]
-			round_end.emit(who_steam_id,elapsed_time,win_draw,win_number)
+			round_end.emit(who_steam_id,elapsed_time,win_number)
 		_:
 			pass

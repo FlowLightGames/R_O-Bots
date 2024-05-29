@@ -87,8 +87,11 @@ func on_game_state_update_recieved(who_steam_id:int,elapsed_time:int,game_state:
 				(tmp_destroy_ref[n] as BrickBase).spawn_pickup_and_free()
 				tmp_destroy_ref.erase(n)
 
-func on_round_end_recieved(who_steam_id:int,elapsed_time:int,game_state:GameState)->void:
-	pass
+func on_round_end_recieved(who_steam_id:int,elapsed_time:int,winner_num:int)->void:
+	if winner_num<0:
+		draw()
+	elif winner_num in range(0,8):
+		win(winner_num)
 
 func pick_up_with_weights(rng:RandomNumberGenerator)->PickUpOptionStruct:
 	if !possible_pickups.map.is_empty():
@@ -110,6 +113,7 @@ func draw()->void:
 	for n:PlayerCharacter in player_ref_list:
 		n.disable()
 	var tmp:DrawOverlay=draw_overlay.instantiate() as DrawOverlay
+	send_round_end(-1)
 	add_child(tmp)
 
 func win(player:int)->void:
@@ -120,7 +124,14 @@ func win(player:int)->void:
 	var tmp:WinOverlay=win_overlay.instantiate() as WinOverlay
 	tmp.old_cam=camera
 	tmp.set_winner(PlayerConfigs.Player_Configs[player])
+	send_round_end(player)
 	add_child(tmp)
+
+func send_round_end(winner_num:int)->void:
+	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
+		if SteamLobby.is_host:
+			var msg:PackedByteArray=PackageConstructor.round_end(winner_num,GlobalSteam.steam_id)
+			SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_RELIABLE,msg)
 
 func check_winner()->void:
 	if !disabled:
@@ -187,6 +198,14 @@ func _on_round_timer_timeout()->void:
 
 func get_gamestate()->GameState:
 	var output:GameState=GameState.new()
+	var alive_players:Array[PlayerState]=[]
+	for n:PlayerCharacter in player_ref_list:
+		alive_players.append(n.get_player_state())
+	output.alive_players=alive_players
+	var destroyables:Array[Vector2i]=[]
+	for n:Vector2i in destroyables_ref_dict:
+		destroyables.append(n)
+	output.destroyables_list=destroyables
 	return output
 
 func get_player_state(player_num:int)->PlayerState:
@@ -227,4 +246,3 @@ func _on_out_of_bound_body_entered(body:Node2D)->void:
 		if is_instance_valid((body as BombBase).affiliated_player):
 			(body as BombBase).affiliated_player.Bomb_Ref_List.erase(body)
 		body.queue_free()
-		#spawn glith animation
