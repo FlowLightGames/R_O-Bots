@@ -166,7 +166,6 @@ func _on_facecolor_dec_pressed()->void:
 		update_face_color()
 		send_character_custom_update()
 
-
 func _on_facecolor_inc_pressed()->void:
 	if(!disabled):
 		current_face_color=posmod(current_face_color+1,max_number_face_color)
@@ -283,7 +282,7 @@ func apply_character_custom_update(ready_check:bool,face_custom:bool,input:Array
 	
 	update_body_type()
 	update_body_color()
-	update_face_color()
+	update_face_type()
 	update_face_color()
 	
 	if ready_check:
