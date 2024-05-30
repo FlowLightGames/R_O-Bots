@@ -437,13 +437,13 @@ func send_taken_action(input:PlayerState.ACTIONS)->void:
 		if SteamLobby.is_host:
 			var player_state:PlayerState=get_player_state()
 			player_state.taken_action=input
-			SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_UNRELIABLE,PackageConstructor.player_state_update(player_state,GlobalSteam.steam_id))
+			SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_UNRELIABLE_NO_DELAY,PackageConstructor.player_state_update(player_state,GlobalSteam.steam_id))
 			#TODO send the thing
 		else:
 			#TODO HOST CASE
 			var player_state:PlayerState=get_player_state()
 			player_state.taken_action=input
-			SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_UNRELIABLE,PackageConstructor.player_state_update(player_state,GlobalSteam.steam_id))
+			SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_UNRELIABLE_NO_DELAY,PackageConstructor.player_state_update(player_state,GlobalSteam.steam_id))
 
 func _physics_process(_delta:float)->void:
 	if !disabled:

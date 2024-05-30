@@ -29,11 +29,12 @@ func _process(delta:float)->void:
 	pass
 
 func _on_game_start_pressed()->void:
-	if !disabled:
-		MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.SINGLEPLAYER
-		MultiplayerStatus.Current_Number_Of_Players=1
-		disabled=true
-		SteamLobby.is_host=true
+	pass
+	#if !disabled:
+		#MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.SINGLEPLAYER
+		#MultiplayerStatus.Current_Number_Of_Players=1
+		#disabled=true
+		#SteamLobby.is_host=true
 
 func _on_host_lobby_pressed()->void:
 	if !disabled:
@@ -44,7 +45,7 @@ func _on_host_lobby_pressed()->void:
 		
 		PlayerConfigs.reset_full()
 		
-		MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.LOBBY
+		MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.ONLINE_LOBBY
 		MultiplayerStatus.Current_Number_Of_Players=1
 		
 		PlayerConfigs.set_player_custom_faces(0,FacesAutoload.custom_faces)

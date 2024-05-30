@@ -13,7 +13,7 @@ extends Node
 #2: initial data transfer for a lobby (custom faces,etc)
 #3: Player Config Master List Update
 #4: Character data update
-#5: Character ready tru/false (if true send also character config)
+#5: UNDEFINED (Canceled ready? mby)
 #6: lobby start game data (Random Seed,stage selected,package delay)
 #7: game state update (from host)
 #8: finished game
@@ -65,32 +65,31 @@ func initial_data_transfer(self_player_number:int)->PackedByteArray:
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func character_data_update(body_base:int,body_color:int,face_base:int,face_color:int,face_custom:bool,self_player_number:int)->PackedByteArray:
+func player_config_master_list(player_configs:Array[PlayerConfigMetaData])->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
-	output.append(4)
-	output.append(self_player_number)
+	output.append(3)
 	
-	output.append(body_base)
-	output.append(body_color)
-	output.append(face_base)
-	output.append(face_color)
-	output.append(face_custom)
-	
+	var ser_player_configs:Array[Dictionary]=[]
+	for n:PlayerConfigMetaData in PlayerConfigs.Player_Configs:
+		ser_player_configs.append(n.serialize())
+	output.append_array(var_to_bytes(ser_player_configs))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func character_ready(body_base:int,body_color:int,face_base:int,face_color:int,face_custom:bool,ready:bool,self_player_number:int)->PackedByteArray:
+func character_data_update(body_base:int,body_color:int,face_base:int,face_color:int,face_custom:bool,self_player_number:int,ready:bool)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
-	output.append(5)
-	output.append(ready)
-	output.append(self_player_number)
-	if ready:
-		output.append(body_base)
-		output.append(body_color)
-		output.append(face_base)
-		output.append(face_color)
-		output.append(face_custom)
-	
+	output.append(4)
+	var output_dict:Dictionary={
+		"PN":self_player_number,
+		"BB":body_base,
+		"BC":body_color,
+		"FB":face_base,
+		"FC":face_color,
+		
+		"RDY":ready,
+		"FCSTM":face_custom
+	}
+	output.append_array(var_to_bytes(output_dict))
 	
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
@@ -116,17 +115,6 @@ func player_number_assignment(number:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(9)
 	output.append(number)
-	output=output.compress(FileAccess.COMPRESSION_GZIP)
-	return output
-
-func player_config_master_list(player_configs:Array[PlayerConfigMetaData])->PackedByteArray:
-	var output:PackedByteArray=PackedByteArray()
-	output.append(3)
-	
-	var ser_player_configs:Array[Dictionary]=[]
-	for n:PlayerConfigMetaData in PlayerConfigs.Player_Configs:
-		ser_player_configs.append(n.serialize())
-	output.append_array(var_to_bytes(ser_player_configs))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 

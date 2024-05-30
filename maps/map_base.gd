@@ -46,80 +46,83 @@ func _ready()->void:
 
 #for multiplayer
 func on_player_state_update_recieved(who_steam_id:int,elapsed_time:int,player_state:PlayerState)->void:
-	print("got playerstate")
-	var config_idx:int=PlayerConfigs.get_player_index_by_steam_id(who_steam_id)
-	#check if info is correct
-	if config_idx in range(0,PlayerConfigs.Player_Configs.size())&&player_state.player_number==config_idx:
-		#check if info still relevant aka if udp is out of order:
-		if PlayerConfigs.Player_Configs[config_idx].elapsed_time<elapsed_time:
-			#update elapsed time
-			PlayerConfigs.set_elapsed_time(config_idx,elapsed_time)
-			var player:PlayerCharacter=get_player_by_number(player_state.player_number)
-			if player:
-				player.apply_player_state(player_state)
+	if !disabled:
+		print("got playerstate")
+		var config_idx:int=PlayerConfigs.get_player_index_by_steam_id(who_steam_id)
+		#check if info is correct
+		if config_idx in range(0,PlayerConfigs.Player_Configs.size())&&player_state.player_number==config_idx:
+			#check if info still relevant aka if udp is out of order:
+			if PlayerConfigs.Player_Configs[config_idx].elapsed_time<elapsed_time:
+				#update elapsed time
+				PlayerConfigs.set_elapsed_time(config_idx,elapsed_time)
+				var player:PlayerCharacter=get_player_by_number(player_state.player_number)
+				if player:
+					player.apply_player_state(player_state)
 
 func on_game_state_update_recieved(who_steam_id:int,elapsed_time:int,game_state:GameState)->void:
-	print("got GAMESTATE")
-	var tmp_alives:Array[PlayerState]=game_state.alive_players.duplicate()
-	var further_process:Array[PlayerState]=[]
-	for n:PlayerState in tmp_alives:
-		var pn:int=n.player_number
-		var player:PlayerCharacter=get_player_by_number(pn)
-		if player:
-			player.apply_player_state(n)
-		else:
-			further_process.append(n)
-	#revive if the shoudld be any unjust deaths
-	for n:PlayerState in further_process:
-		var character:PlayerCharacter=player_scene.instantiate() as PlayerCharacter
-		character.Player_Number=n.player_number
-		player_nodes.add_child(character)
-		character.set_player_name(Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n.player_number].steam_id))
-		if n.player_number!=SteamLobby.player_number:
-			character.is_puppet=true
-		character.config_init(PlayerConfigs.Player_Configs[n.player_number])
-		character.input_map_init()
-		character.position=Vector2i(1024,1024)
-		character.map=self
-		character.disabled=false
-		player_ref_list.append(character)
-		stage_ui.update_icons(player_ref_list)
-	#for n:PlayerCharacter in player_ref_list:
-		#var p:PlayerState=null
-		#for ps in tmp_alives
-		#if !(n.Player_Number in game_state.alive_players):
-			#n.die()
-		#else:
-			#tmp_alives.erase(n.Player_Number)
-	#revive if the shoudld be any unjust deaths
-	#for n:PlayerState in tmp_alives:
-		#var character:PlayerCharacter=player_scene.instantiate() as PlayerCharacter
-		#character.Player_Number=n
-		#player_nodes.add_child(character)
-		#character.set_player_name(Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n].steam_id))
-		#if !(n==SteamLobby.player_number):
-			#character.is_puppet=true
-		#character.config_init(PlayerConfigs.Player_Configs[n])
-		#character.input_map_init()
-		#character.position=Vector2i(1024,1024)
-		#character.map=self
-		#character.disabled=false
-		#player_ref_list.append(character)
-		#stage_ui.update_icons(player_ref_list)
-	#handlebricks 
-	var tmp_destroy_ref:Dictionary=destroyables_ref_dict.duplicate()
-	for n:Vector2i in tmp_destroy_ref:
-		if !(game_state.destroyables_list.has(n)):
-			if!(tmp_destroy_ref[n] as BrickBase).currently_being_destroyed:
-				(tmp_destroy_ref[n] as BrickBase).spawn_pickup_and_free()
-	#for n:Vector2i in tmp_destroy_ref:
-		#destroyables_random_spawner.spawn_block(n)
+	if !disabled:
+		print("got GAMESTATE")
+		var tmp_alives:Array[PlayerState]=game_state.alive_players.duplicate()
+		var further_process:Array[PlayerState]=[]
+		for n:PlayerState in tmp_alives:
+			var pn:int=n.player_number
+			var player:PlayerCharacter=get_player_by_number(pn)
+			if player:
+				player.apply_player_state(n)
+			else:
+				further_process.append(n)
+		#revive if the shoudld be any unjust deaths
+		for n:PlayerState in further_process:
+			var character:PlayerCharacter=player_scene.instantiate() as PlayerCharacter
+			character.Player_Number=n.player_number
+			player_nodes.add_child(character)
+			character.set_player_name(Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n.player_number].steam_id))
+			if n.player_number!=SteamLobby.player_number:
+				character.is_puppet=true
+			character.config_init(PlayerConfigs.Player_Configs[n.player_number])
+			character.input_map_init()
+			character.position=Vector2i(1024,1024)
+			character.map=self
+			character.disabled=false
+			player_ref_list.append(character)
+			stage_ui.update_icons(player_ref_list)
+		#for n:PlayerCharacter in player_ref_list:
+			#var p:PlayerState=null
+			#for ps in tmp_alives
+			#if !(n.Player_Number in game_state.alive_players):
+				#n.die()
+			#else:
+				#tmp_alives.erase(n.Player_Number)
+		#revive if the shoudld be any unjust deaths
+		#for n:PlayerState in tmp_alives:
+			#var character:PlayerCharacter=player_scene.instantiate() as PlayerCharacter
+			#character.Player_Number=n
+			#player_nodes.add_child(character)
+			#character.set_player_name(Steam.getFriendPersonaName(PlayerConfigs.Player_Configs[n].steam_id))
+			#if !(n==SteamLobby.player_number):
+				#character.is_puppet=true
+			#character.config_init(PlayerConfigs.Player_Configs[n])
+			#character.input_map_init()
+			#character.position=Vector2i(1024,1024)
+			#character.map=self
+			#character.disabled=false
+			#player_ref_list.append(character)
+			#stage_ui.update_icons(player_ref_list)
+		#handlebricks 
+		var tmp_destroy_ref:Dictionary=destroyables_ref_dict.duplicate()
+		for n:Vector2i in tmp_destroy_ref:
+			if !(game_state.destroyables_list.has(n)):
+				if!(tmp_destroy_ref[n] as BrickBase).currently_being_destroyed:
+					(tmp_destroy_ref[n] as BrickBase).spawn_pickup_and_free()
+		#for n:Vector2i in tmp_destroy_ref:
+			#destroyables_random_spawner.spawn_block(n)
 
 func on_round_end_recieved(who_steam_id:int,elapsed_time:int,winner_num:int)->void:
-	if winner_num<0:
-		draw()
-	elif winner_num in range(0,8):
-		win(winner_num)
+	if !disabled:
+		if winner_num<0:
+			draw()
+		elif winner_num in range(0,8):
+			win(winner_num)
 
 func pick_up_with_weights(rng:RandomNumberGenerator)->PickUpOptionStruct:
 	if !possible_pickups.map.is_empty():
@@ -224,7 +227,7 @@ func unlock_players()->void:
 func _on_round_timer_timeout()->void:
 	time_out()
 
-func get_gamestate()->GameState:
+func get_game_state()->GameState:
 	var output:GameState=GameState.new()
 	var alive_players:Array[PlayerState]=[]
 	for n:PlayerCharacter in player_ref_list:

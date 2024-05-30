@@ -7,18 +7,23 @@ class_name MultiplayerCustomLobby
 
 func _ready()->void:
 	
+	PackageDeconstructor.player_initial_data_transfer_ack.connect(init_player)
+	
 	PackageDeconstructor.stage_selected.connect(_on_stage_start_recieved)
+	
+	PackageDeconstructor.character_custom_data_update.connect(on_character_custom_data_update)
+	PackageDeconstructor.character_custom_finished.connect(finished_character_custom)
+	
+	MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.ONLINE_LOBBY
 	
 	if !SteamLobby.is_host:
 		stage_select_button.free()
 	else:
 		stage_select_button.disabled=false
+		
 	apply_player_configs()
 	##MultiplayerSpecific:
-	PackageDeconstructor.player_initial_data_transfer_ack.connect(init_player)
-	PackageDeconstructor.character_custom_finished.connect(finished_character_custom)
 	
-	PlayerConfigs.player_config_changed.connect(on_character_custom_data_update)
 	lobby_name_label.text=str(SteamLobby.lobby_id)
 
 func apply_player_configs()->void:
@@ -48,8 +53,9 @@ func init_player(player:int)->void:
 	if player>=0&&player<player_boxes.size():
 		player_boxes[player].enable()
 
-func on_character_custom_data_update(player_number:int)->void:
-	player_boxes[player_number].update_online_character_custom(player_number)
+func on_character_custom_data_update(player_number:int,ready:bool,face_custom:bool,data:Array[int])->void:
+	if player_number in range(0,player_boxes.size()):
+		player_boxes[player_number].apply_character_custom_update(ready,face_custom,data)
 
 func _on_cancel_pressed()->void:
 	SteamLobby.leave_lobby()

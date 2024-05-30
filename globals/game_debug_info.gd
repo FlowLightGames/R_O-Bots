@@ -7,6 +7,7 @@ func _process(delta:float)->void:
 	+"steamName: "+str(GlobalSteam.steam_username)+'\n'
 	+"SteamLobbyPlayerNum: "+str(SteamLobby.player_number)+'\n'
 	+"MultiplayerSTATE: "+str(MultiplayerStatus.STATE.find_key(MultiplayerStatus.Current_Status))+'\n'
+	+"Curr elapsed time of other player 2: "+str(PlayerConfigs.Player_Configs[1].elapsed_time)+'\n'
 	+"Current rand seed: "+str(SteamLobby.random_seed)+'\n'
 	+"is_host: "+str(SteamLobby.is_host)+'\n'
 	+"current lobby members: "+str(SteamLobby.lobby_members)+'\n'
