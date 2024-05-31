@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://c74p4ae6rb6uy"]
+
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="1_vrm4r"]
+[ext_resource type="Script" path="res://menus/stage_select/chat/chat_message.gd" id="2_1mml4"]
+[ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="2_a0mmc"]
+[ext_resource type="Texture2D" uid="uid://c1c0hbjgbbtnl" path="res://menus/character_creator/menu_palette.png" id="3_jj12y"]
+[ext_resource type="Texture2D" uid="uid://dgwo110vph8ds" path="res://UI/theme/status_frame.png" id="5_n5ruc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xsha2"]
+resource_local_to_scene = true
+shader = ExtResource("2_a0mmc")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("3_jj12y")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xu1t1"]
+texture = ExtResource("5_n5ruc")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[node name="Root" type="MarginContainer" node_paths=PackedStringArray("panel_node", "message_text", "sender_text")]
+custom_minimum_size = Vector2(138, 38)
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -138.0
+offset_top = -55.0
+offset_bottom = -17.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 0
+script = ExtResource("2_1mml4")
+panel_node = NodePath("Control")
+message_text = NodePath("Control/Message")
+sender_text = NodePath("Control/Control/NameContainer/PlayerName")
+
+[node name="Control" type="PanelContainer" parent="."]
+material = SubResource("ShaderMaterial_xsha2")
+custom_minimum_size = Vector2(136, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme = ExtResource("1_vrm4r")
+
+[node name="Control" type="Control" parent="Control"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="NameContainer" type="PanelContainer" parent="Control/Control"]
+material = SubResource("ShaderMaterial_xsha2")
+layout_mode = 0
+offset_left = -95.0
+offset_top = -20.0
+offset_right = 9.0
+offset_bottom = -1.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_xu1t1")
+
+[node name="PlayerName" type="Label" parent="Control/Control/NameContainer"]
+custom_minimum_size = Vector2(88, 13)
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Message" type="Label" parent="Control"]
+custom_minimum_size = Vector2(120, 12)
+layout_mode = 2
+size_flags_horizontal = 8
+horizontal_alignment = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cj7kdptcelfix"]
+[gd_scene load_steps=17 format=3 uid="uid://cj7kdptcelfix"]
 
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="1_65nkd"]
 [ext_resource type="Script" path="res://menus/stage_select/stage_select.gd" id="1_p8ugr"]
@@ -13,11 +13,14 @@
 [ext_resource type="Resource" uid="uid://c5qdnlla8f3qt" path="res://menus/stage_select/stage_select_meta_datas/grave.tres" id="7_8k31k"]
 [ext_resource type="Resource" uid="uid://c6o5xoyci0rjr" path="res://menus/stage_select/stage_select_meta_datas/street.tres" id="8_qi5wo"]
 [ext_resource type="PackedScene" uid="uid://boh6gftujg2q0" path="res://UI/background/window_bg_100.tscn" id="11_ymbcm"]
+[ext_resource type="Script" path="res://menus/stage_select/ChatInput.gd" id="13_8neva"]
+[ext_resource type="PackedScene" uid="uid://cambaxrqeiodr" path="res://menus/stage_select/chat/live_chat.tscn" id="13_qkx1r"]
+[ext_resource type="Texture2D" uid="uid://c7g3ei7p02dqg" path="res://UI/theme/button_dark.png" id="14_41rre"]
 
 [node name="StageSelect" type="Node2D" node_paths=PackedStringArray("stage_label", "size_label", "stage_preview")]
 script = ExtResource("1_p8ugr")
-stage_label = NodePath("Control/Panel/Selector/VBoxContainer/StageSelect/Label")
-size_label = NodePath("Control/Panel/Selector/VBoxContainer/SizeSelect/Label")
+stage_label = NodePath("Control/Panel/VBoxContainer/Selector/VBoxContainer/StageSelect/Label")
+size_label = NodePath("Control/Panel/VBoxContainer/Selector/VBoxContainer/SizeSelect/Label")
 stage_preview = NodePath("Control/Panel/StageInfo")
 stage_select_meta_datas = Array[Resource("res://menus/stage_select/stage_select_meta_data.gd")]([ExtResource("2_ogmd1"), ExtResource("3_13x4f"), ExtResource("4_byyl7"), ExtResource("5_cgtbc"), ExtResource("6_br88h"), ExtResource("7_8k31k"), ExtResource("8_qi5wo")])
 
@@ -40,39 +43,41 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -165.0
-offset_top = -93.0
-offset_right = 4.0
-offset_bottom = 114.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Selector" type="PanelContainer" parent="Control/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 13.0
-offset_right = 96.0
-offset_bottom = 102.0
+offset_left = -204.0
+offset_top = -135.0
+offset_right = -91.0
+offset_bottom = 105.0
+metadata/_edit_group_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/Selector"]
+[node name="Selector" type="PanelContainer" parent="Control/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(90, 89)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer/Selector"]
 layout_mode = 2
 alignment = 1
 
-[node name="Stage" type="Label" parent="Control/Panel/Selector/VBoxContainer"]
+[node name="Stage" type="Label" parent="Control/Panel/VBoxContainer/Selector/VBoxContainer"]
 self_modulate = Color(1, 0.231373, 0.301961, 1)
 layout_mode = 2
 text = "STAGE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StageSelect" type="HBoxContainer" parent="Control/Panel/Selector/VBoxContainer"]
+[node name="StageSelect" type="HBoxContainer" parent="Control/Panel/VBoxContainer/Selector/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="StageDec" parent="Control/Panel/Selector/VBoxContainer/StageSelect" instance=ExtResource("2_bfhf8")]
+[node name="StageDec" parent="Control/Panel/VBoxContainer/Selector/VBoxContainer/StageSelect" instance=ExtResource("2_bfhf8")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/Panel/Selector/VBoxContainer/StageSelect"]
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/Selector/VBoxContainer/StageSelect"]
 self_modulate = Color(1, 0.231373, 0.301961, 1)
 custom_minimum_size = Vector2(14, 0)
 layout_mode = 2
@@ -80,24 +85,24 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StageInc" parent="Control/Panel/Selector/VBoxContainer/StageSelect" instance=ExtResource("3_yb0gp")]
+[node name="StageInc" parent="Control/Panel/VBoxContainer/Selector/VBoxContainer/StageSelect" instance=ExtResource("3_yb0gp")]
 layout_mode = 2
 
-[node name="Size" type="Label" parent="Control/Panel/Selector/VBoxContainer"]
+[node name="Size" type="Label" parent="Control/Panel/VBoxContainer/Selector/VBoxContainer"]
 self_modulate = Color(0.32549, 0.568627, 1, 1)
 layout_mode = 2
 text = "SIZE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SizeSelect" type="HBoxContainer" parent="Control/Panel/Selector/VBoxContainer"]
+[node name="SizeSelect" type="HBoxContainer" parent="Control/Panel/VBoxContainer/Selector/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="SizeDec" parent="Control/Panel/Selector/VBoxContainer/SizeSelect" instance=ExtResource("2_bfhf8")]
+[node name="SizeDec" parent="Control/Panel/VBoxContainer/Selector/VBoxContainer/SizeSelect" instance=ExtResource("2_bfhf8")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/Panel/Selector/VBoxContainer/SizeSelect"]
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/Selector/VBoxContainer/SizeSelect"]
 self_modulate = Color(0.32549, 0.568627, 1, 1)
 custom_minimum_size = Vector2(14, 0)
 layout_mode = 2
@@ -105,49 +110,111 @@ text = "L"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SizeInc" parent="Control/Panel/Selector/VBoxContainer/SizeSelect" instance=ExtResource("3_yb0gp")]
+[node name="SizeInc" parent="Control/Panel/VBoxContainer/Selector/VBoxContainer/SizeSelect" instance=ExtResource("3_yb0gp")]
 layout_mode = 2
 
-[node name="StageInfo" parent="Control/Panel" instance=ExtResource("5_mr6la")]
-layout_mode = 0
-offset_left = 116.0
-offset_top = -51.0
-offset_right = 328.0
-offset_bottom = 125.0
+[node name="Buttons" type="PanelContainer" parent="Control/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(90, 68)
+layout_mode = 2
+size_flags_horizontal = 4
 
-[node name="Buttons" type="PanelContainer" parent="Control/Panel"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 105.0
-offset_right = 96.0
-offset_bottom = 173.0
-
-[node name="HBoxContainer" type="VBoxContainer" parent="Control/Panel/Buttons"]
+[node name="HBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer/Buttons"]
 layout_mode = 2
 alignment = 1
 
-[node name="Cancel" type="Button" parent="Control/Panel/Buttons/HBoxContainer"]
+[node name="Cancel" type="Button" parent="Control/Panel/VBoxContainer/Buttons/HBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "CANCEL"
 
-[node name="Spacer" type="Control" parent="Control/Panel/Buttons/HBoxContainer"]
+[node name="Spacer" type="Control" parent="Control/Panel/VBoxContainer/Buttons/HBoxContainer"]
 layout_mode = 2
 
-[node name="Go" type="Button" parent="Control/Panel/Buttons/HBoxContainer"]
+[node name="Go" type="Button" parent="Control/Panel/VBoxContainer/Buttons/HBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "START"
 
+[node name="ChatInput" type="PanelContainer" parent="Control/Panel/VBoxContainer" node_paths=PackedStringArray("line_input", "live_chat")]
+layout_mode = 2
+script = ExtResource("13_8neva")
+line_input = NodePath("VBoxContainer/LineEdit")
+live_chat = NodePath("../../LiveChat")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer/ChatInput"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/ChatInput/VBoxContainer"]
+layout_mode = 2
+text = "Complaint Box"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="LineEdit" type="LineEdit" parent="Control/Panel/VBoxContainer/ChatInput/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+max_length = 32
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true
+caret_mid_grapheme = true
+
+[node name="Send" type="Button" parent="Control/Panel/VBoxContainer/ChatInput/VBoxContainer"]
+layout_mode = 2
+text = "SEND"
+
+[node name="Control" type="Control" parent="Control/Panel/VBoxContainer/ChatInput/VBoxContainer"]
+layout_mode = 2
+
+[node name="StageInfo" parent="Control/Panel" instance=ExtResource("5_mr6la")]
+layout_mode = 0
+offset_left = -32.0
+offset_top = -149.0
+offset_right = 248.0
+offset_bottom = 27.0
+
+[node name="Panel" type="Panel" parent="Control/Panel"]
+layout_mode = 0
+offset_left = -71.0
+offset_right = 302.0
+offset_bottom = 143.0
+
+[node name="Panel" type="NinePatchRect" parent="Control/Panel/Panel"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 16.0
+offset_right = 357.0
+offset_bottom = 133.0
+texture = ExtResource("14_41rre")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="LiveChat" parent="Control/Panel" instance=ExtResource("13_qkx1r")]
+layout_mode = 0
+offset_left = -57.0
+offset_top = 18.0
+offset_right = 283.0
+offset_bottom = 131.0
+
 [node name="Win98" parent="." instance=ExtResource("11_ymbcm")]
 
-[connection signal="pressed" from="Control/Panel/Selector/VBoxContainer/StageSelect/StageDec" to="." method="_on_stage_dec_pressed"]
-[connection signal="pressed" from="Control/Panel/Selector/VBoxContainer/StageSelect/StageInc" to="." method="_on_stage_inc_pressed"]
-[connection signal="pressed" from="Control/Panel/Selector/VBoxContainer/SizeSelect/SizeDec" to="." method="_on_size_dec_pressed"]
-[connection signal="pressed" from="Control/Panel/Selector/VBoxContainer/SizeSelect/SizeInc" to="." method="_on_size_inc_pressed"]
-[connection signal="pressed" from="Control/Panel/Buttons/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="Control/Panel/Buttons/HBoxContainer/Go" to="." method="_on_go_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/Selector/VBoxContainer/StageSelect/StageDec" to="." method="_on_stage_dec_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/Selector/VBoxContainer/StageSelect/StageInc" to="." method="_on_stage_inc_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/Selector/VBoxContainer/SizeSelect/SizeDec" to="." method="_on_size_dec_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/Selector/VBoxContainer/SizeSelect/SizeInc" to="." method="_on_size_inc_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/Buttons/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/Buttons/HBoxContainer/Go" to="." method="_on_go_pressed"]
+[connection signal="text_submitted" from="Control/Panel/VBoxContainer/ChatInput/VBoxContainer/LineEdit" to="Control/Panel/VBoxContainer/ChatInput" method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/ChatInput/VBoxContainer/Send" to="Control/Panel/VBoxContainer/ChatInput" method="_on_send_pressed"]

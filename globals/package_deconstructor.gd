@@ -13,7 +13,7 @@ extends Node
 #2: initial data transfer for a lobby (custom faces,etc)
 #3: Player Config Master List Update
 #4: Character data update
-#5: UNDEFINED (Canceled ready? mby)
+#5: Lobby_ChatMessage
 #6: lobby start game data (Random Seed,stage selected,package delay)
 #7: game state update (from host)
 #8: finished game
@@ -31,6 +31,8 @@ signal player_master_list
 #in customizer lobby signals
 signal character_custom_finished
 signal character_custom_data_update(player_number:int,ready:bool,face_custom:bool,data:Array[int])
+
+signal chat_message(sender_steam_id:int,player_number:int,message:String)
 #host selected map:
 signal stage_selected(seed:int,package_delay:int,selected_map_index:int,selected_map_size:int)
 #multiplayer ingame signals
@@ -137,23 +139,12 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			character_custom_data_update.emit(player_number,ready,face_custom,data)
 			
 		5:
-			print("got player is ready data")
-			#0_ ready bool
-			#1 (body_base)
-			#2 (body_color)
-			#3 (face_base)
-			#4 (face_color)
-			#5 (face_custom)
-			var ready:bool=bool(input.decode_u8(0))
-			var player_number:int=input.decode_u8(1)
-			var character_data:Array[int]=[]
-			character_data.append(input.decode_u8(2))
-			character_data.append(input.decode_u8(3))
-			character_data.append(input.decode_u8(4))
-			character_data.append(input.decode_u8(5))
-			character_data.append(input.decode_u8(6))
-			PlayerConfigs.update_player_confi(player_number,character_data)
-			#TODO set rady var in relevant script
+			var data_dict:Dictionary=bytes_to_var(input)
+			var sender_steamID:int=data_dict["SID"]
+			var player_number:int=data_dict["PN"]
+			var msg:String=data_dict["MSG"]
+			chat_message.emit(sender_steamID,player_number,msg)
+			#var dict:Dictionary={"SID":sender_steamID,"Pn":player_number,"MSG":msg}
 		6:
 			#{"RS":random_seed,"PD":package_delay_msec,"STID":stage_index,"STSI":stage_size}
 			var data_dict:Dictionary=bytes_to_var(input)

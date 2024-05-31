@@ -13,7 +13,7 @@ extends Node
 #2: initial data transfer for a lobby (custom faces,etc)
 #3: Player Config Master List Update
 #4: Character data update
-#5: UNDEFINED (Canceled ready? mby)
+#5: Lobby_ChatMessage
 #6: lobby start game data (Random Seed,stage selected,package delay)
 #7: game state update (from host)
 #8: finished game
@@ -94,6 +94,22 @@ func character_data_update(body_base:int,body_color:int,face_base:int,face_color
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
+func lobby_chat_message(sender_steamID:int,player_number:int,msg:String)->PackedByteArray:
+	var output:PackedByteArray=PackedByteArray()
+	output.append(5)
+	var dict:Dictionary={"SID":sender_steamID,"Pn":player_number,"MSG":msg}
+	output.append_array(var_to_bytes(dict))
+	output=output.compress(FileAccess.COMPRESSION_GZIP)
+	return output
+
+func stage_start_up_master(random_seed:int,package_delay_msec:int,stage_index:int,stage_size:int)->PackedByteArray:
+	var output:PackedByteArray=PackedByteArray()
+	output.append(6)
+	var dict:Dictionary={"RS":random_seed,"PD":package_delay_msec,"STID":stage_index,"STSI":stage_size}
+	output.append_array(var_to_bytes(dict))
+	output=output.compress(FileAccess.COMPRESSION_GZIP)
+	return output
+
 func player_number_req(who_steam_id:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(0)
@@ -129,13 +145,6 @@ func character_custom_finished_master(player_configs:Array[PlayerConfigMetaData]
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func stage_start_up_master(random_seed:int,package_delay_msec:int,stage_index:int,stage_size:int)->PackedByteArray:
-	var output:PackedByteArray=PackedByteArray()
-	output.append(6)
-	var dict:Dictionary={"RS":random_seed,"PD":package_delay_msec,"STID":stage_index,"STSI":stage_size}
-	output.append_array(var_to_bytes(dict))
-	output=output.compress(FileAccess.COMPRESSION_GZIP)
-	return output
 
 func player_state_update(player_state:PlayerState,who_steam_id:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
