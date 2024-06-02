@@ -67,5 +67,5 @@ func _on_stage_select_pressed()->void:
 	var msg:PackedByteArray=PackageConstructor.character_custom_finished_master(PlayerConfigs.Player_Configs)
 	SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_RELIABLE, msg)
 	
-	
+	get_tree().change_scene_to_packed(SceneCollection.stage_select)
 

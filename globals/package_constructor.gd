@@ -97,7 +97,7 @@ func character_data_update(body_base:int,body_color:int,face_base:int,face_color
 func lobby_chat_message(sender_steamID:int,player_number:int,msg:String)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(5)
-	var dict:Dictionary={"SID":sender_steamID,"Pn":player_number,"MSG":msg}
+	var dict:Dictionary={"SID":sender_steamID,"PN":player_number,"MSG":msg}
 	output.append_array(var_to_bytes(dict))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
