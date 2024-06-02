@@ -17,6 +17,7 @@ var disabled:bool=false
 func _ready()->void:
 	MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.SINGLEPLAYER
 	MultiplayerStatus.Current_Number_Of_Players=1
+	SteamLobby.leave_lobby()
 	if !GlobalSteam.steam_init:
 		host_lobby.disabled=true
 		join_lobby.disabled=true

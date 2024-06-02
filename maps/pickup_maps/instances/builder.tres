@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PickUpMap" load_steps=11 format=3 uid="uid://bau8cj2gm4rd8"]
+[gd_resource type="Resource" script_class="PickUpMap" load_steps=9 format=3 uid="uid://bau8cj2gm4rd8"]
 
 [ext_resource type="Script" path="res://maps/pickup_option_struct.gd" id="1_crytv"]
 [ext_resource type="Script" path="res://maps/pickup_maps/pickup_map_base.gd" id="1_k7c3g"]
@@ -11,7 +11,7 @@ weight = 10
 [sub_resource type="Resource" id="Resource_6slqq"]
 script = ExtResource("1_crytv")
 what = 7
-weight = 10
+weight = 5
 
 [sub_resource type="Resource" id="Resource_jinl4"]
 script = ExtResource("1_crytv")
@@ -21,21 +21,11 @@ weight = 10
 [sub_resource type="Resource" id="Resource_kppsx"]
 script = ExtResource("1_crytv")
 what = 9
-weight = 10
-
-[sub_resource type="Resource" id="Resource_6byqe"]
-script = ExtResource("1_crytv")
-what = 0
-weight = 2
+weight = 15
 
 [sub_resource type="Resource" id="Resource_2tbr8"]
 script = ExtResource("1_crytv")
 what = 1
-weight = 2
-
-[sub_resource type="Resource" id="Resource_blu4f"]
-script = ExtResource("1_crytv")
-what = 4
 weight = 2
 
 [sub_resource type="Resource" id="Resource_g2nq8"]
@@ -45,5 +35,5 @@ weight = 2
 
 [resource]
 script = ExtResource("1_k7c3g")
-map = Array[ExtResource("1_crytv")]([SubResource("Resource_cutfl"), SubResource("Resource_6slqq"), SubResource("Resource_jinl4"), SubResource("Resource_kppsx"), SubResource("Resource_6byqe"), SubResource("Resource_2tbr8"), SubResource("Resource_blu4f"), SubResource("Resource_g2nq8")])
+map = Array[ExtResource("1_crytv")]([SubResource("Resource_cutfl"), SubResource("Resource_6slqq"), SubResource("Resource_jinl4"), SubResource("Resource_kppsx"), SubResource("Resource_2tbr8"), SubResource("Resource_g2nq8")])
 pickup_chance = 0.64

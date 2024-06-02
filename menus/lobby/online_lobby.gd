@@ -9,8 +9,6 @@ func _ready()->void:
 	
 	PackageDeconstructor.player_initial_data_transfer_ack.connect(init_player)
 	
-	PackageDeconstructor.stage_selected.connect(_on_stage_start_recieved)
-	
 	PackageDeconstructor.character_custom_data_update.connect(on_character_custom_data_update)
 	PackageDeconstructor.character_custom_finished.connect(finished_character_custom)
 	
@@ -64,23 +62,10 @@ func _on_cancel_pressed()->void:
 func finished_character_custom()->void:
 	MultiplayerStatus.Current_Loaded_Map=null
 	get_tree().change_scene_to_packed(SceneCollection.stage_select)
-	
 
 func _on_stage_select_pressed()->void:
-	#var msg:PackedByteArray=PackageConstructor.character_custom_finished_master(PlayerConfigs.Player_Configs)
-	#SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_RELIABLE, msg)
-	#finished_character_custom()
-	#TODO remove this test where we go straight to stages
-	for n:int in range(1,MultiplayerStatus.Current_Number_Of_Players):
-		var msg:PackedByteArray=PackageConstructor.stage_start_up_master(SteamLobby.random_seed,PlayerConfigs.Player_Configs[n].message_delay_tcp,1,1)
-		SteamLobby.send_p2p_packet(PlayerConfigs.Player_Configs[n].steam_id,Steam.P2P_SEND_RELIABLE,msg)
-	var stage:PackedScene=load("res://maps/instances/default_M.tscn") as PackedScene
-	MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.ONLINE_MULTIPLAYER
-	get_tree().change_scene_to_packed(stage)
+	var msg:PackedByteArray=PackageConstructor.character_custom_finished_master(PlayerConfigs.Player_Configs)
+	SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_RELIABLE, msg)
+	
+	
 
-#stage_selected.emit(random_seed,package_delay,stage_index,stage_size)
-func _on_stage_start_recieved(seed:int,package_delay:int,stage_index:int,stage_size:int)->void:
-	SteamLobby.random_seed=seed
-	MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.ONLINE_MULTIPLAYER
-	MultiplayerStatus.Delay_To_Host_TCP=package_delay
-	get_tree().change_scene_to_file("res://maps/instances/default_M.tscn")

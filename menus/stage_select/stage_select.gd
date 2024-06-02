@@ -5,29 +5,32 @@ extends Node2D
 @export var stage_preview:StagePreview
 @export var stage_select_meta_datas:Array[StageSelectMetaData]
 
+@export var multiplayer_exlusive_nodes:Array[Node]
 
-enum Size {
+enum SIZE {
 	S,M,L
 }
 
 var max_sizes:int=3
 var max_stages:int=0
 
-var current_size:Size=Size.M
+var current_size:SIZE=SIZE.M
 var current_stage:int=0
 
 func _ready()->void:
+	if !MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_LOBBY:
+		for n:Node in multiplayer_exlusive_nodes:
+			n.free()
 	for n:StageSelectMetaData in stage_select_meta_datas:
 		n.stage_pickup_map.sort_map()
-	
 	max_stages=stage_select_meta_datas.size()
-	
-	current_size=Size.M
+	current_size=SIZE.M
 	current_stage=0
 	apply_new_selection()
 
+
 func apply_new_selection()->void:
-	size_label.text=Size.keys()[current_size]
+	size_label.text=SIZE.keys()[current_size]
 	stage_label.text=str(current_stage)
 	stage_preview.set_tileset_preview(stage_select_meta_datas[current_stage])
 	
@@ -62,20 +65,44 @@ func _on_cancel_pressed()->void:
 	else:
 		get_tree().change_scene_to_packed(SceneCollection.offline_lobby)
 
-func _on_go_pressed()->void:
-	if SteamLobby.is_host:
-		SteamLobby.random_seed=randi()
-		var selected_scene:PackedScene=null
+func get_map_scene(index:int,size:SIZE)->PackedScene:
+	var selected_scene:PackedScene=null
+	if index in range(0,stage_select_meta_datas.size()):
 		match current_size:
-			Size.S:
-				selected_scene=stage_select_meta_datas[current_stage].stage_s
-			Size.M:
-				selected_scene=stage_select_meta_datas[current_stage].stage_m
-			Size.L:
-				selected_scene=stage_select_meta_datas[current_stage].stage_l
+			SIZE.S:
+				selected_scene=stage_select_meta_datas[index].stage_s
+			SIZE.M:
+				selected_scene=stage_select_meta_datas[index].stage_m
+			SIZE.L:
+				selected_scene=stage_select_meta_datas[index].stage_l
 			_:
 				selected_scene=null
-		#change this TODO currently test to default for all clinets and host
+	return selected_scene
+
+func _on_go_pressed()->void:
+	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_LOBBY:
+		if SteamLobby.is_host:
+			SteamLobby.random_seed=randi()
+			var selected_scene:PackedScene=get_map_scene(current_stage,current_size)
+			if selected_scene:
+				for n:int in range(1,MultiplayerStatus.Current_Number_Of_Players):
+					var msg:PackedByteArray=PackageConstructor.stage_start_up_master(SteamLobby.random_seed,PlayerConfigs.Player_Configs[n].message_delay_tcp,1,1)
+					SteamLobby.send_p2p_packet(PlayerConfigs.Player_Configs[n].steam_id,Steam.P2P_SEND_RELIABLE,msg)
+				var stage:PackedScene=load("res://maps/instances/default_M.tscn") as PackedScene
+				MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.ONLINE_MULTIPLAYER
+				get_tree().change_scene_to_packed(selected_scene)
+	else:
+		var selected_scene:PackedScene=get_map_scene(current_stage,current_size)
 		if selected_scene:
-			#TODO SEND IT for every player
 			get_tree().change_scene_to_packed(selected_scene)
+
+func _on_stage_start_recieved(seed:int,package_delay:int,stage_index:int,stage_size:int)->void:
+	SteamLobby.random_seed=seed
+	MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.ONLINE_MULTIPLAYER
+	MultiplayerStatus.Delay_To_Host_TCP=package_delay
+	var map:PackedScene=get_map_scene(stage_index,stage_size as SIZE)
+	if map:
+		get_tree().change_scene_to_packed(map)
+	else:
+		get_tree().change_scene_to_packed(SceneCollection.main_menu)
+	
