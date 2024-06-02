@@ -14,11 +14,11 @@ func spawn_message(steam_id:int,player_number:int,msg:String)->void:
 	root.add_child(tmp)
 	root.move_child(tmp,0)
 
-func _on_message_received(sender_steamID:int,msg:String)->void:
-	var player_number:int=PlayerConfigs.get_player_index_by_steam_id(sender_steamID)
-	if player_number in range(0,PlayerConfigs.Player_Configs.size()):
-		if PlayerConfigs.Player_Configs[player_number].steam_id==sender_steamID:
-			spawn_message(sender_steamID,player_number,msg)
+func _on_message_received(sender_steamID:int,sender_player_number:int,msg:String)->void:
+	#var player_number:int=PlayerConfigs.get_player_index_by_steam_id(sender_steamID)
+	if sender_player_number in range(0,PlayerConfigs.Player_Configs.size()):
+		if PlayerConfigs.Player_Configs[sender_player_number].steam_id==sender_steamID:
+			spawn_message(sender_steamID,sender_player_number,msg)
 	
 	#set_deferred("scroll_horizontal",1080)
 	#set_deferred("scroll_vertical",1080)
