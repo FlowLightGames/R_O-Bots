@@ -50,7 +50,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			match req_type:
 				0:
 					print("got player number assignment request")
-					var req_steam_id:int=bytes_to_var(input)
+					var req_steam_id:int=packet_sender
 					var test:int=SteamLobby.add_player_assignment(req_steam_id)
 					print("sending assignment !=0: "+str(test))
 					if test>0:
@@ -60,13 +60,13 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 						SteamLobby.send_p2p_packet(req_steam_id,Steam.P2P_SEND_RELIABLE, msg)
 				1:
 					print("got initial data request")
-					var req_steam_id:int=bytes_to_var(input)
+					var req_steam_id:int=packet_sender
 					print("sending initial data request from: "+str(SteamLobby.player_number))
 					var msg:PackedByteArray=PackageConstructor.initial_data_transfer(SteamLobby.player_number)
 					SteamLobby.send_p2p_packet(req_steam_id,Steam.P2P_SEND_RELIABLE, msg)
 				2:
 					print("got handshake request")
-					var req_steam_id:int=bytes_to_var(input)
+					var req_steam_id:int=packet_sender
 					var msg:PackedByteArray=PackageConstructor.handshake_ack()
 					SteamLobby.send_p2p_packet(req_steam_id,Steam.P2P_SEND_RELIABLE, msg)
 		1:
@@ -77,7 +77,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 				0:
 					var dict:Dictionary=bytes_to_var(data) as Dictionary
 					var player_number:int=dict["PN"]
-					var steamID:int=dict["SID"]
+					var steamID:int=packet_sender
 					var elapsed_time:int=dict["ET"]
 					var measure_delay_time:int=SteamLobby.on_delay_measure_ack(steamID)
 					if measure_delay_time==0:
@@ -91,7 +91,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 					
 					player_number_assignment_ack.emit(player_number)
 					if player_number!=0:
-						var msg:PackedByteArray=PackageConstructor.initial_data_req(GlobalSteam.steam_id)
+						var msg:PackedByteArray=PackageConstructor.initial_data_req()
 						SteamLobby.send_p2p_packet(steamID,Steam.P2P_SEND_RELIABLE,msg)
 				1:
 					
@@ -115,10 +115,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			PlayerConfigs.set_player_initial_data_ack(player_number)
 			
 			var master_player_list:PackedByteArray=PackageConstructor.player_config_master_list(PlayerConfigs.Player_Configs)
-			for member:Dictionary in SteamLobby.lobby_members:
-				if member.has("steam_id"):
-					if member["steam_id"]!=GlobalSteam.steam_id:
-						SteamLobby.send_p2p_packet(member["steam_id"],Steam.P2P_SEND_RELIABLE, master_player_list)
+			SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_RELIABLE, master_player_list)
 			
 			var ack_msg:PackedByteArray=PackageConstructor.initial_data_ack(player_number)
 			SteamLobby.send_p2p_packet(-1,Steam.P2P_SEND_RELIABLE, ack_msg)
@@ -140,7 +137,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			
 		5:
 			var data_dict:Dictionary=bytes_to_var(input)
-			var sender_steamID:int=data_dict["SID"]
+			var sender_steamID:int=packet_sender
 			var player_number:int=data_dict["PN"]
 			var msg:String=data_dict["MSG"]
 			chat_message.emit(sender_steamID,player_number,msg)
@@ -164,7 +161,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			print("got player number assignment to: "+str(player))
 			SteamLobby.player_number=player
 			
-			var self_steamID:int=GlobalSteam.steam_id
+			#var self_steamID:int=GlobalSteam.steam_id
 			#works as well: but to keep it consistent top
 			#var self_steamID:int=Steam.getSteamID()
 			var ack_msg:PackedByteArray=PackageConstructor.player_number_ack()
@@ -182,7 +179,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 		12:
 			#we go playerstate from non pc characers
 			var dict:Dictionary=bytes_to_var(input)
-			var who_steam_id:int=dict["SID"]
+			var who_steam_id:int=packet_sender
 			var elapsed_time:int=dict["ET"]
 			var player_state:PlayerState=PlayerState.new()
 			player_state.deserialize(dict["PS"])
@@ -190,7 +187,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 		13:
 			#we got gamestate update from host
 			var dict:Dictionary=bytes_to_var(input)
-			var who_steam_id:int=dict["SID"]
+			var who_steam_id:int=packet_sender
 			var elapsed_time:int=dict["ET"]
 			var game_state:GameState=GameState.new()
 			game_state.deserialize(dict["GS"])
@@ -198,7 +195,7 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 		14:
 			#we got round end from host:
 			var dict:Dictionary=bytes_to_var(input)
-			var who_steam_id:int=dict["SID"]
+			var who_steam_id:int=packet_sender
 			var elapsed_time:int=dict["ET"]
 			var re_dict:Dictionary=dict["RE"]
 			var win_number:int=re_dict["WN"]

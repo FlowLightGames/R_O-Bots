@@ -111,3 +111,7 @@ func _on_stage_start_recieved(seed:int,package_delay:int,stage_index:int,stage_s
 	else:
 		get_tree().change_scene_to_packed(SceneCollection.main_menu)
 	
+
+
+func _on_leave_lobby_pressed()->void:
+	get_tree().change_scene_to_packed(SceneCollection.main_menu)

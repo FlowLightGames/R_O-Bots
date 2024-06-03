@@ -24,11 +24,11 @@ extends Node
 #13: GameStateUpdate (from host to clients)
 #14: RoundEnd (from host to clients)
 
-func handshake_req(reqester_steam_id:int)->PackedByteArray:
+func handshake_req()->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(0)
 	output.append(2)
-	output.append_array(var_to_bytes(reqester_steam_id))
+	#output.append_array(var_to_bytes(reqester_steam_id))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
@@ -36,15 +36,15 @@ func handshake_ack()->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(1)
 	output.append(2)
-	output.append_array(var_to_bytes(GlobalSteam.steam_id))
+	#output.append_array(var_to_bytes(GlobalSteam.steam_id))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func initial_data_req(self_requester_id:int)->PackedByteArray:
+func initial_data_req()->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(0)
 	output.append(1)
-	output.append_array(var_to_bytes(self_requester_id))
+	#output.append_array(var_to_bytes(self_requester_id))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
@@ -94,10 +94,10 @@ func character_data_update(body_base:int,body_color:int,face_base:int,face_color
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func lobby_chat_message(sender_steamID:int,player_number:int,msg:String)->PackedByteArray:
+func lobby_chat_message(player_number:int,msg:String)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(5)
-	var dict:Dictionary={"SID":sender_steamID,"PN":player_number,"MSG":msg}
+	var dict:Dictionary={"PN":player_number,"MSG":msg}
 	output.append_array(var_to_bytes(dict))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
@@ -110,11 +110,11 @@ func stage_start_up_master(random_seed:int,package_delay_msec:int,stage_index:in
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func player_number_req(who_steam_id:int)->PackedByteArray:
+func player_number_req()->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(0)
 	output.append(0)
-	output.append_array(var_to_bytes(who_steam_id))
+	#output.append_array(var_to_bytes(who_steam_id))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
@@ -146,27 +146,27 @@ func character_custom_finished_master(player_configs:Array[PlayerConfigMetaData]
 	return output
 
 
-func player_state_update(player_state:PlayerState,who_steam_id:int)->PackedByteArray:
+func player_state_update(player_state:PlayerState)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(12)
-	var dict:Dictionary={"SID":who_steam_id,"ET":Time.get_ticks_msec(),"PS":player_state.serialize()}
+	var dict:Dictionary={"ET":Time.get_ticks_msec(),"PS":player_state.serialize()}
 	output.append_array(var_to_bytes(dict))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func game_state_update(game_state:GameState,who_steam_id:int)->PackedByteArray:
+func game_state_update(game_state:GameState)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(13)
-	var dict:Dictionary={"SID":who_steam_id,"ET":Time.get_ticks_msec(),"GS":game_state.serialize()}
+	var dict:Dictionary={"ET":Time.get_ticks_msec(),"GS":game_state.serialize()}
 	output.append_array(var_to_bytes(dict))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
 
-func round_end(winner_num:int,who_steam_id:int)->PackedByteArray:
+func round_end(winner_num:int)->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
 	output.append(14)
 	var round_end_dict:Dictionary={"WN":winner_num}
-	var dict:Dictionary={"SID":who_steam_id,"ET":Time.get_ticks_msec(),"RE":round_end_dict}
+	var dict:Dictionary={"ET":Time.get_ticks_msec(),"RE":round_end_dict}
 	output.append_array(var_to_bytes(dict))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output

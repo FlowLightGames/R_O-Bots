@@ -69,3 +69,6 @@ func _on_stage_select_pressed()->void:
 	
 	get_tree().change_scene_to_packed(SceneCollection.stage_select)
 
+
+func _on_leave_lobby_pressed()->void:
+	get_tree().change_scene_to_packed(SceneCollection.main_menu)

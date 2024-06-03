@@ -161,7 +161,7 @@ func win(player:int)->void:
 func send_round_end(winner_num:int)->void:
 	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
 		if SteamLobby.is_host:
-			var msg:PackedByteArray=PackageConstructor.round_end(winner_num,GlobalSteam.steam_id)
+			var msg:PackedByteArray=PackageConstructor.round_end(winner_num)
 			SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_RELIABLE,msg)
 
 func check_winner()->void:

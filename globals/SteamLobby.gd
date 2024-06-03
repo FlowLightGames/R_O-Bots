@@ -1,6 +1,6 @@
 extends Node
 
-const PACKET_READ_LIMIT: int = 32
+const PACKET_READ_LIMIT: int = 64
 
 var is_host:bool=true
 var player_number:int=0
@@ -15,6 +15,8 @@ var player_assignment_dict:Dictionary={}
 var player_message_delay_buffer:Dictionary={}
 
 var random_seed:int=0
+
+signal player_left(steamID:int)
 
 func add_delay_measure_req(req_steam_id:int)->void:
 	print("added delay measure req: "+str(player_message_delay_buffer))
@@ -135,7 +137,7 @@ func get_lobby_members()->void:
 		lobby_members.append({"steam_id":member_steam_id, "steam_name":member_steam_name})
 
 func make_p2p_handshake()->void:
-	send_p2p_packet(0,Steam.P2P_SEND_RELIABLE,PackageConstructor.handshake_req(GlobalSteam.steam_id))
+	send_p2p_packet(0,Steam.P2P_SEND_RELIABLE,PackageConstructor.handshake_req())
 
 func check_command_line()->void:
 	var these_arguments:PackedStringArray=OS.get_cmdline_args()
@@ -186,7 +188,7 @@ func _on_lobby_joined(this_lobby_id:int,_permissions:int,_locked:bool,response: 
 		#custom send player number ass request
 		print("sending player number request")
 		if !is_host:
-			var msg:PackedByteArray=PackageConstructor.player_number_req(GlobalSteam.steam_id)
+			var msg:PackedByteArray=PackageConstructor.player_number_req()
 			send_p2p_packet(-1,Steam.P2P_SEND_RELIABLE,msg)
 	else:
 		var fail_reason:String
@@ -225,12 +227,15 @@ func _on_lobby_chat_update(this_lobby_id: int, change_id: int, making_change_id:
 			print("%s has joined the lobby." % changer_name)
 		Steam.CHAT_MEMBER_STATE_CHANGE_LEFT:
 			print("%s has left the lobby." % changer_name)
-			if is_host:
-				PlayerConfigs.player_left(change_id)
+			#if is_host:
+				#PlayerConfigs.player_left(change_id)
+			player_left.emit(change_id)
 		Steam.CHAT_MEMBER_STATE_CHANGE_KICKED:
 			print("%s has been kicked from the lobby." % changer_name)
+			player_left.emit(change_id)
 		Steam.CHAT_MEMBER_STATE_CHANGE_BANNED:
 			print("%s has been banned from the lobby." % changer_name)
+			player_left.emit(change_id)
 		_:
 			print("%s did... something." % changer_name)
 	

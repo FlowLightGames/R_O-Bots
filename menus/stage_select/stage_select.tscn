@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cj7kdptcelfix"]
+[gd_scene load_steps=20 format=3 uid="uid://cj7kdptcelfix"]
 
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="1_65nkd"]
 [ext_resource type="Script" path="res://menus/stage_select/stage_select.gd" id="1_p8ugr"]
@@ -16,6 +16,14 @@
 [ext_resource type="Script" path="res://menus/stage_select/ChatInput.gd" id="13_8neva"]
 [ext_resource type="PackedScene" uid="uid://cambaxrqeiodr" path="res://menus/stage_select/chat/live_chat.tscn" id="13_qkx1r"]
 [ext_resource type="Texture2D" uid="uid://c7g3ei7p02dqg" path="res://UI/theme/button_dark.png" id="14_41rre"]
+[ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="16_yqr3q"]
+[ext_resource type="Texture2D" uid="uid://00et7mgdndui" path="res://player_character/base_color_palette.png" id="17_mluqy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_58eb6"]
+shader = ExtResource("16_yqr3q")
+shader_parameter/Max_types = 8
+shader_parameter/Type = 0
+shader_parameter/palett = ExtResource("17_mluqy")
 
 [node name="StageSelect" type="Node2D" node_paths=PackedStringArray("stage_label", "size_label", "stage_preview", "multiplayer_exlusive_nodes")]
 script = ExtResource("1_p8ugr")
@@ -23,7 +31,7 @@ stage_label = NodePath("Control/Panel/VBoxContainer/Selector/VBoxContainer/Stage
 size_label = NodePath("Control/Panel/VBoxContainer/Selector/VBoxContainer/SizeSelect/Label")
 stage_preview = NodePath("Control/Panel/StageInfo")
 stage_select_meta_datas = Array[Resource("res://menus/stage_select/stage_select_meta_data.gd")]([ExtResource("2_ogmd1"), ExtResource("3_13x4f"), ExtResource("4_byyl7"), ExtResource("5_cgtbc"), ExtResource("6_br88h"), ExtResource("7_8k31k"), ExtResource("8_qi5wo")])
-multiplayer_exlusive_nodes = [NodePath("Control/Panel/VBoxContainer/ChatInput"), NodePath("Control/Panel/Panel"), NodePath("Control/Panel/LiveChat")]
+multiplayer_exlusive_nodes = [NodePath("Control/Panel/VBoxContainer/ChatInput"), NodePath("Control/Panel/Panel"), NodePath("Control/Panel/LiveChat"), NodePath("LeaveLobby")]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -213,6 +221,16 @@ offset_top = 18.0
 offset_right = 283.0
 offset_bottom = 131.0
 
+[node name="LeaveLobby" type="Button" parent="."]
+material = SubResource("ShaderMaterial_58eb6")
+custom_minimum_size = Vector2(0, 16)
+offset_left = 569.0
+offset_top = 338.0
+offset_right = 638.0
+offset_bottom = 357.0
+theme = ExtResource("1_65nkd")
+text = "EXIT LOBBY"
+
 [node name="Win98" parent="." instance=ExtResource("11_ymbcm")]
 
 [connection signal="pressed" from="Control/Panel/VBoxContainer/Selector/VBoxContainer/StageSelect/StageDec" to="." method="_on_stage_dec_pressed"]
@@ -223,3 +241,4 @@ offset_bottom = 131.0
 [connection signal="pressed" from="Control/Panel/VBoxContainer/Buttons/HBoxContainer/Go" to="." method="_on_go_pressed"]
 [connection signal="text_submitted" from="Control/Panel/VBoxContainer/ChatInput/VBoxContainer/LineEdit" to="Control/Panel/VBoxContainer/ChatInput" method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="Control/Panel/VBoxContainer/ChatInput/VBoxContainer/Send" to="Control/Panel/VBoxContainer/ChatInput" method="_on_send_pressed"]
+[connection signal="pressed" from="LeaveLobby" to="." method="_on_leave_lobby_pressed"]

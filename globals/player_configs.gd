@@ -31,6 +31,7 @@ func player_left(leaver_id:int)->void:
 	for n:int in Player_Configs.size():
 		if Player_Configs[n].steam_id==leaver_id:
 			Player_Configs[n]=PlayerConfigMetaData.new(0,n,n,FacesAutoload.preset_faces[n],PickUpStats.new())
+			#move other players up
 			for i:int in range(n,Player_Configs.size()):
 				if Player_Configs[i].steam_id!=-1:
 					Player_Configs[i-1]=Player_Configs[i]

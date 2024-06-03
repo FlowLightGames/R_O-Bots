@@ -18,6 +18,7 @@ func _ready()->void:
 	MultiplayerStatus.Current_Status=MultiplayerStatus.STATE.SINGLEPLAYER
 	MultiplayerStatus.Current_Number_Of_Players=1
 	SteamLobby.leave_lobby()
+	SteamLobby.is_host=true
 	if !GlobalSteam.steam_init:
 		host_lobby.disabled=true
 		join_lobby.disabled=true
@@ -86,6 +87,3 @@ func _on_options_pressed()->void:
 
 func _on_exit_pressed()->void:
 	get_tree().quit()
-
-
-
