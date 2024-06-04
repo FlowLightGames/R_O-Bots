@@ -23,6 +23,7 @@ extends Node
 #12: PlayerStateUpdate (from everyone to everyone)
 #13: GameStateUpdate (from host to clients)
 #14: RoundEnd (from host to clients)
+#15: GoToScene (FromHost)
 
 signal player_initial_data_transfer_ack(player_number:int)
 signal player_number_assignment_ack(player_number:int)
@@ -39,6 +40,7 @@ signal stage_selected(seed:int,package_delay:int,selected_map_index:int,selected
 signal player_state_update(who_steam_id:int,elapsed_time:int,player_state:PlayerState) 
 signal game_state_update(who_steam_id:int,elapsed_time:int,game_state:GameState) 
 signal round_end(who_steam_id:int,elapsed_time:int,winner_num:int) 
+#signal go_to_scene(who_steam_id:int,scene:SceneCollection.ONLINE_SCENES)
 
 func handle_data(input:PackedByteArray,packet_sender:int)->void:
 	var type:int=input.decode_u8(0)
@@ -200,5 +202,10 @@ func handle_data(input:PackedByteArray,packet_sender:int)->void:
 			var re_dict:Dictionary=dict["RE"]
 			var win_number:int=re_dict["WN"]
 			round_end.emit(who_steam_id,elapsed_time,win_number)
+		15:
+			pass
+			#var scene_to_go_to:SceneCollection.ONLINE_SCENES=bytes_to_var(input)
+			#var who_steam_id:int=packet_sender
+			#go_to_scene.emit(who_steam_id,scene_to_go_to)
 		_:
 			pass

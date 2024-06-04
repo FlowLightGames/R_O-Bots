@@ -23,6 +23,7 @@ extends Node
 #12: PlayerStateUpdate (from everyone to everyone)
 #13: GameStateUpdate (from host to clients)
 #14: RoundEnd (from host to clients)
+#15: UNDEFINED
 
 func handshake_req()->PackedByteArray:
 	var output:PackedByteArray=PackedByteArray()
@@ -170,3 +171,10 @@ func round_end(winner_num:int)->PackedByteArray:
 	output.append_array(var_to_bytes(dict))
 	output=output.compress(FileAccess.COMPRESSION_GZIP)
 	return output
+
+#func go_to_scene(scene:SceneCollection.ONLINE_SCENES)->PackedByteArray:
+	#var output:PackedByteArray=PackedByteArray()
+	#output.append(15)
+	#output.append_array(var_to_bytes(scene))
+	#output=output.compress(FileAccess.COMPRESSION_GZIP)
+	#return output

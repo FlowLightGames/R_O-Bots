@@ -12,8 +12,19 @@ var Delay_To_Host_TCP:int=0
 
 var Current_Loaded_Map:MapBase=null
 
+#func _ready()->void:
+	#PackageDeconstructor.go_to_scene.connect(_on_go_to_scene)
+
 func start_timer()->void:
 	multiplayer_sync_timer.start(0.5)
+
+#func _on_go_to_scene(who_stem_id:int,scene:SceneCollection)->void:
+	#if !SteamLobby.is_host:
+		#match scene:
+			#SceneCollection.ONLINE_SCENES.LOBBY:
+				#get_tree().change_scene_to_packed(SceneCollection.online_lobby)
+			#SceneCollection.ONLINE_SCENES.STAGE_SELECT:
+				#get_tree().change_scene_to_packed(SceneCollection.stage_select)
 
 func _on_multiplayer_sync_timer_timeout()->void:
 	if Current_Loaded_Map:
