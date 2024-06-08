@@ -81,6 +81,13 @@ func _ready()->void:
 		if type!=SteamLobby.player_number:
 			disabled=true
 
+func _physics_process(delta:float)->void:
+	if Input.is_action_just_pressed(str(type)+"_Action_0"):
+			set_ready()
+	if Input.is_action_just_pressed(str(type)+"_Action_0"):
+			if player_ready:
+				unset_ready()
+
 func enable()->void:
 	#_ready()
 	panel_content.visible=true
@@ -174,6 +181,9 @@ func _on_facecolor_inc_pressed()->void:
 
 func update_face_type()->void:
 	if current_face_custom:
+		#print(PlayerConfigs.Player_Configs[type].serialize())
+		#print(FacesAutoload.custom_faces.size())
+		#print(PlayerConfigs.Player_Configs[type].custom_faces.size())
 		if current_face_base>=0&&current_face_base<PlayerConfigs.Player_Configs[type].custom_faces.size():
 			example_character_0.set_new_face(PlayerConfigs.Player_Configs[type].custom_faces[current_face_base])
 			example_character_1.set_new_face(FacesAutoload.custom_faces[current_face_base])
@@ -228,6 +238,11 @@ func _on_facepreset_inc_pressed()->void:
 		current_face_custom=!current_face_custom
 		update_face_custom()
 		send_character_custom_update()
+
+func unset_ready()->void:
+	enable()
+	player_ready=false
+	ready_overlay.visible=false
 
 func set_ready()->void:
 	example_character_2.set_new_body(current_body_base)

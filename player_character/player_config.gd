@@ -19,13 +19,13 @@ var message_delay_udp:float=0.0
 var message_delay_tcp:float=0.0
 
 
-func _init(bodybase:int=0,bodycolor:int=0,facecolor:int=3,facetexture:Texture2D=FacesAutoload.preset_faces[0],startingtats:PickUpStats=PickUpStats.new(),custom_faces:Array[Texture2D]=[])->void:
+func _init(bodybase:int=0,bodycolor:int=0,facecolor:int=3,facetexture:Texture2D=FacesAutoload.preset_faces[0],startingtats:PickUpStats=PickUpStats.new(),customfaces:Array[Texture2D]=[])->void:
 	Body_Base=bodybase
 	Body_Color=bodycolor
 	Face_Color=facecolor
 	Face_Texture=facetexture
 	Starting_Stats=startingtats
-	custom_faces=custom_faces
+	custom_faces=customfaces
 
 func serialize()->Dictionary:
 	var serialized_faces:Array[PackedByteArray]=[]

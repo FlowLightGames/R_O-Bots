@@ -5,6 +5,7 @@
 
 [node name="GameDebugInfo" type="CanvasLayer" node_paths=PackedStringArray("text")]
 layer = 128
+visible = false
 script = ExtResource("1_do36h")
 text = NodePath("RichTextLabel")
 

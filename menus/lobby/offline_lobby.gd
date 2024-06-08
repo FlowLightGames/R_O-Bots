@@ -12,8 +12,10 @@ func _ready()->void:
 func update_player_boxes()->void:
 	for n:int in range(0,player_boxes.size()):
 		if n<num_of_players:
-			player_boxes[n].enable()
+			if !player_boxes[n].player_ready:
+				player_boxes[n].enable()
 		else:
+			player_boxes[n].unset_ready()
 			player_boxes[n].disable()
 
 func check_all_ready()->bool:

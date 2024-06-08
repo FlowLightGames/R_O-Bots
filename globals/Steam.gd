@@ -16,17 +16,19 @@ func initialize_steam() -> void:
 	print("Did Steam initialize?: %s " % initialize_response)
 	if initialize_response['status'] > 0:
 		print("Failed to initialize Steam, shutting down: %s" % initialize_response)
-		get_tree().quit()
-	is_on_steam_deck= Steam.isSteamRunningOnSteamDeck()
-	is_online= Steam.loggedOn()
-	is_owned= Steam.isSubscribed()
-	steam_id= Steam.getSteamID()
-	steam_username= Steam.getPersonaName()
-	steam_init=true
-	if is_owned == false:
-		print("User does not own this game")
-		#TODO STEAM OLLFINE MODE
 		#get_tree().quit()
+		steam_init=false
+	else:
+		steam_init=true
+		is_on_steam_deck= Steam.isSteamRunningOnSteamDeck()
+		is_online= Steam.loggedOn()
+		is_owned= Steam.isSubscribed()
+		steam_id= Steam.getSteamID()
+		steam_username= Steam.getPersonaName()
+		if is_owned == false:
+			print("User does not own this game")
+			#TODO STEAM OLLFINE MODE
+			#get_tree().quit()
 
 func _ready()->void:
 	initialize_steam()
