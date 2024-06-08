@@ -39,16 +39,18 @@ func check_all_ready()->bool:
 				return false
 	return true
 
-func player_is_ready(player:int)->void:
-	#check if all players are ready
-	if check_all_ready():
-		stage_select_button.disabled=false
-	else:
-		stage_select_button.disabled=true
+#func player_is_ready(player:int)->void:
+#	#check if all players are ready
+	#if check_all_ready():
+		#stage_select_button.disabled=false
+	#else:
+		#stage_select_button.disabled=true
 
 func init_player(player:int)->void:
 	if player>=0&&player<player_boxes.size():
 		player_boxes[player].enable()
+		#if player!=SteamLobby.player_number:
+			#
 
 func on_character_custom_data_update(player_number:int,ready:bool,face_custom:bool,data:Array[int])->void:
 	if player_number in range(0,player_boxes.size()):

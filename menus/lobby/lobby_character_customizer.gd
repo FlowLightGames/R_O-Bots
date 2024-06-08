@@ -80,6 +80,7 @@ func _ready()->void:
 	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_LOBBY:
 		if type!=SteamLobby.player_number:
 			disabled=true
+			gamepad_cursor.disable()
 
 func _physics_process(delta:float)->void:
 	if Input.is_action_just_pressed(str(type)+"_Action_0"):
