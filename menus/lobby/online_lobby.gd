@@ -34,9 +34,8 @@ func apply_player_configs()->void:
 			player_boxes[i].disable()
 
 func check_all_ready()->bool:
-	for n:LobbyCharacterCustom in player_boxes:
-		if !n.disabled:
-			if !n.player_ready:
+	for n:int in range(0,MultiplayerStatus.Current_Number_Of_Players):
+			if !player_boxes[n].player_ready:
 				return false
 	return true
 

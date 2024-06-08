@@ -41,12 +41,12 @@ weight = 10
 [sub_resource type="Resource" id="Resource_aj2gp"]
 script = ExtResource("1_2h0t4")
 what = 27
-weight = 5000
+weight = 10
 
 [sub_resource type="Resource" id="Resource_u6xw5"]
 script = ExtResource("1_2h0t4")
 what = 26
-weight = 5000
+weight = 12
 
 [resource]
 script = ExtResource("1_fqk8s")

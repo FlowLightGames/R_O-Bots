@@ -270,6 +270,21 @@ func set_ready()->void:
 func _on_ready_pressed()->void:
 	if (!disabled):
 		set_ready()
+		send_character_custom_finished()
+
+func send_character_custom_finished()->void:
+	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_LOBBY:
+		if SteamLobby.player_number==type:
+			#body_base:int,body_color:int,face_base:int,face_color:int,face_custom:bool,self_player_number:int
+			var msg:PackedByteArray=PackageConstructor.character_data_update(
+				current_body_base,
+				current_body_color,
+				current_face_base,
+				current_face_color,
+				current_face_custom,
+				SteamLobby.player_number,
+				true)
+			SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_RELIABLE,msg)
 
 func send_character_custom_update()->void:
 	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_LOBBY:
