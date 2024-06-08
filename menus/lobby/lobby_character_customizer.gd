@@ -186,7 +186,7 @@ func update_face_type()->void:
 		#print(PlayerConfigs.Player_Configs[type].custom_faces.size())
 		if current_face_base>=0&&current_face_base<PlayerConfigs.Player_Configs[type].custom_faces.size():
 			example_character_0.set_new_face(PlayerConfigs.Player_Configs[type].custom_faces[current_face_base])
-			example_character_1.set_new_face(FacesAutoload.custom_faces[current_face_base])
+			example_character_1.set_new_face(PlayerConfigs.Player_Configs[type].custom_faces[current_face_base])
 		else:
 			current_face_base=0
 			example_character_0.set_new_face(null)
