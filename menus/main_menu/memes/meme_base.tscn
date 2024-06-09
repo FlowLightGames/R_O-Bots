@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://n7lkku2i7eso"]
+[gd_scene load_steps=8 format=3 uid="uid://n7lkku2i7eso"]
 
 [ext_resource type="Shader" path="res://UI/shader/displacement.gdshader" id="1_aicbm"]
 [ext_resource type="Script" path="res://menus/main_menu/memes/meme_base.gd" id="1_tbwee"]
 [ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="2_1yqul"]
-[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="4_8xkdt"]
-[ext_resource type="FontFile" uid="uid://binhnkh0687qg" path="res://UI/font/LanaPixel.ttf" id="5_tdqds"]
+[ext_resource type="PackedScene" uid="uid://c35h63yx4uv8f" path="res://UI/window.tscn" id="4_2e6qj"]
+[ext_resource type="FontFile" uid="uid://binhnkh0687qg" path="res://UI/font/LanaPixel.ttf" id="5_t1cac"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fiimy"]
 resource_local_to_scene = true
@@ -14,97 +14,28 @@ shader_parameter/opacity = 1.0
 shader_parameter/displacement_map_size = Vector2i(12, 9)
 shader_parameter/displacement_map = ExtResource("2_1yqul")
 
-[sub_resource type="Animation" id="Animation_2swfm"]
-resource_name = "Default"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [1.0, 0.0, 1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:material:shader_parameter/displacement_strength")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0.0, 8.0, -12.0, 16.0, 4.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_13fgb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:material:shader_parameter/displacement_strength")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dvjti"]
-_data = {
-"Default": SubResource("Animation_2swfm"),
-"RESET": SubResource("Animation_13fgb")
-}
-
-[sub_resource type="LabelSettings" id="LabelSettings_6qpgs"]
-font = ExtResource("5_tdqds")
+[sub_resource type="LabelSettings" id="LabelSettings_sxxc1"]
+font = ExtResource("5_t1cac")
 font_size = 11
-font_color = Color(0, 0, 0, 1)
 
 [node name="MemeBase" type="Node2D" node_paths=PackedStringArray("body_base")]
 script = ExtResource("1_tbwee")
 body_base = NodePath("Base")
 
+[node name="Window" parent="." instance=ExtResource("4_2e6qj")]
+
 [node name="Base" type="Sprite2D" parent="."]
+position = Vector2(1, 11)
 
 [node name="LED" type="Sprite2D" parent="Base"]
 material = SubResource("ShaderMaterial_fiimy")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Base/LED"]
-libraries = {
-"": SubResource("AnimationLibrary_dvjti")
-}
-autoplay = "Default"
-speed_scale = 2.0
+[node name="Label" type="Label" parent="."]
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 32.0
+offset_bottom = 14.0
+text = "human"
+label_settings = SubResource("LabelSettings_sxxc1")
 
-[node name="Panel" type="Panel" parent="Base"]
-show_behind_parent = true
-offset_right = 40.0
-offset_bottom = 40.0
-theme = ExtResource("4_8xkdt")
-
-[node name="Label" type="Label" parent="Base/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 10.0
-label_settings = SubResource("LabelSettings_6qpgs")
+[editable path="Window"]

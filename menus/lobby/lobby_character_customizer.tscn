@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ca0ofo74p5we4"]
+[gd_scene load_steps=23 format=3 uid="uid://ca0ofo74p5we4"]
 
 [ext_resource type="Texture2D" uid="uid://c1c0hbjgbbtnl" path="res://menus/character_creator/menu_palette.png" id="2_0fqbj"]
 [ext_resource type="PackedScene" uid="uid://cd27yl8tl5qd6" path="res://player_character/character.tscn" id="2_6d3b8"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bw335sbq0nqxa" path="res://player_character/face_base_color_palette.png" id="10_0fgjq"]
 [ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="12_1tuyl"]
 [ext_resource type="Texture2D" uid="uid://byx1a3xtgp4am" path="res://UI/word_art/#.png" id="13_iy8pe"]
+[ext_resource type="Texture2D" uid="uid://dgwo110vph8ds" path="res://UI/theme/status_frame.png" id="13_t07bf"]
 [ext_resource type="Script" path="res://menus/lobby/gamepad_cursor.gd" id="14_satqh"]
 [ext_resource type="Script" path="res://menus/lobby/gamepad_UI_binding.gd" id="15_2qbew"]
 
@@ -22,6 +23,13 @@ shader = ExtResource("6_rcmc8")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("2_0fqbj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bpf5s"]
+texture = ExtResource("12_1tuyl")
+texture_margin_left = 2.0
+texture_margin_top = 10.0
+texture_margin_right = 2.0
+texture_margin_bottom = 3.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hfxrk"]
 resource_local_to_scene = true
@@ -62,6 +70,7 @@ custom_minimum_size = Vector2(144, 128)
 offset_right = 6.0
 offset_bottom = 11.0
 theme = ExtResource("5_4ciyq")
+theme_override_styles/panel = SubResource("StyleBoxTexture_bpf5s")
 script = ExtResource("5_h4pye")
 player_tag = NodePath("Control/Panel/Label")
 example_character_0 = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character")
@@ -331,13 +340,16 @@ mouse_filter = 2
 
 [node name="Panel" type="NinePatchRect" parent="Control"]
 material = SubResource("ShaderMaterial_m4yiq")
-custom_minimum_size = Vector2(94, 24)
-layout_mode = 0
-offset_left = 17.0
-offset_top = -20.0
-offset_right = 34.0
-offset_bottom = 4.0
-texture = ExtResource("12_1tuyl")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -47.0
+offset_top = -16.0
+offset_right = 47.0
+offset_bottom = 3.0
+grow_horizontal = 2
+texture = ExtResource("13_t07bf")
 patch_margin_left = 8
 patch_margin_top = 10
 patch_margin_right = 7
@@ -346,9 +358,9 @@ patch_margin_bottom = 3
 [node name="Label" type="Label" parent="Control/Panel"]
 layout_mode = 2
 offset_left = 3.0
-offset_top = 8.0
+offset_top = 2.0
 offset_right = 91.0
-offset_bottom = 21.0
+offset_bottom = 15.0
 text = "Player"
 horizontal_alignment = 1
 vertical_alignment = 1

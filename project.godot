@@ -79,7 +79,6 @@ folder_colors={
 "res://maps/": "green",
 "res://menus/": "pink",
 "res://multiplayer/": "orange",
-"res://pickup/": "blue",
 "res://player_character/": "red",
 "res://tools/": "gray"
 }

@@ -31,11 +31,14 @@ func _ready()->void:
 	else:
 		randomize()
 	spawn_players(MultiplayerStatus.Current_Number_Of_Players)
-	round_timer.wait_time=round_time
-	stage_ui.initial_time(round_time)
-	var tmp_countdown:Countdown=countdown_overlay.instantiate() as Countdown
-	tmp_countdown.map=self
-	add_child(tmp_countdown)
+	if round_time>0:
+		round_timer.wait_time=round_time
+		stage_ui.initial_time(round_time)
+		var tmp_countdown:Countdown=countdown_overlay.instantiate() as Countdown
+		tmp_countdown.map=self
+		add_child(tmp_countdown)
+	else:
+		unlock_players()
 	
 	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
 		PackageDeconstructor.player_state_update.connect(on_player_state_update_recieved)
@@ -221,6 +224,8 @@ func spawn_players(how_many:int)->void:
 func unlock_players()->void:
 	for n:PlayerCharacter in player_ref_list:
 		n.enable()
+
+func start_round_time()->void:
 	round_timer.start()
 	stage_ui.start()
 

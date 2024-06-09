@@ -6,7 +6,7 @@ enum STATE{ONLINE_LOBBY,SEARCH_LOBBY,SINGLEPLAYER,ONLINE_MULTIPLAYER,OFFLINE_MUL
 
 #session settings
 #wont be saved
-var Current_Number_Of_Players:int=0
+var Current_Number_Of_Players:int=1
 var Current_Status:int=STATE.SINGLEPLAYER
 var Delay_To_Host_TCP:int=0
 

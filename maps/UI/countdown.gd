@@ -13,5 +13,6 @@ func _ready()->void:
 
 func unlock_players()->void:
 	map.unlock_players()
+	map.start_round_time()
 func set_region(to:int)->void:
 	wordart_sprite.region_rect=regions[to]

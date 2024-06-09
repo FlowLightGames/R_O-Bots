@@ -40,7 +40,7 @@ func _on_save_pressed()->void:
 		for n:String in dict:
 			if (dict[n]):
 				InputMap.action_erase_events(n)
-				InputMap.action_add_event(n,GameConfig.get_input_event(dict[n]))
+				InputMap.action_add_event(n,GameConfig.get_input_event(dict[n] as String))
 				GameConfig.Player_Input_Dicts[player_idx][n]=dict[n]
 		player_idx+=1
 	

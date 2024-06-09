@@ -12,6 +12,7 @@ script = ExtResource("2_xoqqx")
 player_num_label = NodePath("Label")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 alignment = 2
 

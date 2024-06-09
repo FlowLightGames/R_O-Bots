@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://c35h63yx4uv8f"]
+
+[ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="1_ep437"]
+[ext_resource type="Texture2D" uid="uid://33ao7gnpaje7" path="res://UI/theme/_.png" id="2_yrwgf"]
+[ext_resource type="Texture2D" uid="uid://drvidu8ip7fcn" path="res://UI/theme/[].png" id="3_1x8ck"]
+[ext_resource type="Texture2D" uid="uid://bd6qdcfbs4lbc" path="res://UI/theme/x.png" id="4_xd8nx"]
+
+[node name="Window" type="PanelContainer"]
+custom_minimum_size = Vector2(32, 16)
+offset_right = 32.0
+offset_bottom = 18.0
+theme = ExtResource("1_ep437")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_top = -12.0
+offset_right = 2.0
+offset_bottom = -4.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="U" type="TextureRect" parent="Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_yrwgf")
+
+[node name="F" type="TextureRect" parent="Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_1x8ck")
+
+[node name="X" type="TextureRect" parent="Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_xd8nx")

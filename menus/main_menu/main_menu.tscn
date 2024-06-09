@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://b33a2c617wpeh"]
+[gd_scene load_steps=40 format=3 uid="uid://b33a2c617wpeh"]
 
 [ext_resource type="Script" path="res://menus/main_menu/main_menu.gd" id="1_wv75o"]
 [ext_resource type="Texture2D" uid="uid://du2ycui0mnds2" path="res://UI/word_art/GAME_START.png" id="2_iwafk"]
@@ -20,17 +20,11 @@
 [ext_resource type="Shader" path="res://UI/background/BG_scroll.gdshader" id="19_5rq4l"]
 [ext_resource type="Texture2D" uid="uid://fyjqyxmg724a" path="res://menus/main_menu/moving_tex.png" id="20_bnm3p"]
 [ext_resource type="Texture2D" uid="uid://dmfy3avy14qap" path="res://UI/word_art/R.png" id="21_vo6vu"]
-[ext_resource type="PackedScene" uid="uid://c6crfban3jnh6" path="res://menus/main_menu/memes/soy_l.tscn" id="22_hhjs3"]
 [ext_resource type="Texture2D" uid="uid://gf74g6i1ttaa" path="res://UI/word_art/O-Bots.png" id="22_khdki"]
-[ext_resource type="PackedScene" uid="uid://dle0eti55rs84" path="res://menus/main_menu/memes/soy_r.tscn" id="23_8lyr0"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="23_h0oec"]
 [ext_resource type="PackedScene" uid="uid://boh6gftujg2q0" path="res://UI/background/window_bg_100.tscn" id="24_bbiac"]
 [ext_resource type="FontFile" uid="uid://binhnkh0687qg" path="res://UI/font/LanaPixel.ttf" id="24_endfs"]
-[ext_resource type="PackedScene" uid="uid://6mm35ooxdona" path="res://menus/main_menu/memes/k_knife.tscn" id="24_stkql"]
-[ext_resource type="PackedScene" uid="uid://clits4js13287" path="res://menus/main_menu/memes/k_gun.tscn" id="25_urfxm"]
 [ext_resource type="PackedScene" uid="uid://ddx01qsshkpmh" path="res://menus/main_menu/memes/god_r.tscn" id="26_1jxwv"]
-[ext_resource type="PackedScene" uid="uid://wnge5pvgn22f" path="res://menus/main_menu/memes/cup.tscn" id="26_47nha"]
-[ext_resource type="PackedScene" uid="uid://cotw4gngshl28" path="res://menus/main_menu/memes/f_sus.tscn" id="27_2gpix"]
 [ext_resource type="PackedScene" uid="uid://b6hbc7e77ncf1" path="res://menus/main_menu/memes/god_l.tscn" id="27_dnwu7"]
 [ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="31_5bp4f"]
 [ext_resource type="Texture2D" uid="uid://00et7mgdndui" path="res://player_character/base_color_palette.png" id="32_cl2uc"]
@@ -414,14 +408,14 @@ stretch_mode = 1
 [node name="R" type="Sprite2D" parent="."]
 visible = false
 z_index = 1
-position = Vector2(318, 208)
+position = Vector2(318, 210)
 texture = ExtResource("21_vo6vu")
 offset = Vector2(0, -144)
 
 [node name="O-Bots" type="Sprite2D" parent="."]
 visible = false
 z_index = 1
-position = Vector2(318, 247)
+position = Vector2(318, 250)
 texture = ExtResource("22_khdki")
 offset = Vector2(0, -112)
 
@@ -429,35 +423,11 @@ offset = Vector2(0, -112)
 
 [node name="god_l" parent="Memes" instance=ExtResource("27_dnwu7")]
 z_index = -8
-position = Vector2(155, 98)
+position = Vector2(170, 84)
 
 [node name="god_r" parent="Memes" instance=ExtResource("26_1jxwv")]
 z_index = -8
-position = Vector2(493, 86)
-
-[node name="gun" parent="Memes" instance=ExtResource("25_urfxm")]
-visible = false
-position = Vector2(159, 214)
-
-[node name="knife" parent="Memes" instance=ExtResource("24_stkql")]
-visible = false
-position = Vector2(65, 230)
-
-[node name="sus" parent="Memes" instance=ExtResource("27_2gpix")]
-visible = false
-position = Vector2(468, 188)
-
-[node name="cup" parent="Memes" instance=ExtResource("26_47nha")]
-visible = false
-position = Vector2(555, 225)
-
-[node name="soy_r" parent="Memes" instance=ExtResource("23_8lyr0")]
-visible = false
-position = Vector2(494, 279)
-
-[node name="soy_l" parent="Memes" instance=ExtResource("22_hhjs3")]
-visible = false
-position = Vector2(163, 286)
+position = Vector2(459, 67)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../CRT/Static")

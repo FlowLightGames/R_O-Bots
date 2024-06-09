@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=51 format=3 uid="uid://bv4urn83158ba"]
+[gd_resource type="Theme" load_steps=52 format=3 uid="uid://bv4urn83158ba"]
 
 [ext_resource type="Texture2D" uid="uid://c7g3ei7p02dqg" path="res://UI/theme/button_dark.png" id="1_txp8d"]
 [ext_resource type="Texture2D" uid="uid://ddhumxm8mptyr" path="res://UI/theme/button_def.png" id="2_gbiao"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bofykwqmygwwy" path="res://UI/theme/drop_mark.png" id="8_gd2re"]
 [ext_resource type="Texture2D" uid="uid://c7opjjytubqr8" path="res://UI/theme/increment_dark.png" id="9_dbbdv"]
 [ext_resource type="Texture2D" uid="uid://dx0npj6q3ijml" path="res://UI/theme/increment.png" id="10_725kg"]
+[ext_resource type="Texture2D" uid="uid://dy8jrm61flppq" path="res://UI/theme/win.png" id="11_ejy6h"]
 [ext_resource type="Texture2D" uid="uid://cg48sfx7clhxv" path="res://UI/theme/menu_mark_dark.png" id="11_k6mur"]
 [ext_resource type="Texture2D" uid="uid://byxrmt7lxhegj" path="res://UI/theme/menu_mark.png" id="12_cie1x"]
 [ext_resource type="Texture2D" uid="uid://dcaj6ckqayaoe" path="res://UI/theme/tab_disabled.png" id="13_q2bvr"]
@@ -102,20 +103,20 @@ texture_margin_right = 2.0
 texture_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3dra4"]
-texture = ExtResource("5_h5gyn")
-texture_margin_left = 8.0
-texture_margin_top = 10.0
-texture_margin_right = 8.0
-texture_margin_bottom = 4.0
-region_rect = Rect2(0, 0, 16, 16)
+texture = ExtResource("11_ejy6h")
+texture_margin_left = 3.0
+texture_margin_top = 13.0
+texture_margin_right = 2.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(8, 5, 16, 19)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cj4kg"]
-texture = ExtResource("5_h5gyn")
-texture_margin_left = 8.0
-texture_margin_top = 10.0
-texture_margin_right = 8.0
+texture = ExtResource("11_ejy6h")
+texture_margin_left = 5.0
+texture_margin_top = 14.0
+texture_margin_right = 4.0
 texture_margin_bottom = 4.0
-region_rect = Rect2(0, 0, 16, 16)
+region_rect = Rect2(8, 5, 16, 19)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_606xp"]
 texture = ExtResource("5_h5gyn")
