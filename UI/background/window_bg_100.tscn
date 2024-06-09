@@ -59,7 +59,7 @@ color = Color(0.0898438, 0.0898438, 0.0898438, 1)
 [node name="Taskbar" type="NinePatchRect" parent="Window"]
 layout_mode = 0
 offset_top = 335.0
-offset_right = 636.0
+offset_right = 637.0
 offset_bottom = 355.0
 texture = ExtResource("3_4kql5")
 patch_margin_left = 3

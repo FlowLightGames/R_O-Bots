@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c6bip4iaysbdf" path="res://menus/character_creator/-_pressed.png" id="8_np0m7"]
 [ext_resource type="PackedScene" uid="uid://boh6gftujg2q0" path="res://UI/background/window_bg_100.tscn" id="10_bcotd"]
 
-[sub_resource type="Shader" id="Shader_wbm88"]
+[sub_resource type="Shader" id="Shader_3y3wm"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -27,12 +27,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h62vj"]
 resource_local_to_scene = true
-shader = SubResource("Shader_wbm88")
+shader = SubResource("Shader_3y3wm")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_gy5h7"]
+[sub_resource type="Shader" id="Shader_wlfii"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -49,12 +49,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b7e2k"]
 resource_local_to_scene = true
-shader = SubResource("Shader_gy5h7")
+shader = SubResource("Shader_wlfii")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_upye3"]
+[sub_resource type="Shader" id="Shader_lllly"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -71,12 +71,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88fua"]
 resource_local_to_scene = true
-shader = SubResource("Shader_upye3")
+shader = SubResource("Shader_lllly")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_x1rm0"]
+[sub_resource type="Shader" id="Shader_conb6"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -93,12 +93,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8dsxe"]
 resource_local_to_scene = true
-shader = SubResource("Shader_x1rm0")
+shader = SubResource("Shader_conb6")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_ukxpy"]
+[sub_resource type="Shader" id="Shader_en7o8"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -115,12 +115,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h3kn5"]
 resource_local_to_scene = true
-shader = SubResource("Shader_ukxpy")
+shader = SubResource("Shader_en7o8")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_acveg"]
+[sub_resource type="Shader" id="Shader_b0ynq"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -137,12 +137,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1mq1e"]
 resource_local_to_scene = true
-shader = SubResource("Shader_acveg")
+shader = SubResource("Shader_b0ynq")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_2sifx"]
+[sub_resource type="Shader" id="Shader_0j2g2"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -159,12 +159,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8b51h"]
 resource_local_to_scene = true
-shader = SubResource("Shader_2sifx")
+shader = SubResource("Shader_0j2g2")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_djlws"]
+[sub_resource type="Shader" id="Shader_3vatv"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -181,7 +181,7 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyk73"]
 resource_local_to_scene = true
-shader = SubResource("Shader_djlws")
+shader = SubResource("Shader_3vatv")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
@@ -290,44 +290,25 @@ texture_pressed = ExtResource("8_np0m7")
 texture_hover = ExtResource("7_vuhxi")
 texture_disabled = ExtResource("8_np0m7")
 
-[node name="Panel" type="Panel" parent="Control/CenterContainer/VBoxContainer/Control"]
+[node name="Panel" type="PanelContainer" parent="Control/CenterContainer/VBoxContainer/Control"]
 layout_mode = 0
 offset_left = 95.0
-offset_top = -3.0
+offset_top = -4.0
 offset_right = 592.0
 offset_bottom = 30.0
 metadata/_edit_group_ = true
 
 [node name="Cancel" type="Button" parent="Control/CenterContainer/VBoxContainer/Control/Panel"]
 custom_minimum_size = Vector2(0, 16)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 5.0
-offset_top = -4.5
-offset_right = 53.0
-offset_bottom = 11.5
-grow_vertical = 2
-size_flags_horizontal = 4
+layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 4
 text = "CANCEL"
 
 [node name="StageSelect" type="Button" parent="Control/CenterContainer/VBoxContainer/Control/Panel"]
 custom_minimum_size = Vector2(0, 16)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -91.0
-offset_top = -4.5
-offset_right = -5.0
-offset_bottom = 11.5
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 4
+layout_mode = 2
+size_flags_horizontal = 8
 size_flags_vertical = 4
 text = "STAGE SELECT
 "

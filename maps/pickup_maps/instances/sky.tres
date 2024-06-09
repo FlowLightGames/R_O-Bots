@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PickUpMap" load_steps=11 format=3 uid="uid://vifr20kyl8bm"]
+[gd_resource type="Resource" script_class="PickUpMap" load_steps=10 format=3 uid="uid://vifr20kyl8bm"]
 
 [ext_resource type="Script" path="res://maps/pickup_option_struct.gd" id="1_bciml"]
 [ext_resource type="Script" path="res://maps/pickup_maps/pickup_map_base.gd" id="1_o2iqb"]
@@ -16,11 +16,6 @@ weight = 20
 [sub_resource type="Resource" id="Resource_jh6tq"]
 script = ExtResource("1_bciml")
 what = 19
-weight = 20
-
-[sub_resource type="Resource" id="Resource_wjti3"]
-script = ExtResource("1_bciml")
-what = 20
 weight = 20
 
 [sub_resource type="Resource" id="Resource_lna67"]
@@ -45,5 +40,5 @@ weight = 1
 
 [resource]
 script = ExtResource("1_o2iqb")
-map = Array[ExtResource("1_bciml")]([SubResource("Resource_i1mu2"), SubResource("Resource_1rcqk"), SubResource("Resource_jh6tq"), SubResource("Resource_wjti3"), SubResource("Resource_lna67"), SubResource("Resource_m1uld"), SubResource("Resource_sm5y4"), SubResource("Resource_5haaq")])
+map = Array[ExtResource("1_bciml")]([SubResource("Resource_i1mu2"), SubResource("Resource_1rcqk"), SubResource("Resource_jh6tq"), SubResource("Resource_lna67"), SubResource("Resource_m1uld"), SubResource("Resource_sm5y4"), SubResource("Resource_5haaq")])
 pickup_chance = 1.0

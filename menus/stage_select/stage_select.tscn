@@ -224,9 +224,9 @@ offset_bottom = 131.0
 [node name="LeaveLobby" type="Button" parent="."]
 material = SubResource("ShaderMaterial_58eb6")
 custom_minimum_size = Vector2(0, 16)
-offset_left = 569.0
+offset_left = 570.0
 offset_top = 338.0
-offset_right = 638.0
+offset_right = 639.0
 offset_bottom = 357.0
 theme = ExtResource("1_65nkd")
 text = "EXIT LOBBY"
