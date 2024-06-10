@@ -1,14 +1,15 @@
-[gd_scene load_steps=25 format=3 uid="uid://bqyx8ovdlweo6"]
+[gd_scene load_steps=26 format=3 uid="uid://bqyx8ovdlweo6"]
 
 [ext_resource type="Script" path="res://menus/lobby/online_lobby.gd" id="1_5s41p"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="2_clof7"]
 [ext_resource type="PackedScene" uid="uid://ca0ofo74p5we4" path="res://menus/lobby/lobby_character_customizer.tscn" id="2_xj8qo"]
 [ext_resource type="Texture2D" uid="uid://c1c0hbjgbbtnl" path="res://menus/character_creator/menu_palette.png" id="3_ydp07"]
+[ext_resource type="PackedScene" uid="uid://c35h63yx4uv8f" path="res://UI/window.tscn" id="5_bg7s0"]
 [ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="6_73173"]
 [ext_resource type="PackedScene" uid="uid://boh6gftujg2q0" path="res://UI/background/window_bg_100.tscn" id="6_qbrkn"]
 [ext_resource type="Texture2D" uid="uid://00et7mgdndui" path="res://player_character/base_color_palette.png" id="7_tmjy8"]
 
-[sub_resource type="Shader" id="Shader_cfcn4"]
+[sub_resource type="Shader" id="Shader_dqhan"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -25,12 +26,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h62vj"]
 resource_local_to_scene = true
-shader = SubResource("Shader_cfcn4")
+shader = SubResource("Shader_dqhan")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[sub_resource type="Shader" id="Shader_i4w5l"]
+[sub_resource type="Shader" id="Shader_gptia"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -47,12 +48,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b7e2k"]
 resource_local_to_scene = true
-shader = SubResource("Shader_i4w5l")
+shader = SubResource("Shader_gptia")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[sub_resource type="Shader" id="Shader_7o1bj"]
+[sub_resource type="Shader" id="Shader_qvaw7"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -69,12 +70,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88fua"]
 resource_local_to_scene = true
-shader = SubResource("Shader_7o1bj")
+shader = SubResource("Shader_qvaw7")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[sub_resource type="Shader" id="Shader_vrr1t"]
+[sub_resource type="Shader" id="Shader_p6gqj"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -91,12 +92,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8dsxe"]
 resource_local_to_scene = true
-shader = SubResource("Shader_vrr1t")
+shader = SubResource("Shader_p6gqj")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[sub_resource type="Shader" id="Shader_1ibbv"]
+[sub_resource type="Shader" id="Shader_w27wh"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -113,12 +114,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h3kn5"]
 resource_local_to_scene = true
-shader = SubResource("Shader_1ibbv")
+shader = SubResource("Shader_w27wh")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[sub_resource type="Shader" id="Shader_c7n1a"]
+[sub_resource type="Shader" id="Shader_4k71s"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -135,12 +136,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1mq1e"]
 resource_local_to_scene = true
-shader = SubResource("Shader_c7n1a")
+shader = SubResource("Shader_4k71s")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[sub_resource type="Shader" id="Shader_0ftpq"]
+[sub_resource type="Shader" id="Shader_mcxc3"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -157,12 +158,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8b51h"]
 resource_local_to_scene = true
-shader = SubResource("Shader_0ftpq")
+shader = SubResource("Shader_mcxc3")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
 
-[sub_resource type="Shader" id="Shader_j8uim"]
+[sub_resource type="Shader" id="Shader_lmige"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -179,7 +180,7 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyk73"]
 resource_local_to_scene = true
-shader = SubResource("Shader_j8uim")
+shader = SubResource("Shader_lmige")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("3_ydp07")
@@ -194,7 +195,7 @@ shader_parameter/palett = ExtResource("7_tmjy8")
 script = ExtResource("1_5s41p")
 player_boxes = [NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer2"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer3"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer4"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer5"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer6"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer7"), NodePath("Control/CenterContainer/VBoxContainer/GridContainer/LobbyCharacterCustomizer8")]
 lobby_name_label = NodePath("Control/CenterContainer/VBoxContainer/Label")
-stage_select_button = NodePath("Control/CenterContainer/VBoxContainer/PanelContainer/HBoxContainer2/StageSelect")
+stage_select_button = NodePath("Control/CenterContainer/VBoxContainer/Window/HBoxContainer2/StageSelect")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -215,6 +216,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
+custom_minimum_size = Vector2(0, 329)
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="Control/CenterContainer/VBoxContainer"]
@@ -263,28 +265,27 @@ layout_mode = 2
 type = 7
 
 [node name="Spacer" type="Control" parent="Control/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 8)
+custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+[node name="Window" parent="Control/CenterContainer/VBoxContainer" instance=ExtResource("5_bg7s0")]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/CenterContainer/VBoxContainer/PanelContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/CenterContainer/VBoxContainer/Window"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="Invite" type="Button" parent="Control/CenterContainer/VBoxContainer/PanelContainer/HBoxContainer2"]
+[node name="Invite" type="Button" parent="Control/CenterContainer/VBoxContainer/Window/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "INVITE"
 
-[node name="StageSelect" type="Button" parent="Control/CenterContainer/VBoxContainer/PanelContainer/HBoxContainer2"]
+[node name="StageSelect" type="Button" parent="Control/CenterContainer/VBoxContainer/Window/HBoxContainer2"]
 layout_mode = 2
 disabled = true
 text = "STAGE SELECT"
 
-[node name="Cancel" type="Button" parent="Control/CenterContainer/VBoxContainer/PanelContainer"]
+[node name="Cancel" type="Button" parent="Control/CenterContainer/VBoxContainer/Window"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "CANCEL"
@@ -344,6 +345,6 @@ text = "EXIT LOBBY"
 
 [node name="Win98" parent="." instance=ExtResource("6_qbrkn")]
 
-[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/PanelContainer/HBoxContainer2/StageSelect" to="." method="_on_stage_select_pressed"]
-[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/PanelContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Window/HBoxContainer2/StageSelect" to="." method="_on_stage_select_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Window/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="LeaveLobby" to="." method="_on_leave_lobby_pressed"]

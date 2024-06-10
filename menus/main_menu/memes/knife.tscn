@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxvndwy1rfyhy"]
+
+[ext_resource type="PackedScene" uid="uid://n7lkku2i7eso" path="res://menus/main_menu/memes/meme_base.tscn" id="1_1pfm3"]
+[ext_resource type="Texture2D" uid="uid://ojuvy5q0nsdy" path="res://menus/main_menu/memes/k_knife_base.png" id="2_igqc4"]
+[ext_resource type="Shader" path="res://UI/shader/displacement.gdshader" id="3_nkc1d"]
+[ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="4_eod37"]
+[ext_resource type="Texture2D" uid="uid://kf8ssn47lyw3" path="res://menus/main_menu/memes/k_knife_led.png" id="5_55iqn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6xtn3"]
+resource_local_to_scene = true
+shader = ExtResource("3_nkc1d")
+shader_parameter/displacement_strength = 0.0
+shader_parameter/opacity = 1.0
+shader_parameter/displacement_map_size = Vector2i(12, 9)
+shader_parameter/displacement_map = ExtResource("4_eod37")
+
+[node name="MemeBase" instance=ExtResource("1_1pfm3")]
+
+[node name="Window" parent="." index="0"]
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 37.0
+offset_bottom = 50.0
+
+[node name="Base" parent="." index="1"]
+texture = ExtResource("2_igqc4")
+
+[node name="LED" parent="Base" index="0"]
+material = SubResource("ShaderMaterial_6xtn3")
+position = Vector2(-1, -4)
+texture = ExtResource("5_55iqn")
+
+[node name="Label" parent="." index="2"]
+visible = false
+
+[editable path="Window"]

@@ -54,7 +54,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_yl204")
-color = Color(0.0898438, 0.0898438, 0.0898438, 1)
+color = Color(0.0374908, 0.457031, 0.447198, 1)
 
 [node name="Taskbar" type="NinePatchRect" parent="Window"]
 layout_mode = 0

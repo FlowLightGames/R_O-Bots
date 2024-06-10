@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwrl3y4hbd2k7"]
+[gd_scene load_steps=5 format=3 uid="uid://bwrl3y4hbd2k7"]
 
 [ext_resource type="Script" path="res://menus/lobby/online_lobby_list.gd" id="1_wrpf2"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="2_ahmaw"]
+[ext_resource type="PackedScene" uid="uid://c35h63yx4uv8f" path="res://UI/window.tscn" id="3_qvv7j"]
 [ext_resource type="PackedScene" uid="uid://boh6gftujg2q0" path="res://UI/background/window_bg_100.tscn" id="4_ppg0q"]
 
 [node name="OnlineLobby" type="Node2D" node_paths=PackedStringArray("lobby_list_node")]
 script = ExtResource("1_wrpf2")
-lobby_list_node = NodePath("Control/CenterContainer/HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer")
+lobby_list_node = NodePath("Control/CenterContainer/HBoxContainer/Window/ScrollContainer/VBoxContainer")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -30,11 +31,16 @@ grow_vertical = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/CenterContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Control/CenterContainer/HBoxContainer"]
+[node name="Cancel" parent="Control/CenterContainer/HBoxContainer" instance=ExtResource("3_qvv7j")]
+custom_minimum_size = Vector2(32, 48)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/CenterContainer/HBoxContainer/Cancel"]
 layout_mode = 2
 alignment = 2
 
-[node name="Cancel" type="Button" parent="Control/CenterContainer/HBoxContainer/VBoxContainer2"]
+[node name="Cancel" type="Button" parent="Control/CenterContainer/HBoxContainer/Cancel/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -42,23 +48,28 @@ size_flags_vertical = 4
 text = "CANCEL
 "
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/CenterContainer/HBoxContainer"]
+[node name="Window" parent="Control/CenterContainer/HBoxContainer" instance=ExtResource("3_qvv7j")]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control/CenterContainer/HBoxContainer/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/CenterContainer/HBoxContainer/Window"]
 custom_minimum_size = Vector2(258, 226)
 layout_mode = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/HBoxContainer/PanelContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/HBoxContainer/Window/ScrollContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/HBoxContainer"]
+[node name="Search" parent="Control/CenterContainer/HBoxContainer" instance=ExtResource("3_qvv7j")]
+custom_minimum_size = Vector2(32, 48)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/HBoxContainer/Search"]
 layout_mode = 2
 alignment = 2
 
-[node name="FriendSearch" type="Button" parent="Control/CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="FriendSearch" type="Button" parent="Control/CenterContainer/HBoxContainer/Search/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -67,5 +78,5 @@ text = "SEARCH FRIEND LOBBY"
 
 [node name="Win98" parent="." instance=ExtResource("4_ppg0q")]
 
-[connection signal="pressed" from="Control/CenterContainer/HBoxContainer/VBoxContainer2/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="Control/CenterContainer/HBoxContainer/VBoxContainer/FriendSearch" to="." method="_on_friend_search_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/HBoxContainer/Cancel/VBoxContainer2/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/HBoxContainer/Search/VBoxContainer/FriendSearch" to="." method="_on_friend_search_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dbkg81o4mkfc6"]
+[gd_scene load_steps=27 format=3 uid="uid://dbkg81o4mkfc6"]
 
 [ext_resource type="Script" path="res://menus/lobby/offline_lobby.gd" id="1_rhpcm"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="2_x6hru"]
@@ -8,9 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://c4q0n6hagbxsm" path="res://menus/character_creator/+_pressed.png" id="6_56hjt"]
 [ext_resource type="Texture2D" uid="uid://cuwujcpyfqj7h" path="res://menus/character_creator/-_default.png" id="7_vuhxi"]
 [ext_resource type="Texture2D" uid="uid://c6bip4iaysbdf" path="res://menus/character_creator/-_pressed.png" id="8_np0m7"]
+[ext_resource type="PackedScene" uid="uid://c35h63yx4uv8f" path="res://UI/window.tscn" id="9_ivsxq"]
 [ext_resource type="PackedScene" uid="uid://boh6gftujg2q0" path="res://UI/background/window_bg_100.tscn" id="10_bcotd"]
 
-[sub_resource type="Shader" id="Shader_3y3wm"]
+[sub_resource type="Shader" id="Shader_0av4p"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -27,12 +28,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h62vj"]
 resource_local_to_scene = true
-shader = SubResource("Shader_3y3wm")
+shader = SubResource("Shader_0av4p")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_wlfii"]
+[sub_resource type="Shader" id="Shader_x4cna"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -49,12 +50,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b7e2k"]
 resource_local_to_scene = true
-shader = SubResource("Shader_wlfii")
+shader = SubResource("Shader_x4cna")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_lllly"]
+[sub_resource type="Shader" id="Shader_ydmky"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -71,12 +72,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88fua"]
 resource_local_to_scene = true
-shader = SubResource("Shader_lllly")
+shader = SubResource("Shader_ydmky")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_conb6"]
+[sub_resource type="Shader" id="Shader_bbn6p"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -93,12 +94,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8dsxe"]
 resource_local_to_scene = true
-shader = SubResource("Shader_conb6")
+shader = SubResource("Shader_bbn6p")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_en7o8"]
+[sub_resource type="Shader" id="Shader_0pqiy"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -115,12 +116,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h3kn5"]
 resource_local_to_scene = true
-shader = SubResource("Shader_en7o8")
+shader = SubResource("Shader_0pqiy")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_b0ynq"]
+[sub_resource type="Shader" id="Shader_t61o1"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -137,12 +138,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1mq1e"]
 resource_local_to_scene = true
-shader = SubResource("Shader_b0ynq")
+shader = SubResource("Shader_t61o1")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_0j2g2"]
+[sub_resource type="Shader" id="Shader_auacr"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -159,12 +160,12 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8b51h"]
 resource_local_to_scene = true
-shader = SubResource("Shader_0j2g2")
+shader = SubResource("Shader_auacr")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
 
-[sub_resource type="Shader" id="Shader_3vatv"]
+[sub_resource type="Shader" id="Shader_bhy8u"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -181,7 +182,7 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyk73"]
 resource_local_to_scene = true
-shader = SubResource("Shader_3vatv")
+shader = SubResource("Shader_bhy8u")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 0
 shader_parameter/palett = ExtResource("4_ve03o")
@@ -209,6 +210,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
+custom_minimum_size = Vector2(0, 329)
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="Control/CenterContainer/VBoxContainer"]
@@ -260,52 +262,40 @@ type = 7
 custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Control/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+[node name="Control" type="HBoxContainer" parent="Control/CenterContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/VBoxContainer/Control"]
-layout_mode = 1
-offset_left = 7.0
-offset_top = -2.0
-offset_right = 86.0
-offset_bottom = 30.0
-metadata/_edit_group_ = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/CenterContainer/VBoxContainer/Control/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/CenterContainer/VBoxContainer/Control"]
 layout_mode = 2
 alignment = 1
 
-[node name="AddPlayer" type="TextureButton" parent="Control/CenterContainer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
+[node name="AddPlayer" type="TextureButton" parent="Control/CenterContainer/VBoxContainer/Control/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("5_flnsh")
 texture_pressed = ExtResource("6_56hjt")
 texture_hover = ExtResource("5_flnsh")
 texture_disabled = ExtResource("6_56hjt")
 
-[node name="RemovePlayer" type="TextureButton" parent="Control/CenterContainer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
+[node name="RemovePlayer" type="TextureButton" parent="Control/CenterContainer/VBoxContainer/Control/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("7_vuhxi")
 texture_pressed = ExtResource("8_np0m7")
 texture_hover = ExtResource("7_vuhxi")
 texture_disabled = ExtResource("8_np0m7")
 
-[node name="Panel" type="PanelContainer" parent="Control/CenterContainer/VBoxContainer/Control"]
-layout_mode = 0
-offset_left = 95.0
-offset_top = -4.0
-offset_right = 592.0
-offset_bottom = 30.0
-metadata/_edit_group_ = true
+[node name="Window" parent="Control/CenterContainer/VBoxContainer/Control" instance=ExtResource("9_ivsxq")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 
-[node name="Cancel" type="Button" parent="Control/CenterContainer/VBoxContainer/Control/Panel"]
+[node name="Cancel" type="Button" parent="Control/CenterContainer/VBoxContainer/Control/Window"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 text = "CANCEL"
 
-[node name="StageSelect" type="Button" parent="Control/CenterContainer/VBoxContainer/Control/Panel"]
+[node name="StageSelect" type="Button" parent="Control/CenterContainer/VBoxContainer/Control/Window"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -315,7 +305,7 @@ text = "STAGE SELECT
 
 [node name="Win98" parent="." instance=ExtResource("10_bcotd")]
 
-[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Control/VBoxContainer/HBoxContainer/AddPlayer" to="." method="_on_add_player_pressed"]
-[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Control/VBoxContainer/HBoxContainer/RemovePlayer" to="." method="_on_remove_player_pressed"]
-[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Control/Panel/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Control/Panel/StageSelect" to="." method="_on_stage_select_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Control/HBoxContainer/AddPlayer" to="." method="_on_add_player_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Control/HBoxContainer/RemovePlayer" to="." method="_on_remove_player_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Control/Window/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Control/Window/StageSelect" to="." method="_on_stage_select_pressed"]

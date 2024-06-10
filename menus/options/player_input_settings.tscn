@@ -1,16 +1,49 @@
-[gd_scene load_steps=4 format=3 uid="uid://ogldl5edlenf"]
+[gd_scene load_steps=7 format=3 uid="uid://ogldl5edlenf"]
 
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="1_e4fh6"]
 [ext_resource type="Script" path="res://menus/options/player_input_settings.gd" id="2_5hndy"]
+[ext_resource type="Texture2D" uid="uid://33ao7gnpaje7" path="res://UI/theme/_.png" id="3_4a7ra"]
 [ext_resource type="PackedScene" uid="uid://doqxt21sixjlv" path="res://menus/options/input_remap_button.tscn" id="3_rvmbt"]
+[ext_resource type="Texture2D" uid="uid://drvidu8ip7fcn" path="res://UI/theme/[].png" id="4_wjxik"]
+[ext_resource type="Texture2D" uid="uid://bd6qdcfbs4lbc" path="res://UI/theme/x.png" id="5_fjlju"]
 
-[node name="PlayerInputSettings" type="PanelContainer" node_paths=PackedStringArray("buttons", "curr_player_label")]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Window" type="PanelContainer" node_paths=PackedStringArray("buttons", "curr_player_label")]
+offset_left = 5.0
+offset_top = 14.0
+offset_right = 218.0
+offset_bottom = 206.0
 theme = ExtResource("1_e4fh6")
 script = ExtResource("2_5hndy")
 buttons = [NodePath("VBoxContainer/InputRemapButton"), NodePath("VBoxContainer/InputRemapButton2"), NodePath("VBoxContainer/InputRemapButton3"), NodePath("VBoxContainer/InputRemapButton4"), NodePath("VBoxContainer/InputRemapButton5"), NodePath("VBoxContainer/InputRemapButton6")]
 curr_player_label = NodePath("VBoxContainer/PlayerNumber")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_top = -12.0
+offset_right = 2.0
+offset_bottom = -4.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="U" type="TextureRect" parent="Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_4a7ra")
+
+[node name="F" type="TextureRect" parent="Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_wjxik")
+
+[node name="X" type="TextureRect" parent="Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_fjlju")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -90,7 +123,3 @@ text = "SAVE"
 
 [node name="Spacer" type="Control" parent="VBoxContainer"]
 layout_mode = 2
-
-[connection signal="pressed" from="VBoxContainer/Control/HBoxContainer/Default" to="." method="_on_default_pressed"]
-[connection signal="pressed" from="VBoxContainer/Control/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="VBoxContainer/Control/Save" to="." method="_on_save_pressed"]

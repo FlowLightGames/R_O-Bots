@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://ckvahyw454yty"]
+[gd_scene load_steps=20 format=3 uid="uid://ckvahyw454yty"]
 
 [ext_resource type="Texture2D" uid="uid://cku07yuqo02it" path="res://menus/character_creator/focus_UI.png" id="1_83p8w"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="1_mn51c"]
 [ext_resource type="Script" path="res://menus/character_creator/FocusUI.gd" id="2_3otq7"]
 [ext_resource type="Script" path="res://menus/character_creator/custom_face_creator.gd" id="2_co753"]
 [ext_resource type="Texture2D" uid="uid://csq85bq71qs26" path="res://menus/character_creator/face_bg.png" id="2_uyadp"]
+[ext_resource type="PackedScene" uid="uid://c35h63yx4uv8f" path="res://UI/window.tscn" id="3_bbati"]
 [ext_resource type="Texture2D" uid="uid://cogay0i3t7w5s" path="res://menus/character_creator/color_button_normal.png" id="4_rx3cs"]
 [ext_resource type="Texture2D" uid="uid://dkuucv8inome7" path="res://menus/character_creator/color_button_pressed.png" id="5_klc0v"]
 [ext_resource type="PackedScene" uid="uid://cd27yl8tl5qd6" path="res://player_character/character.tscn" id="6_pmmbq"]
@@ -39,12 +40,12 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_mn51c")
 script = ExtResource("2_co753")
-custom_focus_UI = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace/FocusUI")
-example_character_0 = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ExampleCaracter/Visuals/Character")
-example_character_1 = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ExampleCaracter/Visuals/Character2")
-body_color_txt = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer/Label")
-body_txt = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer/Label")
-face_color_txt = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer/Label")
+custom_focus_UI = NodePath("CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace/FocusUI")
+example_character_0 = NodePath("CenterContainer/Window/VBoxContainer/HBoxContainer/Window/Visuals/Character")
+example_character_1 = NodePath("CenterContainer/Window/VBoxContainer/HBoxContainer/Window/Visuals/Character2")
+body_color_txt = NodePath("CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer/Label")
+body_txt = NodePath("CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer/Label")
+face_color_txt = NodePath("CenterContainer/Window/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer/Label")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -55,28 +56,28 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+[node name="Window" parent="CenterContainer" instance=ExtResource("3_bbati")]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Window"]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="Seperator3" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer"]
+[node name="Seperator3" type="Control" parent="CenterContainer/Window/VBoxContainer"]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Window/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Window/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="CustomFaceNode" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CustomFaceNode" type="Control" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(60, 45)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -85,11 +86,11 @@ mouse_filter = 2
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="CustomFace" type="Node2D" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode"]
+[node name="CustomFace" type="Node2D" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode"]
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="FocusUI" type="Sprite2D" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace" node_paths=PackedStringArray("draw_ref", "canvas", "pos_ref", "button_white", "button_gray", "button_mirror", "Example_char_0", "Example_char_1")]
+[node name="FocusUI" type="Sprite2D" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace" node_paths=PackedStringArray("draw_ref", "canvas", "pos_ref", "button_white", "button_gray", "button_mirror", "Example_char_0", "Example_char_1")]
 z_index = 1
 texture = ExtResource("1_83p8w")
 centered = false
@@ -100,23 +101,23 @@ pos_ref = NodePath("../TileMap")
 button_white = NodePath("../../../../ColorPicker/White")
 button_gray = NodePath("../../../../ColorPicker/Gray")
 button_mirror = NodePath("../../../Mirrored/CheckBox")
-Example_char_0 = NodePath("../../../../ExampleCaracter/Visuals/Character")
-Example_char_1 = NodePath("../../../../ExampleCaracter/Visuals/Character2")
+Example_char_0 = NodePath("../../../../Window/Visuals/Character")
+Example_char_1 = NodePath("../../../../Window/Visuals/Character2")
 
-[node name="TileMap" type="TileMap" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace"]
+[node name="TileMap" type="TileMap" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace"]
 tile_set = SubResource("TileSet_2iwk0")
 format = 2
 
-[node name="Canvas" type="Sprite2D" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace"]
+[node name="Canvas" type="Sprite2D" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace"]
 scale = Vector2(5, 5)
 centered = false
 
-[node name="bg" type="Sprite2D" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace/Canvas"]
+[node name="bg" type="Sprite2D" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace/Canvas"]
 show_behind_parent = true
 texture = ExtResource("2_uyadp")
 centered = false
 
-[node name="Panel" type="Panel" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode"]
+[node name="Window" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode" instance=ExtResource("3_bbati")]
 show_behind_parent = true
 layout_mode = 0
 offset_left = -2.0
@@ -124,10 +125,10 @@ offset_top = -13.0
 offset_right = 62.0
 offset_bottom = 48.0
 
-[node name="Mirrored" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Mirrored" type="HBoxContainer" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="CheckBox" type="CheckBox" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/Mirrored"]
+[node name="CheckBox" type="CheckBox" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer/Mirrored"]
 layout_mode = 2
 theme_override_icons/checked = ExtResource("8_ix1c1")
 theme_override_icons/checked_disabled = ExtResource("8_ix1c1")
@@ -141,21 +142,21 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_s25ka")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_g648x")
 flat = true
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/Mirrored"]
+[node name="Label" type="Label" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer/Mirrored"]
 layout_mode = 2
 text = "Mirrored
 "
 
-[node name="seperator" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="seperator" type="Control" parent="CenterContainer/Window/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
-[node name="ColorPicker" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="ColorPicker" type="VBoxContainer" parent="CenterContainer/Window/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="White" type="TextureButton" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ColorPicker"]
+[node name="White" type="TextureButton" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/ColorPicker"]
 layout_mode = 2
 toggle_mode = true
 button_pressed = true
@@ -163,7 +164,7 @@ texture_normal = ExtResource("4_rx3cs")
 texture_pressed = ExtResource("5_klc0v")
 metadata/_edit_group_ = true
 
-[node name="ColorRect" type="ColorRect" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ColorPicker/White"]
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/ColorPicker/White"]
 show_behind_parent = true
 layout_mode = 0
 offset_left = 2.0
@@ -172,14 +173,14 @@ offset_right = 14.0
 offset_bottom = 14.0
 mouse_filter = 2
 
-[node name="Gray" type="TextureButton" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ColorPicker"]
+[node name="Gray" type="TextureButton" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/ColorPicker"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("4_rx3cs")
 texture_pressed = ExtResource("5_klc0v")
 metadata/_edit_group_ = true
 
-[node name="ColorRect" type="ColorRect" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ColorPicker/Gray"]
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/ColorPicker/Gray"]
 show_behind_parent = true
 layout_mode = 0
 offset_left = 2.0
@@ -189,52 +190,53 @@ offset_bottom = 14.0
 mouse_filter = 2
 color = Color(0.498039, 0.498039, 0.498039, 1)
 
-[node name="seperator2" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="seperator2" type="Control" parent="CenterContainer/Window/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="ExampleCaracter" type="PanelContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Window" parent="CenterContainer/Window/VBoxContainer/HBoxContainer" instance=ExtResource("3_bbati")]
 custom_minimum_size = Vector2(42, 23)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = null
 metadata/_edit_lock_ = true
 
-[node name="Visuals" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ExampleCaracter"]
+[node name="Visuals" type="Control" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Window"]
 custom_minimum_size = Vector2(42, 27)
 layout_mode = 2
 metadata/_edit_group_ = true
 
-[node name="Character" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ExampleCaracter/Visuals" instance=ExtResource("6_pmmbq")]
+[node name="Character" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Window/Visuals" instance=ExtResource("6_pmmbq")]
 position = Vector2(9, 24)
 
-[node name="Character2" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ExampleCaracter/Visuals" instance=ExtResource("6_pmmbq")]
+[node name="Character2" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Window/Visuals" instance=ExtResource("6_pmmbq")]
 position = Vector2(33, 24)
 
-[node name="seperator3" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="seperator3" type="Control" parent="CenterContainer/Window/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Options" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Options" type="VBoxContainer" parent="CenterContainer/Window/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="BodyBase" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options"]
+[node name="BodyBase" type="VBoxContainer" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase"]
+[node name="Label" type="Label" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyBase"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "BodyBase"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyBase"]
 layout_mode = 2
 alignment = 1
 
-[node name="Dec" type="TextureButton" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer"]
+[node name="Dec" type="TextureButton" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("9_2e0cx")
 texture_pressed = ExtResource("9_2e0cx")
@@ -242,11 +244,11 @@ texture_hover = ExtResource("9_2e0cx")
 texture_disabled = ExtResource("9_2e0cx")
 texture_focused = ExtResource("9_2e0cx")
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer"]
 layout_mode = 2
 text = "0"
 
-[node name="Inc" type="TextureButton" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer"]
+[node name="Inc" type="TextureButton" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("10_2crly")
 texture_pressed = ExtResource("10_2crly")
@@ -254,20 +256,20 @@ texture_hover = ExtResource("10_2crly")
 texture_disabled = ExtResource("10_2crly")
 texture_focused = ExtResource("10_2crly")
 
-[node name="BodyColor" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options"]
+[node name="BodyColor" type="VBoxContainer" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor"]
+[node name="Label" type="Label" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyColor"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "BodyClr"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyColor"]
 layout_mode = 2
 alignment = 1
 
-[node name="Dec" type="TextureButton" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer"]
+[node name="Dec" type="TextureButton" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("9_2e0cx")
 texture_pressed = ExtResource("9_2e0cx")
@@ -275,11 +277,11 @@ texture_hover = ExtResource("9_2e0cx")
 texture_disabled = ExtResource("9_2e0cx")
 texture_focused = ExtResource("9_2e0cx")
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer"]
 layout_mode = 2
 text = "0"
 
-[node name="Inc" type="TextureButton" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer"]
+[node name="Inc" type="TextureButton" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("10_2crly")
 texture_pressed = ExtResource("10_2crly")
@@ -287,20 +289,20 @@ texture_hover = ExtResource("10_2crly")
 texture_disabled = ExtResource("10_2crly")
 texture_focused = ExtResource("10_2crly")
 
-[node name="FaceColor" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options"]
+[node name="FaceColor" type="VBoxContainer" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor"]
+[node name="Label" type="Label" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/FaceColor"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "FaceClr"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/FaceColor"]
 layout_mode = 2
 alignment = 1
 
-[node name="Dec" type="TextureButton" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer"]
+[node name="Dec" type="TextureButton" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("9_2e0cx")
 texture_pressed = ExtResource("9_2e0cx")
@@ -308,11 +310,11 @@ texture_hover = ExtResource("9_2e0cx")
 texture_disabled = ExtResource("9_2e0cx")
 texture_focused = ExtResource("9_2e0cx")
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer"]
 layout_mode = 2
 text = "0"
 
-[node name="Inc" type="TextureButton" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer"]
+[node name="Inc" type="TextureButton" parent="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("10_2crly")
 texture_pressed = ExtResource("10_2crly")
@@ -320,15 +322,15 @@ texture_hover = ExtResource("10_2crly")
 texture_disabled = ExtResource("10_2crly")
 texture_focused = ExtResource("10_2crly")
 
-[node name="Seperator" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer"]
+[node name="Seperator" type="Control" parent="CenterContainer/Window/VBoxContainer"]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
-[node name="Cancel and save" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer"]
+[node name="Cancel and save" type="Control" parent="CenterContainer/Window/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Save" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/Cancel and save"]
+[node name="Save" type="Button" parent="CenterContainer/Window/VBoxContainer/Cancel and save"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 1
 anchors_preset = 6
@@ -344,7 +346,7 @@ grow_vertical = 2
 pivot_offset = Vector2(0, -14)
 text = "SAVE"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/Cancel and save"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Window/VBoxContainer/Cancel and save"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -353,30 +355,30 @@ offset_top = -15.0
 offset_right = 86.0
 grow_vertical = 0
 
-[node name="Cancel" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/Cancel and save/HBoxContainer"]
+[node name="Cancel" type="Button" parent="CenterContainer/Window/VBoxContainer/Cancel and save/HBoxContainer"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 text = "CANCEL
 "
 
-[node name="Clear" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/Cancel and save/HBoxContainer"]
+[node name="Clear" type="Button" parent="CenterContainer/Window/VBoxContainer/Cancel and save/HBoxContainer"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 text = "CLEAR"
 
-[node name="Seperator2" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 4)
+[node name="Seperator2" type="Control" parent="CenterContainer/Window/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/Mirrored/CheckBox" to="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace/FocusUI" method="_on_check_box_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ColorPicker/White" to="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace/FocusUI" method="_on_texture_button_white_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/ColorPicker/Gray" to="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace/FocusUI" method="_on_texture_button_gray_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer/Dec" to="." method="_on_dec_body_base_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer/Inc" to="." method="_on_inc_body_base_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer/Dec" to="." method="_on_dec_body_color_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer/Inc" to="." method="_on_inc_body_color_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer/Dec" to="." method="_on_dec_face_color_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer/Inc" to="." method="_on_inc_face_color_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/Cancel and save/Save" to="." method="_on_save_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/Cancel and save/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/Cancel and save/HBoxContainer/Clear" to="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace/FocusUI" method="_on_clear_pressed"]
+[connection signal="pressed" from="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer/Mirrored/CheckBox" to="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace/FocusUI" method="_on_check_box_pressed"]
+[connection signal="pressed" from="CenterContainer/Window/VBoxContainer/HBoxContainer/ColorPicker/White" to="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace/FocusUI" method="_on_texture_button_white_pressed"]
+[connection signal="pressed" from="CenterContainer/Window/VBoxContainer/HBoxContainer/ColorPicker/Gray" to="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace/FocusUI" method="_on_texture_button_gray_pressed"]
+[connection signal="pressed" from="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer/Dec" to="." method="_on_dec_body_base_pressed"]
+[connection signal="pressed" from="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyBase/HBoxContainer/Inc" to="." method="_on_inc_body_base_pressed"]
+[connection signal="pressed" from="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer/Dec" to="." method="_on_dec_body_color_pressed"]
+[connection signal="pressed" from="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/BodyColor/HBoxContainer/Inc" to="." method="_on_inc_body_color_pressed"]
+[connection signal="pressed" from="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer/Dec" to="." method="_on_dec_face_color_pressed"]
+[connection signal="pressed" from="CenterContainer/Window/VBoxContainer/HBoxContainer/Options/FaceColor/HBoxContainer/Inc" to="." method="_on_inc_face_color_pressed"]
+[connection signal="pressed" from="CenterContainer/Window/VBoxContainer/Cancel and save/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="CenterContainer/Window/VBoxContainer/Cancel and save/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="CenterContainer/Window/VBoxContainer/Cancel and save/HBoxContainer/Clear" to="CenterContainer/Window/VBoxContainer/HBoxContainer/VBoxContainer/CustomFaceNode/CustomFace/FocusUI" method="_on_clear_pressed"]
