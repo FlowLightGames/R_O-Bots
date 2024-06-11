@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ca0ofo74p5we4"]
+[gd_scene load_steps=24 format=3 uid="uid://ca0ofo74p5we4"]
 
 [ext_resource type="Texture2D" uid="uid://c1c0hbjgbbtnl" path="res://menus/character_creator/menu_palette.png" id="2_0fqbj"]
 [ext_resource type="PackedScene" uid="uid://cd27yl8tl5qd6" path="res://player_character/character.tscn" id="2_6d3b8"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bw335sbq0nqxa" path="res://player_character/face_base_color_palette.png" id="10_0fgjq"]
 [ext_resource type="Texture2D" uid="uid://ch5uqrjjbkqdi" path="res://UI/theme/box.png" id="12_1tuyl"]
 [ext_resource type="Texture2D" uid="uid://byx1a3xtgp4am" path="res://UI/word_art/#.png" id="13_iy8pe"]
+[ext_resource type="PackedScene" uid="uid://c35h63yx4uv8f" path="res://UI/window.tscn" id="13_qfudv"]
 [ext_resource type="Texture2D" uid="uid://dgwo110vph8ds" path="res://UI/theme/status_frame.png" id="13_t07bf"]
 [ext_resource type="Script" path="res://menus/lobby/gamepad_cursor.gd" id="14_satqh"]
 [ext_resource type="Script" path="res://menus/lobby/gamepad_UI_binding.gd" id="15_2qbew"]
@@ -75,10 +76,10 @@ script = ExtResource("5_h4pye")
 player_tag = NodePath("Control/Panel/Label")
 example_character_0 = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character")
 example_character_1 = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/Control/Character2")
-example_character_2 = NodePath("CenterContainer/NinePatchRect/Control/Character")
-example_character_3 = NodePath("CenterContainer/NinePatchRect/Control/Character2")
+example_character_2 = NodePath("CenterContainer/Window/anchor/Control/Character")
+example_character_3 = NodePath("CenterContainer/Window/anchor/Control/Character2")
 panel_content = NodePath("CenterContainer/VBoxContainer")
-ready_overlay = NodePath("CenterContainer/NinePatchRect")
+ready_overlay = NodePath("CenterContainer/Window")
 player_name = NodePath("Control")
 gamepad_cursor = NodePath("GamepadCursor")
 body_color_txt = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Body/BodyColor/HBoxContainer/Label")
@@ -293,44 +294,47 @@ layout_mode = 2
 layout_mode = 2
 text = "READY "
 
-[node name="NinePatchRect" type="Panel" parent="CenterContainer"]
+[node name="Window" parent="CenterContainer" instance=ExtResource("13_qfudv")]
 visible = false
 custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/NinePatchRect"]
+[node name="anchor" type="Control" parent="CenterContainer/Window"]
 layout_mode = 2
-offset_top = 7.0
-offset_right = 128.0
-offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/Window/anchor"]
+layout_mode = 2
+offset_left = -5.0
+offset_top = -7.0
+offset_right = 123.0
+offset_bottom = 26.0
 bbcode_enabled = true
 text = "[center]
 [wave amp=25
 .0 freq=5.0 connected=1][rainbow freq=1.0 sat=0.8 val=1.0]READY[/rainbow][/wave][/center]"
 metadata/_edit_lock_ = true
 
-[node name="Control" type="Control" parent="CenterContainer/NinePatchRect"]
+[node name="Control" type="Control" parent="CenterContainer/Window/anchor"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -76.0
-offset_top = -20.0
-offset_right = -76.0
-offset_bottom = -20.0
+offset_left = -76.5
+offset_top = -25.0
+offset_right = -76.5
+offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="Character" parent="CenterContainer/NinePatchRect/Control" instance=ExtResource("2_6d3b8")]
+[node name="Character" parent="CenterContainer/Window/anchor/Control" instance=ExtResource("2_6d3b8")]
 position = Vector2(44, 27)
 disabled = true
 
-[node name="Character2" parent="CenterContainer/NinePatchRect/Control" instance=ExtResource("2_6d3b8")]
+[node name="Character2" parent="CenterContainer/Window/anchor/Control" instance=ExtResource("2_6d3b8")]
 position = Vector2(106, 27)
 disabled = true
 

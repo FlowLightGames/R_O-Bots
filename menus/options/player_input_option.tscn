@@ -1,15 +1,48 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsbs004ae4h2a"]
+[gd_scene load_steps=6 format=3 uid="uid://bsbs004ae4h2a"]
 
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="1_ts18e"]
 [ext_resource type="Script" path="res://menus/options/player_input_option.gd" id="2_xoqqx"]
+[ext_resource type="Texture2D" uid="uid://33ao7gnpaje7" path="res://UI/theme/_.png" id="3_6u4ph"]
+[ext_resource type="Texture2D" uid="uid://drvidu8ip7fcn" path="res://UI/theme/[].png" id="4_17d8l"]
+[ext_resource type="Texture2D" uid="uid://bd6qdcfbs4lbc" path="res://UI/theme/x.png" id="5_sm04k"]
 
-[node name="PlayerInputOption" type="PanelContainer" node_paths=PackedStringArray("player_num_label")]
+[node name="Window" type="PanelContainer" node_paths=PackedStringArray("player_num_label")]
 custom_minimum_size = Vector2(142, 32)
-offset_right = 142.0
-offset_bottom = 32.0
+offset_left = 5.0
+offset_top = 14.0
+offset_right = 147.0
+offset_bottom = 46.0
 theme = ExtResource("1_ts18e")
 script = ExtResource("2_xoqqx")
 player_num_label = NodePath("Label")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_top = -12.0
+offset_right = 2.0
+offset_bottom = -4.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="U" type="TextureRect" parent="Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_6u4ph")
+
+[node name="F" type="TextureRect" parent="Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_17d8l")
+
+[node name="X" type="TextureRect" parent="Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_sm04k")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 17)

@@ -4,7 +4,7 @@ var player_scene:PackedScene=load("res://player_character/character.tscn")
 var pickup_scene:PackedScene=load("res://pickup/pickup.tscn")
 var bomb_out_of_bound_scene:PackedScene=load("res://bombs/bomb_out_of_bound_anim.tscn")
 var draw_overlay:PackedScene=load("res://maps/UI/draw.tscn")
-var win_overlay:PackedScene=load("res://maps/UI/CRT_Win_Screen.tscn")
+var win_overlay:PackedScene=load("res://maps/UI/Window_Win_Screen.tscn")
 var countdown_overlay:PackedScene=load("res://maps/UI/countdown.tscn")
 
 @export var spawnpoint_tilemap:TileMap
@@ -155,8 +155,8 @@ func win(player:int)->void:
 	round_timer.stop()
 	for n:PlayerCharacter in player_ref_list:
 		n.disable()
-	var tmp:WinOverlay=win_overlay.instantiate() as WinOverlay
-	tmp.old_cam=camera
+	var tmp:WindowWinOverlay=win_overlay.instantiate() as WindowWinOverlay
+	#tmp.old_cam=camera
 	tmp.set_winner(PlayerConfigs.Player_Configs[player])
 	send_round_end(player)
 	add_child(tmp)
