@@ -53,14 +53,24 @@ func _on_stage_select_pressed()->void:
 			tmp_face_texture=FacesAutoload.custom_faces[player_boxes[n].current_face_base]
 		else:
 			tmp_face_texture=FacesAutoload.preset_faces[player_boxes[n].current_face_base]
-		var tmp_meta:PlayerConfigMetaData=PlayerConfigMetaData.new(
-			player_boxes[n].current_body_base,
-			player_boxes[n].current_body_color,
-			player_boxes[n].current_face_color,
-			tmp_face_texture,
-			PickUpStats.new()
-		)
-		PlayerConfigs.Player_Configs[n]=tmp_meta
+		#var tmp_meta:PlayerConfigMetaData=PlayerConfigMetaData.new(
+			#player_boxes[n].current_body_base,
+			#player_boxes[n].current_body_color,
+			#player_boxes[n].current_face_color,
+			#tmp_face_texture,
+			#PickUpStats.new()
+		#)
+		#PlayerConfigs.Player_Configs[n]=tmp_meta
+		PlayerConfigs.Player_Configs[n].Custom_Face=player_boxes[n].current_face_custom
+		
+		PlayerConfigs.Player_Configs[n].Body_Base=player_boxes[n].current_body_base
+		PlayerConfigs.Player_Configs[n].Body_Color=player_boxes[n].current_body_color
+		PlayerConfigs.Player_Configs[n].Face_Base=player_boxes[n].current_face_base
+		PlayerConfigs.Player_Configs[n].Face_Color=player_boxes[n].current_face_color
+		
+		PlayerConfigs.Player_Configs[n].Face_Texture=tmp_face_texture
+		PlayerConfigs.Player_Configs[n].Starting_Stats=PickUpStats.new()
+	
 	MultiplayerStatus.Current_Number_Of_Players=num_of_players
 	#change to stage select
 	get_tree().change_scene_to_packed(SceneCollection.stage_select)

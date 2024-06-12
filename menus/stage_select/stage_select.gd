@@ -65,6 +65,7 @@ func _on_cancel_pressed()->void:
 	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
 		get_tree().change_scene_to_packed(SceneCollection.online_lobby)
 	else:
+		#PlayerConfigs.reset_full()
 		get_tree().change_scene_to_packed(SceneCollection.offline_lobby)
 
 func get_map_scene(index:int,size:SIZE)->PackedScene:
