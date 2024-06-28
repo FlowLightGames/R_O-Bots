@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" path="res://UI/shader/CRT.gdshader" id="1_75rkg"]
 [ext_resource type="Texture2D" uid="uid://blirwqch763b4" path="res://maps/UI/size_texture.png" id="2_2p0rl"]
-[ext_resource type="Texture2D" uid="uid://bj7d41o8lmqdm" path="res://maps/UI/scanlines.png" id="3_v0x4t"]
+[ext_resource type="Texture2D" uid="uid://bj7d41o8lmqdm" path="res://UI/overlay/scanlines.png" id="3_v0x4t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0egie"]
 resource_local_to_scene = true

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bj7d41o8lmqdm"
-path="res://.godot/imported/scanlines.png-fa17fb90ea1c3324049501d1c992f1f7.ctex"
+uid="uid://ce4r0oqiunfxq"
+path="res://.godot/imported/line.png-267f093822d39402b33ad43241c2432b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://maps/UI/scanlines.png"
-dest_files=["res://.godot/imported/scanlines.png-fa17fb90ea1c3324049501d1c992f1f7.ctex"]
+source_file="res://player_character/hook_shot/line.png"
+dest_files=["res://.godot/imported/line.png-267f093822d39402b33ad43241c2432b.ctex"]
 
 [params]
 

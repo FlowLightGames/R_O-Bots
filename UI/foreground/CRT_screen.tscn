@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c0fh1rd681v0r"]
 
 [ext_resource type="Shader" path="res://UI/shader/CRT.gdshader" id="1_2ojd0"]
-[ext_resource type="Texture2D" uid="uid://bj7d41o8lmqdm" path="res://maps/UI/scanlines.png" id="2_4sf58"]
+[ext_resource type="Texture2D" uid="uid://bj7d41o8lmqdm" path="res://UI/overlay/scanlines.png" id="2_4sf58"]
 [ext_resource type="Texture2D" uid="uid://blirwqch763b4" path="res://maps/UI/size_texture.png" id="2_eipt3"]
 [ext_resource type="Texture2D" uid="uid://dybwn6afguk2n" path="res://maps/UI/win_crt.png" id="2_lw6ko"]
 

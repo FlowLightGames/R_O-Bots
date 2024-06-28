@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b15nl8vm76x7e" path="res://player_character/shadow.png" id="7_pgdi6"]
 [ext_resource type="Shader" path="res://UI/shader/CRT.gdshader" id="9_7ahio"]
 [ext_resource type="Texture2D" uid="uid://blirwqch763b4" path="res://maps/UI/size_texture.png" id="10_8ox4x"]
-[ext_resource type="Texture2D" uid="uid://bj7d41o8lmqdm" path="res://maps/UI/scanlines.png" id="11_3sgp5"]
+[ext_resource type="Texture2D" uid="uid://bj7d41o8lmqdm" path="res://UI/overlay/scanlines.png" id="11_3sgp5"]
 [ext_resource type="Texture2D" uid="uid://dybwn6afguk2n" path="res://maps/UI/win_crt.png" id="12_m88r4"]
 [ext_resource type="PackedScene" uid="uid://5w2ex05brd33" path="res://UI/transition.tscn" id="13_ey60s"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="14_ubxp5"]
