@@ -4,7 +4,7 @@ class_name PickUpStats
 
 #CAN only have one
 enum SPECIALSTATE{
-	NONE,GUN,KNIFE,ZEUS
+	NONE,GUN,KNIFE,ZEUS,SPACE_SHIP,HOOK_SHOT
 }
 
 #Can have multiple
@@ -20,6 +20,7 @@ var LIFE_UP:int=0
 var KICKER:bool=false
 var DUNKER:bool=false
 var BRICK_WALKER:bool=false
+var BOMB_WALKER:bool=false
 var SPECIAL_STATE:SPECIALSTATE=SPECIALSTATE.NONE
 #MAP
 #0: POOP

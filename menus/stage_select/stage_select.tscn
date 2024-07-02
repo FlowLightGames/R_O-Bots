@@ -125,6 +125,9 @@ vertical_alignment = 1
 [node name="SizeInc" parent="Control/Panel/VBoxContainer/WinSelector/VBoxContainer/SizeSelect" instance=ExtResource("3_yb0gp")]
 layout_mode = 2
 
+[node name="Spacer" type="Control" parent="Control/Panel/VBoxContainer/WinSelector/VBoxContainer"]
+layout_mode = 2
+
 [node name="WinButton" parent="Control/Panel/VBoxContainer" instance=ExtResource("10_ieomm")]
 layout_mode = 2
 

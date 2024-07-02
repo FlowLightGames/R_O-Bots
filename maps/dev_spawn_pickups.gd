@@ -7,10 +7,11 @@ func spawn_pickups()->void:
 	var marked_cells:Array[Vector2i]=get_used_cells(0)
 	var number_of_marked_cells:int=marked_cells.size()
 	
-	for i:PickUp.PICKUP in PickUp.PICKUP.values():
-		#var tmp_spawn:BrickBase=(possible_spawns.pick_random() as PackedScene).instantiate()
-		var tmp_pos:Vector2i= pick_random_from_array(marked_cells)
-		spawn_pickup(tmp_pos,i)
+	for n:int in range(0,2):
+		for i:PickUp.PICKUP in PickUp.PICKUP.values():
+			#var tmp_spawn:BrickBase=(possible_spawns.pick_random() as PackedScene).instantiate()
+			var tmp_pos:Vector2i= pick_random_from_array(marked_cells)
+			spawn_pickup(tmp_pos,i)
 	clear()
 
 func spawn_pickup(pos:Vector2i,what:PickUp.PICKUP)->void:

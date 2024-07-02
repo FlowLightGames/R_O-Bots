@@ -25,6 +25,7 @@ var disabled:bool=false
 var player_ref_list:Array[PlayerCharacter]=[]
 var destroyables_ref_dict:Dictionary={}
 
+
 func _ready()->void:
 	if MultiplayerStatus.Current_Status==MultiplayerStatus.STATE.ONLINE_MULTIPLAYER:
 		seed(SteamLobby.random_seed)
@@ -200,7 +201,7 @@ func spawn_players(how_many:int)->void:
 		for n:int in range(0,how_many):
 			var spawn:Vector2i=possible_spawns.pick_random()
 			var character:PlayerCharacter=player_scene.instantiate() as PlayerCharacter
-			#imprtant to set first
+			#imprtant to set wst
 			character.Player_Number=n
 			player_nodes.add_child(character)
 			

@@ -13,30 +13,48 @@ var gunshot:PackedScene=load("res://player_character/gun_knife/gun_shot.tscn") a
 var zeus_lightning:PackedScene=load("res://player_character/zeus/zeus_lightning.tscn") as PackedScene
 var fart:PackedScene=load("res://player_character/fart/fart.tscn") as PackedScene
 var fire_ball:PackedScene=load("res://player_character/fire/fire_ball.tscn") as PackedScene
+var space_ship_pew:PackedScene=load("res://player_character/space_ship/pew.tscn") as PackedScene
+var hook_shot:PackedScene=load("res://player_character/hook_shot/hook_shot.tscn") as PackedScene
 
 @export var name_label:Label
 @export var BodyAnimation:AnimationPlayer
 @export var FaceAnimation:AnimationPlayer
 @export var IFramesAnimation:AnimationPlayer
+
+@export_category("Visuals")
 @export var Face:Sprite2D
 @export var Body:Sprite2D
-@export var bomb_place_check:RayCast2D
 @export var KnifeGunSprite:Sprite2D
+@export var SpaceShip:Sprite2D
+
+@export_category("Checks")
+@export var bomb_place_check:RayCast2D
 @export var ZeusReticle:Node2D
 @export var KnifeHurtBox:CollisionShape2D
 @export var GunRayCast:RayCast2D
 @export var KickerRayCast:RayCast2D
 @export var DunkerRayCast:RayCast2D
+
+
 #TIMERS
+@export_category("Timers")
 @export var fart_timer:Timer
 @export var fire_timer:Timer
 @export var death_timer:Timer
+@export var space_ship_timer:Timer
+@export var space_ship_shoot_timer:Timer
 #AUDIO
+@export_category("Audio")
 @export var gunshot_audio:AudioStreamPlayer
 @export var knifeshiv_audio:AudioStreamPlayer
+@export var space_pew_audio:AudioStreamPlayer
+
+@export_category("")
+
+@export var disabled:bool=false
 
 var i_frames:bool=false
-@export var disabled:bool=false
+var movement_blocked:bool=false
 #for multiplayer so we dont control other players
 var is_puppet:bool=false
 var moving:bool=false
@@ -53,6 +71,10 @@ var Player_Number:int=0
 var Player_Name:String
 
 const BASE_MOVEMENT_SPEED:int=60
+const space_ship_duraction:float=8.0
+const space_ship_shoot_cd:float=0.5
+
+var space_ship_can_shoot:bool=true
 
 @export var map:MapBase
 
@@ -167,6 +189,8 @@ func picked_up(what:PickUp.PICKUP)->void:
 			Pickup_Stats.DUNKER=true
 		PickUp.PICKUP.BRICK_WALKER:
 			Pickup_Stats.BRICK_WALKER=true
+		PickUp.PICKUP.BOMB_WALKER:
+			Pickup_Stats.BOMB_WALKER=true
 		#SPECIAL YET
 		PickUp.PICKUP.PILL:
 			var possible_pickups:Array=PickUp.PICKUP.values()
@@ -180,6 +204,9 @@ func picked_up(what:PickUp.PICKUP)->void:
 			Pickup_Stats.add_state(PickUpStats.STATE.FIRE)
 		PickUp.PICKUP.FART:
 			Pickup_Stats.add_state(PickUpStats.STATE.FART)
+		PickUp.PICKUP.SPACE_SHIP:
+			Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.SPACE_SHIP
+			space_ship_timer.start(space_ship_duraction)
 		#KIFE_GUN
 		PickUp.PICKUP.GUN:
 			Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.GUN
@@ -187,6 +214,8 @@ func picked_up(what:PickUp.PICKUP)->void:
 			Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.KNIFE
 		PickUp.PICKUP.ZEUS:
 			Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.ZEUS
+		PickUp.PICKUP.HOOK_SHOT:
+			Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.HOOK_SHOT
 		_:
 			pass
 	Pickup_Stats.clamp_stats()
@@ -209,7 +238,21 @@ func update_state()->void:
 				ZeusReticle.visible=true
 				KnifeGunSprite.frame=0
 				KnifeHurtBox.set_deferred("disabled",true)
+			Pickup_Stats.SPECIALSTATE.HOOK_SHOT:
+				ZeusReticle.visible=false
+				KnifeGunSprite.frame=3
+				KnifeHurtBox.set_deferred("disabled",true)
+			PickUpStats.SPECIALSTATE.SPACE_SHIP:
+				BodyAnimation.stop()
+				Body.visible=false
+				Face.visible=false
+				SpaceShip.visible=true
+				ZeusReticle.visible=false
+				KnifeGunSprite.frame=0
+				KnifeHurtBox.set_deferred("disabled",true)
 			_:
+				Body.visible=true
+				SpaceShip.visible=false
 				ZeusReticle.position=position
 				ZeusReticle.visible=false
 				KnifeGunSprite.frame=0
@@ -218,6 +261,10 @@ func update_state()->void:
 			set_collision_mask_value(4,false)
 		else:
 			set_collision_mask_value(4,true)
+		if Pickup_Stats.BOMB_WALKER:
+			set_collision_mask_value(9,false)
+		else:
+			set_collision_mask_value(9,true)
 		if Pickup_Stats.KICKER:
 			KickerRayCast.enabled=true
 		else :
@@ -247,17 +294,29 @@ func die()->void:
 		death_timer.start(0.6)
 
 func action_one()->void:
-	bomb_place_check.force_raycast_update()
-	if !(bomb_place_check.is_colliding()):
-		place_bomb()
-	else:
-		throw_bomb()
+	match Pickup_Stats.SPECIAL_STATE:
+				PickUpStats.SPECIALSTATE.SPACE_SHIP:
+					if space_ship_can_shoot:
+						space_ship_can_shoot=false
+						space_ship_shoot_timer.start(space_ship_shoot_cd)
+						fire_pew()
+						send_taken_action(PlayerState.ACTIONS.PEW_FIRED)
+				_:
+					bomb_place_check.force_raycast_update()
+					if !(bomb_place_check.is_colliding()):
+						place_bomb()
+					else:
+						throw_bomb()
+	
 
 func action_two()->void:
 	detonate_bomb()
 	match Pickup_Stats.SPECIAL_STATE:
 				PickUpStats.SPECIALSTATE.GUN:
 					fire_gun()
+					send_taken_action(PlayerState.ACTIONS.GUN_FIRED)
+				PickUpStats.SPECIALSTATE.HOOK_SHOT:
+					fire_hook()
 					send_taken_action(PlayerState.ACTIONS.GUN_FIRED)
 				_:
 					pass
@@ -353,6 +412,25 @@ func fire_gun()->void:
 			(hit_target as PlayerCharacter).damage()
 	update_state()
 
+func fire_hook()->void:
+	var view_direction_4_way:Vector2i=get_priority_4_way_direction(current_view_direction)
+	Pickup_Stats.SPECIAL_STATE=PickUpStats.SPECIALSTATE.NONE
+	var tmp_hookshot:HookShot=hook_shot.instantiate() as HookShot
+	
+	tmp_hookshot.direction=view_direction_4_way
+	tmp_hookshot.position=Vector2((roundi(position.x)/16)*16+(signi(position.x)*8),(roundi(position.y)/16)*16+(signi(position.y)*8))
+	tmp_hookshot.current_map=map
+	tmp_hookshot.ignored_bodies.append(self)
+	get_parent().add_child(tmp_hookshot)
+	update_state()
+
+func fire_pew()->void:
+	var tmp:Pew=space_ship_pew.instantiate() as Pew
+	tmp.position=position+Vector2(8*get_priority_4_way_direction(current_view_direction))
+	tmp.direction=get_priority_4_way_direction(current_view_direction)
+	tmp.ignored_bodies.append(self)
+	get_parent().add_child(tmp)
+
 func get_priority_4_way_direction(input:Vector2i)->Vector2i:
 	var output:Vector2i=Vector2i.ZERO
 	if input.y==0:
@@ -401,6 +479,51 @@ func apply_player_state(player_state:PlayerState)->void:
 		_:
 			pass
 
+func basic_movement()->void:
+	var move_vec:Vector2i=Vector2i.ZERO
+	move_vec.x+=-int(Input.is_action_pressed(Action_LEFT))+int(Input.is_action_pressed(Action_RIGHT))
+	move_vec.y+=-int(Input.is_action_pressed(Action_UP))+int(Input.is_action_pressed(Action_DOWN))
+	
+	var animation_string:String=""
+	var tmp_moving:bool=false
+	
+	if move_vec!=Vector2i.ZERO:
+		tmp_moving=true
+		if move_vec!=current_view_direction:
+			flagged_for_sync=true
+		current_view_direction=move_vec
+		animation_string+="run_"
+	else:
+		animation_string+="idle_"
+		tmp_moving=false
+	
+	if tmp_moving!=moving:
+		flagged_for_sync=true
+	moving=tmp_moving
+	
+	match current_view_direction.y:
+		1:
+			front_back="front_"
+		-1:
+			front_back="back_"
+		_:
+			if current_view_direction.x!=0:
+				front_back="front_"
+	
+	match current_view_direction.x:
+		1:
+			left_right="right"
+		-1:
+			left_right="left"
+		_:
+			pass
+	if Pickup_Stats.SPECIAL_STATE!=Pickup_Stats.SPECIALSTATE.SPACE_SHIP:
+		BodyAnimation.play(animation_string+front_back+left_right)
+	var normalized_move_vec:Vector2=Vector2(move_vec).normalized()
+	velocity=normalized_move_vec*BASE_MOVEMENT_SPEED*(Pickup_Stats.get_speed_scale())
+	if !movement_blocked:
+		move_and_slide()
+
 func handle_passive_actions()->void:
 	KickerRayCast.rotation=Vector2(get_priority_4_way_direction(current_view_direction)).angle()-0.5*PI
 	var kicker_target:Object=KickerRayCast.get_collider()
@@ -438,7 +561,6 @@ func send_taken_action(input:PlayerState.ACTIONS)->void:
 			var player_state:PlayerState=get_player_state()
 			player_state.taken_action=input
 			SteamLobby.send_p2p_packet(0,Steam.P2P_SEND_UNRELIABLE_NO_DELAY,PackageConstructor.player_state_update(player_state))
-			#TODO send the thing
 		else:
 			#TODO HOST CASE
 			var player_state:PlayerState=get_player_state()
@@ -450,6 +572,7 @@ func _physics_process(_delta:float)->void:
 		#if this is your PC
 		if !is_puppet:
 			flagged_for_sync=false
+			#ZEUS STATE
 			if Pickup_Stats.SPECIAL_STATE==PickUpStats.SPECIALSTATE.ZEUS:
 				BodyAnimation.play("zeus")
 				var move_vec:Vector2i=Vector2i.ZERO
@@ -464,49 +587,26 @@ func _physics_process(_delta:float)->void:
 					
 					ZeusReticle.visible=false
 					ZeusReticle.position=Vector2.ZERO
-			else:
-				var move_vec:Vector2i=Vector2i.ZERO
-				move_vec.x+=-int(Input.is_action_pressed(Action_LEFT))+int(Input.is_action_pressed(Action_RIGHT))
-				move_vec.y+=-int(Input.is_action_pressed(Action_UP))+int(Input.is_action_pressed(Action_DOWN))
-				
-				var animation_string:String=""
-				var tmp_moving:bool=false
-				
-				if move_vec!=Vector2i.ZERO:
-					tmp_moving=true
-					if move_vec!=current_view_direction:
-						flagged_for_sync=true
-					current_view_direction=move_vec
-					animation_string+="run_"
-				else:
-					animation_string+="idle_"
-					tmp_moving=false
-				
-				if tmp_moving!=moving:
-					flagged_for_sync=true
-				moving=tmp_moving
-				
-				match current_view_direction.y:
-					1:
-						front_back="front_"
-					-1:
-						front_back="back_"
-					_:
-						if current_view_direction.x!=0:
-							front_back="front_"
-				
-				match current_view_direction.x:
-					1:
-						left_right="right"
-					-1:
-						left_right="left"
+			
+			elif Pickup_Stats.SPECIAL_STATE==Pickup_Stats.SPECIALSTATE.SPACE_SHIP:
+				basic_movement()
+				var dir:Vector2i=get_priority_4_way_direction(current_view_direction)
+				match dir:
+					Vector2i(1,0):
+						SpaceShip.frame=3
+					Vector2i(-1,0):
+						SpaceShip.frame=1
+					Vector2i(0,1):
+						SpaceShip.frame=2
+					Vector2i(0,-1):
+						SpaceShip.frame=0
 					_:
 						pass
-				
-				BodyAnimation.play(animation_string+front_back+left_right)
-				var normalized_move_vec:Vector2=Vector2(move_vec).normalized()
-				velocity=normalized_move_vec*BASE_MOVEMENT_SPEED*(Pickup_Stats.get_speed_scale())
-				move_and_slide()
+				if Input.is_action_just_pressed(Action_0):
+					action_one()
+			#NORMAL
+			else:
+				basic_movement()
 				
 				handle_passive_actions()
 				
@@ -589,3 +689,11 @@ func _on_fire_timer_timeout()->void:
 	tmp.direction=get_priority_4_way_direction(current_view_direction)
 	tmp.ignored_bodies.append(self)
 	get_parent().add_child(tmp)
+
+func _on_space_ship_timer_timeout()->void:
+	if Pickup_Stats.SPECIAL_STATE==Pickup_Stats.SPECIALSTATE.SPACE_SHIP:
+		Pickup_Stats.SPECIAL_STATE=Pickup_Stats.SPECIALSTATE.NONE
+		update_state()
+
+func _on_space_ship_shoot_timer_timeout()->void:
+	space_ship_can_shoot=true

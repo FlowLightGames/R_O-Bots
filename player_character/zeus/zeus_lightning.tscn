@@ -95,6 +95,7 @@ dmg_raycast = NodePath("DamageRayCast")
 lightning_sprite = NodePath("Lightning")
 
 [node name="Lightning" type="Sprite2D" parent="."]
+texture_repeat = 2
 material = SubResource("ShaderMaterial_lna21")
 position = Vector2(-16, -352)
 texture = ExtResource("1_2b0eq")
@@ -102,9 +103,8 @@ centered = false
 hframes = 3
 
 [node name="DamageRayCast" type="RayCast2D" parent="."]
-position = Vector2(0, -4)
 enabled = false
-target_position = Vector2(0, 8)
+target_position = Vector2(0, -0.5)
 collision_mask = 15
 hit_from_inside = true
 

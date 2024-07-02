@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cd27yl8tl5qd6"]
+[gd_scene load_steps=46 format=3 uid="uid://cd27yl8tl5qd6"]
 
 [ext_resource type="Script" path="res://player_character/character.gd" id="1_arre1"]
 [ext_resource type="Texture2D" uid="uid://dtjkf0bsqsk5m" path="res://player_character/base_character_sprite.png" id="1_gp3n5"]
@@ -8,11 +8,13 @@
 [ext_resource type="Shader" path="res://player_character/character_face.gdshader" id="5_6tn1k"]
 [ext_resource type="Texture2D" uid="uid://bw335sbq0nqxa" path="res://player_character/face_base_color_palette.png" id="5_er4tu"]
 [ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="6_hlhnq"]
+[ext_resource type="Texture2D" uid="uid://ycc2v2bkvwm" path="res://player_character/space_ship/space_ship.png" id="6_x1a8a"]
 [ext_resource type="Texture2D" uid="uid://bwy8smpq2xf1" path="res://player_character/gun_knife/knife_gun.png" id="9_i1ueb"]
 [ext_resource type="Texture2D" uid="uid://obuc3onp21l3" path="res://player_character/zeus/zeus_reticle.png" id="10_lcotw"]
 [ext_resource type="AudioStream" uid="uid://bekw1o1jffch2" path="res://player_character/gun_knife/gun.wav" id="11_gfy4j"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="11_tx0pb"]
 [ext_resource type="AudioStream" uid="uid://b4eto78885q1g" path="res://player_character/gun_knife/knife.wav" id="12_to44d"]
+[ext_resource type="AudioStream" uid="uid://c4vfgwyn06aas" path="res://player_character/space_ship/pew.wav" id="14_r82iq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qqfp6"]
 radius = 6.0
@@ -23,6 +25,44 @@ shader = ExtResource("3_ykf1j")
 shader_parameter/Max_types = 8
 shader_parameter/Type = 7
 shader_parameter/palett = ExtResource("2_hxxlk")
+
+[sub_resource type="Animation" id="Animation_bpyc8"]
+resource_name = "Default"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, -1), Vector2(0, -2), Vector2(0, -3), Vector2(0, -2), Vector2(0, -1)]
+}
+
+[sub_resource type="Animation" id="Animation_6ss0t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, -1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3im33"]
+_data = {
+"Default": SubResource("Animation_bpyc8"),
+"RESET": SubResource("Animation_6ss0t")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hbvyt"]
 resource_local_to_scene = true
@@ -100,7 +140,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Visuals/KinfeGun:position")
+tracks/5/path = NodePath("Visuals/KinfeGunHook:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -112,7 +152,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Visuals/KinfeGun:scale")
+tracks/6/path = NodePath("Visuals/KinfeGunHook:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -124,7 +164,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Visuals/KinfeGun:visible")
+tracks/7/path = NodePath("Visuals/KinfeGunHook:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -136,7 +176,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Visuals/KinfeGun:show_behind_parent")
+tracks/8/path = NodePath("Visuals/KinfeGunHook:show_behind_parent")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -277,7 +317,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Visuals/KinfeGun:show_behind_parent")
+tracks/4/path = NodePath("Visuals/KinfeGunHook:show_behind_parent")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -289,7 +329,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Visuals/KinfeGun:scale")
+tracks/5/path = NodePath("Visuals/KinfeGunHook:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -354,7 +394,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Visuals/KinfeGun:show_behind_parent")
+tracks/4/path = NodePath("Visuals/KinfeGunHook:show_behind_parent")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -366,7 +406,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Visuals/KinfeGun:scale")
+tracks/5/path = NodePath("Visuals/KinfeGunHook:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -443,7 +483,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Visuals/KinfeGun:position")
+tracks/5/path = NodePath("Visuals/KinfeGunHook:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -455,7 +495,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Visuals/KinfeGun:scale")
+tracks/6/path = NodePath("Visuals/KinfeGunHook:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -467,7 +507,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Visuals/KinfeGun:visible")
+tracks/7/path = NodePath("Visuals/KinfeGunHook:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -479,7 +519,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Visuals/KinfeGun:show_behind_parent")
+tracks/8/path = NodePath("Visuals/KinfeGunHook:show_behind_parent")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -556,7 +596,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Visuals/KinfeGun:position")
+tracks/5/path = NodePath("Visuals/KinfeGunHook:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -568,7 +608,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Visuals/KinfeGun:scale")
+tracks/6/path = NodePath("Visuals/KinfeGunHook:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -580,7 +620,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Visuals/KinfeGun:visible")
+tracks/7/path = NodePath("Visuals/KinfeGunHook:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -592,7 +632,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Visuals/KinfeGun:show_behind_parent")
+tracks/8/path = NodePath("Visuals/KinfeGunHook:show_behind_parent")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -747,7 +787,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Visuals/KinfeGun:show_behind_parent")
+tracks/4/path = NodePath("Visuals/KinfeGunHook:show_behind_parent")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -759,7 +799,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Visuals/KinfeGun:position")
+tracks/5/path = NodePath("Visuals/KinfeGunHook:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -771,7 +811,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Visuals/KinfeGun:scale")
+tracks/6/path = NodePath("Visuals/KinfeGunHook:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -836,7 +876,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Visuals/KinfeGun:show_behind_parent")
+tracks/4/path = NodePath("Visuals/KinfeGunHook:show_behind_parent")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -848,7 +888,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Visuals/KinfeGun:position")
+tracks/5/path = NodePath("Visuals/KinfeGunHook:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -860,7 +900,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Visuals/KinfeGun:scale")
+tracks/6/path = NodePath("Visuals/KinfeGunHook:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -937,7 +977,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Visuals/KinfeGun:position")
+tracks/5/path = NodePath("Visuals/KinfeGunHook:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -949,7 +989,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Visuals/KinfeGun:scale")
+tracks/6/path = NodePath("Visuals/KinfeGunHook:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -961,7 +1001,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Visuals/KinfeGun:visible")
+tracks/7/path = NodePath("Visuals/KinfeGunHook:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -973,7 +1013,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Visuals/KinfeGun:show_behind_parent")
+tracks/8/path = NodePath("Visuals/KinfeGunHook:show_behind_parent")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -1050,7 +1090,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Visuals/KinfeGun:position")
+tracks/5/path = NodePath("Visuals/KinfeGunHook:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -1062,7 +1102,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Visuals/KinfeGun:scale")
+tracks/6/path = NodePath("Visuals/KinfeGunHook:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1074,7 +1114,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Visuals/KinfeGun:visible")
+tracks/7/path = NodePath("Visuals/KinfeGunHook:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -1086,7 +1126,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Visuals/KinfeGun:show_behind_parent")
+tracks/8/path = NodePath("Visuals/KinfeGunHook:show_behind_parent")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -1297,7 +1337,7 @@ shader_parameter/Max_types = 8
 shader_parameter/Type = 7
 shader_parameter/palett = ExtResource("2_hxxlk")
 
-[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("name_label", "BodyAnimation", "FaceAnimation", "IFramesAnimation", "Face", "Body", "bomb_place_check", "KnifeGunSprite", "ZeusReticle", "KnifeHurtBox", "GunRayCast", "KickerRayCast", "DunkerRayCast", "fart_timer", "fire_timer", "death_timer", "gunshot_audio", "knifeshiv_audio")]
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("name_label", "BodyAnimation", "FaceAnimation", "IFramesAnimation", "Face", "Body", "KnifeGunSprite", "SpaceShip", "bomb_place_check", "ZeusReticle", "KnifeHurtBox", "GunRayCast", "KickerRayCast", "DunkerRayCast", "fart_timer", "fire_timer", "death_timer", "space_ship_timer", "space_ship_shoot_timer", "gunshot_audio", "knifeshiv_audio")]
 z_index = 2
 collision_mask = 280
 motion_mode = 1
@@ -1308,16 +1348,19 @@ FaceAnimation = NodePath("Visuals/FaceAnimation")
 IFramesAnimation = NodePath("Visuals/IFramesAnimation")
 Face = NodePath("Visuals/Face")
 Body = NodePath("Visuals/Body")
+KnifeGunSprite = NodePath("Visuals/KinfeGunHook/Holding")
+SpaceShip = NodePath("Visuals/SpaceShip")
 bomb_place_check = NodePath("PlaceableBombCheck")
-KnifeGunSprite = NodePath("Visuals/KinfeGun/Holding")
 ZeusReticle = NodePath("Visuals/ZeusReticle")
 KnifeHurtBox = NodePath("KifeDmgArea/CollisionShape2D")
 GunRayCast = NodePath("GunCast2D")
 KickerRayCast = NodePath("KickerCast2D")
 DunkerRayCast = NodePath("DunkerCast2D")
-fart_timer = NodePath("FartTimer")
-fire_timer = NodePath("FireTimer")
-death_timer = NodePath("DeathTimer")
+fart_timer = NodePath("Timers/FartTimer")
+fire_timer = NodePath("Timers/FireTimer")
+death_timer = NodePath("Timers/DeathTimer")
+space_ship_timer = NodePath("Timers/SpaceShipTimer")
+space_ship_shoot_timer = NodePath("Timers/SpaceShipShootTimer")
 gunshot_audio = NodePath("Audio/GunShot")
 knifeshiv_audio = NodePath("Audio/KnifeShiv")
 metadata/_edit_lock_ = true
@@ -1343,17 +1386,38 @@ z_index = 1
 z_as_relative = false
 texture = ExtResource("2_kidny")
 
+[node name="SpaceShip" type="Sprite2D" parent="Visuals"]
+visible = false
+position = Vector2(0, 12)
+texture = ExtResource("6_x1a8a")
+offset = Vector2(0, -1)
+hframes = 4
+frame = 2
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Shadow" type="Sprite2D" parent="Visuals/SpaceShip"]
+show_behind_parent = true
+position = Vector2(0, -12)
+texture = ExtResource("2_kidny")
+
+[node name="Bobbing" type="AnimationPlayer" parent="Visuals/SpaceShip"]
+libraries = {
+"": SubResource("AnimationLibrary_3im33")
+}
+autoplay = "Default"
+
 [node name="Face" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_hbvyt")
 position = Vector2(-1, 1)
 vframes = 2
 
-[node name="KinfeGun" type="Node2D" parent="Visuals"]
+[node name="KinfeGunHook" type="Node2D" parent="Visuals"]
 
-[node name="Holding" type="Sprite2D" parent="Visuals/KinfeGun"]
+[node name="Holding" type="Sprite2D" parent="Visuals/KinfeGunHook"]
 position = Vector2(-6, 7)
 texture = ExtResource("9_i1ueb")
-hframes = 3
+hframes = 4
 
 [node name="BodyAnimation" type="AnimationPlayer" parent="Visuals"]
 root_node = NodePath("../..")
@@ -1400,6 +1464,9 @@ bus = &"SFX"
 stream = ExtResource("12_to44d")
 bus = &"SFX"
 
+[node name="SpaceShipPew" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("14_r82iq")
+
 [node name="KifeDmgArea" type="Area2D" parent="."]
 scale = Vector2(1, -1)
 collision_layer = 0
@@ -1431,13 +1498,6 @@ collision_mask = 28
 hit_from_inside = true
 collide_with_areas = true
 
-[node name="DeathTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="FartTimer" type="Timer" parent="."]
-
-[node name="FireTimer" type="Timer" parent="."]
-
 [node name="Label" type="Label" parent="."]
 visible = false
 self_modulate = Color(0.74978, 0.74978, 0.74978, 1)
@@ -1452,9 +1512,26 @@ horizontal_alignment = 1
 vertical_alignment = 1
 text_overrun_behavior = 1
 
+[node name="Timers" type="Node" parent="."]
+
+[node name="FireTimer" type="Timer" parent="Timers"]
+
+[node name="FartTimer" type="Timer" parent="Timers"]
+
+[node name="DeathTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="SpaceShipTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="SpaceShipShootTimer" type="Timer" parent="Timers"]
+one_shot = true
+
 [connection signal="animation_finished" from="Visuals/BodyAnimation" to="." method="_on_body_animation_animation_finished"]
 [connection signal="animation_finished" from="Visuals/IFramesAnimation" to="." method="_on_i_frames_animation_animation_finished"]
 [connection signal="body_entered" from="KifeDmgArea" to="." method="_on_kife_dmg_area_body_entered"]
-[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
-[connection signal="timeout" from="FartTimer" to="." method="_on_fart_timer_timeout"]
-[connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]
+[connection signal="timeout" from="Timers/FireTimer" to="." method="_on_fire_timer_timeout"]
+[connection signal="timeout" from="Timers/FartTimer" to="." method="_on_fart_timer_timeout"]
+[connection signal="timeout" from="Timers/DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="Timers/SpaceShipTimer" to="." method="_on_space_ship_timer_timeout"]
+[connection signal="timeout" from="Timers/SpaceShipShootTimer" to="." method="_on_space_ship_shoot_timer_timeout"]

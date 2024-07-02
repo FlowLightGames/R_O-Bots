@@ -2,7 +2,7 @@
 1:shadows
 2:interactables
 3:explosion,
-4:tilemap over layer
+4:tilemap over layer, hookshot
 5:flying bomb, bomb_out_of_bounds_anim, zeus-reticle
 
 layer -1: BG

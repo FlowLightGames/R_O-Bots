@@ -7,9 +7,9 @@ enum PICKUP{
 	LIFE_UP,FIRE_UP,BOMB_UP,SPEED_UP,
 	LIFE_DOWN,FIRE_DOWN,BOMB_DOWN,SPEED_DOWN,
 	LIFE_MAX,FIRE_MAX,BOMB_MAX,SPEED_MAX,
-	KICKER,DUNKER,BRICK_WALKER,
-	PILL,POOP,FIRE,FART,
-	KNIFE,GUN,ZEUS
+	KICKER,DUNKER,BRICK_WALKER,BOMB_WALKER,
+	PILL,POOP,FIRE,FART,SPACE_SHIP,
+	KNIFE,GUN,ZEUS,HOOK_SHOT,
 }
 
 @export var type:PICKUP
@@ -71,6 +71,8 @@ static func get_item_index(what:PICKUP)->Vector2i:
 			return Vector2i(1,4)
 		PICKUP.BRICK_WALKER:
 			return Vector2i(2,4)
+		PICKUP.BOMB_WALKER:
+			return Vector2i(3,4)
 		##CATCHALL#
 		PICKUP.PILL:
 			return Vector2i(0,5)
@@ -80,6 +82,8 @@ static func get_item_index(what:PICKUP)->Vector2i:
 			return Vector2i(2,5)
 		PICKUP.FART:
 			return Vector2i(3,5)
+		PICKUP.SPACE_SHIP:
+			return Vector2i(4,5)
 		#SPECIAL_STATES
 		PICKUP.KNIFE:
 			return Vector2i(0,6)
@@ -87,6 +91,8 @@ static func get_item_index(what:PICKUP)->Vector2i:
 			return Vector2i(1,6)
 		PICKUP.ZEUS:
 			return Vector2i(2,6)
+		PICKUP.HOOK_SHOT:
+			return Vector2i(3,6)
 		_:
 			return Vector2i(0,0)
 

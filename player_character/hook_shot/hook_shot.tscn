@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://cesbbjo5y2mad"]
+
+[ext_resource type="Texture2D" uid="uid://ce4r0oqiunfxq" path="res://player_character/hook_shot/line.png" id="1_1vha6"]
+[ext_resource type="Script" path="res://player_character/hook_shot/hook_shot.gd" id="1_wcccq"]
+[ext_resource type="Texture2D" uid="uid://c7juvlb6oyraf" path="res://player_character/hook_shot/hook.png" id="2_lx118"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yify8"]
+size = Vector2(14, 14)
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("head", "line")]
+z_index = 4
+script = ExtResource("1_wcccq")
+head = NodePath("Area2D")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+rotation = 6.28319
+points = PackedVector2Array(0, 0, 8, 0)
+width = 4.0
+texture = ExtResource("1_1vha6")
+texture_mode = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(8, 0)
+collision_layer = 0
+collision_mask = 31
+monitoring = false
+monitorable = false
+metadata/_edit_group_ = true
+
+[node name="End" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("2_lx118")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_yify8")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cipy31rjo7rl"]
+
+[ext_resource type="Texture2D" uid="uid://bs8bfte5ttpab" path="res://player_character/space_ship/space_ship_shot.png" id="1_17xax"]
+[ext_resource type="Script" path="res://player_character/space_ship/pew.gd" id="1_upccm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dc2s"]
+size = Vector2(4, 4)
+
+[node name="Area2D" type="Area2D" node_paths=PackedStringArray("sprite")]
+z_index = 2
+collision_layer = 0
+collision_mask = 27
+script = ExtResource("1_upccm")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_17xax")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5dc2s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
