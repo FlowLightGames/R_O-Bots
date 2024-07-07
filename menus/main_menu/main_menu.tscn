@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://b33a2c617wpeh"]
+[gd_scene load_steps=41 format=3 uid="uid://b33a2c617wpeh"]
 
 [ext_resource type="Script" path="res://menus/main_menu/main_menu.gd" id="1_wv75o"]
 [ext_resource type="Texture2D" uid="uid://du2ycui0mnds2" path="res://UI/word_art/GAME_START.png" id="2_iwafk"]
@@ -25,9 +25,7 @@
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="23_h0oec"]
 [ext_resource type="PackedScene" uid="uid://boh6gftujg2q0" path="res://UI/background/window_bg_100.tscn" id="24_bbiac"]
 [ext_resource type="FontFile" uid="uid://binhnkh0687qg" path="res://UI/font/LanaPixel.ttf" id="24_endfs"]
-[ext_resource type="PackedScene" uid="uid://bb0r2bc2muya7" path="res://menus/main_menu/memes/gun.tscn" id="25_f0ets"]
 [ext_resource type="PackedScene" uid="uid://ddx01qsshkpmh" path="res://menus/main_menu/memes/god_r.tscn" id="26_1jxwv"]
-[ext_resource type="PackedScene" uid="uid://cxvndwy1rfyhy" path="res://menus/main_menu/memes/knife.tscn" id="26_dkgpn"]
 [ext_resource type="PackedScene" uid="uid://b6hbc7e77ncf1" path="res://menus/main_menu/memes/god_l.tscn" id="27_dnwu7"]
 [ext_resource type="Shader" path="res://UI/shader/palette_swap.gdshader" id="31_5bp4f"]
 [ext_resource type="Texture2D" uid="uid://00et7mgdndui" path="res://player_character/base_color_palette.png" id="32_cl2uc"]
@@ -425,17 +423,11 @@ offset = Vector2(0, -112)
 
 [node name="god_l" parent="Memes" instance=ExtResource("27_dnwu7")]
 z_index = -8
-position = Vector2(170, 84)
+position = Vector2(78, 261)
 
 [node name="god_r" parent="Memes" instance=ExtResource("26_1jxwv")]
 z_index = -8
-position = Vector2(459, 67)
-
-[node name="MemeBase" parent="Memes" instance=ExtResource("25_f0ets")]
-position = Vector2(535, 228)
-
-[node name="MemeBase2" parent="Memes" instance=ExtResource("26_dkgpn")]
-position = Vector2(136, 248)
+position = Vector2(559, 135)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../CRT/Static")

@@ -16,6 +16,7 @@ shader_parameter/displacement_map = ExtResource("4_ck8eh")
 [node name="MemeBase" instance=ExtResource("1_e1xtq")]
 
 [node name="Window" parent="." index="0"]
+visible = false
 offset_left = -80.0
 offset_top = -69.0
 offset_right = 95.0
@@ -28,6 +29,7 @@ texture = ExtResource("2_oy1w1")
 material = SubResource("ShaderMaterial_snus0")
 
 [node name="Label" parent="." index="2"]
+visible = false
 offset_left = -77.0
 offset_top = -68.0
 offset_right = -31.0

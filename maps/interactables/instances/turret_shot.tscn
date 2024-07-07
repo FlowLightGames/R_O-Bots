@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://344lqkdk3gla"]
+
+[ext_resource type="Texture2D" uid="uid://b6yw4kxdh85ym" path="res://maps/interactables/pellet.png" id="1_awkfi"]
+[ext_resource type="Script" path="res://maps/interactables/instances/turret_shot.gd" id="1_kmvc8"]
+[ext_resource type="Texture2D" uid="uid://0wst5lx5ombe" path="res://maps/interactables/pellet_shadow.png" id="3_sobkp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_anceo"]
+size = Vector2(6, 6)
+
+[node name="Area2D" type="Area2D"]
+z_index = 2
+collision_layer = 0
+collision_mask = 17
+script = ExtResource("1_kmvc8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = ExtResource("1_awkfi")
+
+[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
+z_index = 1
+z_as_relative = false
+position = Vector2(0, 6)
+texture = ExtResource("3_sobkp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_anceo")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

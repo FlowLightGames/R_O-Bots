@@ -17,6 +17,7 @@ shader_parameter/displacement_map = ExtResource("4_eod37")
 [node name="MemeBase" instance=ExtResource("1_1pfm3")]
 
 [node name="Window" parent="." index="0"]
+visible = false
 offset_left = -36.0
 offset_top = -36.0
 offset_right = 37.0

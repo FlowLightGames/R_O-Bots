@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d3x5kj41il137"]
+[gd_scene load_steps=25 format=3 uid="uid://d3x5kj41il137"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_jbrmr"]
 [ext_resource type="Texture2D" uid="uid://cvp6agl5khasp" path="res://maps/tilesets/builder.png" id="2_fsvjj"]
@@ -8,12 +8,14 @@
 [ext_resource type="Texture2D" uid="uid://dn77v8fftvbnl" path="res://maps/tilesets/default.png" id="4_hgf8r"]
 [ext_resource type="PackedScene" uid="uid://c7fkhop3q3tp0" path="res://maps/interactables/instances/danger_lightning.tscn" id="5_uuyyg"]
 [ext_resource type="PackedScene" uid="uid://b164ejct0nrup" path="res://maps/interactables/instances/redirect_d.tscn" id="6_1g6qr"]
+[ext_resource type="PackedScene" uid="uid://cfdvrr6oqurft" path="res://maps/interactables/instances/portal_0.tscn" id="6_buat1"]
 [ext_resource type="PackedScene" uid="uid://bthyc8utjqbym" path="res://maps/interactables/instances/redirect_l.tscn" id="7_blseq"]
 [ext_resource type="PackedScene" uid="uid://sgj42a0vhqxd" path="res://maps/interactables/instances/redirect_r.tscn" id="8_l1607"]
 [ext_resource type="PackedScene" uid="uid://dp7rwu7555ctg" path="res://maps/interactables/instances/redirect_u.tscn" id="9_lmjee"]
 [ext_resource type="PackedScene" uid="uid://dvmhesayqhg82" path="res://maps/statics/instances/default_0.tscn" id="10_y57ms"]
 [ext_resource type="Texture2D" uid="uid://g3tlmg8rcqwx" path="res://UI/theme/exit.png" id="11_3up0c"]
 [ext_resource type="Script" path="res://maps/dev_spawn_pickups.gd" id="12_gpt01"]
+[ext_resource type="PackedScene" uid="uid://dln4e6jh8nx6j" path="res://maps/interactables/instances/turret.tscn" id="14_xi36v"]
 
 [sub_resource type="Resource" id="Resource_0r0oj"]
 script = ExtResource("2_nrjdl")
@@ -85,6 +87,7 @@ sources/0 = SubResource("TileSetAtlasSource_emw3u")
 sources/1 = SubResource("TileSetAtlasSource_vchie")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_u8j6t"]
+scenes/1/scene = ExtResource("6_buat1")
 scenes/2/scene = ExtResource("4_8xr4i")
 scenes/3/scene = ExtResource("5_uuyyg")
 scenes/4/scene = ExtResource("6_1g6qr")
@@ -92,6 +95,7 @@ scenes/5/scene = ExtResource("7_blseq")
 scenes/6/scene = ExtResource("8_l1607")
 scenes/7/scene = ExtResource("9_lmjee")
 scenes/8/scene = ExtResource("10_y57ms")
+scenes/9/scene = ExtResource("14_xi36v")
 
 [sub_resource type="TileSet" id="TileSet_uc4fe"]
 sources/0 = SubResource("TileSetScenesCollectionSource_u8j6t")
@@ -121,7 +125,7 @@ layer_0/tile_data = PackedInt32Array(1114120, 0, 0, 1114126, 0, 0)
 
 [node name="Interactables" parent="." index="5"]
 tile_set = SubResource("TileSet_uc4fe")
-layer_0/tile_data = PackedInt32Array(524306, 0, 196608, 524309, 0, 131072, 524318, 0, 262144, 720926, 0, 327680, 524315, 0, 393216, 720923, 0, 458752, 589838, 0, 524288)
+layer_0/tile_data = PackedInt32Array(524306, 0, 196608, 524309, 0, 131072, 524318, 0, 262144, 720926, 0, 327680, 524315, 0, 393216, 720923, 0, 458752, 589838, 0, 524288, 393221, 0, 65536, 589826, 0, 65536, 589834, 0, 589824)
 
 [node name="Camera2D" parent="." index="9"]
 position = Vector2(320, 180)
@@ -135,9 +139,9 @@ layer_0/tile_data = PackedInt32Array(983063, 0, 0, 983064, 0, 0, 983065, 0, 0, 9
 script = ExtResource("12_gpt01")
 
 [connection signal="body_entered" from="Interactables/DangerLightning" to="Interactables/DangerLightning" method="_on_body_entered"]
-[connection signal="area_entered" from="Interactables/@Area2D@32421" to="Interactables/@Area2D@32421" method="_on_area_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@32421" to="Interactables/@Area2D@32421" method="_on_body_entered"]
+[connection signal="area_entered" from="Interactables/@Area2D@93308" to="Interactables/@Area2D@93308" method="_on_area_entered"]
+[connection signal="body_entered" from="Interactables/@Area2D@93308" to="Interactables/@Area2D@93308" method="_on_body_entered"]
 [connection signal="body_entered" from="Interactables/Area2D" to="Interactables/Area2D" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@32422" to="Interactables/@Area2D@32422" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@32423" to="Interactables/@Area2D@32423" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@32424" to="Interactables/@Area2D@32424" method="_on_body_entered"]
+[connection signal="body_entered" from="Interactables/@Area2D@93309" to="Interactables/@Area2D@93309" method="_on_body_entered"]
+[connection signal="body_entered" from="Interactables/@Area2D@93310" to="Interactables/@Area2D@93310" method="_on_body_entered"]
+[connection signal="body_entered" from="Interactables/@Area2D@93311" to="Interactables/@Area2D@93311" method="_on_body_entered"]

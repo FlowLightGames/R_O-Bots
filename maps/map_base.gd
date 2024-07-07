@@ -201,7 +201,7 @@ func spawn_players(how_many:int)->void:
 		for n:int in range(0,how_many):
 			var spawn:Vector2i=possible_spawns.pick_random()
 			var character:PlayerCharacter=player_scene.instantiate() as PlayerCharacter
-			#imprtant to set wst
+			#imprtant to set wdst
 			character.Player_Number=n
 			player_nodes.add_child(character)
 			

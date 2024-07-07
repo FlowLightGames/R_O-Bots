@@ -1,5 +1,5 @@
 0:base tilemap(ground)
-1:shadows
+1:shadows, retracted turret, hydrogen marker
 2:interactables
 3:explosion,
 4:tilemap over layer, hookshot

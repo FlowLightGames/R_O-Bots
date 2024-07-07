@@ -17,6 +17,7 @@ shader_parameter/displacement_map = ExtResource("4_27kdc")
 [node name="MemeBase" instance=ExtResource("1_k31te")]
 
 [node name="Window" parent="." index="0"]
+visible = false
 offset_left = -64.0
 offset_top = -42.0
 offset_right = 63.0
