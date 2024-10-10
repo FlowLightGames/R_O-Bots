@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://d3x5kj41il137"]
+[gd_scene load_steps=27 format=3 uid="uid://d3x5kj41il137"]
 
 [ext_resource type="PackedScene" uid="uid://ba2chyw1gv6ew" path="res://maps/map_base.tscn" id="1_jbrmr"]
 [ext_resource type="Texture2D" uid="uid://cvp6agl5khasp" path="res://maps/tilesets/builder.png" id="2_fsvjj"]
 [ext_resource type="Script" path="res://maps/pickup_maps/pickup_map_base.gd" id="2_nrjdl"]
+[ext_resource type="Script" path="res://maps/pickup_option_struct.gd" id="2_t6yvu"]
 [ext_resource type="PackedScene" uid="uid://dd0kxf6lm6rav" path="res://maps/bricks/instances/default_0.tscn" id="3_nsn15"]
 [ext_resource type="PackedScene" uid="uid://c75v6sj412w3d" path="res://maps/interactables/instances/danger_bolt.tscn" id="4_8xr4i"]
 [ext_resource type="Texture2D" uid="uid://dn77v8fftvbnl" path="res://maps/tilesets/default.png" id="4_hgf8r"]
@@ -20,7 +21,7 @@
 
 [sub_resource type="Resource" id="Resource_0r0oj"]
 script = ExtResource("2_nrjdl")
-map = Array[Resource("res://maps/pickup_option_struct.gd")]([])
+map = Array[ExtResource("2_t6yvu")]([])
 pickup_chance = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_emw3u"]
@@ -139,11 +140,3 @@ tile_set = SubResource("TileSet_ts5a3")
 format = 2
 layer_0/tile_data = PackedInt32Array(983063, 0, 0, 983064, 0, 0, 983065, 0, 0, 983066, 0, 0, 983067, 0, 0, 983068, 0, 0, 983069, 0, 0, 983070, 0, 0, 983071, 0, 0, 983072, 0, 0, 983073, 0, 0, 983074, 0, 0, 1179671, 0, 0, 1179672, 0, 0, 1179673, 0, 0, 1179674, 0, 0, 1179675, 0, 0, 1179676, 0, 0, 1179677, 0, 0, 1179678, 0, 0, 1179679, 0, 0, 1179680, 0, 0, 1179681, 0, 0, 1179682, 0, 0, 1376279, 0, 0, 1376280, 0, 0, 1376281, 0, 0, 1376282, 0, 0, 1376283, 0, 0, 1376284, 0, 0, 1376285, 0, 0, 1376286, 0, 0, 1376287, 0, 0, 1376288, 0, 0, 1376289, 0, 0, 1376290, 0, 0, 983062, 0, 0, 983061, 0, 0, 983060, 0, 0, 983059, 0, 0, 1179667, 0, 0, 1179668, 0, 0, 1179669, 0, 0, 1179670, 0, 0, 1376278, 0, 0, 1376277, 0, 0, 1376276, 0, 0, 1376275, 0, 0, 1179684, 0, 0, 1179685, 0, 0, 1179686, 0, 0, 1179683, 0, 0, 983075, 0, 0, 983076, 0, 0, 983077, 0, 0, 983078, 0, 0, 1376294, 0, 0, 1376293, 0, 0, 1376292, 0, 0, 1376291, 0, 0, 786451, 0, 0, 786452, 0, 0, 786453, 0, 0, 786454, 0, 0, 786455, 0, 0, 786456, 0, 0, 786457, 0, 0, 786458, 0, 0, 786459, 0, 0, 786460, 0, 0, 786461, 0, 0, 786462, 0, 0, 786463, 0, 0, 786464, 0, 0, 786465, 0, 0, 786466, 0, 0, 786467, 0, 0, 786468, 0, 0, 786469, 0, 0, 786470, 0, 0, 393235, 0, 0, 393236, 0, 0, 393237, 0, 0, 393238, 0, 0, 393239, 0, 0, 393240, 0, 0, 393241, 0, 0, 393242, 0, 0, 393243, 0, 0, 393244, 0, 0, 393245, 0, 0, 393246, 0, 0, 393247, 0, 0, 393248, 0, 0, 393249, 0, 0, 393250, 0, 0, 393251, 0, 0, 393252, 0, 0, 393253, 0, 0, 393254, 0, 0, 196646, 0, 0, 196645, 0, 0, 196644, 0, 0, 196643, 0, 0, 196642, 0, 0, 196641, 0, 0, 196640, 0, 0, 196639, 0, 0, 196638, 0, 0, 196637, 0, 0, 196636, 0, 0, 196635, 0, 0, 196634, 0, 0, 196633, 0, 0, 196632, 0, 0, 196631, 0, 0, 196630, 0, 0, 196629, 0, 0, 196628, 0, 0, 196627, 0, 0)
 script = ExtResource("12_gpt01")
-
-[connection signal="body_entered" from="Interactables/DangerLightning" to="Interactables/DangerLightning" method="_on_body_entered"]
-[connection signal="area_entered" from="Interactables/@Area2D@58293" to="Interactables/@Area2D@58293" method="_on_area_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@58293" to="Interactables/@Area2D@58293" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/Area2D" to="Interactables/Area2D" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@58294" to="Interactables/@Area2D@58294" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@58295" to="Interactables/@Area2D@58295" method="_on_body_entered"]
-[connection signal="body_entered" from="Interactables/@Area2D@58296" to="Interactables/@Area2D@58296" method="_on_body_entered"]

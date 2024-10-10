@@ -30,4 +30,3 @@ func set_tileset_preview(input: StageSelectMetaData)->void:
 	#TODO might need to change selection based on different sizes 
 	set_possible_spawn_grid(input.stage_pickup_map.map)
 	set_spawn_percent(input.stage_pickup_map.pickup_chance)
-

@@ -35,4 +35,3 @@ func _ready()->void:
 		ev= InputEventKey.new()
 		ev.physical_keycode = KEY_B
 		InputMap.action_add_event(str(n)+"_Action_1", ev)
-

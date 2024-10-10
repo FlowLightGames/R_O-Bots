@@ -274,4 +274,3 @@ func _on_p2p_session_connect_fail(steam_id: int, session_error: int) -> void:
 		_:
 			print("WARNING: Session failure with %s: unknown error %s" % [steam_id, session_error])
 	
-

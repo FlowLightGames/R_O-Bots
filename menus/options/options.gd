@@ -55,6 +55,3 @@ func _on_cancel_pressed()->void:
 			main_panel.enable_buttons(true)
 		_:
 			pass
-
-
-

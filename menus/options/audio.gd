@@ -47,4 +47,3 @@ func _on_save_pressed()->void:
 
 func _on_cancel_pressed()->void:
 	cancel.emit()
-

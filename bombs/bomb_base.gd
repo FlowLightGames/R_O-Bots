@@ -114,4 +114,3 @@ func explode()->void:
 
 func _on_explosion_timer_timeout()->void:
 	explode()
-

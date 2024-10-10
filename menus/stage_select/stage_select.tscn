@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://cj7kdptcelfix"]
+[gd_scene load_steps=22 format=3 uid="uid://cj7kdptcelfix"]
 
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="1_65nkd"]
 [ext_resource type="Script" path="res://menus/stage_select/stage_select.gd" id="1_p8ugr"]
 [ext_resource type="PackedScene" uid="uid://c5g77somkggcq" path="res://UI/buttons/dec.tscn" id="2_bfhf8"]
+[ext_resource type="Script" path="res://menus/stage_select/stage_select_meta_data.gd" id="2_gy561"]
 [ext_resource type="Resource" uid="uid://1fmhmk2wgv0l" path="res://menus/stage_select/stage_select_meta_datas/default.tres" id="2_ogmd1"]
 [ext_resource type="Resource" uid="uid://b3axbay36hl74" path="res://menus/stage_select/stage_select_meta_datas/builder.tres" id="3_13x4f"]
 [ext_resource type="PackedScene" uid="uid://cbjorljnfyjlt" path="res://UI/buttons/inc.tscn" id="3_yb0gp"]
@@ -31,7 +32,7 @@ script = ExtResource("1_p8ugr")
 stage_label = NodePath("Control/Panel/VBoxContainer/WinSelector/VBoxContainer/StageSelect/Label")
 size_label = NodePath("Control/Panel/VBoxContainer/WinSelector/VBoxContainer/SizeSelect/Label")
 stage_preview = NodePath("Control/Panel/StageInfo")
-stage_select_meta_datas = Array[Resource("res://menus/stage_select/stage_select_meta_data.gd")]([ExtResource("2_ogmd1"), ExtResource("3_13x4f"), ExtResource("4_byyl7"), ExtResource("5_cgtbc"), ExtResource("6_br88h"), ExtResource("7_8k31k"), ExtResource("8_qi5wo")])
+stage_select_meta_datas = Array[ExtResource("2_gy561")]([ExtResource("2_ogmd1"), ExtResource("3_13x4f"), ExtResource("4_byyl7"), ExtResource("5_cgtbc"), ExtResource("6_br88h"), ExtResource("7_8k31k"), ExtResource("8_qi5wo")])
 multiplayer_exlusive_nodes = [NodePath("Control/Panel/Window"), NodePath("Control/Panel/VBoxContainer/WinChatInput"), NodePath("Control/Panel/LiveChat"), NodePath("LeaveLobby")]
 
 [node name="Control" type="Control" parent="."]

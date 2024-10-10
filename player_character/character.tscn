@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://cd27yl8tl5qd6"]
+[gd_scene load_steps=47 format=3 uid="uid://cd27yl8tl5qd6"]
 
 [ext_resource type="Script" path="res://player_character/character.gd" id="1_arre1"]
 [ext_resource type="Texture2D" uid="uid://dtjkf0bsqsk5m" path="res://player_character/base_character_sprite.png" id="1_gp3n5"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://br3114oxyqbrh" path="res://player_character/face_displacement_map.png" id="6_hlhnq"]
 [ext_resource type="Texture2D" uid="uid://ycc2v2bkvwm" path="res://player_character/space_ship/space_ship.png" id="6_x1a8a"]
 [ext_resource type="Texture2D" uid="uid://bwy8smpq2xf1" path="res://player_character/gun_knife/knife_gun.png" id="9_i1ueb"]
+[ext_resource type="Texture2D" uid="uid://obdvp1vt7v2p" path="res://player_character/face_presets/face_preset_sprite1.png" id="10_62gev"]
 [ext_resource type="Texture2D" uid="uid://obuc3onp21l3" path="res://player_character/zeus/zeus_reticle.png" id="10_lcotw"]
 [ext_resource type="AudioStream" uid="uid://bekw1o1jffch2" path="res://player_character/gun_knife/gun.wav" id="11_gfy4j"]
 [ext_resource type="Theme" uid="uid://bv4urn83158ba" path="res://UI/theme/RoboTheme.tres" id="11_tx0pb"]
@@ -99,7 +100,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-1, 1)]
+"values": [Vector2(-1, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -288,7 +289,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-1, 1)]
+"values": [Vector2(-1, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -365,7 +366,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-1, 1)]
+"values": [Vector2(-1, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -442,7 +443,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-1, 1)]
+"values": [Vector2(-1, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -555,7 +556,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(1, 1)]
+"values": [Vector2(1, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -693,7 +694,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.9, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(-1, 1), Vector2(-1, 2), Vector2(-1, 1), Vector2(-1, 2), Vector2(-1, 1)]
+"values": [Vector2(-1, 0), Vector2(-1, 1), Vector2(-1, 0), Vector2(-1, 1), Vector2(-1, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -758,7 +759,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(-1, 1), Vector2(-1, 0), Vector2(-1, 1), Vector2(-1, 0)]
+"values": [Vector2(-1, 0), Vector2(-1, -1), Vector2(-1, 0), Vector2(-1, -1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -847,7 +848,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(-1, 1), Vector2(-1, 0), Vector2(-1, 1), Vector2(-1, 0)]
+"values": [Vector2(-1, 0), Vector2(-1, -1), Vector2(-1, 0), Vector2(-1, -1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -936,7 +937,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(-1, 0), Vector2(-1, 1), Vector2(-1, 0), Vector2(-1, 1)]
+"values": [Vector2(-1, -1), Vector2(-1, 0), Vector2(-1, -1), Vector2(-1, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1049,7 +1050,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(1, 0), Vector2(1, 1), Vector2(1, 0), Vector2(1, 1)]
+"values": [Vector2(1, -1), Vector2(1, 0), Vector2(1, -1), Vector2(1, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1409,7 +1410,8 @@ autoplay = "Default"
 
 [node name="Face" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_hbvyt")
-position = Vector2(-1, 1)
+position = Vector2(-1, 0)
+texture = ExtResource("10_62gev")
 vframes = 2
 
 [node name="KinfeGunHook" type="Node2D" parent="Visuals"]

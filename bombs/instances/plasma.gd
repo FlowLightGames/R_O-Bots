@@ -33,4 +33,3 @@ func explode()->void:
 		if is_instance_valid(affiliated_player):
 			affiliated_player.Bomb_Ref_List.erase(self)
 		queue_free()
-

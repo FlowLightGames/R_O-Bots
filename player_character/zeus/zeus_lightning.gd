@@ -20,4 +20,3 @@ func _ready()->void:
 		elif hit_target is PlayerCharacter:
 			(hit_target as PlayerCharacter).damage()
 	
-

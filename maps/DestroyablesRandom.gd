@@ -48,4 +48,3 @@ func _ready()->void:
 		spawn_with_seed(SteamLobby.random_seed)
 	else:
 		spawn_with_seed(randi())
-

@@ -31,4 +31,3 @@ func pick_random_from_array(arr:Array[Vector2i])->Vector2i:
 
 func _ready()->void:
 	spawn_pickups()
-
